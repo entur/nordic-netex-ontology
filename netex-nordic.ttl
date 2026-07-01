@@ -239,9 +239,27 @@ profile:NP_DatedServiceJourneyShape a sh:NodeShape ;
     sh:targetClass netex:DatedServiceJourney ;
     rdfs:label "DatedServiceJourney — NP constraints" ;
     sh:property [
+        sh:path netex:DatedServiceJourney_ServiceJourneyRef ;
+        sh:name "ServiceJourneyRef" ;
+        sh:description "Reference to the template ServiceJourney this dated instance realizes" ;
+        sh:minCount 1 ;
+        sh:maxCount 1
+    ] , [
+        sh:path netex:DatedServiceJourney_OperatingDayRef ;
+        sh:name "OperatingDayRef" ;
+        sh:description "The specific operating day this journey runs on" ;
+        sh:minCount 1 ;
+        sh:maxCount 1
+    ] , [
         sh:path netex:DatedServiceJourney_DatedVehicleJourneyRef ;
         sh:name "DatedVehicleJourneyRef" ;
         sh:description "Deviation/replacement tracking — allowed in NP"
+    ] , [
+        sh:path netex:DatedServiceJourney_ServiceAlteration ;
+        sh:name "ServiceAlteration" ;
+        sh:description "Alteration status code when journey deviates from plan" ;
+        sh:maxCount 1 ;
+        sh:in ( "planned" "cancellation" "replaced" "extraJourney" )
     ] .
 
 ## =================================================================
