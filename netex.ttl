@@ -1,0 +1,2477 @@
+## -----------------------------------------------------------------
+## NeTEx Ontology — Standard Classes & Relationships
+## -----------------------------------------------------------------
+## Machine-readable model of the NeTEx XML schema: classes, frames,
+## relationships, XSD cardinality, SIRI bridges, and Transmodel alignment.
+##
+## ROLE: Base vocabulary and schema — the foundation all other files
+##       import. Defines what NeTEx IS (classes, references, elements)
+##       without any profile-specific constraints.
+##
+## LAYER STACK:
+##   netex.ttl                     ← Base schema (this file)
+##   └─ netex-nordic.ttl           ← Nordic Profile constraints & ordering
+##      └─ netex-entur.ttl         ← Entur-specific governance & codespaces
+##         └─ netex-rolling-stock.ttl ← Service sub-profile (system dependencies)
+##   netex-nordic-documentation.ttl ← File paths for descriptions/tables/examples
+##
+## Generated: 2026-06-09
+## -----------------------------------------------------------------
+
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix siri:    <https://siri-cen.eu/ontology#> .
+@prefix tm-commons:  <https://w3id.org/transmodel/commons#> .
+@prefix tm-journeys: <https://w3id.org/transmodel/journeys#> .
+@prefix tm-fac:      <https://w3id.org/transmodel/facilities#> .
+@prefix tm-org:      <https://w3id.org/transmodel/organisations#> .
+@prefix tm-fares:    <https://w3id.org/transmodel/fares#> .
+
+## =================================================================
+## META-CLASSES (ontology vocabulary)
+## =================================================================
+
+netex:Profile a owl:Class ;
+    rdfs:label "Profile" ;
+    skos:definition "A constrained subset of NeTEx for a specific region or use case" .
+
+netex:DataSource a owl:Class ;
+    rdfs:label "DataSource" ;
+    skos:definition "Origin classification for data ownership (central registry, operator delivery, etc.)" .
+
+## =================================================================
+## CUSTOM PROPERTIES (domain-specific vocabulary)
+## =================================================================
+## These properties model NeTEx-specific structural relationships and
+## XSD-derived metadata. They define the vocabulary that all other
+## ontology files (netex-nordic.ttl, netex-entur.ttl, etc.) build upon.
+##
+## WHY custom properties instead of standard OWL constructs?
+##   - OWL cardinality requires verbose blank-node Restrictions
+##   - rdfs:domain/range applies globally; we need per-reference scoping
+##   - No standard expresses XML containment hierarchy or XPath paths
+##
+## Profile-level constraints (excludes, requires, cardinality tightening)
+## are expressed as SHACL shapes in netex-nordic.ttl and
+## netex-rolling-stock.ttl — standard tooling (pySHACL, Apache Jena,
+## TopBraid) can validate NeTEx data directly against them.
+## -----------------------------------------------------------------
+
+## --- Structural (XML containment hierarchy) ---
+
+netex:contains a owl:ObjectProperty ;
+    rdfs:label "contains" ;
+    skos:definition "Frame or object contains these child classes as XML child elements" .
+
+netex:containedIn a owl:ObjectProperty ;
+    rdfs:label "containedIn" ;
+    owl:inverseOf netex:contains ;
+    skos:definition "Inverse of contains — this frame is nested within a parent frame" .
+
+netex:childOf a owl:ObjectProperty ;
+    rdfs:label "childOf" ;
+    skos:definition "Object is modelled as inline child element(s) within the parent class" .
+
+netex:inFrame a owl:ObjectProperty ;
+    rdfs:label "inFrame" ;
+    skos:definition "Object is a top-level member of this frame type" .
+
+netex:specializes a owl:ObjectProperty ;
+    rdfs:label "specializes" ;
+    skos:definition "This class is a functional specialization of another (e.g. DatedServiceJourney specializes ServiceJourney)" .
+
+## --- Reference metadata (per-relationship scoping) ---
+
+netex:onClass a owl:ObjectProperty ;
+    rdfs:label "onClass" ;
+    skos:definition "The source class that owns this reference or element" .
+
+netex:target a owl:ObjectProperty ;
+    rdfs:label "target" ;
+    skos:definition "The target class pointed to by this reference" .
+
+netex:xsdCardinality a owl:DatatypeProperty ;
+    rdfs:label "xsdCardinality" ;
+    rdfs:range xsd:string ;
+    skos:definition "Cardinality as defined in XSD (e.g. '0..1', '1..n'). String notation mirrors XSD minOccurs/maxOccurs." .
+
+netex:path a owl:DatatypeProperty ;
+    rdfs:label "path" ;
+    rdfs:range xsd:string ;
+    skos:definition "XPath-like path from the owning class to the reference element in the XML tree" .
+
+netex:altPath a owl:DatatypeProperty ;
+    rdfs:label "altPath" ;
+    rdfs:range xsd:string ;
+    skos:definition "Alternative XPath-like path (when multiple structural options exist)" .
+
+## --- Element ordering ---
+
+netex:elementOrder a owl:ObjectProperty ;
+    rdfs:label "elementOrder" ;
+    skos:definition "Canonical element sequence for a class (XSD-derived)" .
+
+netex:position a owl:DatatypeProperty ;
+    rdfs:label "position" ;
+    rdfs:range xsd:integer ;
+    skos:definition "Ordinal position within the element sequence" .
+
+netex:element a owl:DatatypeProperty ;
+    rdfs:label "element" ;
+    rdfs:range xsd:string ;
+    skos:definition "XML element or attribute name at this position" .
+
+## --- Domain chains (navigational) ---
+
+netex:step1 a owl:ObjectProperty ; rdfs:label "step1" .
+netex:step2 a owl:ObjectProperty ; rdfs:label "step2" .
+netex:step3 a owl:ObjectProperty ; rdfs:label "step3" .
+netex:step4 a owl:ObjectProperty ; rdfs:label "step4" .
+netex:step5 a owl:ObjectProperty ; rdfs:label "step5" .
+
+## --- SIRI bridge ---
+
+netex:referencedBySIRI a owl:ObjectProperty ;
+    rdfs:label "referencedBySIRI" ;
+    skos:definition "This NeTEx class is referenced by the given SIRI service via ID" .
+
+## =================================================================
+## FRAME CLASSES (Containers)
+## =================================================================
+
+netex:CompositeFrame a owl:Class ;
+    rdfs:label "CompositeFrame" ;
+    skos:definition "Container frame grouping multiple frames into a single delivery" ;
+    netex:contains netex:ResourceFrame ,
+                   netex:SiteFrame ,
+                   netex:ServiceCalendarFrame ,
+                   netex:ServiceFrame ,
+                   netex:TimetableFrame ,
+                   netex:VehicleScheduleFrame ,
+                   netex:FareFrame ,
+                   netex:SalesTransactionFrame ;
+    netex:contains netex:Codespace .
+
+netex:ResourceFrame a owl:Class ;
+    rdfs:label "ResourceFrame" ;
+    skos:definition "Organizations, vehicle types, vehicles and shared resources" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:Authority ,
+                   netex:Operator ,
+                   netex:VehicleType ,
+                   netex:Vehicle ,
+                   netex:PurposeOfGrouping ,
+                   netex:CompoundTrain ,
+                   netex:Train .
+
+netex:SiteFrame a owl:Class ;
+    rdfs:label "SiteFrame" ;
+    skos:definition "Stop places, topographic places, parking, and tariff zones" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:StopPlace ,
+                   netex:TopographicPlace ,
+                   netex:Parking ,
+                   netex:TariffZone .
+
+netex:ServiceCalendarFrame a owl:Class ;
+    rdfs:label "ServiceCalendarFrame" ;
+    skos:definition "Day types, operating periods, and calendar assignments" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:ServiceCalendar ,
+                   netex:DayType ,
+                   netex:DayTypeAssignment ,
+                   netex:OperatingPeriod ,
+                   netex:OperatingDay .
+
+netex:ServiceFrame a owl:Class ;
+    rdfs:label "ServiceFrame" ;
+    skos:definition "Lines, routes, journey patterns, stop points, and assignments" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:Line ,
+                   netex:Route ,
+                   netex:JourneyPattern ,
+                   netex:ScheduledStopPoint ,
+                   netex:PassengerStopAssignment ,
+                   netex:DestinationDisplay ,
+                   netex:GroupOfLines ,
+                   netex:Notice ,
+                   netex:FlexibleServiceProperties ,
+                   netex:RoutePoint ,
+                   netex:ServiceLink ,
+                   netex:SiteConnection .
+
+netex:TimetableFrame a owl:Class ;
+    rdfs:label "TimetableFrame" ;
+    skos:definition "Service journeys, dated journeys, and interchange rules" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:ServiceJourney ,
+                   netex:DatedServiceJourney ,
+                   netex:Interchange ,
+                   netex:TrainNumber .
+
+netex:VehicleScheduleFrame a owl:Class ;
+    rdfs:label "VehicleScheduleFrame" ;
+    skos:definition "Vehicle blocks and scheduling assignments" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:TrainBlock .
+
+netex:FareFrame a owl:Class ;
+    rdfs:label "FareFrame" ;
+    skos:definition "Fares, tariffs, fare products, and sales offer packages" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:FareZone .
+
+netex:SalesTransactionFrame a owl:Class ;
+    rdfs:label "SalesTransactionFrame" ;
+    skos:definition "Sales transaction data and fare contracts" ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains netex:FareContract .
+
+## =================================================================
+## OBJECT CLASSES
+## =================================================================
+
+## -----------------------------------------------------------------
+## ResourceFrame objects
+## -----------------------------------------------------------------
+
+netex:Organisation a owl:Class ;
+    rdfs:label "Organisation" ;
+    skos:definition "Abstract superclass for all organisational entities (Authority, Operator, etc.)" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:Authority a owl:Class ;
+    rdfs:label "Authority" ;
+    skos:definition "Transit authority — the public body responsible for organizing transport" ;
+    rdfs:subClassOf netex:Organisation ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:Operator a owl:Class ;
+    rdfs:label "Operator" ;
+    skos:definition "Transport operator — the company running the services" ;
+    rdfs:subClassOf netex:Organisation ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:VehicleType a owl:Class ;
+    rdfs:label "VehicleType" ;
+    skos:definition "Vehicle classification with capacity and propulsion characteristics" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:Vehicle a owl:Class ;
+    rdfs:label "Vehicle" ;
+    skos:definition "Individual rolling stock unit assigned to an operator" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:PurposeOfGrouping a owl:Class ;
+    rdfs:label "PurposeOfGrouping" ;
+    skos:definition "Classification of why objects are grouped together" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:ResponsibilitySet a owl:Class ;
+    rdfs:label "ResponsibilitySet" ;
+    skos:definition "Set of responsibility role assignments linking organizations to domains" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:Contract a owl:Class ;
+    rdfs:label "Contract" ;
+    skos:definition "Agreement between authority and operator for service provision" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:CompoundTrain a owl:Class ;
+    rdfs:label "CompoundTrain" ;
+    skos:definition "Composed rolling stock formation consisting of multiple Train units coupled together" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:TrainInCompoundTrain a owl:Class ;
+    rdfs:label "TrainInCompoundTrain" ;
+    skos:definition "A Train's role within a CompoundTrain (order, operational orientation)" ;
+    netex:childOf netex:CompoundTrain .
+
+netex:Train a owl:Class ;
+    rdfs:label "Train" ;
+    skos:definition "A single train unit with its components (coaches, wagons)" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:TrainComponent a owl:Class ;
+    rdfs:label "TrainComponent" ;
+    skos:definition "A TrainElement's role within a Train (order, label, orientation)" ;
+    netex:childOf netex:Train .
+
+netex:TrainElement a owl:Class ;
+    rdfs:label "TrainElement" ;
+    skos:definition "Individual coach or wagon unit within a Train, carrying capacity and equipment details" ;
+    netex:childOf netex:Train .
+
+## -----------------------------------------------------------------
+## SiteFrame objects
+## -----------------------------------------------------------------
+
+netex:StopPlace a owl:Class ;
+    rdfs:label "StopPlace" ;
+    skos:definition "Physical stop location containing one or more quays" ;
+    netex:inFrame netex:SiteFrame .
+
+netex:Quay a owl:Class ;
+    rdfs:label "Quay" ;
+    skos:definition "Boarding/alighting point within a StopPlace" ;
+    netex:childOf netex:StopPlace .
+
+netex:TopographicPlace a owl:Class ;
+    rdfs:label "TopographicPlace" ;
+    skos:definition "Named geographic area (city, municipality, county)" ;
+    netex:inFrame netex:SiteFrame .
+
+netex:Parking a owl:Class ;
+    rdfs:label "Parking" ;
+    skos:definition "Parking facility, typically associated with a StopPlace" ;
+    netex:inFrame netex:SiteFrame .
+
+netex:TariffZone a owl:Class ;
+    rdfs:label "TariffZone" ;
+    skos:definition "Geographic zone used for fare calculation" ;
+    netex:inFrame netex:SiteFrame .
+
+netex:FareZone a owl:Class ;
+    rdfs:label "FareZone" ;
+    skos:definition "Zone defining fare boundaries, may contain scheduled stop points" ;
+    netex:inFrame netex:FareFrame .
+
+## -----------------------------------------------------------------
+## Equipment objects (children of StopPlace/Quay)
+## -----------------------------------------------------------------
+
+netex:ShelterEquipment a owl:Class ;
+    rdfs:label "ShelterEquipment" ;
+    skos:definition "Waiting shelter at a stop" ;
+    netex:childOf netex:StopPlace , netex:Quay .
+
+netex:WaitingRoomEquipment a owl:Class ;
+    rdfs:label "WaitingRoomEquipment" ;
+    skos:definition "Waiting room facility at a stop" ;
+    netex:childOf netex:StopPlace , netex:Quay .
+
+netex:SanitaryEquipment a owl:Class ;
+    rdfs:label "SanitaryEquipment" ;
+    skos:definition "Sanitary facilities at a stop" ;
+    netex:childOf netex:StopPlace , netex:Quay .
+
+netex:TicketingEquipment a owl:Class ;
+    rdfs:label "TicketingEquipment" ;
+    skos:definition "Ticketing machines and validation equipment" ;
+    netex:childOf netex:StopPlace , netex:Quay .
+
+## -----------------------------------------------------------------
+## ServiceCalendarFrame objects
+## -----------------------------------------------------------------
+
+netex:ServiceCalendar a owl:Class ;
+    rdfs:label "ServiceCalendar" ;
+    skos:definition "Logical container with shared validity period for calendar-related elements" ;
+    netex:inFrame netex:ServiceCalendarFrame .
+
+netex:DayType a owl:Class ;
+    rdfs:label "DayType" ;
+    skos:definition "Abstract day classification (weekday, holiday, etc.)" ;
+    netex:inFrame netex:ServiceCalendarFrame .
+
+netex:DayTypeAssignment a owl:Class ;
+    rdfs:label "DayTypeAssignment" ;
+    skos:definition "Binds a DayType to a specific date or OperatingPeriod" ;
+    netex:inFrame netex:ServiceCalendarFrame .
+
+netex:OperatingPeriod a owl:Class ;
+    rdfs:label "OperatingPeriod" ;
+    skos:definition "Date range (FromDate–ToDate) for recurring service" ;
+    netex:inFrame netex:ServiceCalendarFrame .
+
+netex:OperatingDay a owl:Class ;
+    rdfs:label "OperatingDay" ;
+    skos:definition "Specific calendar date for DatedServiceJourney instances" ;
+    netex:inFrame netex:ServiceCalendarFrame .
+
+## -----------------------------------------------------------------
+## ServiceFrame objects
+## -----------------------------------------------------------------
+
+netex:Line a owl:Class ;
+    rdfs:label "Line" ;
+    skos:definition "Public transport service line grouping routes and journeys" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:GroupOfLines a owl:Class ;
+    rdfs:label "GroupOfLines" ;
+    skos:definition "Logical grouping of lines (e.g. by area or mode)" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:Route a owl:Class ;
+    rdfs:label "Route" ;
+    skos:definition "Ordered sequence of points defining a path for a line" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:JourneyPattern a owl:Class ;
+    rdfs:label "JourneyPattern" ;
+    skos:definition "Ordered sequence of stop points defining where a journey calls" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:StopPointInJourneyPattern a owl:Class ;
+    rdfs:label "StopPointInJourneyPattern" ;
+    skos:definition "A stop point's role within a journey pattern (order, boarding rules)" ;
+    netex:childOf netex:JourneyPattern .
+
+netex:ScheduledStopPoint a owl:Class ;
+    rdfs:label "ScheduledStopPoint" ;
+    skos:definition "Logical stop point in the timetable, linked to physical StopPlace via assignment" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:PassengerStopAssignment a owl:Class ;
+    rdfs:label "PassengerStopAssignment" ;
+    skos:definition "Bridge linking a logical ScheduledStopPoint to a physical StopPlace/Quay" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:DestinationDisplay a owl:Class ;
+    rdfs:label "DestinationDisplay" ;
+    skos:definition "Text shown to passengers on displays and signs" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:Notice a owl:Class ;
+    rdfs:label "Notice" ;
+    skos:definition "Informational text attached to journeys or stop points" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:FlexibleServiceProperties a owl:Class ;
+    rdfs:label "FlexibleServiceProperties" ;
+    skos:definition "Booking and flexibility rules for demand-responsive transport" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:LinkSequenceProjection a owl:Class ;
+    rdfs:label "LinkSequenceProjection" ;
+    skos:definition "GML geometry projecting a route or link onto a map" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:RoutePoint a owl:Class ;
+    rdfs:label "RoutePoint" ;
+    skos:definition "A point that identifies a location in a Route, used as building block for PointOnRoute" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:ServiceLink a owl:Class ;
+    rdfs:label "ServiceLink" ;
+    skos:definition "Directed link between two ScheduledStopPoints, carrying distance and optional GML projection" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:SiteConnection a owl:Class ;
+    rdfs:label "SiteConnection" ;
+    skos:definition "Transfer connection between two stop places with walking duration" ;
+    netex:inFrame netex:ServiceFrame .
+
+## -----------------------------------------------------------------
+## TimetableFrame objects
+## -----------------------------------------------------------------
+
+netex:ServiceJourney a owl:Class ;
+    rdfs:label "ServiceJourney" ;
+    skos:definition "A planned trip template in the timetable, reusable across dates" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:TimetabledPassingTime a owl:Class ;
+    rdfs:label "TimetabledPassingTime" ;
+    skos:definition "Arrival/departure times at a specific stop within a ServiceJourney" ;
+    netex:childOf netex:ServiceJourney .
+
+netex:DatedServiceJourney a owl:Class ;
+    rdfs:label "DatedServiceJourney" ;
+    skos:definition "A concrete journey instance on a specific date, possibly with alterations" ;
+    netex:inFrame netex:TimetableFrame ;
+    netex:specializes netex:ServiceJourney .
+
+netex:Interchange a owl:Class ;
+    rdfs:label "Interchange" ;
+    skos:definition "Planned transfer between two service journeys at stop points" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:TrainNumber a owl:Class ;
+    rdfs:label "TrainNumber" ;
+    skos:definition "Railway-specific train service number, referenced via JourneyPart" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:JourneyPart a owl:Class ;
+    rdfs:label "JourneyPart" ;
+    skos:definition "A segment of a ServiceJourney with its own train composition and facilities" ;
+    netex:childOf netex:ServiceJourney .
+
+## -----------------------------------------------------------------
+## VehicleScheduleFrame objects
+## -----------------------------------------------------------------
+
+netex:TrainBlock a owl:Class ;
+    rdfs:label "TrainBlock" ;
+    skos:definition "Block of journeys assigned to a single vehicle" ;
+    netex:inFrame netex:VehicleScheduleFrame .
+
+netex:TrainBlockPart a owl:Class ;
+    rdfs:label "TrainBlockPart" ;
+    skos:definition "A segment of a TrainBlock linking a JourneyPart to a CompoundTrain" ;
+    netex:childOf netex:TrainBlock .
+
+## -----------------------------------------------------------------
+## SalesTransactionFrame objects
+## -----------------------------------------------------------------
+
+netex:FareContract a owl:Class ;
+    rdfs:label "FareContract" ;
+    skos:definition "A fare contract with entries representing purchased products" ;
+    netex:inFrame netex:SalesTransactionFrame .
+
+## -----------------------------------------------------------------
+## Metadata objects (not frame-specific)
+## -----------------------------------------------------------------
+
+netex:AlternativeName a owl:Class ;
+    rdfs:label "AlternativeName" ;
+    skos:definition "Alternative name for any object (alias, translation, etc.)" .
+
+netex:AlternativeText a owl:Class ;
+    rdfs:label "AlternativeText" ;
+    skos:definition "Alternative text representation for multilingual content" .
+
+netex:Codespace a owl:Class ;
+    rdfs:label "Codespace" ;
+    skos:definition "XML namespace mapping (Xmlns ↔ XmlnsUrl) used in ID prefixes" .
+
+netex:Network a owl:Class ;
+    rdfs:label "Network" ;
+    skos:definition "Top-level grouping of lines for an authority/operator" ;
+    netex:inFrame netex:ServiceFrame .
+
+## =================================================================
+## RELATIONSHIPS — NAMED REFERENCES
+## =================================================================
+## Each reference is a first-class resource: netex:ClassName_PropertyName.
+## This enables referential integrity between base and profile layers.
+## -----------------------------------------------------------------
+
+netex:Reference a owl:Class ;
+    rdfs:label "Reference" ;
+    skos:definition "A typed reference property from one NeTEx class to another" .
+
+netex:Composition a owl:Class ;
+    rdfs:label "Composition" ;
+    skos:definition "A containment relationship (inline child elements)" .
+
+## --- ResourceFrame relationships ---
+
+netex:Operator_AuthorityRef a netex:Reference ;
+    rdfs:label "Operator → AuthorityRef" ;
+    netex:onClass netex:Operator ;
+    netex:target netex:Authority ;
+    netex:xsdCardinality "0..1" .
+
+netex:Vehicle_OperatorRef a netex:Reference ;
+    rdfs:label "Vehicle → OperatorRef" ;
+    netex:onClass netex:Vehicle ;
+    netex:target netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:Vehicle_VehicleTypeRef a netex:Reference ;
+    rdfs:label "Vehicle → VehicleTypeRef" ;
+    netex:onClass netex:Vehicle ;
+    netex:target netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+netex:ResponsibilitySet_ResponsibleOrganisationRef a netex:Reference ;
+    rdfs:label "ResponsibilitySet → ResponsibleOrganisationRef" ;
+    netex:onClass netex:ResponsibilitySet ;
+    netex:target netex:Authority ;
+    netex:xsdCardinality "0..1" ;
+    netex:path "roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef" .
+
+netex:ResponsibilitySet_ContractRef a netex:Reference ;
+    rdfs:label "ResponsibilitySet → ContractRef" ;
+    netex:onClass netex:ResponsibilitySet ;
+    netex:target netex:Contract ;
+    netex:xsdCardinality "0..1" ;
+    netex:path "roles/ResponsibilityRoleAssignment/AssociatedContract/ContractRef" .
+
+netex:Contract_OrganisationRef_contractees a netex:Reference ;
+    rdfs:label "Contract → OrganisationRef (contractees)" ;
+    netex:onClass netex:Contract ;
+    netex:target netex:Authority ;
+    netex:xsdCardinality "0..n" ;
+    netex:path "contractees/OrganisationRef" .
+
+netex:Contract_OrganisationRef_contractors a netex:Reference ;
+    rdfs:label "Contract → OrganisationRef (contractors)" ;
+    netex:onClass netex:Contract ;
+    netex:target netex:Operator ;
+    netex:xsdCardinality "0..n" ;
+    netex:path "contractors/OrganisationRef" .
+
+## --- SiteFrame relationships ---
+
+netex:StopPlace_TopographicPlaceRef a netex:Reference ;
+    rdfs:label "StopPlace → TopographicPlaceRef" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:TopographicPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_ParentSiteRef a netex:Reference ;
+    rdfs:label "StopPlace → ParentSiteRef" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_TariffZoneRef a netex:Reference ;
+    rdfs:label "StopPlace → TariffZoneRef" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:TariffZone ;
+    netex:xsdCardinality "0..n" .
+
+netex:StopPlace_quays a netex:Composition ;
+    rdfs:label "StopPlace → quays" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:Quay ;
+    netex:xsdCardinality "0..n" .
+
+netex:TopographicPlace_ParentTopographicPlaceRef a netex:Reference ;
+    rdfs:label "TopographicPlace → ParentTopographicPlaceRef" ;
+    netex:onClass netex:TopographicPlace ;
+    netex:target netex:TopographicPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:Parking_ParentSiteRef a netex:Reference ;
+    rdfs:label "Parking → ParentSiteRef" ;
+    netex:onClass netex:Parking ;
+    netex:target netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:FareZone_ScheduledStopPointRef a netex:Reference ;
+    rdfs:label "FareZone → ScheduledStopPointRef" ;
+    netex:onClass netex:FareZone ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..n" ;
+    netex:path "members/ScheduledStopPointRef" .
+
+## --- ServiceCalendarFrame relationships ---
+
+netex:DayTypeAssignment_DayTypeRef a netex:Reference ;
+    rdfs:label "DayTypeAssignment → DayTypeRef" ;
+    netex:onClass netex:DayTypeAssignment ;
+    netex:target netex:DayType ;
+    netex:xsdCardinality "0..1" .
+
+netex:DayTypeAssignment_OperatingPeriodRef a netex:Reference ;
+    rdfs:label "DayTypeAssignment → OperatingPeriodRef" ;
+    netex:onClass netex:DayTypeAssignment ;
+    netex:target netex:OperatingPeriod ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Mutually exclusive with Date" .
+
+## --- ServiceFrame relationships ---
+
+netex:Line_OperatorRef a netex:Reference ;
+    rdfs:label "Line → OperatorRef" ;
+    netex:onClass netex:Line ;
+    netex:target netex:Operator ;
+    netex:xsdCardinality "1..1" .
+
+netex:Line_RepresentedByGroupRef a netex:Reference ;
+    rdfs:label "Line → RepresentedByGroupRef" ;
+    netex:onClass netex:Line ;
+    netex:target netex:GroupOfLines ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Can also target Network" .
+
+netex:GroupOfLines_LineRef a netex:Reference ;
+    rdfs:label "GroupOfLines → LineRef" ;
+    netex:onClass netex:GroupOfLines ;
+    netex:target netex:Line ;
+    netex:xsdCardinality "1..n" ;
+    netex:path "members/LineRef" .
+
+netex:Route_LineRef a netex:Reference ;
+    rdfs:label "Route → LineRef" ;
+    netex:onClass netex:Route ;
+    netex:target netex:Line ;
+    netex:xsdCardinality "1..1" .
+
+netex:Route_InverseRouteRef a netex:Reference ;
+    rdfs:label "Route → InverseRouteRef" ;
+    netex:onClass netex:Route ;
+    netex:target netex:Route ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Bidirectional inverse route" .
+
+netex:Route_PointOnRoute_ScheduledStopPointRef a netex:Reference ;
+    rdfs:label "Route → PointOnRoute/ScheduledStopPointRef" ;
+    netex:onClass netex:Route ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "1..1" ;
+    netex:path "pointsInSequence/PointOnRoute/ScheduledStopPointRef" ;
+    netex:altPath "pointsInSequence/PointOnRoute/RoutePointRef" ;
+    rdfs:comment "PointOnRoute must reference either a ScheduledStopPoint or RoutePoint" .
+
+netex:JourneyPattern_RouteRef a netex:Reference ;
+    rdfs:label "JourneyPattern → RouteRef" ;
+    netex:onClass netex:JourneyPattern ;
+    netex:target netex:Route ;
+    netex:xsdCardinality "0..1" .
+
+netex:JourneyPattern_pointsInSequence a netex:Composition ;
+    rdfs:label "JourneyPattern → pointsInSequence" ;
+    netex:onClass netex:JourneyPattern ;
+    netex:target netex:StopPointInJourneyPattern ;
+    netex:xsdCardinality "1..n" .
+
+netex:StopPointInJourneyPattern_ScheduledStopPointRef a netex:Reference ;
+    rdfs:label "StopPointInJourneyPattern → ScheduledStopPointRef" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "1..1" .
+
+netex:StopPointInJourneyPattern_DestinationDisplayRef a netex:Reference ;
+    rdfs:label "StopPointInJourneyPattern → DestinationDisplayRef" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:target netex:DestinationDisplay ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPointInJourneyPattern_NoticeRef a netex:Reference ;
+    rdfs:label "StopPointInJourneyPattern → NoticeRef" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:target netex:Notice ;
+    netex:xsdCardinality "0..1" ;
+    netex:path "noticeAssignments/NoticeAssignment/NoticeRef" .
+
+netex:PassengerStopAssignment_ScheduledStopPointRef a netex:Reference ;
+    rdfs:label "PassengerStopAssignment → ScheduledStopPointRef" ;
+    netex:onClass netex:PassengerStopAssignment ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "1..1" .
+
+netex:PassengerStopAssignment_StopPlaceRef a netex:Reference ;
+    rdfs:label "PassengerStopAssignment → StopPlaceRef" ;
+    netex:onClass netex:PassengerStopAssignment ;
+    netex:target netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:PassengerStopAssignment_QuayRef a netex:Reference ;
+    rdfs:label "PassengerStopAssignment → QuayRef" ;
+    netex:onClass netex:PassengerStopAssignment ;
+    netex:target netex:Quay ;
+    netex:xsdCardinality "1..1" .
+
+## --- TimetableFrame relationships ---
+
+netex:ServiceJourney_JourneyPatternRef a netex:Reference ;
+    rdfs:label "ServiceJourney → JourneyPatternRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:JourneyPattern ;
+    netex:xsdCardinality "1..1" .
+
+netex:ServiceJourney_VehicleTypeRef a netex:Reference ;
+    rdfs:label "ServiceJourney → VehicleTypeRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:VehicleType ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Passenger-facing hint (expect low-floor bus), NOT operational assignment. Use BlockRef for actual vehicle assignment." .
+
+netex:ServiceJourney_LineRef a netex:Reference ;
+    rdfs:label "ServiceJourney → LineRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_OperatorRef a netex:Reference ;
+    rdfs:label "ServiceJourney → OperatorRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_DayTypeRef a netex:Reference ;
+    rdfs:label "ServiceJourney → DayTypeRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:DayType ;
+    netex:xsdCardinality "0..n" ;
+    netex:path "dayTypes/DayTypeRef" .
+
+netex:ServiceJourney_BlockRef a netex:Reference ;
+    rdfs:label "ServiceJourney → BlockRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:TrainBlock ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_passingTimes a netex:Composition ;
+    rdfs:label "ServiceJourney → passingTimes" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:TimetabledPassingTime ;
+    netex:xsdCardinality "1..n" .
+
+netex:DatedServiceJourney_ServiceJourneyRef a netex:Reference ;
+    rdfs:label "DatedServiceJourney → ServiceJourneyRef" ;
+    netex:onClass netex:DatedServiceJourney ;
+    netex:target netex:ServiceJourney ;
+    netex:xsdCardinality "1..1" .
+
+netex:DatedServiceJourney_OperatingDayRef a netex:Reference ;
+    rdfs:label "DatedServiceJourney → OperatingDayRef" ;
+    netex:onClass netex:DatedServiceJourney ;
+    netex:target netex:OperatingDay ;
+    netex:xsdCardinality "1..1" .
+
+netex:DatedServiceJourney_BlockRef a netex:Reference ;
+    rdfs:label "DatedServiceJourney → BlockRef" ;
+    netex:onClass netex:DatedServiceJourney ;
+    netex:target netex:TrainBlock ;
+    netex:xsdCardinality "0..1" .
+
+netex:DatedServiceJourney_DatedVehicleJourneyRef a netex:Reference ;
+    rdfs:label "DatedServiceJourney → DatedVehicleJourneyRef" ;
+    netex:onClass netex:DatedServiceJourney ;
+    netex:target netex:DatedServiceJourney ;
+    netex:xsdCardinality "0..n" ;
+    netex:path "replacedJourneys/DatedVehicleJourneyRef" ;
+    rdfs:comment "Replaced/reinforced journeys" .
+
+netex:Interchange_FromJourneyRef a netex:Reference ;
+    rdfs:label "Interchange → FromJourneyRef" ;
+    netex:onClass netex:Interchange ;
+    netex:target netex:ServiceJourney ;
+    netex:xsdCardinality "1..1" .
+
+netex:Interchange_ToJourneyRef a netex:Reference ;
+    rdfs:label "Interchange → ToJourneyRef" ;
+    netex:onClass netex:Interchange ;
+    netex:target netex:ServiceJourney ;
+    netex:xsdCardinality "1..1" .
+
+netex:Interchange_FromPointRef a netex:Reference ;
+    rdfs:label "Interchange → FromPointRef" ;
+    netex:onClass netex:Interchange ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:Interchange_ToPointRef a netex:Reference ;
+    rdfs:label "Interchange → ToPointRef" ;
+    netex:onClass netex:Interchange ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+## --- VehicleScheduleFrame relationships ---
+
+netex:TrainBlock_OperatorRef a netex:Reference ;
+    rdfs:label "TrainBlock → OperatorRef" ;
+    netex:onClass netex:TrainBlock ;
+    netex:target netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:TrainBlock_journeys a netex:Composition ;
+    rdfs:label "TrainBlock → journeys" ;
+    netex:onClass netex:TrainBlock ;
+    netex:target netex:ServiceJourney ;
+    netex:xsdCardinality "0..n" ;
+    netex:path "journeys/VehicleJourneyRef" ;
+    rdfs:comment "Bidirectional: Block lists its journeys, journeys reference Block via BlockRef" .
+
+netex:TrainBlock_blockParts a netex:Composition ;
+    rdfs:label "TrainBlock → blockParts" ;
+    netex:onClass netex:TrainBlock ;
+    netex:target netex:TrainBlockPart ;
+    netex:xsdCardinality "0..n" .
+
+netex:TrainBlockPart_CompoundTrainRef a netex:Reference ;
+    rdfs:label "TrainBlockPart → CompoundTrainRef" ;
+    netex:onClass netex:TrainBlockPart ;
+    netex:target netex:CompoundTrain ;
+    netex:xsdCardinality "0..1" .
+
+netex:TrainBlockPart_JourneyPartRef a netex:Reference ;
+    rdfs:label "TrainBlockPart → JourneyPartRef" ;
+    netex:onClass netex:TrainBlockPart ;
+    netex:target netex:JourneyPart ;
+    netex:xsdCardinality "0..n" ;
+    netex:path "journeyParts/JourneyPartRef" .
+
+## --- Rolling stock relationships ---
+
+netex:Train_components a netex:Composition ;
+    rdfs:label "Train → components" ;
+    netex:onClass netex:Train ;
+    netex:target netex:TrainComponent ;
+    netex:xsdCardinality "0..n" .
+
+netex:TrainComponent_TrainElementRef a netex:Reference ;
+    rdfs:label "TrainComponent → TrainElementRef" ;
+    netex:onClass netex:TrainComponent ;
+    netex:target netex:TrainElement ;
+    netex:xsdCardinality "1..1" .
+
+netex:CompoundTrain_components a netex:Composition ;
+    rdfs:label "CompoundTrain → components" ;
+    netex:onClass netex:CompoundTrain ;
+    netex:target netex:TrainInCompoundTrain ;
+    netex:xsdCardinality "0..n" .
+
+netex:TrainInCompoundTrain_TrainRef a netex:Reference ;
+    rdfs:label "TrainInCompoundTrain → TrainRef" ;
+    netex:onClass netex:TrainInCompoundTrain ;
+    netex:target netex:Train ;
+    netex:xsdCardinality "1..1" .
+
+## --- JourneyPart relationships ---
+
+netex:ServiceJourney_parts a netex:Composition ;
+    rdfs:label "ServiceJourney → parts" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:JourneyPart ;
+    netex:xsdCardinality "0..n" .
+
+netex:JourneyPart_FromStopPointRef a netex:Reference ;
+    rdfs:label "JourneyPart → FromStopPointRef" ;
+    netex:onClass netex:JourneyPart ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:JourneyPart_ToStopPointRef a netex:Reference ;
+    rdfs:label "JourneyPart → ToStopPointRef" ;
+    netex:onClass netex:JourneyPart ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+## =================================================================
+## ELEMENTS — NAMED DATA PROPERTIES
+## =================================================================
+## Data-carrying XML child elements (not references to other objects,
+## not XML attributes like @id/@version).
+## Only elements constrained by profiles need to be listed here.
+## -----------------------------------------------------------------
+
+netex:Element a owl:Class ;
+    rdfs:label "Element" ;
+    skos:definition "A data-carrying XML child element within a NeTEx object" .
+
+## --- ResourceFrame elements ---
+
+netex:Authority_Name a netex:Element ;
+    rdfs:label "Authority → Name" ;
+    netex:onClass netex:Authority ;
+    netex:xsdCardinality "0..1" .
+
+netex:Operator_Name a netex:Element ;
+    rdfs:label "Operator → Name" ;
+    netex:onClass netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:VehicleType_Name a netex:Element ;
+    rdfs:label "VehicleType → Name" ;
+    netex:onClass netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+## --- SiteFrame elements ---
+
+netex:StopPlace_ValidBetween a netex:Element ;
+    rdfs:label "StopPlace → ValidBetween" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_AccessibilityAssessment a netex:Element ;
+    rdfs:label "StopPlace → AccessibilityAssessment" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_AccessibilityAssessment a netex:Element ;
+    rdfs:label "Quay → AccessibilityAssessment" ;
+    netex:onClass netex:Quay ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_boardingPositions a netex:Element ;
+    rdfs:label "Quay → boardingPositions" ;
+    netex:onClass netex:Quay ;
+    netex:xsdCardinality "0..1" .
+
+## --- ServiceFrame elements ---
+
+netex:Line_TransportSubmode a netex:Element ;
+    rdfs:label "Line → TransportSubmode" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_PublicCode a netex:Element ;
+    rdfs:label "Line → PublicCode" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_PrivateCode a netex:Element ;
+    rdfs:label "Line → PrivateCode" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_FlexibleLineRef a netex:Reference ;
+    rdfs:label "ServiceJourney → FlexibleLineRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:Line ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Reference to FlexibleLine (subtype of Line)" .
+
+## --- FareFrame elements ---
+
+netex:FareZone_Name a netex:Element ;
+    rdfs:label "FareZone → Name" ;
+    netex:onClass netex:FareZone ;
+    netex:xsdCardinality "0..1" .
+
+## --- TimetableFrame elements ---
+
+netex:TimetabledPassingTime_ArrivalTime a netex:Element ;
+    rdfs:label "TimetabledPassingTime → ArrivalTime" ;
+    netex:onClass netex:TimetabledPassingTime ;
+    netex:xsdCardinality "0..1" .
+
+netex:TimetabledPassingTime_DepartureTime a netex:Element ;
+    rdfs:label "TimetabledPassingTime → DepartureTime" ;
+    netex:onClass netex:TimetabledPassingTime ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_TransportMode a netex:Element ;
+    rdfs:label "ServiceJourney → TransportMode" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_TransportSubmode a netex:Element ;
+    rdfs:label "ServiceJourney → TransportSubmode" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:xsdCardinality "0..1" .
+
+netex:DatedServiceJourney_ServiceAlteration a netex:Element ;
+    rdfs:label "DatedServiceJourney → ServiceAlteration" ;
+    netex:onClass netex:DatedServiceJourney ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPointInJourneyPattern_ForBoarding a netex:Element ;
+    rdfs:label "StopPointInJourneyPattern → ForBoarding" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPointInJourneyPattern_ForAlighting a netex:Element ;
+    rdfs:label "StopPointInJourneyPattern → ForAlighting" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+## --- Rolling stock elements ---
+
+netex:TrainComponent_Label a netex:Element ;
+    rdfs:label "TrainComponent → Label" ;
+    netex:onClass netex:TrainComponent ;
+    netex:xsdCardinality "0..1" .
+
+netex:TrainComponent_OperationalOrientation a netex:Element ;
+    rdfs:label "TrainComponent → OperationalOrientation" ;
+    netex:onClass netex:TrainComponent ;
+    netex:xsdCardinality "0..1" .
+
+netex:Train_TypeOfFuel a netex:Element ;
+    rdfs:label "Train → TypeOfFuel" ;
+    netex:onClass netex:Train ;
+    netex:xsdCardinality "0..1" .
+
+netex:Network_Name a netex:Element ;
+    rdfs:label "Network → Name" ;
+    netex:onClass netex:Network ;
+    netex:xsdCardinality "0..1" .
+
+## =================================================================
+## SIRI REAL-TIME BRIDGES
+## =================================================================
+
+siri:SIRI_ET a siri:Service ;
+    rdfs:label "SIRI-ET — Estimated Timetable" ;
+    siri:externalRepo "Profile_Documentation_SIRI" .
+
+siri:SIRI_SX a siri:Service ;
+    rdfs:label "SIRI-SX — Situation Exchange" ;
+    siri:externalRepo "Profile_Documentation_SIRI" .
+
+siri:SIRI_VM a siri:Service ;
+    rdfs:label "SIRI-VM — Vehicle Monitoring" ;
+    siri:externalRepo "Profile_Documentation_SIRI" .
+
+siri:SIRI_FM a siri:Service ;
+    rdfs:label "SIRI-FM — Facility Monitoring" ;
+    siri:externalRepo "Profile_Documentation_SIRI" .
+
+netex:Line netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_SX , siri:SIRI_VM , siri:SIRI_FM ;
+    rdfs:comment "Via LineRef in EstimatedVehicleJourney, MonitoredVehicleJourney, AffectedLine, FacilityLocation" .
+
+netex:Route netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_SX ;
+    rdfs:comment "Via RouteRef in EstimatedVehicleJourney (mandatory for replacements), AffectedRoute" .
+
+netex:ServiceJourney netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX ;
+    rdfs:comment "Via FramedVehicleJourneyRef / DatedVehicleJourneyRef" .
+
+netex:DatedServiceJourney netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX , siri:SIRI_FM ;
+    rdfs:comment "Via DatedVehicleJourneyRef in all services" .
+
+netex:JourneyPattern netex:referencedBySIRI siri:SIRI_ET ;
+    rdfs:comment "Via JourneyPatternRef in EstimatedVehicleJourney" .
+
+netex:Operator netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX , siri:SIRI_FM ;
+    rdfs:comment "Via OperatorRef in all services" .
+
+netex:Quay netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX ;
+    rdfs:comment "Via StopPointRef in EstimatedCall, RecordedCall, MonitoredCall, AffectedStopPoint" .
+
+netex:StopPlace netex:referencedBySIRI siri:SIRI_SX , siri:SIRI_FM , siri:SIRI_VM ;
+    rdfs:comment "Via StopPlaceRef in AffectedStopPlace, FacilityLocation; OriginRef/DestinationRef in VM" .
+
+netex:GroupOfLines netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_SX ;
+    rdfs:comment "Via GroupOfLinesRef (ET, mandatory for replacements), NetworkRef (SX AffectedNetwork)" .
+
+## =================================================================
+## TRANSMODEL ALIGNMENT
+## =================================================================
+
+netex:Authority skos:exactMatch tm-org:Authority ;
+    rdfs:seeAlso tm-org:Organisation .
+
+netex:Operator skos:exactMatch tm-org:Operator ;
+    rdfs:seeAlso tm-org:Organisation .
+
+netex:StopPlace skos:exactMatch tm-fac:StopPlace .
+netex:Quay skos:exactMatch tm-fac:Quay .
+netex:TopographicPlace skos:closeMatch tm-journeys:TopographicPlace .
+netex:Parking skos:closeMatch tm-fac:Garage .
+
+netex:Line skos:exactMatch tm-journeys:Line .
+netex:Route skos:exactMatch tm-journeys:Route .
+netex:JourneyPattern skos:exactMatch tm-journeys:JourneyPattern .
+netex:ScheduledStopPoint skos:exactMatch tm-journeys:ScheduledStopPoint .
+netex:DestinationDisplay skos:exactMatch tm-journeys:DestinationDisplay .
+netex:Network skos:closeMatch tm-commons:GroupOfEntities .
+
+netex:ServiceJourney skos:exactMatch tm-journeys:ServiceJourney .
+netex:DatedServiceJourney skos:exactMatch tm-journeys:DatedVehicleJourney .
+netex:Interchange skos:closeMatch tm-journeys:Connection .
+netex:StopPointInJourneyPattern skos:exactMatch tm-journeys:StopPointInJourneyPattern .
+
+netex:DayType skos:exactMatch tm-journeys:DayType .
+netex:DayTypeAssignment skos:exactMatch tm-journeys:DayTypeAssignment .
+netex:OperatingPeriod skos:exactMatch tm-journeys:OperatingPeriod .
+netex:OperatingDay skos:exactMatch tm-journeys:OperatingDay .
+
+netex:Vehicle skos:closeMatch tm-journeys:Vehicle .
+
+netex:ShelterEquipment skos:exactMatch tm-fac:ShelterEquipment .
+netex:WaitingRoomEquipment skos:exactMatch tm-fac:WaitingRoomEquipment .
+netex:SanitaryEquipment skos:exactMatch tm-fac:SanitaryEquipment .
+netex:TicketingEquipment skos:exactMatch tm-fac:TicketingEquipment .
+
+netex:TariffZone skos:closeMatch tm-commons:Zone .
+netex:FareZone skos:closeMatch tm-commons:Zone .
+
+netex:AccessibilityAssessment skos:exactMatch tm-fac:AccessibilityAssessment .
+
+## =================================================================
+## ADDITIONAL CLASSES (referenced by national profiles)
+## =================================================================
+
+netex:AccessibilityAssessment a owl:Class ;
+    rdfs:label "AccessibilityAssessment" ;
+    skos:definition "Assessment of accessibility features (wheelchair, step-free, etc.)" .
+
+netex:AccessSpace a owl:Class ;
+    rdfs:label "AccessSpace" ;
+    skos:definition "Pedestrian area within a stop providing access between entrances and quays" ;
+    netex:childOf netex:StopPlace .
+
+netex:AvailabilityCondition a owl:Class ;
+    rdfs:label "AvailabilityCondition" ;
+    skos:definition "Condition specifying when an entity is valid (date range + optional day filter)" .
+
+netex:BookingArrangements a owl:Class ;
+    rdfs:label "BookingArrangements" ;
+    skos:definition "Booking rules for demand-responsive or reservable services" .
+
+netex:Branding a owl:Class ;
+    rdfs:label "Branding" ;
+    skos:definition "Visual identity (logo, colour scheme) for an operator or line" .
+
+netex:CalendarChain a owl:Class ;
+    rdfs:label "CalendarChain" ;
+    skos:definition "Linked sequence of calendar periods for chaining validity" .
+
+netex:Centroid a owl:Class ;
+    rdfs:label "Centroid" ;
+    skos:definition "Geographic centre point (Location with Longitude/Latitude)" .
+
+netex:CheckConstraint a owl:Class ;
+    rdfs:label "CheckConstraint" ;
+    skos:definition "Security or ticket check constraint at a stop (gates, barriers)" ;
+    netex:childOf netex:StopPlace .
+
+netex:Connection a owl:Class ;
+    rdfs:label "Connection" ;
+    skos:definition "Transfer connection between two scheduled stop points with walk duration" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:ContactDetails a owl:Class ;
+    rdfs:label "ContactDetails" ;
+    skos:definition "Contact information (phone, email, URL)" .
+
+netex:DayTypeAssignment a owl:Class ;
+    rdfs:label "DayTypeAssignment" ;
+    skos:definition "Binds a DayType to a specific date or OperatingPeriod" ;
+    netex:inFrame netex:ServiceCalendarFrame .
+
+netex:DefaultConnection a owl:Class ;
+    rdfs:label "DefaultConnection" ;
+    skos:definition "Default transfer time between stop points or within a stop" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:DeliveryVariant a owl:Class ;
+    rdfs:label "DeliveryVariant" ;
+    skos:definition "Variant of a Notice text for different media (print, audio, display)" .
+
+netex:Destination a owl:Class ;
+    rdfs:label "Destination" ;
+    skos:definition "Destination information attached to a journey" .
+
+netex:DestinationDisplayVariant a owl:Class ;
+    rdfs:label "DestinationDisplayVariant" ;
+    skos:definition "Media-specific variant of DestinationDisplay text" ;
+    netex:childOf netex:DestinationDisplay .
+
+netex:Direction a owl:Class ;
+    rdfs:label "Direction" ;
+    skos:definition "Named direction (inbound/outbound or custom)" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:DriverScheduleFrame a owl:Class ;
+    rdfs:label "DriverScheduleFrame" ;
+    skos:definition "Frame for driver duty and roster data" ;
+    netex:containedIn netex:CompositeFrame .
+
+netex:DynamicStopAssignment a owl:Class ;
+    rdfs:label "DynamicStopAssignment" ;
+    skos:definition "Real-time platform/quay assignment (overrides PassengerStopAssignment)" .
+
+netex:Entrance a owl:Class ;
+    rdfs:label "Entrance" ;
+    skos:definition "Physical entrance to a StopPlace" ;
+    netex:childOf netex:StopPlace .
+
+netex:FareProduct a owl:Class ;
+    rdfs:label "FareProduct" ;
+    skos:definition "A purchasable fare product (ticket, pass, carnet)" ;
+    netex:inFrame netex:FareFrame .
+
+netex:FlexibleLine a owl:Class ;
+    rdfs:label "FlexibleLine" ;
+    skos:definition "Line with demand-responsive or flexible routing" ;
+    rdfs:subClassOf netex:Line ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:FlexibleLinkProperties a owl:Class ;
+    rdfs:label "FlexibleLinkProperties" ;
+    skos:definition "Properties of a flexible (demand-responsive) link in a pattern" .
+
+netex:FlexiblePointProperties a owl:Class ;
+    rdfs:label "FlexiblePointProperties" ;
+    skos:definition "Properties of a flexible (demand-responsive) stop point" .
+
+netex:FlexibleRoute a owl:Class ;
+    rdfs:label "FlexibleRoute" ;
+    skos:definition "Route with flexible/variable path" ;
+    rdfs:subClassOf netex:Route .
+
+netex:FrameDefaults a owl:Class ;
+    rdfs:label "FrameDefaults" ;
+    skos:definition "Default values for frame (timezone, locale, currency, etc.)" .
+
+netex:GeneralFrame a owl:Class ;
+    rdfs:label "GeneralFrame" ;
+    skos:definition "Generic frame for arbitrary NeTEx objects" ;
+    netex:containedIn netex:CompositeFrame .
+
+netex:GroupOfOperators a owl:Class ;
+    rdfs:label "GroupOfOperators" ;
+    skos:definition "Grouping of operators (consortium, Verkehrsverbund, etc.)" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:GroupOfServices a owl:Class ;
+    rdfs:label "GroupOfServices" ;
+    skos:definition "Grouping of services for joint attributes" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:GroupOfStopPlaces a owl:Class ;
+    rdfs:label "GroupOfStopPlaces" ;
+    skos:definition "Grouping of related stop places (station complex, interchange hub)" ;
+    netex:inFrame netex:SiteFrame .
+
+netex:HeadwayJourneyGroup a owl:Class ;
+    rdfs:label "HeadwayJourneyGroup" ;
+    skos:definition "Group of journeys running at regular headway intervals" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:InfrastructureFrame a owl:Class ;
+    rdfs:label "InfrastructureFrame" ;
+    skos:definition "Frame for infrastructure elements (tracks, roads)" ;
+    netex:containedIn netex:CompositeFrame .
+
+netex:JourneyInterchange a owl:Class ;
+    rdfs:label "JourneyInterchange" ;
+    skos:definition "Planned interchange between specific journeys" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:Level a owl:Class ;
+    rdfs:label "Level" ;
+    skos:definition "Floor level within a station (ground, underground, mezzanine)" ;
+    netex:childOf netex:StopPlace .
+
+netex:Link a owl:Class ;
+    rdfs:label "Link" ;
+    skos:definition "Abstract directed connection between two points" .
+
+netex:NavigationPath a owl:Class ;
+    rdfs:label "NavigationPath" ;
+    skos:definition "Pedestrian path between places within or between stops" ;
+    netex:inFrame netex:SiteFrame .
+
+netex:NoticeAssignment a owl:Class ;
+    rdfs:label "NoticeAssignment" ;
+    skos:definition "Assigns a Notice to a journey, stop, or pattern element" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:OccupancyView a owl:Class ;
+    rdfs:label "OccupancyView" ;
+    skos:definition "Expected passenger occupancy level for a journey segment" .
+
+netex:OperationalContext a owl:Class ;
+    rdfs:label "OperationalContext" ;
+    skos:definition "Operational context defining vehicle type and mode for a line/journey" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:OrganisationalUnit a owl:Class ;
+    rdfs:label "OrganisationalUnit" ;
+    skos:definition "Subdivision of an Organisation" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:OrganisationChain a owl:Class ;
+    rdfs:label "OrganisationChain" ;
+    skos:definition "Chain of organisational responsibilities" .
+
+netex:PassengerBoardingPositionAssignment a owl:Class ;
+    rdfs:label "PassengerBoardingPositionAssignment" ;
+    skos:definition "Assignment of a train component to a boarding position on a quay" .
+
+netex:Point a owl:Class ;
+    rdfs:label "Point" ;
+    skos:definition "Abstract geographic or logical point" .
+
+netex:PointOfInterest a owl:Class ;
+    rdfs:label "PointOfInterest" ;
+    skos:definition "Place of interest near a stop (attraction, facility)" ;
+    netex:inFrame netex:SiteFrame .
+
+netex:PointOnRoute a owl:Class ;
+    rdfs:label "PointOnRoute" ;
+    skos:definition "A point's position within a Route sequence" ;
+    netex:childOf netex:Route .
+
+netex:PointProjection a owl:Class ;
+    rdfs:label "PointProjection" ;
+    skos:definition "Projects a logical point onto a geographic point" .
+
+netex:PostalAddress a owl:Class ;
+    rdfs:label "PostalAddress" ;
+    skos:definition "Postal address of a stop or organisation" .
+
+netex:Presentation a owl:Class ;
+    rdfs:label "Presentation" ;
+    skos:definition "Visual presentation attributes (colour, font, icon)" .
+
+netex:PropertyOfDay a owl:Class ;
+    rdfs:label "PropertyOfDay" ;
+    skos:definition "Properties characterizing a DayType (day of week, holiday type)" .
+
+netex:PublicationDelivery a owl:Class ;
+    rdfs:label "PublicationDelivery" ;
+    skos:definition "Root envelope element for NeTEx XML document delivery" .
+
+netex:RouteLink a owl:Class ;
+    rdfs:label "RouteLink" ;
+    skos:definition "Directed link between two RoutePoints" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:RoutingConstraintZone a owl:Class ;
+    rdfs:label "RoutingConstraintZone" ;
+    skos:definition "Zone restricting permitted boarding/alighting combinations" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:SchematicMap a owl:Class ;
+    rdfs:label "SchematicMap" ;
+    skos:definition "Schematic (non-geographic) map representation of a network" .
+
+netex:ServiceFacilitySet a owl:Class ;
+    rdfs:label "ServiceFacilitySet" ;
+    skos:definition "Set of on-board service facilities (class, meals, wifi, etc.)" .
+
+netex:ServiceJourneyInterchange a owl:Class ;
+    rdfs:label "ServiceJourneyInterchange" ;
+    skos:definition "Planned interchange between specific service journeys with guarantee/wait rules" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:ServiceJourneyPattern a owl:Class ;
+    rdfs:label "ServiceJourneyPattern" ;
+    skos:definition "Specialization of JourneyPattern with timing links for a service" ;
+    rdfs:subClassOf netex:JourneyPattern ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:ServiceLinkInJourneyPattern a owl:Class ;
+    rdfs:label "ServiceLinkInJourneyPattern" ;
+    skos:definition "A ServiceLink's role within a JourneyPattern sequence" ;
+    netex:childOf netex:JourneyPattern .
+
+netex:SiteFacilitySet a owl:Class ;
+    rdfs:label "SiteFacilitySet" ;
+    skos:definition "Set of facilities at a site (shelters, ticketing, toilets)" .
+
+netex:StopArea a owl:Class ;
+    rdfs:label "StopArea" ;
+    skos:definition "Grouping area within a StopPlace containing related quays" ;
+    netex:childOf netex:StopPlace .
+
+netex:StopChain a owl:Class ;
+    rdfs:label "StopChain" ;
+    skos:definition "Ordered chain of stops for sequential service" .
+
+netex:SubProfile a owl:Class ;
+    rdfs:label "SubProfile" ;
+    skos:definition "A profile that extends/refines another profile for a sub-domain" .
+
+netex:TemplateServiceJourney a owl:Class ;
+    rdfs:label "TemplateServiceJourney" ;
+    skos:definition "Journey defined by frequency/headway rather than fixed times" ;
+    rdfs:subClassOf netex:ServiceJourney ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:Timeband a owl:Class ;
+    rdfs:label "Timeband" ;
+    skos:definition "Named time range within a day (peak, off-peak)" .
+
+netex:TimeDemandType a owl:Class ;
+    rdfs:label "TimeDemandType" ;
+    skos:definition "Set of run times and dwell times between timing points for a pattern" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:TimetableChain a owl:Class ;
+    rdfs:label "TimetableChain" ;
+    skos:definition "Sequence of linked timetable frames for chained validity" .
+
+netex:TimingLink a owl:Class ;
+    rdfs:label "TimingLink" ;
+    skos:definition "Directed link between two timing points with run time" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:TimingPoint a owl:Class ;
+    rdfs:label "TimingPoint" ;
+    skos:definition "Point used for timing calculations (may or may not be a stop)" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:TimingPointInJourneyPattern a owl:Class ;
+    rdfs:label "TimingPointInJourneyPattern" ;
+    skos:definition "A timing point's role within a journey pattern" ;
+    netex:childOf netex:JourneyPattern .
+
+netex:TrainStopAssignment a owl:Class ;
+    rdfs:label "TrainStopAssignment" ;
+    skos:definition "Assignment of train components to specific boarding positions at a stop" .
+
+netex:TransferRestriction a owl:Class ;
+    rdfs:label "TransferRestriction" ;
+    skos:definition "Restriction on transfers at a stop or between services" .
+
+netex:TypeOfFrame a owl:Class ;
+    rdfs:label "TypeOfFrame" ;
+    skos:definition "Classification/tag for a frame (profile delivery type)" .
+
+netex:TypeOfNotice a owl:Class ;
+    rdfs:label "TypeOfNotice" ;
+    skos:definition "Classification of notice type" .
+
+netex:TypeOfPlace a owl:Class ;
+    rdfs:label "TypeOfPlace" ;
+    skos:definition "Classification of a place (StopPlace, PointOfInterest, etc.)" .
+
+netex:TypeOfProductCategory a owl:Class ;
+    rdfs:label "TypeOfProductCategory" ;
+    skos:definition "Product category for a service (InterCity, Regional, Express, etc.)" .
+
+netex:TypeOfService a owl:Class ;
+    rdfs:label "TypeOfService" ;
+    skos:definition "Classification of service type (normal, express, night)" .
+
+netex:TypeOfValue a owl:Class ;
+    rdfs:label "TypeOfValue" ;
+    skos:definition "Generic classification type for open enumerations" .
+
+netex:UicOperatingPeriod a owl:Class ;
+    rdfs:label "UicOperatingPeriod" ;
+    skos:definition "Operating period with ValidDayBits bitmask (UIC standard)" ;
+    rdfs:subClassOf netex:OperatingPeriod ;
+    netex:inFrame netex:ServiceCalendarFrame .
+
+netex:ValidityTrigger a owl:Class ;
+    rdfs:label "ValidityTrigger" ;
+    skos:definition "Event-based trigger for validity changes" .
+
+netex:ValueSet a owl:Class ;
+    rdfs:label "ValueSet" ;
+    skos:definition "Controlled vocabulary/code list" .
+
+netex:VehicleJourney a owl:Class ;
+    rdfs:label "VehicleJourney" ;
+    skos:definition "Operational vehicle journey (may differ from ServiceJourney)" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:Zone a owl:Class ;
+    rdfs:label "Zone" ;
+    skos:definition "Abstract geographic zone" .
+
+## =================================================================
+## ADDITIONAL ELEMENTS & PROPERTIES (referenced by national profiles)
+## =================================================================
+
+## --- AvailabilityCondition ---
+
+netex:AvailabilityCondition_FromDate a netex:Element ;
+    rdfs:label "AvailabilityCondition → FromDate" ;
+    netex:onClass netex:AvailabilityCondition ;
+    netex:xsdCardinality "0..1" .
+
+netex:AvailabilityCondition_ToDate a netex:Element ;
+    rdfs:label "AvailabilityCondition → ToDate" ;
+    netex:onClass netex:AvailabilityCondition ;
+    netex:xsdCardinality "0..1" .
+
+netex:AvailabilityCondition_ValidDayBits a netex:Element ;
+    rdfs:label "AvailabilityCondition → ValidDayBits" ;
+    netex:onClass netex:AvailabilityCondition ;
+    netex:xsdCardinality "0..1" .
+
+## --- CompositeFrame ---
+
+netex:CompositeFrame_FrameDefaults a netex:Element ;
+    rdfs:label "CompositeFrame → FrameDefaults" ;
+    netex:onClass netex:CompositeFrame ;
+    netex:xsdCardinality "0..1" .
+
+## --- Connection ---
+
+netex:Connection_BothWays a netex:Element ;
+    rdfs:label "Connection → BothWays" ;
+    netex:onClass netex:Connection ;
+    netex:xsdCardinality "0..1" .
+
+netex:Connection_Distance a netex:Element ;
+    rdfs:label "Connection → Distance" ;
+    netex:onClass netex:Connection ;
+    netex:xsdCardinality "0..1" .
+
+netex:Connection_FromScheduledStopPointRef a netex:Reference ;
+    rdfs:label "Connection → FromScheduledStopPointRef" ;
+    netex:onClass netex:Connection ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "1..1" .
+
+netex:Connection_ToScheduledStopPointRef a netex:Reference ;
+    rdfs:label "Connection → ToScheduledStopPointRef" ;
+    netex:onClass netex:Connection ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "1..1" .
+
+netex:Connection_WalkTransferDuration a netex:Element ;
+    rdfs:label "Connection → WalkTransferDuration" ;
+    netex:onClass netex:Connection ;
+    netex:xsdCardinality "0..1" .
+
+## --- ContactDetails ---
+
+netex:ContactDetails_Email a netex:Element ;
+    rdfs:label "ContactDetails → Email" ;
+    netex:onClass netex:ContactDetails ;
+    netex:xsdCardinality "0..1" .
+
+netex:ContactDetails_Phone a netex:Element ;
+    rdfs:label "ContactDetails → Phone" ;
+    netex:onClass netex:ContactDetails ;
+    netex:xsdCardinality "0..1" .
+
+netex:ContactDetails_Url a netex:Element ;
+    rdfs:label "ContactDetails → Url" ;
+    netex:onClass netex:ContactDetails ;
+    netex:xsdCardinality "0..1" .
+
+## --- DayType ---
+
+netex:DayType_Name a netex:Element ;
+    rdfs:label "DayType → Name" ;
+    netex:onClass netex:DayType ;
+    netex:xsdCardinality "0..1" .
+
+netex:DayType_properties a netex:Composition ;
+    rdfs:label "DayType → properties" ;
+    netex:onClass netex:DayType ;
+    netex:target netex:PropertyOfDay ;
+    netex:xsdCardinality "0..n" .
+
+netex:DayType_PropertyOfDay a netex:Composition ;
+    rdfs:label "DayType → PropertyOfDay" ;
+    netex:onClass netex:DayType ;
+    netex:target netex:PropertyOfDay ;
+    netex:xsdCardinality "0..n" .
+
+## --- DayTypeAssignment ---
+
+netex:DayTypeAssignment_isAvailable a netex:Element ;
+    rdfs:label "DayTypeAssignment → isAvailable" ;
+    netex:onClass netex:DayTypeAssignment ;
+    netex:xsdCardinality "0..1" .
+
+netex:DayTypeAssignment_OperatingDayRef a netex:Reference ;
+    rdfs:label "DayTypeAssignment → OperatingDayRef" ;
+    netex:onClass netex:DayTypeAssignment ;
+    netex:target netex:OperatingDay ;
+    netex:xsdCardinality "0..1" .
+
+netex:DayTypeAssignment_UicOperatingPeriodRef a netex:Reference ;
+    rdfs:label "DayTypeAssignment → UicOperatingPeriodRef" ;
+    netex:onClass netex:DayTypeAssignment ;
+    netex:target netex:UicOperatingPeriod ;
+    netex:xsdCardinality "0..1" .
+
+## --- DefaultConnection ---
+
+netex:DefaultConnection_FromStopPointRef a netex:Reference ;
+    rdfs:label "DefaultConnection → FromStopPointRef" ;
+    netex:onClass netex:DefaultConnection ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:DefaultConnection_ToStopPointRef a netex:Reference ;
+    rdfs:label "DefaultConnection → ToStopPointRef" ;
+    netex:onClass netex:DefaultConnection ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+## --- Destination ---
+
+netex:Destination_DestinationDisplayRef a netex:Reference ;
+    rdfs:label "Destination → DestinationDisplayRef" ;
+    netex:onClass netex:Destination ;
+    netex:target netex:DestinationDisplay ;
+    netex:xsdCardinality "0..1" .
+
+netex:Destination_ScheduledStopPointRef a netex:Reference ;
+    rdfs:label "Destination → ScheduledStopPointRef" ;
+    netex:onClass netex:Destination ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+## --- DestinationDisplay ---
+
+netex:DestinationDisplay_FrontText a netex:Element ;
+    rdfs:label "DestinationDisplay → FrontText" ;
+    netex:onClass netex:DestinationDisplay ;
+    netex:xsdCardinality "0..1" .
+
+netex:DestinationDisplay_SideText a netex:Element ;
+    rdfs:label "DestinationDisplay → SideText" ;
+    netex:onClass netex:DestinationDisplay ;
+    netex:xsdCardinality "0..1" .
+
+netex:DestinationDisplay_variants a netex:Composition ;
+    rdfs:label "DestinationDisplay → variants" ;
+    netex:onClass netex:DestinationDisplay ;
+    netex:target netex:DestinationDisplayVariant ;
+    netex:xsdCardinality "0..n" .
+
+netex:DestinationDisplay_vias a netex:Element ;
+    rdfs:label "DestinationDisplay → vias" ;
+    netex:onClass netex:DestinationDisplay ;
+    netex:xsdCardinality "0..n" .
+
+## --- Entity (generic) ---
+
+netex:Entity_Name a netex:Element ;
+    rdfs:label "Entity → Name" ;
+    skos:definition "Generic Name element on any NeTEx entity" ;
+    netex:xsdCardinality "0..1" .
+
+## --- FlexibleLine ---
+
+netex:FlexibleLine_BookingArrangements a netex:Composition ;
+    rdfs:label "FlexibleLine → BookingArrangements" ;
+    netex:onClass netex:FlexibleLine ;
+    netex:target netex:BookingArrangements ;
+    netex:xsdCardinality "0..1" .
+
+## --- JourneyPattern ---
+
+netex:JourneyPattern_DestinationDisplayRef a netex:Reference ;
+    rdfs:label "JourneyPattern → DestinationDisplayRef" ;
+    netex:onClass netex:JourneyPattern ;
+    netex:target netex:DestinationDisplay ;
+    netex:xsdCardinality "0..1" .
+
+netex:JourneyPattern_DirectionType a netex:Element ;
+    rdfs:label "JourneyPattern → DirectionType" ;
+    netex:onClass netex:JourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+## --- Line ---
+
+netex:Line_AccessibilityAssessment a netex:Composition ;
+    rdfs:label "Line → AccessibilityAssessment" ;
+    netex:onClass netex:Line ;
+    netex:target netex:AccessibilityAssessment ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_allowedDirections a netex:Element ;
+    rdfs:label "Line → allowedDirections" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..n" .
+
+netex:Line_BrandingRef a netex:Reference ;
+    rdfs:label "Line → BrandingRef" ;
+    netex:onClass netex:Line ;
+    netex:target netex:Branding ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_Monitored a netex:Element ;
+    rdfs:label "Line → Monitored" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_Name a netex:Element ;
+    rdfs:label "Line → Name" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_OperationalContextRef a netex:Reference ;
+    rdfs:label "Line → OperationalContextRef" ;
+    netex:onClass netex:Line ;
+    netex:target netex:OperationalContext ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_Presentation a netex:Composition ;
+    rdfs:label "Line → Presentation" ;
+    netex:onClass netex:Line ;
+    netex:target netex:Presentation ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_ResponsibilitySetRef a netex:Reference ;
+    rdfs:label "Line → ResponsibilitySetRef" ;
+    netex:onClass netex:Line ;
+    netex:target netex:ResponsibilitySet ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_ShortName a netex:Element ;
+    rdfs:label "Line → ShortName" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_TransportMode a netex:Element ;
+    rdfs:label "Line → TransportMode" ;
+    netex:onClass netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_TypeOfLineRef a netex:Reference ;
+    rdfs:label "Line → TypeOfLineRef" ;
+    netex:onClass netex:Line ;
+    netex:target netex:TypeOfValue ;
+    netex:xsdCardinality "0..1" .
+
+netex:Line_TypeOfProductCategoryRef a netex:Reference ;
+    rdfs:label "Line → TypeOfProductCategoryRef" ;
+    netex:onClass netex:Line ;
+    netex:target netex:TypeOfProductCategory ;
+    netex:xsdCardinality "0..1" .
+
+## --- Network ---
+
+netex:Network_tariffZones a netex:Composition ;
+    rdfs:label "Network → tariffZones" ;
+    netex:onClass netex:Network ;
+    netex:target netex:TariffZone ;
+    netex:xsdCardinality "0..n" .
+
+netex:Network_TransportOrganisationRef a netex:Reference ;
+    rdfs:label "Network → TransportOrganisationRef" ;
+    netex:onClass netex:Network ;
+    netex:target netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+## --- Notice ---
+
+netex:Notice_CanBeAdvertised a netex:Element ;
+    rdfs:label "Notice → CanBeAdvertised" ;
+    netex:onClass netex:Notice ;
+    netex:xsdCardinality "0..1" .
+
+netex:Notice_DeliveryVariant a netex:Composition ;
+    rdfs:label "Notice → DeliveryVariant" ;
+    netex:onClass netex:Notice ;
+    netex:target netex:DeliveryVariant ;
+    netex:xsdCardinality "0..n" .
+
+netex:Notice_TypeOfNoticeRef a netex:Reference ;
+    rdfs:label "Notice → TypeOfNoticeRef" ;
+    netex:onClass netex:Notice ;
+    netex:target netex:TypeOfNotice ;
+    netex:xsdCardinality "0..1" .
+
+## --- OperatingDay ---
+
+netex:OperatingDay_CalendarDate a netex:Element ;
+    rdfs:label "OperatingDay → CalendarDate" ;
+    netex:onClass netex:OperatingDay ;
+    netex:xsdCardinality "1..1" .
+
+netex:OperatingDay_DayLength a netex:Element ;
+    rdfs:label "OperatingDay → DayLength" ;
+    netex:onClass netex:OperatingDay ;
+    netex:xsdCardinality "0..1" .
+
+netex:OperatingDay_EarliestTime a netex:Element ;
+    rdfs:label "OperatingDay → EarliestTime" ;
+    netex:onClass netex:OperatingDay ;
+    netex:xsdCardinality "0..1" .
+
+## --- OperatingPeriod ---
+
+netex:OperatingPeriod_FromDate a netex:Element ;
+    rdfs:label "OperatingPeriod → FromDate" ;
+    netex:onClass netex:OperatingPeriod ;
+    netex:xsdCardinality "1..1" .
+
+netex:OperatingPeriod_ToDate a netex:Element ;
+    rdfs:label "OperatingPeriod → ToDate" ;
+    netex:onClass netex:OperatingPeriod ;
+    netex:xsdCardinality "1..1" .
+
+## --- Operator ---
+
+netex:Operator_ContactDetails a netex:Composition ;
+    rdfs:label "Operator → ContactDetails" ;
+    netex:onClass netex:Operator ;
+    netex:target netex:ContactDetails ;
+    netex:xsdCardinality "0..1" .
+
+netex:Operator_CountryRef a netex:Element ;
+    rdfs:label "Operator → CountryRef" ;
+    netex:onClass netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:Operator_CustomerServiceContactDetails a netex:Composition ;
+    rdfs:label "Operator → CustomerServiceContactDetails" ;
+    netex:onClass netex:Operator ;
+    netex:target netex:ContactDetails ;
+    netex:xsdCardinality "0..1" .
+
+netex:Operator_OrganisationType a netex:Element ;
+    rdfs:label "Operator → OrganisationType" ;
+    netex:onClass netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:Operator_PrimaryMode a netex:Element ;
+    rdfs:label "Operator → PrimaryMode" ;
+    netex:onClass netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:Operator_PublicCode a netex:Element ;
+    rdfs:label "Operator → PublicCode" ;
+    netex:onClass netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+netex:Operator_ShortName a netex:Element ;
+    rdfs:label "Operator → ShortName" ;
+    netex:onClass netex:Operator ;
+    netex:xsdCardinality "0..1" .
+
+## --- Parking ---
+
+netex:Parking_Centroid a netex:Composition ;
+    rdfs:label "Parking → Centroid" ;
+    netex:onClass netex:Parking ;
+    netex:target netex:Centroid ;
+    netex:xsdCardinality "0..1" .
+
+netex:Parking_Name a netex:Element ;
+    rdfs:label "Parking → Name" ;
+    netex:onClass netex:Parking ;
+    netex:xsdCardinality "0..1" .
+
+## --- PointOnRoute ---
+
+netex:PointOnRoute_RoutePointRef a netex:Reference ;
+    rdfs:label "PointOnRoute → RoutePointRef" ;
+    netex:onClass netex:PointOnRoute ;
+    netex:target netex:RoutePoint ;
+    netex:xsdCardinality "0..1" .
+
+## --- PointProjection ---
+
+netex:PointProjection_ProjectToPointRef a netex:Reference ;
+    rdfs:label "PointProjection → ProjectToPointRef" ;
+    netex:onClass netex:PointProjection ;
+    netex:target netex:Point ;
+    netex:xsdCardinality "1..1" .
+
+## --- PostalAddress ---
+
+netex:PostalAddress_CountryRef a netex:Element ;
+    rdfs:label "PostalAddress → CountryRef" ;
+    netex:onClass netex:PostalAddress ;
+    netex:xsdCardinality "0..1" .
+
+netex:PostalAddress_Suburb a netex:Element ;
+    rdfs:label "PostalAddress → Suburb" ;
+    netex:onClass netex:PostalAddress ;
+    netex:xsdCardinality "0..1" .
+
+netex:PostalAddress_Town a netex:Element ;
+    rdfs:label "PostalAddress → Town" ;
+    netex:onClass netex:PostalAddress ;
+    netex:xsdCardinality "0..1" .
+
+## --- PropertyOfDay ---
+
+netex:PropertyOfDay_DaysOfWeek a netex:Element ;
+    rdfs:label "PropertyOfDay → DaysOfWeek" ;
+    netex:onClass netex:PropertyOfDay ;
+    netex:xsdCardinality "0..1" .
+
+netex:PropertyOfDay_HolidayTypes a netex:Element ;
+    rdfs:label "PropertyOfDay → HolidayTypes" ;
+    netex:onClass netex:PropertyOfDay ;
+    netex:xsdCardinality "0..n" .
+
+## --- Quay ---
+
+netex:Quay_Centroid a netex:Composition ;
+    rdfs:label "Quay → Centroid" ;
+    netex:onClass netex:Quay ;
+    netex:target netex:Centroid ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_Covered a netex:Element ;
+    rdfs:label "Quay → Covered" ;
+    netex:onClass netex:Quay ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_LevelRef a netex:Reference ;
+    rdfs:label "Quay → LevelRef" ;
+    netex:onClass netex:Quay ;
+    netex:target netex:Level ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_Name a netex:Element ;
+    rdfs:label "Quay → Name" ;
+    netex:onClass netex:Quay ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_PrivateCode a netex:Element ;
+    rdfs:label "Quay → PrivateCode" ;
+    netex:onClass netex:Quay ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_PublicCode a netex:Element ;
+    rdfs:label "Quay → PublicCode" ;
+    netex:onClass netex:Quay ;
+    netex:xsdCardinality "0..1" .
+
+netex:Quay_QuayType a netex:Element ;
+    rdfs:label "Quay → QuayType" ;
+    netex:onClass netex:Quay ;
+    netex:xsdCardinality "0..1" .
+
+## --- Route ---
+
+netex:Route_DirectionType a netex:Element ;
+    rdfs:label "Route → DirectionType" ;
+    netex:onClass netex:Route ;
+    netex:xsdCardinality "0..1" .
+
+netex:Route_Name a netex:Element ;
+    rdfs:label "Route → Name" ;
+    netex:onClass netex:Route ;
+    netex:xsdCardinality "0..1" .
+
+netex:Route_PointOnRoute a netex:Composition ;
+    rdfs:label "Route → PointOnRoute" ;
+    netex:onClass netex:Route ;
+    netex:target netex:PointOnRoute ;
+    netex:xsdCardinality "1..n" .
+
+netex:Route_pointsInSequence a netex:Composition ;
+    rdfs:label "Route → pointsInSequence" ;
+    netex:onClass netex:Route ;
+    netex:target netex:PointOnRoute ;
+    netex:xsdCardinality "1..n" .
+
+## --- RouteLink ---
+
+netex:RouteLink_FromPointRef a netex:Reference ;
+    rdfs:label "RouteLink → FromPointRef" ;
+    netex:onClass netex:RouteLink ;
+    netex:target netex:RoutePoint ;
+    netex:xsdCardinality "1..1" .
+
+netex:RouteLink_ToPointRef a netex:Reference ;
+    rdfs:label "RouteLink → ToPointRef" ;
+    netex:onClass netex:RouteLink ;
+    netex:target netex:RoutePoint ;
+    netex:xsdCardinality "1..1" .
+
+## --- RoutePoint ---
+
+netex:RoutePoint_Location a netex:Element ;
+    rdfs:label "RoutePoint → Location" ;
+    netex:onClass netex:RoutePoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:RoutePoint_Name a netex:Element ;
+    rdfs:label "RoutePoint → Name" ;
+    netex:onClass netex:RoutePoint ;
+    netex:xsdCardinality "0..1" .
+
+## --- RoutingConstraintZone ---
+
+netex:RoutingConstraintZone_LineRef a netex:Reference ;
+    rdfs:label "RoutingConstraintZone → LineRef" ;
+    netex:onClass netex:RoutingConstraintZone ;
+    netex:target netex:Line ;
+    netex:xsdCardinality "0..1" .
+
+netex:RoutingConstraintZone_ScheduledStopPointRef a netex:Reference ;
+    rdfs:label "RoutingConstraintZone → ScheduledStopPointRef" ;
+    netex:onClass netex:RoutingConstraintZone ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..n" .
+
+netex:RoutingConstraintZone_ZoneUse a netex:Element ;
+    rdfs:label "RoutingConstraintZone → ZoneUse" ;
+    netex:onClass netex:RoutingConstraintZone ;
+    netex:xsdCardinality "0..1" .
+
+## --- ScheduledStopPoint ---
+
+netex:ScheduledStopPoint_ForAlighting a netex:Element ;
+    rdfs:label "ScheduledStopPoint → ForAlighting" ;
+    netex:onClass netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:ScheduledStopPoint_ForBoarding a netex:Element ;
+    rdfs:label "ScheduledStopPoint → ForBoarding" ;
+    netex:onClass netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:ScheduledStopPoint_Location a netex:Element ;
+    rdfs:label "ScheduledStopPoint → Location" ;
+    netex:onClass netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:ScheduledStopPoint_Name a netex:Element ;
+    rdfs:label "ScheduledStopPoint → Name" ;
+    netex:onClass netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:ScheduledStopPoint_PublicCode a netex:Element ;
+    rdfs:label "ScheduledStopPoint → PublicCode" ;
+    netex:onClass netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:ScheduledStopPoint_StopAreaRef a netex:Reference ;
+    rdfs:label "ScheduledStopPoint → StopAreaRef" ;
+    netex:onClass netex:ScheduledStopPoint ;
+    netex:target netex:StopArea ;
+    netex:xsdCardinality "0..1" .
+
+netex:ScheduledStopPoint_StopType a netex:Element ;
+    rdfs:label "ScheduledStopPoint → StopType" ;
+    netex:onClass netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+## --- ServiceJourney ---
+
+netex:ServiceJourney_AvailabilityConditionRef a netex:Reference ;
+    rdfs:label "ServiceJourney → AvailabilityConditionRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:AvailabilityCondition ;
+    netex:xsdCardinality "0..n" .
+
+netex:ServiceJourney_DepartureDayOffset a netex:Element ;
+    rdfs:label "ServiceJourney → DepartureDayOffset" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_DepartureTime a netex:Element ;
+    rdfs:label "ServiceJourney → DepartureTime" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_Destination a netex:Composition ;
+    rdfs:label "ServiceJourney → Destination" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:Destination ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_Name a netex:Element ;
+    rdfs:label "ServiceJourney → Name" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_ServiceJourneyPatternRef a netex:Reference ;
+    rdfs:label "ServiceJourney → ServiceJourneyPatternRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:ServiceJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_TimeDemandTypeRef a netex:Reference ;
+    rdfs:label "ServiceJourney → TimeDemandTypeRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:TimeDemandType ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_TrainNumberRef a netex:Reference ;
+    rdfs:label "ServiceJourney → TrainNumberRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:TrainNumber ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_TypeOfProductCategoryRef a netex:Reference ;
+    rdfs:label "ServiceJourney → TypeOfProductCategoryRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:TypeOfProductCategory ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_TypeOfServiceRef a netex:Reference ;
+    rdfs:label "ServiceJourney → TypeOfServiceRef" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:TypeOfService ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourney_validityConditions a netex:Composition ;
+    rdfs:label "ServiceJourney → validityConditions" ;
+    netex:onClass netex:ServiceJourney ;
+    netex:target netex:AvailabilityCondition ;
+    netex:xsdCardinality "0..n" .
+
+## --- ServiceJourneyInterchange ---
+
+netex:ServiceJourneyInterchange_ChangeWithinVehicle a netex:Element ;
+    rdfs:label "ServiceJourneyInterchange → ChangeWithinVehicle" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyInterchange_CrossBorder a netex:Element ;
+    rdfs:label "ServiceJourneyInterchange → CrossBorder" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyInterchange_FromPointRef a netex:Reference ;
+    rdfs:label "ServiceJourneyInterchange → FromPointRef" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyInterchange_FromServiceJourneyRef a netex:Reference ;
+    rdfs:label "ServiceJourneyInterchange → FromServiceJourneyRef" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:target netex:ServiceJourney ;
+    netex:xsdCardinality "1..1" .
+
+netex:ServiceJourneyInterchange_Guaranteed a netex:Element ;
+    rdfs:label "ServiceJourneyInterchange → Guaranteed" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyInterchange_MaximumWaitTime a netex:Element ;
+    rdfs:label "ServiceJourneyInterchange → MaximumWaitTime" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyInterchange_StaySeated a netex:Element ;
+    rdfs:label "ServiceJourneyInterchange → StaySeated" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyInterchange_ToPointRef a netex:Reference ;
+    rdfs:label "ServiceJourneyInterchange → ToPointRef" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyInterchange_ToServiceJourneyRef a netex:Reference ;
+    rdfs:label "ServiceJourneyInterchange → ToServiceJourneyRef" ;
+    netex:onClass netex:ServiceJourneyInterchange ;
+    netex:target netex:ServiceJourney ;
+    netex:xsdCardinality "1..1" .
+
+## --- ServiceJourneyPattern ---
+
+netex:ServiceJourneyPattern_DirectionType a netex:Element ;
+    rdfs:label "ServiceJourneyPattern → DirectionType" ;
+    netex:onClass netex:ServiceJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyPattern_linksInSequence a netex:Composition ;
+    rdfs:label "ServiceJourneyPattern → linksInSequence" ;
+    netex:onClass netex:ServiceJourneyPattern ;
+    netex:target netex:ServiceLinkInJourneyPattern ;
+    netex:xsdCardinality "0..n" .
+
+netex:ServiceJourneyPattern_PrivateCode a netex:Element ;
+    rdfs:label "ServiceJourneyPattern → PrivateCode" ;
+    netex:onClass netex:ServiceJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyPattern_ServiceJourneyPatternType a netex:Element ;
+    rdfs:label "ServiceJourneyPattern → ServiceJourneyPatternType" ;
+    netex:onClass netex:ServiceJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceJourneyPattern_TimingLinks a netex:Composition ;
+    rdfs:label "ServiceJourneyPattern → TimingLinks" ;
+    netex:onClass netex:ServiceJourneyPattern ;
+    netex:target netex:TimingLink ;
+    netex:xsdCardinality "0..n" .
+
+## --- ServiceLink ---
+
+netex:ServiceLink_Distance a netex:Element ;
+    rdfs:label "ServiceLink → Distance" ;
+    netex:onClass netex:ServiceLink ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceLink_FromPointRef a netex:Reference ;
+    rdfs:label "ServiceLink → FromPointRef" ;
+    netex:onClass netex:ServiceLink ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "1..1" .
+
+netex:ServiceLink_LineString a netex:Element ;
+    rdfs:label "ServiceLink → LineString" ;
+    netex:onClass netex:ServiceLink ;
+    netex:xsdCardinality "0..1" .
+
+netex:ServiceLink_ToPointRef a netex:Reference ;
+    rdfs:label "ServiceLink → ToPointRef" ;
+    netex:onClass netex:ServiceLink ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "1..1" .
+
+## --- ServiceLinkInJourneyPattern ---
+
+netex:ServiceLinkInJourneyPattern_ServiceLinkRef a netex:Reference ;
+    rdfs:label "ServiceLinkInJourneyPattern → ServiceLinkRef" ;
+    netex:onClass netex:ServiceLinkInJourneyPattern ;
+    netex:target netex:ServiceLink ;
+    netex:xsdCardinality "1..1" .
+
+## --- SiteConnection ---
+
+netex:SiteConnection_NavigationPathRef a netex:Reference ;
+    rdfs:label "SiteConnection → NavigationPathRef" ;
+    netex:onClass netex:SiteConnection ;
+    netex:target netex:NavigationPath ;
+    netex:xsdCardinality "0..1" .
+
+## --- StopPlace ---
+
+netex:StopPlace_accessSpaces a netex:Composition ;
+    rdfs:label "StopPlace → accessSpaces" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:AccessSpace ;
+    netex:xsdCardinality "0..n" .
+
+netex:StopPlace_Centroid a netex:Composition ;
+    rdfs:label "StopPlace → Centroid" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:Centroid ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_entrances a netex:Composition ;
+    rdfs:label "StopPlace → entrances" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:Entrance ;
+    netex:xsdCardinality "0..n" .
+
+netex:StopPlace_levels a netex:Composition ;
+    rdfs:label "StopPlace → levels" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:Level ;
+    netex:xsdCardinality "0..n" .
+
+netex:StopPlace_Name a netex:Element ;
+    rdfs:label "StopPlace → Name" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_placeTypes a netex:Element ;
+    rdfs:label "StopPlace → placeTypes" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..n" .
+
+netex:StopPlace_PostalAddress a netex:Composition ;
+    rdfs:label "StopPlace → PostalAddress" ;
+    netex:onClass netex:StopPlace ;
+    netex:target netex:PostalAddress ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_PrivateCode a netex:Element ;
+    rdfs:label "StopPlace → PrivateCode" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_PublicCode a netex:Element ;
+    rdfs:label "StopPlace → PublicCode" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_ShortName a netex:Element ;
+    rdfs:label "StopPlace → ShortName" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_StopPlaceType a netex:Element ;
+    rdfs:label "StopPlace → StopPlaceType" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPlace_TransportMode a netex:Element ;
+    rdfs:label "StopPlace → TransportMode" ;
+    netex:onClass netex:StopPlace ;
+    netex:xsdCardinality "0..1" .
+
+## --- StopPointInJourneyPattern ---
+
+netex:StopPointInJourneyPattern_order a netex:Element ;
+    rdfs:label "StopPointInJourneyPattern → order" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:xsdCardinality "1..1" .
+
+netex:StopPointInJourneyPattern_RequestStop a netex:Element ;
+    rdfs:label "StopPointInJourneyPattern → RequestStop" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+netex:StopPointInJourneyPattern_StopUse a netex:Element ;
+    rdfs:label "StopPointInJourneyPattern → StopUse" ;
+    netex:onClass netex:StopPointInJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+## --- TimetabledPassingTime ---
+
+netex:TimetabledPassingTime_StopPointInJourneyPatternRef a netex:Reference ;
+    rdfs:label "TimetabledPassingTime → StopPointInJourneyPatternRef" ;
+    netex:onClass netex:TimetabledPassingTime ;
+    netex:target netex:StopPointInJourneyPattern ;
+    netex:xsdCardinality "0..1" .
+
+## --- TimingLink ---
+
+netex:TimingLink_FromPointRef a netex:Reference ;
+    rdfs:label "TimingLink → FromPointRef" ;
+    netex:onClass netex:TimingLink ;
+    netex:target netex:TimingPoint ;
+    netex:xsdCardinality "1..1" .
+
+netex:TimingLink_ToPointRef a netex:Reference ;
+    rdfs:label "TimingLink → ToPointRef" ;
+    netex:onClass netex:TimingLink ;
+    netex:target netex:TimingPoint ;
+    netex:xsdCardinality "1..1" .
+
+## --- TopographicPlace ---
+
+netex:TopographicPlace_TopographicPlaceType a netex:Element ;
+    rdfs:label "TopographicPlace → TopographicPlaceType" ;
+    netex:onClass netex:TopographicPlace ;
+    netex:xsdCardinality "0..1" .
+
+## --- TrainNumber ---
+
+netex:TrainNumber_ForAdvertisement a netex:Element ;
+    rdfs:label "TrainNumber → ForAdvertisement" ;
+    netex:onClass netex:TrainNumber ;
+    netex:xsdCardinality "0..1" .
+
+## --- TrainBlock ---
+
+netex:Block_StartTime a netex:Element ;
+    rdfs:label "Block → StartTime" ;
+    netex:onClass netex:TrainBlock ;
+    netex:xsdCardinality "0..1" .
+
+netex:Block_EndTime a netex:Element ;
+    rdfs:label "Block → EndTime" ;
+    netex:onClass netex:TrainBlock ;
+    netex:xsdCardinality "0..1" .
+
+## --- UicOperatingPeriod ---
+
+netex:UicOperatingPeriod_ValidDayBits a netex:Element ;
+    rdfs:label "UicOperatingPeriod → ValidDayBits" ;
+    netex:onClass netex:UicOperatingPeriod ;
+    netex:xsdCardinality "1..1" .
+
+## --- VehicleType ---
+
+netex:VehicleType_FuelType a netex:Element ;
+    rdfs:label "VehicleType → FuelType" ;
+    netex:onClass netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+netex:VehicleType_HasHoist a netex:Element ;
+    rdfs:label "VehicleType → HasHoist" ;
+    netex:onClass netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+netex:VehicleType_HasLiftOrRamp a netex:Element ;
+    rdfs:label "VehicleType → HasLiftOrRamp" ;
+    netex:onClass netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+netex:VehicleType_Length a netex:Element ;
+    rdfs:label "VehicleType → Length" ;
+    netex:onClass netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+netex:VehicleType_LowFloor a netex:Element ;
+    rdfs:label "VehicleType → LowFloor" ;
+    netex:onClass netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+netex:VehicleType_TransportMode a netex:Element ;
+    rdfs:label "VehicleType → TransportMode" ;
+    netex:onClass netex:VehicleType ;
+    netex:xsdCardinality "0..1" .
+
+## --- AccessSpace ---
+
+netex:AccessSpace_LevelRef a netex:Reference ;
+    rdfs:label "AccessSpace → LevelRef" ;
+    netex:onClass netex:AccessSpace ;
+    netex:target netex:Level ;
+    netex:xsdCardinality "0..1" .
+
+## --- basedOn ---
+
+netex:basedOn a owl:ObjectProperty ;
+    rdfs:label "basedOn" ;
+    skos:definition "This profile or sub-profile is based on another" .
+
+## =================================================================
+## END OF ONTOLOGY
+## =================================================================
