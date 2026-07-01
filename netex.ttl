@@ -31,6 +31,15 @@
 @prefix tm-fares:    <https://w3id.org/transmodel/fares#> .
 
 ## =================================================================
+## ONTOLOGY DECLARATION
+## =================================================================
+
+<https://netex-cen.eu/ontology> a owl:Ontology ;
+    rdfs:label "NeTEx Base Ontology" ;
+    owl:versionIRI <https://netex-cen.eu/ontology/2026-07> ;
+    rdfs:comment "Machine-readable model of the NeTEx XML schema: classes, frames, relationships, XSD cardinality, SIRI bridges, and Transmodel alignment." .
+
+## =================================================================
 ## META-CLASSES (ontology vocabulary)
 ## =================================================================
 
@@ -81,7 +90,9 @@ netex:inFrame a owl:ObjectProperty ;
 
 netex:specializes a owl:ObjectProperty ;
     rdfs:label "specializes" ;
-    skos:definition "This class is a functional specialization of another (e.g. DatedServiceJourney specializes ServiceJourney)" .
+    rdfs:subPropertyOf rdfs:seeAlso ;
+    skos:definition "This class is a functional specialization of another (e.g. DatedServiceJourney specializes ServiceJourney)" ;
+    skos:scopeNote "Deliberately NOT modelled as rdfs:subClassOf. DatedServiceJourney is not a true type-theoretic subclass of ServiceJourney — it references one rather than inheriting its identity. Using rdfs:subClassOf would allow a reasoner to wrongly conclude that a DSJ IS-A ServiceJourney, which misrepresents the NeTEx schema semantics. TemplateServiceJourney, by contrast, truly IS a ServiceJourney and correctly uses rdfs:subClassOf." .
 
 ## --- Reference metadata (per-relationship scoping) ---
 
@@ -1149,7 +1160,8 @@ netex:DestinationDisplay skos:exactMatch tm-journeys:DestinationDisplay .
 netex:Network skos:closeMatch tm-commons:GroupOfEntities .
 
 netex:ServiceJourney skos:exactMatch tm-journeys:ServiceJourney .
-netex:DatedServiceJourney skos:exactMatch tm-journeys:DatedVehicleJourney .
+netex:DatedServiceJourney skos:closeMatch tm-journeys:DatedVehicleJourney ;
+    rdfs:comment "closeMatch (not exactMatch): CEN NeTEx issue #292 shows active disagreement on whether DatedServiceJourney truly maps to Transmodel DatedVehicleJourney. The alignment is approximate." .
 netex:Interchange skos:closeMatch tm-journeys:Connection .
 netex:StopPointInJourneyPattern skos:exactMatch tm-journeys:StopPointInJourneyPattern .
 
@@ -1531,6 +1543,7 @@ netex:ValueSet a owl:Class ;
 netex:VehicleJourney a owl:Class ;
     rdfs:label "VehicleJourney" ;
     skos:definition "Operational vehicle journey (may differ from ServiceJourney)" ;
+    skos:scopeNote "Deliberately not connected via rdfs:subClassOf or netex:specializes to ServiceJourney or DatedServiceJourney. NeTEx inherits this ambiguity from Transmodel: whether DatedServiceJourney/DatedVehicleJourney are true specializations of VehicleJourney is unresolved in CEN (issue #292). This ontology represents the gap rather than overclaiming a hierarchy that the standard itself does not formalize." ;
     netex:inFrame netex:TimetableFrame .
 
 netex:Zone a owl:Class ;
