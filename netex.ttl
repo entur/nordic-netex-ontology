@@ -88,9 +88,8 @@ netex:inFrame a owl:ObjectProperty ;
     rdfs:label "inFrame" ;
     skos:definition "Object is a top-level member of this frame type" .
 
-netex:specializes a owl:ObjectProperty ;
+netex:specializes a owl:AnnotationProperty ;
     rdfs:label "specializes" ;
-    rdfs:subPropertyOf rdfs:seeAlso ;
     skos:definition "This class is a functional specialization of another (e.g. DatedServiceJourney specializes ServiceJourney)" ;
     skos:scopeNote "Deliberately NOT modelled as rdfs:subClassOf. DatedServiceJourney is not a true type-theoretic subclass of ServiceJourney — it references one rather than inheriting its identity. Using rdfs:subClassOf would allow a reasoner to wrongly conclude that a DSJ IS-A ServiceJourney, which misrepresents the NeTEx schema semantics. TemplateServiceJourney, by contrast, truly IS a ServiceJourney and correctly uses rdfs:subClassOf." .
 
