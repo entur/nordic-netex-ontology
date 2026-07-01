@@ -1,101 +1,101 @@
 # Nordic NeTEx Ontology
 
-Maskinlesbar ontologi for NeTEx-standarden og det nordiske NeTEx-profilet (Nordic Profile). Modellerer klasser, relasjoner, rammeverk (frames) og profilbegrensninger som RDF/OWL og SHACL i Turtle-format.
+Machine-readable ontology for the NeTEx standard and the Nordic NeTEx Profile. Models classes, relationships, frames, and profile constraints as RDF/OWL and SHACL in Turtle format.
 
-## Formål
+## Purpose
 
-Ontologien tjener to formål:
+The ontology serves two purposes:
 
-- **For mennesker:** En presis, navigerbar referanse for hvordan NeTEx-klasser, referanser og begrensninger henger sammen.
-- **For maskiner:** Et grunnlag for automatisert validering (SHACL), dokumentasjonsgenerering og verktøyintegrasjon.
+- **For humans:** A precise, navigable reference for how NeTEx classes, references, and constraints relate to each other.
+- **For machines:** A foundation for automated validation (SHACL), documentation generation, and tooling integration.
 
-## Scope og avgrensning
+## Scope
 
-Dette repoet inneholder kun den **felles nordiske grunnmuren** — det som er avtalt på tvers av NO, SE, FI og DK. Det er bevisst separert fra lands- og organisasjonsspesifikke lag:
-
-```
-netex.ttl               ← NeTEx basisskjema (hva standarden definerer)
-netex-nordic.ttl        ← Nordic Profile (hva Norden er enige om)
-```
-
-Alt utover dette — governance-regler, tjeneste-subprofiler, dokumentasjonsstier, codespace-konvensjoner — hører hjemme i nedstrøms repoer som importerer dette grunnlaget via `owl:imports` eller som git-submodul.
-
-**Designprinsipp:** Ethvert lag som bygger videre kan stramme inn (via SHACL), men dette repoet forblir stabilt og gjenbrukbart uavhengig av hvem som konsumerer det.
-
-## Filer
-
-| Fil | Innhold |
-|-----|---------|
-| `netex.ttl` | OWL-klasser og egenskaper for NeTEx XML-skjemaet: rammeklasser, referansemetadata, XSD-kardinalitet, elementrekkefølge, SIRI-koblinger og Transmodel-alignering. |
-| `netex-nordic.ttl` | SHACL-shapes som uttrykker hva Nordic Profile tillater, krever og ekskluderer utover XSD. |
-
-## Utvidelsesmodell
-
-Nedstrøms lag kan importere og bygge videre uten å endre dette repoet:
+This repository contains only the **shared Nordic foundation** — what has been agreed upon across NO, SE, FI, and DK. It is deliberately separated from country- and organisation-specific layers:
 
 ```
-netex.ttl                          ← Grunnvokabular (dette repoet)
-└─ netex-nordic.ttl                ← Nordiske begrensninger (dette repoet)
-   └─ <ditt-lag>.ttl               ← Organisasjon, tjeneste, land, …
+netex.ttl               ← NeTEx base schema (what the standard defines)
+netex-nordic.ttl        ← Nordic Profile (what the Nordics agree on)
+```
+
+Everything beyond this — governance rules, service sub-profiles, documentation paths, codespace conventions — belongs in downstream repositories that import this foundation via `owl:imports` or as a git submodule.
+
+**Design principle:** Any layer built on top can tighten constraints (via SHACL), but this repository remains stable and reusable regardless of who consumes it.
+
+## Files
+
+| File | Contents |
+|------|----------|
+| `netex.ttl` | OWL classes and properties for the NeTEx XML schema: frame classes, reference metadata, XSD cardinality, element ordering, SIRI bridges, and Transmodel alignment. |
+| `netex-nordic.ttl` | SHACL shapes expressing what the Nordic Profile allows, requires, and excludes beyond XSD. |
+
+## Extension model
+
+Downstream layers can import and build on top without modifying this repository:
+
+```
+netex.ttl                          ← Base vocabulary (this repo)
+└─ netex-nordic.ttl                ← Nordic constraints (this repo)
+   └─ <your-layer>.ttl             ← Organisation, service, country, …
       └─ …
 ```
 
-Hvert lag kan:
-- **Stramme inn** — Legge til strengere SHACL-shapes (`sh:minCount`, `sh:maxCount 0`)
-- **Utvide** — Definere nye klasser, referanser eller domeneegenskaper
-- **Koble** — Referere til URI-er herfra i egne shapes og regler
+Each layer can:
+- **Tighten** — Add stricter SHACL shapes (`sh:minCount`, `sh:maxCount 0`)
+- **Extend** — Define new classes, references, or domain properties
+- **Link** — Reference URIs from this repo in your own shapes and rules
 
-## SHACL-validering
+## SHACL validation
 
-SHACL-shapes i `netex-nordic.ttl` uttrykker profilbegrensninger som valideringsverktøy kan kjøre direkte:
+SHACL shapes in `netex-nordic.ttl` express profile constraints that validation tools can execute directly:
 
-| Constraint | SHACL-uttrykk | Eksempel |
-|------------|---------------|----------|
-| Ekskludert | `sh:maxCount 0` | ParentSiteRef brukes ikke i NP |
-| Tillatt | `sh:maxCount 1` | TopographicPlaceRef valgfritt |
-| Påkrevd | `sh:minCount 1; sh:maxCount 1` | RouteRef obligatorisk (XSD sier valgfritt) |
-| Typesjekk | `sh:class` | RouteRef må peke på en Route |
+| Constraint | SHACL expression | Example |
+|------------|------------------|---------|
+| Excluded | `sh:maxCount 0` | ParentSiteRef not used in NP |
+| Allowed | `sh:maxCount 1` | TopographicPlaceRef optional |
+| Required | `sh:minCount 1; sh:maxCount 1` | RouteRef mandatory (XSD says optional) |
+| Type check | `sh:class` | RouteRef must point to a Route |
 
-Shape-navngivning: `profile:NP_{ClassName}Shape`.
+Shape naming: `profile:NP_{ClassName}Shape`.
 
-## Innebygde koblinger
+## Built-in links
 
-| Kobling | Mekanisme |
-|---------|-----------|
-| SIRI sanntid | `netex:referencedBySIRI` — hvilke klasser refereres av ET, SX, VM, FM |
-| Transmodel | `skos:exactMatch` / `skos:closeMatch` — alignering mot Transmodel-konsepter |
+| Link | Mechanism |
+|------|-----------|
+| SIRI real-time | `netex:referencedBySIRI` — which classes are referenced by ET, SX, VM, FM |
+| Transmodel | `skos:exactMatch` / `skos:closeMatch` — alignment with Transmodel concepts |
 
-## Teknologi
+## Technology
 
-| Vokabular | Rolle |
-|-----------|-------|
-| RDF/OWL | Klasser og egenskaper |
-| SHACL | Profilbegrensninger som validerbare shapes |
-| SKOS | Definisjoner, notasjon og kryssvokabular-mapping |
-| Turtle (.ttl) | Serialiseringsformat |
+| Vocabulary | Role |
+|------------|------|
+| RDF/OWL | Classes and properties |
+| SHACL | Profile constraints as validatable shapes |
+| SKOS | Definitions, notation, and cross-vocabulary mapping |
+| Turtle (.ttl) | Serialisation format |
 
-## Prefikser
+## Prefixes
 
-| Prefiks | Navnerom |
-|---------|----------|
+| Prefix | Namespace |
+|--------|-----------|
 | `netex:` | `https://netex-cen.eu/ontology#` |
 | `profile:` | `https://netex-cen.eu/profile#` |
 | `sh:` | `http://www.w3.org/ns/shacl#` |
 | `siri:` | `https://siri-cen.eu/ontology#` |
 | `tm-commons:` | `https://w3id.org/transmodel/commons#` |
 
-## Verktøy
+## Tools
 
-Ontologien kan konsumeres av ethvert standard RDF/SHACL-verktøy, f.eks.:
+The ontology can be consumed by any standard RDF/SHACL tooling, e.g.:
 
-- **pySHACL** — Validering av NeTEx-data mot profil-shapes
-- **Apache Jena** — SPARQL-spørringer
-- **TopBraid / Protégé** — Visuell utforskning og redigering
-- **Egne skript/agenter** — Importer `.ttl`-filene via `owl:imports` eller last direkte
+- **pySHACL** — Validate NeTEx data against profile shapes
+- **Apache Jena** — SPARQL queries
+- **TopBraid / Protégé** — Visual exploration and editing
+- **Custom scripts/agents** — Import the `.ttl` files via `owl:imports` or load directly
 
-## Videre lesning
+## Further reading
 
-- [Ontology Guide](https://github.com/entur/nordic-netex-documentation/blob/main/guides/Ontology/Ontology_Guide.md) — Fullstendig guide til ontologiens oppbygning
-- [W3C RDF Primer](https://www.w3.org/TR/rdf11-primer/) — Introduksjon til RDF og Turtle-syntaks
+- [Ontology Guide](https://github.com/entur/nordic-netex-documentation/blob/main/guides/Ontology/Ontology_Guide.md) — Full guide to the ontology structure
+- [W3C RDF Primer](https://www.w3.org/TR/rdf11-primer/) — Introduction to RDF and Turtle syntax
 - [W3C SHACL Specification](https://www.w3.org/TR/shacl/) — Shapes Constraint Language
-- [Transmodel](https://www.transmodel-cen.eu/) — Den konseptuelle modellen bak NeTEx
+- [Transmodel](https://www.transmodel-cen.eu/) — The conceptual model behind NeTEx
