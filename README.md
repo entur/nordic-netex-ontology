@@ -1,69 +1,94 @@
 # Nordic NeTEx Ontology
 
-Machine-readable ontology for the NeTEx standard and the Nordic NeTEx Profile. Models classes, relationships, frames, and profile constraints as RDF/OWL and SHACL in Turtle format.
+The **Nordic NeTEx Profile** as a machine-readable overlay on top of the
+generated NeTEx base ontology. This repository holds the profile layer only —
+SHACL constraints, element ordering, Nordic vocabulary, and cross-standard
+alignment — and imports the CEN-owned base rather than re-deriving it.
 
 ## Purpose
 
-The ontology serves two purposes:
+- **For humans:** A precise, navigable reference for what the Nordic Profile
+  allows, requires, and excludes beyond the NeTEx standard.
+- **For machines:** A SHACL-validatable definition of the Nordic Profile that
+  standard tooling can execute against real NeTEx data.
 
-- **For humans:** A precise, navigable reference for how NeTEx classes, references, and constraints relate to each other.
-- **For machines:** A foundation for automated validation (SHACL), documentation generation, and tooling integration.
+## Architecture
 
-## Scope
-
-This repository contains only the **shared Nordic foundation** — what has been agreed upon across NO, SE, FI, and DK. It is deliberately separated from country- and organisation-specific layers:
+The NeTEx base vocabulary is **generated** — projected deterministically from
+the official NeTEx XSD by the [netex-ontology-generator](#base-ontology-generated)
+(intended to be CEN-owned). This repository builds the Nordic layer on top:
 
 ```
-netex.ttl               ← NeTEx base schema (what the standard defines)
-netex-nordic.ttl        ← Nordic Profile (what the Nordics agree on)
+netex.ttl (+ modules)              ← generated NeTEx base  (external, CEN-owned)
+└─ netex-nordic.ttl                ← Nordic Profile: SHACL constraints, ordering
+   ├─ netex-nordic-vocab.ttl       ← Nordic vocabulary (nordic:)
+   ├─ netex-nordic-model.ttl       ← curated frame containment & specialisation
+   ├─ netex-transmodel-alignment.ttl ← NeTEx ⇄ Transmodel (skos)
+   └─ netex-siri-bridge.ttl        ← NeTEx ⇄ SIRI real-time bridges
+      └─ <your-layer>.ttl          ← Organisation, service, country, …
 ```
 
-Everything beyond this — governance rules, service sub-profiles, documentation paths, codespace conventions — belongs in downstream repositories that import this foundation via `owl:imports` or as a git submodule.
+**Design principle:** The generated base stays a faithful, mechanical projection
+of the standard. The Nordic layer only *tightens* (SHACL), *annotates*, and
+*aligns* — it never renames or forks the base.
 
-**Design principle:** Any layer built on top can tighten constraints (via SHACL), but this repository remains stable and reusable regardless of who consumes it.
+## Base ontology (generated)
+
+The base is produced by `netex-ontology-generator`, which projects the NeTEx XSD
+into RDF/OWL and splits it into per-module documents (`netex.ttl` root plus
+`netex-core`, `netex-framework`, `netex-part1`…`part5`, `netex-service`,
+`netex-siri`, `netex-gml`). Terms keep their NeTEx identity in the single
+`netex:` namespace; only the documents are split.
+
+**Naming philosophy:** term names follow the NeTEx XSD (and the standard RDF
+convention): **PascalCase classes** (`netex:StopPlace`) and **lowerCamelCase
+properties** (`netex:parentSiteRef`). Transmodel governs *alignment*, not
+naming — the mapping lives in `netex-transmodel-alignment.ttl` via
+`skos:exactMatch` / `skos:closeMatch`, so NeTEx keeps its own identity.
+
+> **TODO (living branch):** wire the generated base in as a **git submodule**
+> and add an ingest step that pulls only the relevant `output/*.ttl`. The
+> submodule URL is pending the generator's move to CEN.
 
 ## Files
 
 | File | Contents |
 |------|----------|
-| `netex.ttl` | OWL classes and properties for the NeTEx XML schema: frame classes, reference metadata, XSD cardinality, element ordering, SIRI bridges, and Transmodel alignment. |
-| `netex-nordic.ttl` | SHACL shapes expressing what the Nordic Profile allows, requires, and excludes beyond XSD. |
+| `netex-nordic.ttl` | SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains. |
+| `netex-nordic-vocab.ttl` | Nordic-invented vocabulary in the `nordic:` namespace (profile meta-classes, data-confidence, ordering, domain chains, SIRI bridge property, structural predicates). |
+| `netex-nordic-model.ttl` | Curated structural overlay: frame containment and functional specialisation semantics on the generated classes. |
+| `netex-transmodel-alignment.ttl` | `skos:exactMatch` / `skos:closeMatch` alignment from generated NeTEx classes to Transmodel concepts. |
+| `netex-siri-bridge.ttl` | Which generated NeTEx classes are referenced by SIRI services (ET, SX, VM, FM). |
 
 ## Extension model
 
-Downstream layers can import and build on top without modifying this repository:
-
-```
-netex.ttl                          ← Base vocabulary (this repo)
-└─ netex-nordic.ttl                ← Nordic constraints (this repo)
-   └─ <your-layer>.ttl             ← Organisation, service, country, …
-      └─ …
-```
+Downstream layers import and build on top without modifying this repository:
 
 Each layer can:
 - **Tighten** — Add stricter SHACL shapes (`sh:minCount`, `sh:maxCount 0`)
-- **Extend** — Define new classes, references, or domain properties
-- **Link** — Reference URIs from this repo in your own shapes and rules
+- **Extend** — Define new classes or properties in its own namespace
+- **Link** — Reference generated `netex:` URIs and `nordic:` terms in its own rules
 
 ## SHACL validation
 
-SHACL shapes in `netex-nordic.ttl` express profile constraints that validation tools can execute directly:
+SHACL shapes in `netex-nordic.ttl` target generated `netex:` classes and
+constrain their generated (lowerCamelCase) properties directly:
 
 | Constraint | SHACL expression | Example |
 |------------|------------------|---------|
-| Excluded | `sh:maxCount 0` | ParentSiteRef not used in NP |
-| Allowed | `sh:maxCount 1` | TopographicPlaceRef optional |
-| Required | `sh:minCount 1; sh:maxCount 1` | RouteRef mandatory (XSD says optional) |
-| Type check | `sh:class` | RouteRef must point to a Route |
+| Excluded | `sh:maxCount 0` | `netex:parentSiteRef` not used in NP |
+| Allowed | `sh:maxCount 1` | `netex:topographicPlaceRef` optional |
+| Required | `sh:minCount 1; sh:maxCount 1` | `netex:routeRef` mandatory (XSD says optional) |
+| Type check | `sh:class` | `netex:routeRef` must point to a `netex:Route` |
 
 Shape naming: `profile:NP_{ClassName}Shape`.
 
-## Built-in links
+## Cross-standard links
 
-| Link | Mechanism |
-|------|-----------|
-| SIRI real-time | `netex:referencedBySIRI` — which classes are referenced by ET, SX, VM, FM |
-| Transmodel | `skos:exactMatch` / `skos:closeMatch` — alignment with Transmodel concepts |
+| Link | Mechanism | File |
+|------|-----------|------|
+| SIRI real-time | `nordic:referencedBySIRI` — which classes ET, SX, VM, FM reference | `netex-siri-bridge.ttl` |
+| Transmodel | `skos:exactMatch` / `skos:closeMatch` — conceptual alignment | `netex-transmodel-alignment.ttl` |
 
 ## Technology
 
@@ -79,6 +104,7 @@ Shape naming: `profile:NP_{ClassName}Shape`.
 | Prefix | Namespace |
 |--------|-----------|
 | `netex:` | `https://netex-cen.eu/ontology#` |
+| `nordic:` | `https://netex-cen.eu/nordic#` |
 | `profile:` | `https://netex-cen.eu/profile#` |
 | `sh:` | `http://www.w3.org/ns/shacl#` |
 | `siri:` | `https://siri-cen.eu/ontology#` |

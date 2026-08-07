@@ -8,12 +8,13 @@
 ## This is the shared Nordic agreement (NO, SE, FI, DK) — constraints
 ## that go beyond what XSD expresses but are mandatory for interoperability.
 ##
-## Imports: netex.ttl (base NeTEx classes and relationships)
-##
-## Generated: 2026-06-09
+## Imports:
+##   netex.ttl (generated) — CEN-owned NeTEx base ontology, provided via submodule
+##   netex-nordic-vocab.ttl — Nordic-specific vocabulary (nordic:)
 ## -----------------------------------------------------------------
 
 @prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix nordic:  <https://netex-cen.eu/nordic#> .
 @prefix profile: <https://netex-cen.eu/profile#> .
 @prefix sh:      <http://www.w3.org/ns/shacl#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -21,23 +22,24 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 
-## --- Import base NeTEx ontology ---
+## --- Import generated NeTEx base + Nordic vocabulary ---
 <https://netex-cen.eu/profile/nordic> a owl:Ontology ;
-    owl:imports <https://netex-cen.eu/ontology> .
+    owl:imports <https://netex-cen.eu/ontology> ,
+                <https://netex-cen.eu/nordic> .
 
 ## =================================================================
 ## PROFILE DEFINITION
 ## =================================================================
 
-profile:NP a netex:Profile ;
+profile:NP a nordic:Profile ;
     rdfs:label "Nordic Profile" ;
     skos:notation "NP" ;
     skos:definition "Shared NeTEx profile for Norway, Sweden, Finland and Denmark" ;
-    netex:dataConfidence [
-        netex:level "HIGH" ;
-        netex:basis "Multiple production datasets from Entur (NO), validated element ordering against live exports. Profile maintained by cross-Nordic editorial team." ;
-        netex:datasets "Entur aggregated NeTEx (VYG), per-line exports, Entur stop register" ;
-        netex:lastValidated "2026-06"
+    nordic:dataConfidence [
+        nordic:level "HIGH" ;
+        nordic:basis "Multiple production datasets from Entur (NO), validated element ordering against live exports. Profile maintained by cross-Nordic editorial team." ;
+        nordic:datasets "Entur aggregated NeTEx (VYG), per-line exports, Entur stop register" ;
+        nordic:lastValidated "2026-06"
     ] .
 
 ## =================================================================
@@ -47,9 +49,10 @@ profile:NP a netex:Profile ;
 ## Expressed as SHACL NodeShapes for validation with standard tooling
 ## (pySHACL, Apache Jena, TopBraid).
 ##
-## sh:path references point to named Reference/Element resources
-## defined in netex.ttl, enabling traceability between constraints
-## and the base schema vocabulary.
+## sh:path references point to the generated object/datatype
+## properties in the NeTEx base ontology (lowerCamelCase, derived
+## 1:1 from the XSD element names), enabling traceability between
+## constraints and the base schema vocabulary.
 ##
 ## Shape naming: profile:NP_{ClassName}Shape
 ## -----------------------------------------------------------------
@@ -61,27 +64,27 @@ profile:NP_StopPlaceShape a sh:NodeShape ;
     rdfs:label "StopPlace — NP constraints" ;
     ## Excluded
     sh:property [
-        sh:path netex:StopPlace_ParentSiteRef ;
+        sh:path netex:parentSiteRef ;
         sh:maxCount 0 ;
         sh:name "ParentSiteRef" ;
         sh:description "Not used in NP — stop hierarchy managed by central registry"
     ] , [
-        sh:path netex:StopPlace_TariffZoneRef ;
+        sh:path netex:tariffZoneRef ;
         sh:maxCount 0 ;
         sh:name "TariffZoneRef" ;
         sh:description "Not used in NP"
     ] ;
     ## Allowed (0..1)
     sh:property [
-        sh:path netex:StopPlace_TopographicPlaceRef ;
+        sh:path netex:topographicPlaceRef ;
         sh:maxCount 1 ;
         sh:name "TopographicPlaceRef"
     ] , [
-        sh:path netex:StopPlace_ValidBetween ;
+        sh:path netex:validBetween ;
         sh:maxCount 1 ;
         sh:name "ValidBetween"
     ] , [
-        sh:path netex:StopPlace_AccessibilityAssessment ;
+        sh:path netex:accessibilityAssessment ;
         sh:maxCount 1 ;
         sh:name "AccessibilityAssessment"
     ] .
@@ -92,11 +95,11 @@ profile:NP_QuayShape a sh:NodeShape ;
     sh:targetClass netex:Quay ;
     rdfs:label "Quay — NP constraints" ;
     sh:property [
-        sh:path netex:Quay_AccessibilityAssessment ;
+        sh:path netex:accessibilityAssessment ;
         sh:maxCount 1 ;
         sh:name "AccessibilityAssessment"
     ] , [
-        sh:path netex:Quay_boardingPositions ;
+        sh:path netex:boardingPositions ;
         sh:maxCount 1 ;
         sh:name "boardingPositions"
     ] .
@@ -107,19 +110,19 @@ profile:NP_LineShape a sh:NodeShape ;
     sh:targetClass netex:Line ;
     rdfs:label "Line — NP constraints" ;
     sh:property [
-        sh:path netex:Line_RepresentedByGroupRef ;
+        sh:path netex:representedByGroupRef ;
         sh:maxCount 1 ;
         sh:name "RepresentedByGroupRef"
     ] , [
-        sh:path netex:Line_TransportSubmode ;
+        sh:path netex:transportSubmode ;
         sh:maxCount 1 ;
         sh:name "TransportSubmode"
     ] , [
-        sh:path netex:Line_PublicCode ;
+        sh:path netex:publicCode ;
         sh:maxCount 1 ;
         sh:name "PublicCode"
     ] , [
-        sh:path netex:Line_PrivateCode ;
+        sh:path netex:privateCode ;
         sh:maxCount 1 ;
         sh:name "PrivateCode"
     ] .
@@ -131,12 +134,12 @@ profile:NP_ServiceJourneyShape a sh:NodeShape ;
     rdfs:label "ServiceJourney — NP constraints" ;
     ## Excluded
     sh:property [
-        sh:path netex:ServiceJourney_FlexibleLineRef ;
+        sh:path netex:flexibleLineRef ;
         sh:maxCount 0 ;
         sh:name "FlexibleLineRef" ;
         sh:description "Not used in NP — use Line with FlexibleServiceProperties"
     ] , [
-        sh:path netex:ServiceJourney_BlockRef ;
+        sh:path netex:blockRef ;
         sh:maxCount 0 ;
         sh:name "BlockRef" ;
         sh:description "Not used in NP — block assignment via DatedServiceJourney"
@@ -149,7 +152,7 @@ profile:NP_JourneyPatternShape a sh:NodeShape ;
     rdfs:label "JourneyPattern — NP constraints" ;
     ## Required (tightened from XSD 0..1)
     sh:property [
-        sh:path netex:JourneyPattern_RouteRef ;
+        sh:path netex:routeRef ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:class netex:Route ;
         sh:name "RouteRef" ;
@@ -163,7 +166,7 @@ profile:NP_VehicleShape a sh:NodeShape ;
     rdfs:label "Vehicle — NP constraints" ;
     ## Required (tightened from XSD 0..1)
     sh:property [
-        sh:path netex:Vehicle_VehicleTypeRef ;
+        sh:path netex:vehicleTypeRef ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:class netex:VehicleType ;
         sh:name "VehicleTypeRef" ;
@@ -176,7 +179,7 @@ profile:NP_AuthorityShape a sh:NodeShape ;
     sh:targetClass netex:Authority ;
     rdfs:label "Authority — NP constraints" ;
     sh:property [
-        sh:path netex:Authority_Name ;
+        sh:path netex:name ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:name "Name" ;
         sh:description "XSD allows 0..1, NP mandates 1..1"
@@ -188,7 +191,7 @@ profile:NP_OperatorShape a sh:NodeShape ;
     sh:targetClass netex:Operator ;
     rdfs:label "Operator — NP constraints" ;
     sh:property [
-        sh:path netex:Operator_Name ;
+        sh:path netex:name ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:name "Name" ;
         sh:description "XSD allows 0..1, NP mandates 1..1"
@@ -200,7 +203,7 @@ profile:NP_VehicleTypeShape a sh:NodeShape ;
     sh:targetClass netex:VehicleType ;
     rdfs:label "VehicleType — NP constraints" ;
     sh:property [
-        sh:path netex:VehicleType_Name ;
+        sh:path netex:name ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:name "Name" ;
         sh:description "XSD allows 0..1, NP mandates 1..1"
@@ -212,7 +215,7 @@ profile:NP_FareZoneShape a sh:NodeShape ;
     sh:targetClass netex:FareZone ;
     rdfs:label "FareZone — NP constraints" ;
     sh:property [
-        sh:path netex:FareZone_Name ;
+        sh:path netex:name ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:name "Name" ;
         sh:description "XSD allows 0..1, NP mandates 1..1"
@@ -224,11 +227,11 @@ profile:NP_InterchangeShape a sh:NodeShape ;
     sh:targetClass netex:Interchange ;
     rdfs:label "Interchange — NP constraints" ;
     sh:property [
-        sh:path netex:Interchange_FromPointRef ;
+        sh:path netex:fromPointRef ;
         sh:maxCount 1 ;
         sh:name "FromPointRef"
     ] , [
-        sh:path netex:Interchange_ToPointRef ;
+        sh:path netex:toPointRef ;
         sh:maxCount 1 ;
         sh:name "ToPointRef"
     ] .
@@ -239,23 +242,23 @@ profile:NP_DatedServiceJourneyShape a sh:NodeShape ;
     sh:targetClass netex:DatedServiceJourney ;
     rdfs:label "DatedServiceJourney — NP constraints" ;
     sh:property [
-        sh:path netex:DatedServiceJourney_ServiceJourneyRef ;
+        sh:path netex:serviceJourneyRef ;
         sh:name "ServiceJourneyRef" ;
         sh:description "Reference to the template ServiceJourney this dated instance realizes" ;
         sh:minCount 1 ;
         sh:maxCount 1
     ] , [
-        sh:path netex:DatedServiceJourney_OperatingDayRef ;
+        sh:path netex:operatingDayRef ;
         sh:name "OperatingDayRef" ;
         sh:description "The specific operating day this journey runs on" ;
         sh:minCount 1 ;
         sh:maxCount 1
     ] , [
-        sh:path netex:DatedServiceJourney_DatedVehicleJourneyRef ;
+        sh:path netex:datedVehicleJourneyRef ;
         sh:name "DatedVehicleJourneyRef" ;
         sh:description "Deviation/replacement tracking — allowed in NP"
     ] , [
-        sh:path netex:DatedServiceJourney_ServiceAlteration ;
+        sh:path netex:serviceAlteration ;
         sh:name "ServiceAlteration" ;
         sh:description "Alteration status code when journey deviates from plan" ;
         sh:maxCount 1 ;
@@ -272,275 +275,275 @@ profile:NP_DatedServiceJourneyShape a sh:NodeShape ;
 ## Only elements documented in the profile Tables are listed.
 ## -----------------------------------------------------------------
 
-netex:ServiceJourney netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:ServiceJourney nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "keyList"
+    nordic:position 3 ; nordic:element "keyList"
 ] , [
-    netex:position 4 ; netex:element "Name"
+    nordic:position 4 ; nordic:element "Name"
 ] , [
-    netex:position 5 ; netex:element "PrivateCode"
+    nordic:position 5 ; nordic:element "PrivateCode"
 ] , [
-    netex:position 6 ; netex:element "Description"
+    nordic:position 6 ; nordic:element "Description"
 ] , [
-    netex:position 7 ; netex:element "TransportMode"
+    nordic:position 7 ; nordic:element "TransportMode"
 ] , [
-    netex:position 8 ; netex:element "TransportSubmode"
+    nordic:position 8 ; nordic:element "TransportSubmode"
 ] , [
     ## XSD: ServiceTimeGroup — DepartureTime before dayTypes
-    netex:position 9 ; netex:element "DepartureTime"
+    nordic:position 9 ; nordic:element "DepartureTime"
 ] , [
-    netex:position 10 ; netex:element "DepartureDayOffset"
+    nordic:position 10 ; nordic:element "DepartureDayOffset"
 ] , [
-    netex:position 11 ; netex:element "dayTypes"
+    nordic:position 11 ; nordic:element "dayTypes"
 ] , [
-    netex:position 12 ; netex:element "JourneyPatternRef"
+    nordic:position 12 ; nordic:element "JourneyPatternRef"
 ] , [
     ## XSD: ServiceJourneyPatternRef is the specialised alternative to JourneyPatternRef
-    netex:position 12 ; netex:element "ServiceJourneyPatternRef"
+    nordic:position 12 ; nordic:element "ServiceJourneyPatternRef"
 ] , [
-    netex:position 13 ; netex:element "VehicleTypeRef"
+    nordic:position 13 ; nordic:element "VehicleTypeRef"
 ] , [
-    netex:position 14 ; netex:element "BlockRef"
+    nordic:position 14 ; nordic:element "BlockRef"
 ] , [
-    netex:position 15 ; netex:element "OperatorRef"
+    nordic:position 15 ; nordic:element "OperatorRef"
 ] , [
-    netex:position 16 ; netex:element "LineRef"
+    nordic:position 16 ; nordic:element "LineRef"
 ] , [
-    netex:position 17 ; netex:element "FlexibleLineRef"
+    nordic:position 17 ; nordic:element "FlexibleLineRef"
 ] , [
-    netex:position 18 ; netex:element "passingTimes"
+    nordic:position 18 ; nordic:element "passingTimes"
 ] , [
-    netex:position 19 ; netex:element "parts"
+    nordic:position 19 ; nordic:element "parts"
 ] .
 
-netex:Operator netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:Operator nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "CompanyNumber"
+    nordic:position 3 ; nordic:element "CompanyNumber"
 ] , [
-    netex:position 4 ; netex:element "Name"
+    nordic:position 4 ; nordic:element "Name"
 ] , [
-    netex:position 5 ; netex:element "ShortName"
+    nordic:position 5 ; nordic:element "ShortName"
 ] , [
-    netex:position 6 ; netex:element "LegalName"
+    nordic:position 6 ; nordic:element "LegalName"
 ] , [
-    netex:position 7 ; netex:element "ContactDetails"
+    nordic:position 7 ; nordic:element "ContactDetails"
 ] , [
-    netex:position 8 ; netex:element "OrganisationType"
+    nordic:position 8 ; nordic:element "OrganisationType"
 ] , [
-    netex:position 9 ; netex:element "CountryRef"
+    nordic:position 9 ; nordic:element "CountryRef"
 ] , [
-    netex:position 10 ; netex:element "PrimaryMode"
+    nordic:position 10 ; nordic:element "PrimaryMode"
 ] , [
-    netex:position 11 ; netex:element "CustomerServiceContactDetails"
+    nordic:position 11 ; nordic:element "CustomerServiceContactDetails"
 ] .
 
-netex:StopPlace netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:StopPlace nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "ValidBetween"
+    nordic:position 3 ; nordic:element "ValidBetween"
 ] , [
-    netex:position 4 ; netex:element "keyList"
+    nordic:position 4 ; nordic:element "keyList"
 ] , [
-    netex:position 5 ; netex:element "Name"
+    nordic:position 5 ; nordic:element "Name"
 ] , [
-    netex:position 6 ; netex:element "Centroid"
+    nordic:position 6 ; nordic:element "Centroid"
 ] , [
-    netex:position 7 ; netex:element "AccessibilityAssessment"
+    nordic:position 7 ; nordic:element "AccessibilityAssessment"
 ] , [
-    netex:position 8 ; netex:element "TopographicPlaceRef"
+    nordic:position 8 ; nordic:element "TopographicPlaceRef"
 ] , [
-    netex:position 9 ; netex:element "ParentSiteRef"
+    nordic:position 9 ; nordic:element "ParentSiteRef"
 ] , [
-    netex:position 10 ; netex:element "TransportMode"
+    nordic:position 10 ; nordic:element "TransportMode"
 ] , [
-    netex:position 11 ; netex:element "StopPlaceType"
+    nordic:position 11 ; nordic:element "StopPlaceType"
 ] , [
-    netex:position 12 ; netex:element "Weighting"
+    nordic:position 12 ; nordic:element "Weighting"
 ] , [
-    netex:position 13 ; netex:element "quays"
+    nordic:position 13 ; nordic:element "quays"
 ] .
 
-netex:Line netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:Line nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "Name"
+    nordic:position 3 ; nordic:element "Name"
 ] , [
     ## XSD: DataManagedObjectGroup — ShortName follows Name
-    netex:position 4 ; netex:element "ShortName"
+    nordic:position 4 ; nordic:element "ShortName"
 ] , [
-    netex:position 5 ; netex:element "TransportMode"
+    nordic:position 5 ; nordic:element "TransportMode"
 ] , [
-    netex:position 6 ; netex:element "TransportSubmode"
+    nordic:position 6 ; nordic:element "TransportSubmode"
 ] , [
-    netex:position 7 ; netex:element "PublicCode"
+    nordic:position 7 ; nordic:element "PublicCode"
 ] , [
-    netex:position 8 ; netex:element "PrivateCode"
+    nordic:position 8 ; nordic:element "PrivateCode"
 ] , [
     ## XSD: LinePropertiesGroup — AuthorityRef before OperatorRef
-    netex:position 9 ; netex:element "AuthorityRef"
+    nordic:position 9 ; nordic:element "AuthorityRef"
 ] , [
-    netex:position 10 ; netex:element "OperatorRef"
+    nordic:position 10 ; nordic:element "OperatorRef"
 ] , [
-    netex:position 11 ; netex:element "Monitored"
+    nordic:position 11 ; nordic:element "Monitored"
 ] , [
-    netex:position 12 ; netex:element "RepresentedByGroupRef"
+    nordic:position 12 ; nordic:element "RepresentedByGroupRef"
 ] , [
-    netex:position 13 ; netex:element "Presentation"
+    nordic:position 13 ; nordic:element "Presentation"
 ] .
 
-netex:Route netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:Route nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "Name"
+    nordic:position 3 ; nordic:element "Name"
 ] , [
-    netex:position 4 ; netex:element "ShortName"
+    nordic:position 4 ; nordic:element "ShortName"
 ] , [
-    netex:position 5 ; netex:element "Description"
+    nordic:position 5 ; nordic:element "Description"
 ] , [
-    netex:position 6 ; netex:element "LineRef"
+    nordic:position 6 ; nordic:element "LineRef"
 ] , [
-    netex:position 7 ; netex:element "DirectionType"
+    nordic:position 7 ; nordic:element "DirectionType"
 ] , [
-    netex:position 8 ; netex:element "pointsInSequence"
+    nordic:position 8 ; nordic:element "pointsInSequence"
 ] , [
-    netex:position 9 ; netex:element "InverseRouteRef"
+    nordic:position 9 ; nordic:element "InverseRouteRef"
 ] .
 
-netex:JourneyPattern netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:JourneyPattern nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "Name"
+    nordic:position 3 ; nordic:element "Name"
 ] , [
-    netex:position 4 ; netex:element "RouteRef"
+    nordic:position 4 ; nordic:element "RouteRef"
 ] , [
-    netex:position 5 ; netex:element "pointsInSequence"
+    nordic:position 5 ; nordic:element "pointsInSequence"
 ] , [
-    netex:position 6 ; netex:element "linksInSequence"
+    nordic:position 6 ; nordic:element "linksInSequence"
 ] .
 
-netex:DatedServiceJourney netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:DatedServiceJourney nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "ServiceAlteration"
+    nordic:position 3 ; nordic:element "ServiceAlteration"
 ] , [
-    netex:position 4 ; netex:element "BlockRef"
+    nordic:position 4 ; nordic:element "BlockRef"
 ] , [
-    netex:position 5 ; netex:element "ServiceJourneyRef"
+    nordic:position 5 ; nordic:element "ServiceJourneyRef"
 ] , [
-    netex:position 6 ; netex:element "replacedJourneys"
+    nordic:position 6 ; nordic:element "replacedJourneys"
 ] , [
-    netex:position 7 ; netex:element "OperatingDayRef"
+    nordic:position 7 ; nordic:element "OperatingDayRef"
 ] .
 
-netex:DayType netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:DayType nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "Name"
+    nordic:position 3 ; nordic:element "Name"
 ] , [
-    netex:position 4 ; netex:element "properties"
+    nordic:position 4 ; nordic:element "properties"
 ] .
 
-netex:ScheduledStopPoint netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:ScheduledStopPoint nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "ValidBetween"
+    nordic:position 3 ; nordic:element "ValidBetween"
 ] , [
-    netex:position 4 ; netex:element "Name"
+    nordic:position 4 ; nordic:element "Name"
 ] , [
-    netex:position 5 ; netex:element "TimingPointStatus"
+    nordic:position 5 ; nordic:element "TimingPointStatus"
 ] .
 
-netex:PassengerStopAssignment netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:PassengerStopAssignment nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "@order"
+    nordic:position 3 ; nordic:element "@order"
 ] , [
-    netex:position 4 ; netex:element "ValidBetween"
+    nordic:position 4 ; nordic:element "ValidBetween"
 ] , [
-    netex:position 5 ; netex:element "ScheduledStopPointRef"
+    nordic:position 5 ; nordic:element "ScheduledStopPointRef"
 ] , [
-    netex:position 6 ; netex:element "StopPlaceRef"
+    nordic:position 6 ; nordic:element "StopPlaceRef"
 ] , [
-    netex:position 7 ; netex:element "QuayRef"
+    nordic:position 7 ; nordic:element "QuayRef"
 ] .
 
-netex:DestinationDisplay netex:elementOrder [
-    netex:position 1 ; netex:element "@id"
+netex:DestinationDisplay nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
 ] , [
-    netex:position 2 ; netex:element "@version"
+    nordic:position 2 ; nordic:element "@version"
 ] , [
-    netex:position 3 ; netex:element "Name"
+    nordic:position 3 ; nordic:element "Name"
 ] , [
-    netex:position 4 ; netex:element "SideText"
+    nordic:position 4 ; nordic:element "SideText"
 ] , [
-    netex:position 5 ; netex:element "FrontText"
+    nordic:position 5 ; nordic:element "FrontText"
 ] , [
-    netex:position 6 ; netex:element "vias"
+    nordic:position 6 ; nordic:element "vias"
 ] .
 
 ## =================================================================
 ## DOMAIN CHAINS (navigational shortcuts)
 ## =================================================================
 
-netex:TimetableChain rdfs:comment """
+nordic:TimetableChain rdfs:comment """
     Line → Route → JourneyPattern → ServiceJourney → DatedServiceJourney
     The core modelling chain: from abstract line identity
     through physical route, stop sequence, timed trip template,
     to a concrete instance on a specific date.
 """ ;
-    netex:step1 netex:Line ;
-    netex:step2 netex:Route ;
-    netex:step3 netex:JourneyPattern ;
-    netex:step4 netex:ServiceJourney ;
-    netex:step5 netex:DatedServiceJourney .
+    nordic:step1 netex:Line ;
+    nordic:step2 netex:Route ;
+    nordic:step3 netex:JourneyPattern ;
+    nordic:step4 netex:ServiceJourney ;
+    nordic:step5 netex:DatedServiceJourney .
 
-netex:StopChain rdfs:comment """
+nordic:StopChain rdfs:comment """
     ScheduledStopPoint → PassengerStopAssignment → StopPlace → Quay
     The logical-to-physical stop bridge.
 """ ;
-    netex:step1 netex:ScheduledStopPoint ;
-    netex:step2 netex:PassengerStopAssignment ;
-    netex:step3 netex:StopPlace ;
-    netex:step4 netex:Quay .
+    nordic:step1 netex:ScheduledStopPoint ;
+    nordic:step2 netex:PassengerStopAssignment ;
+    nordic:step3 netex:StopPlace ;
+    nordic:step4 netex:Quay .
 
-netex:CalendarChain rdfs:comment """
+nordic:CalendarChain rdfs:comment """
     DayType → DayTypeAssignment → OperatingPeriod / Date
     How services are bound to dates.
 """ ;
-    netex:step1 netex:DayType ;
-    netex:step2 netex:DayTypeAssignment ;
-    netex:step3 netex:OperatingPeriod .
+    nordic:step1 netex:DayType ;
+    nordic:step2 netex:DayTypeAssignment ;
+    nordic:step3 netex:OperatingPeriod .
 
-netex:OrganisationChain rdfs:comment """
+nordic:OrganisationChain rdfs:comment """
     Authority → Contract → Operator → ResponsibilitySet
     Organisational governance and responsibility.
 """ ;
-    netex:step1 netex:Authority ;
-    netex:step2 netex:Contract ;
-    netex:step3 netex:Operator ;
-    netex:step4 netex:ResponsibilitySet .
+    nordic:step1 netex:Authority ;
+    nordic:step2 netex:Contract ;
+    nordic:step3 netex:Operator ;
+    nordic:step4 netex:ResponsibilitySet .
 
 ## =================================================================
 ## END OF NORDIC PROFILE ONTOLOGY
