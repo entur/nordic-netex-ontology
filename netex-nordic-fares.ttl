@@ -1,0 +1,696 @@
+## -----------------------------------------------------------------
+## Nordic NeTEx Profile — Fares Overlay
+## -----------------------------------------------------------------
+## ROLE: Extends the Nordic Profile to cover FARES — fare products,
+##       fare structure, geographical/usage parameters, and the
+##       pricing grid (fare tables). Adds SHACL constraints and
+##       canonical element ordering for the fare classes, layered on
+##       the generated NeTEx base exactly like netex-nordic.ttl does
+##       for network/timetable classes.
+##
+## SCOPE: The Nordic shared agreement for fares. Only tightens,
+##        annotates and orders the generated netex: fare classes —
+##        it never mints new terms in the CEN-owned netex: namespace.
+##
+## SOURCE:
+##   - Nordic NeTEx Profile "fares" (Handbook N801), v0.96
+##     (last changed 2022-07-28) — long-pending review, captured here
+##     as the profile's fares agreement. Class hierarchies, enums and
+##     cardinalities below follow that document.
+##   - EFIP-style export examples (Innlandstrafikk single ticket;
+##     Reis Nordland express-boat distance fare and bus carnet /
+##     klippekort). Every shape is grounded in elements that appear
+##     in those real exports.
+##   - Entur produkt sub-profile (entur-netex-ontology,
+##     feat/produkt-fareproducts) — the downstream demonstrator whose
+##     PROPOSAL list this overlay realises against the richer base.
+##
+## Imports:
+##   netex.ttl (generated) — CEN-owned NeTEx base ontology (submodule)
+##   netex-nordic-vocab.ttl — Nordic-specific vocabulary (nordic:)
+##
+## Items that the generated base does not yet expose are flagged with
+## "## PROPOSAL:" rather than grounded on ungrounded netex: IRIs.
+## -----------------------------------------------------------------
+
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix nordic:  <https://netex-cen.eu/nordic#> .
+@prefix profile: <https://netex-cen.eu/profile#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+## --- Import generated NeTEx base + Nordic vocabulary ---
+<https://netex-cen.eu/profile/nordic/fares> a owl:Ontology ;
+    rdfs:label "Nordic NeTEx Profile — Fares Overlay" ;
+    owl:imports <https://netex-cen.eu/ontology> ,
+                <https://netex-cen.eu/nordic> ;
+    rdfs:comment "Nordic Profile fares layer: SHACL constraints and element ordering for fare products, fare structure and pricing, grounded in the EFIP export examples and Handbook N801 v0.96." .
+
+## =================================================================
+## FARES SUB-PROFILE MARKER
+## =================================================================
+
+profile:NP_Fares a nordic:Profile ;
+    rdfs:label "Nordic Profile — Fares" ;
+    skos:notation "NP-Fares" ;
+    skos:definition "Fares part of the shared Nordic NeTEx Profile: fare products, fare structure, usage/geographical parameters and pricing." ;
+    nordic:specializes profile:NP ;
+    nordic:dataConfidence [
+        nordic:level "MEDIUM" ;
+        nordic:basis "Handbook N801 fares v0.96 is still awaiting formal review/ratification into the Nordic Profile. Shapes are grounded in real EFIP-style exports (Innlandstrafikk, Reis Nordland) but the fares profile itself is not yet ratified NP." ;
+        nordic:datasets "Innlandstrafikk single ticket (zonal); Reis Nordland express-boat distance fare and bus carnet (klippekort)" ;
+        nordic:lastValidated "2026-08"
+    ] .
+
+## =================================================================
+## FARE PRODUCTS — SHACL SHAPES
+## =================================================================
+## FareProduct < ServiceAccessRight (fares product group). The
+## examples carry PreassignedFareProduct (single trip) and
+## AmountOfPriceUnitProduct (carnet / klippekort).
+## Shape naming: profile:NP_{ClassName}Shape
+## -----------------------------------------------------------------
+
+## --- FareProduct (abstract common constraints) ---
+
+profile:NP_FareProductShape a sh:NodeShape ;
+    sh:targetClass netex:FareProduct ;
+    rdfs:label "FareProduct — NP fares constraints" ;
+    ## A fare product is always sold under one organisation.
+    ## Examples use OperatorRef (which may carry an Authority id).
+    sh:property [
+        sh:path netex:operatorRef ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:name "OperatorRef" ;
+        sh:description "The organisation the product is sold under (OperatorRef/AuthorityRef in the examples)"
+    ] , [
+        sh:path netex:name ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:name "Name" ;
+        sh:description "XSD allows 0..1, NP mandates 1..1"
+    ] , [
+        sh:path netex:chargingMomentType ;
+        sh:maxCount 1 ;
+        sh:name "ChargingMomentType"
+    ] , [
+        sh:path netex:conditionSummary ;
+        sh:maxCount 1 ;
+        sh:name "ConditionSummary"
+    ] , [
+        sh:path netex:productType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:name "ProductType" ;
+        sh:description "Product classification (examples use singleTrip, tripCarnet)"
+    ] .
+
+## --- PreassignedFareProduct (single trip) ---
+
+profile:NP_PreassignedFareProductShape a sh:NodeShape ;
+    sh:targetClass netex:PreassignedFareProduct ;
+    rdfs:label "PreassignedFareProduct — NP fares constraints" ;
+    sh:property [
+        sh:path netex:validableElements ;
+        sh:minCount 1 ;
+        sh:name "validableElements" ;
+        sh:description "The validable elements bundling the fare structure this product grants access to"
+    ] , [
+        sh:path netex:accessRightsInProduct ;
+        sh:minCount 1 ;
+        sh:name "accessRightsInProduct" ;
+        sh:description "Access rights (→ ValidableElementRef) carried by the product"
+    ] .
+
+## --- AmountOfPriceUnitProduct (carnet / klippekort) ---
+
+profile:NP_AmountOfPriceUnitProductShape a sh:NodeShape ;
+    sh:targetClass netex:AmountOfPriceUnitProduct ;
+    rdfs:label "AmountOfPriceUnitProduct — NP fares constraints" ;
+    ## Carnet products state the quota (e.g. 10 klipp) in Amount.
+    sh:property [
+        sh:path netex:amount ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:name "Amount" ;
+        sh:description "Number of units in the carnet (e.g. 10 for a 10-trip klippekort)"
+    ] .
+
+## --- ConditionSummary (inline product summary) ---
+
+profile:NP_ConditionSummaryShape a sh:NodeShape ;
+    sh:targetClass netex:ConditionSummary ;
+    rdfs:label "ConditionSummary — NP fares constraints" ;
+    sh:property [
+        sh:path netex:fareStructureType ;
+        sh:maxCount 1 ;
+        sh:name "FareStructureType" ;
+        sh:description "Examples use pointToPointDistanceFare, zonalFare"
+    ] , [
+        sh:path netex:isRefundable ;
+        sh:maxCount 1 ;
+        sh:name "IsRefundable"
+    ] , [
+        sh:path netex:isExchangable ;
+        sh:maxCount 1 ;
+        sh:name "IsExchangable"
+    ] .
+
+## --- AccessRightInProduct ---
+
+profile:NP_AccessRightInProductShape a sh:NodeShape ;
+    sh:targetClass netex:AccessRightInProduct ;
+    rdfs:label "AccessRightInProduct — NP fares constraints" ;
+    ## Each access right resolves to exactly one validable element.
+    sh:property [
+        sh:path netex:validableElementRef ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class netex:ValidableElement ;
+        sh:name "ValidableElementRef" ;
+        sh:description "The validable element this access right grants"
+    ] .
+
+## =================================================================
+## FARE STRUCTURE — SHACL SHAPES
+## =================================================================
+## FareStructureElement < PriceableObject carries the geographical
+## intervals and the GenericParameterAssignments (validity params).
+## ValidableElement < PriceableObject bundles FareStructureElements.
+##
+## GPA PLACEMENT — two export variants exist (both seen in examples):
+##   (A) EFIP-style: each GenericParameterAssignment is wrapped in its
+##       own FareStructureElement, referenced via FareStructureElementRef.
+##   (B) Inline: GenericParameterAssignments sit directly under
+##       validityParameterAssignments on the FSE / product / element.
+## The shapes below constrain the logical objects and do not assume a
+## placement, so both exports validate against the same rules.
+## -----------------------------------------------------------------
+
+## --- FareStructureElement ---
+
+profile:NP_FareStructureElementShape a sh:NodeShape ;
+    sh:targetClass netex:FareStructureElement ;
+    rdfs:label "FareStructureElement — NP fares constraints" ;
+    sh:property [
+        sh:path netex:name ;
+        sh:maxCount 1 ;
+        sh:name "Name"
+    ] , [
+        sh:path netex:tariffBasis ;
+        sh:maxCount 1 ;
+        sh:name "TariffBasis" ;
+        sh:description "Examples use distance, zone"
+    ] , [
+        sh:path netex:geographicalIntervals ;
+        sh:name "geographicalIntervals" ;
+        sh:description "Distance/zone bands priced by the fare table"
+    ] .
+
+## --- ValidableElement ---
+
+profile:NP_ValidableElementShape a sh:NodeShape ;
+    sh:targetClass netex:ValidableElement ;
+    rdfs:label "ValidableElement — NP fares constraints" ;
+    ## A validable element bundles at least one fare structure element.
+    sh:property [
+        sh:path netex:fareStructureElements ;
+        sh:minCount 1 ;
+        sh:name "fareStructureElements" ;
+        sh:description "The fare structure elements (via FareStructureElementRef) that make up this validable element"
+    ] .
+
+## --- GenericParameterAssignment ---
+
+profile:NP_GenericParameterAssignmentShape a sh:NodeShape ;
+    sh:targetClass netex:GenericParameterAssignment ;
+    rdfs:label "GenericParameterAssignment — NP fares constraints" ;
+    sh:property [
+        sh:path netex:validityParameterAssignmentType ;
+        sh:maxCount 1 ;
+        sh:name "ValidityParameterAssignmentType" ;
+        sh:description "EQ in the examples"
+    ] , [
+        sh:path netex:limitationGroupingType ;
+        sh:maxCount 1 ;
+        sh:name "LimitationGroupingType"
+    ] , [
+        sh:path netex:validityParameterGroupingType ;
+        sh:maxCount 1 ;
+        sh:name "ValidityParameterGroupingType"
+    ] , [
+        sh:path netex:chargingBasis ;
+        sh:maxCount 1 ;
+        sh:name "ChargingBasis" ;
+        sh:description "normalFare in the examples"
+    ] .
+
+## =================================================================
+## FARE COMPONENTS (geographical / time factors) — SHACL SHAPES
+## =================================================================
+
+## --- GeographicalInterval ---
+## GeographicalInterval < FareStructureFactor < PriceableObject
+
+profile:NP_GeographicalIntervalShape a sh:NodeShape ;
+    sh:targetClass netex:GeographicalInterval ;
+    rdfs:label "GeographicalInterval — NP fares constraints" ;
+    sh:property [
+        sh:path netex:startGeographicalValue ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:name "StartGeographicalValue"
+    ] , [
+        sh:path netex:endGeographicalValue ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:name "EndGeographicalValue"
+    ] , [
+        sh:path netex:numberOfUnits ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:name "NumberOfUnits"
+    ] , [
+        sh:path netex:intervalType ;
+        sh:maxCount 1 ;
+        sh:name "IntervalType" ;
+        sh:description "Classification of interval type" ;
+        sh:in ( "coupon" "distance" "section" "stop" "tariffZone" "tariffUnit" )
+    ] .
+
+## --- TimeInterval ---
+## TimeInterval < FareInterval < PriceableObject
+
+profile:NP_TimeIntervalShape a sh:NodeShape ;
+    sh:targetClass netex:TimeInterval ;
+    rdfs:label "TimeInterval — NP fares constraints" ;
+    ## Duration is the defining, mandatory element of a TimeInterval.
+    sh:property [
+        sh:path netex:duration ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:duration ;
+        sh:name "Duration"
+    ] .
+
+## =================================================================
+## USAGE PARAMETERS — SHACL SHAPES
+## =================================================================
+## All UsageParameter < ValidityParameter. The examples exercise
+## UserProfile, CompanionProfile, Refunding, PurchaseWindow,
+## UsageValidityPeriod, FrequencyOfUse and Interchanging.
+## -----------------------------------------------------------------
+
+## --- UserProfile ---
+
+profile:NP_UserProfileShape a sh:NodeShape ;
+    sh:targetClass netex:UserProfile ;
+    rdfs:label "UserProfile — NP fares constraints" ;
+    sh:property [
+        sh:path netex:name ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:name "Name" ;
+        sh:description "XSD allows 0..1, NP mandates 1..1 (e.g. Adult, Child, Senior, Student)"
+    ] , [
+        sh:path netex:userType ;
+        sh:maxCount 1 ;
+        sh:name "UserType"
+    ] , [
+        sh:path netex:minimumAge ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:name "MinimumAge"
+    ] , [
+        sh:path netex:maximumAge ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:name "MaximumAge"
+    ] , [
+        sh:path netex:proofRequired ;
+        sh:maxCount 1 ;
+        sh:name "ProofRequired"
+    ] .
+
+## --- CompanionProfile ---
+
+profile:NP_CompanionProfileShape a sh:NodeShape ;
+    sh:targetClass netex:CompanionProfile ;
+    rdfs:label "CompanionProfile — NP fares constraints" ;
+    sh:property [
+        sh:path netex:userProfileRef ;
+        sh:maxCount 1 ;
+        sh:name "UserProfileRef"
+    ] , [
+        sh:path netex:discountBasis ;
+        sh:maxCount 1 ;
+        sh:name "DiscountBasis"
+    ] .
+
+## --- FrequencyOfUse ---
+
+profile:NP_FrequencyOfUseShape a sh:NodeShape ;
+    sh:targetClass netex:FrequencyOfUse ;
+    rdfs:label "FrequencyOfUse — NP fares constraints" ;
+    sh:property [
+        sh:path netex:frequencyOfUseType ;
+        sh:maxCount 1 ;
+        sh:name "FrequencyOfUseType" ;
+        sh:description "unlimited in the examples"
+    ] .
+
+## --- UsageValidityPeriod ---
+
+profile:NP_UsageValidityPeriodShape a sh:NodeShape ;
+    sh:targetClass netex:UsageValidityPeriod ;
+    rdfs:label "UsageValidityPeriod — NP fares constraints" ;
+    sh:property [
+        sh:path netex:validityPeriodType ;
+        sh:maxCount 1 ;
+        sh:name "ValidityPeriodType"
+    ] , [
+        sh:path netex:usageTrigger ;
+        sh:maxCount 1 ;
+        sh:name "UsageTrigger"
+    ] , [
+        sh:path netex:usageEnd ;
+        sh:maxCount 1 ;
+        sh:name "UsageEnd"
+    ] .
+
+## =================================================================
+## PRICING (fare tables) — SHACL SHAPES
+## =================================================================
+## FareTable holds the price grid; Cell carries a CellPrice plus the
+## PriceableObjectRefs (product × user profile × geographical interval)
+## the price applies to.
+## -----------------------------------------------------------------
+
+## --- FareTable ---
+
+profile:NP_FareTableShape a sh:NodeShape ;
+    sh:targetClass netex:FareTable ;
+    rdfs:label "FareTable — NP fares constraints" ;
+    sh:property [
+        sh:path netex:pricesFor ;
+        sh:name "pricesFor" ;
+        sh:description "The priceable object(s) this table prices (product / fare structure element)"
+    ] , [
+        sh:path netex:cells ;
+        sh:minCount 1 ;
+        sh:name "cells" ;
+        sh:description "The priced cells of the grid"
+    ] .
+
+## --- Cell ---
+
+profile:NP_CellShape a sh:NodeShape ;
+    sh:targetClass netex:Cell ;
+    rdfs:label "Cell — NP fares constraints" ;
+    sh:property [
+        sh:path netex:priceableObjectRef ;
+        sh:minCount 1 ;
+        sh:name "PriceableObjectRef" ;
+        sh:description "The coordinates of the cell (fare structure element × user profile × geographical interval)"
+    ] .
+
+## --- FarePrice / CellPrice (Amount + Currency) ---
+
+profile:NP_FarePriceShape a sh:NodeShape ;
+    sh:targetClass netex:FarePrice ;
+    rdfs:label "FarePrice — NP fares constraints" ;
+    sh:property [
+        sh:path netex:amount ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:name "Amount"
+    ] , [
+        sh:path netex:currency ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:name "Currency" ;
+        sh:description "NOK in the examples"
+    ] .
+
+## --- TypeOfPricingRule (VAT / tax category) ---
+
+profile:NP_TypeOfPricingRuleShape a sh:NodeShape ;
+    sh:targetClass netex:TypeOfPricingRule ;
+    rdfs:label "TypeOfPricingRule — NP fares constraints" ;
+    sh:property [
+        sh:path netex:name ;
+        sh:maxCount 1 ;
+        sh:name "Name"
+    ] , [
+        sh:path netex:taxCategory ;
+        sh:maxCount 1 ;
+        sh:name "TaxCategory" ;
+        sh:description "e.g. transportation (transport VAT)"
+    ] .
+
+## =================================================================
+## ELEMENT ORDERING (XSD-derived, confirmed against the examples)
+## =================================================================
+## Canonical element sequence per fare class. Attributes (@id,
+## @version, @order) are listed first by convention. Only elements
+## documented in the profile / present in the EFIP examples are listed.
+## -----------------------------------------------------------------
+
+netex:PreassignedFareProduct nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "validityConditions"
+] , [
+    nordic:position 4 ; nordic:element "Name"
+] , [
+    nordic:position 5 ; nordic:element "Description"
+] , [
+    nordic:position 6 ; nordic:element "ChargingMomentType"
+] , [
+    nordic:position 7 ; nordic:element "OperatorRef"
+] , [
+    nordic:position 8 ; nordic:element "ConditionSummary"
+] , [
+    nordic:position 9 ; nordic:element "validityParameterAssignments"
+] , [
+    nordic:position 10 ; nordic:element "validableElements"
+] , [
+    nordic:position 11 ; nordic:element "accessRightsInProduct"
+] , [
+    nordic:position 12 ; nordic:element "ProductType"
+] .
+
+netex:AmountOfPriceUnitProduct nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "validityConditions"
+] , [
+    nordic:position 4 ; nordic:element "Name"
+] , [
+    nordic:position 5 ; nordic:element "Description"
+] , [
+    nordic:position 6 ; nordic:element "ChargingMomentType"
+] , [
+    nordic:position 7 ; nordic:element "OperatorRef"
+] , [
+    nordic:position 8 ; nordic:element "ConditionSummary"
+] , [
+    nordic:position 9 ; nordic:element "validityParameterAssignments"
+] , [
+    nordic:position 10 ; nordic:element "validableElements"
+] , [
+    nordic:position 11 ; nordic:element "accessRightsInProduct"
+] , [
+    nordic:position 12 ; nordic:element "ProductType"
+] , [
+    ## XSD: AmountOfPriceUnitProduct adds Amount after the product group
+    nordic:position 13 ; nordic:element "Amount"
+] .
+
+netex:FareStructureElement nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "validityConditions"
+] , [
+    nordic:position 4 ; nordic:element "Name"
+] , [
+    nordic:position 5 ; nordic:element "Description"
+] , [
+    nordic:position 6 ; nordic:element "TariffBasis"
+] , [
+    nordic:position 7 ; nordic:element "geographicalIntervals"
+] , [
+    nordic:position 8 ; nordic:element "validityParameterAssignments"
+] .
+
+netex:GeographicalInterval nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "StartGeographicalValue"
+] , [
+    nordic:position 4 ; nordic:element "EndGeographicalValue"
+] , [
+    nordic:position 5 ; nordic:element "NumberOfUnits"
+] , [
+    nordic:position 6 ; nordic:element "IntervalType"
+] , [
+    nordic:position 7 ; nordic:element "prices"
+] .
+
+netex:GenericParameterAssignment nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "ChargingBasis"
+] , [
+    nordic:position 4 ; nordic:element "LimitationGroupingType"
+] , [
+    nordic:position 5 ; nordic:element "limitations"
+] , [
+    nordic:position 6 ; nordic:element "ValidityParameterAssignmentType"
+] , [
+    nordic:position 7 ; nordic:element "ValidityParameterGroupingType"
+] , [
+    nordic:position 8 ; nordic:element "validityParameters"
+] , [
+    nordic:position 9 ; nordic:element "IncludesGroupingType"
+] .
+
+netex:ValidableElement nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "validityConditions"
+] , [
+    nordic:position 4 ; nordic:element "Name"
+] , [
+    nordic:position 5 ; nordic:element "Description"
+] , [
+    nordic:position 6 ; nordic:element "fareStructureElements"
+] , [
+    nordic:position 7 ; nordic:element "validityParameterAssignments"
+] .
+
+netex:AccessRightInProduct nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "validityConditions"
+] , [
+    nordic:position 4 ; nordic:element "ValidableElementRef"
+] .
+
+netex:UserProfile nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "validityConditions"
+] , [
+    nordic:position 4 ; nordic:element "Name"
+] , [
+    nordic:position 5 ; nordic:element "Description"
+] , [
+    nordic:position 6 ; nordic:element "BaseUserProfileRef"
+] , [
+    nordic:position 7 ; nordic:element "UserType"
+] , [
+    nordic:position 8 ; nordic:element "MinimumAge"
+] , [
+    nordic:position 9 ; nordic:element "MaximumAge"
+] , [
+    nordic:position 10 ; nordic:element "ProofRequired"
+] .
+
+netex:FareTable nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "validityConditions"
+] , [
+    nordic:position 4 ; nordic:element "pricesFor"
+] , [
+    nordic:position 5 ; nordic:element "cells"
+] .
+
+netex:Cell nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "CellPrice"
+] , [
+    nordic:position 4 ; nordic:element "PriceableObjectRef"
+] .
+
+netex:TypeOfPricingRule nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "Name"
+] , [
+    nordic:position 4 ; nordic:element "TaxCategory"
+] .
+
+## =================================================================
+## PROPOSAL — fares vocabulary not confirmed in the generated base
+## =================================================================
+## The following Handbook N801 v0.96 fare objects are needed by richer
+## exports but are only added here if the generated base actually
+## exposes them. Where the base does not yet project a class, add it to
+## the base first (mechanical XSD projection), then move it up into a
+## grounded shape above — do NOT mint ungrounded netex: IRIs.
+##
+## PROPOSAL: additional fare-structure factors (Fare components group):
+##   - GeographicalUnit          < FareUnit          (Distance, prices)
+##   - GeographicalStructureFactor < FareStructureFactor
+##   - QualityStructureFactor    < FareStructureFactor
+##   - FareDemandFactor          < QualityStructureFactor
+##       (FareDemandType enum: peak middle offPeak superOffPeak night specialEvent)
+##   - FareQuotaFactor           < QualityStructureFactor  (NumberOfUnits 1:1)
+##   - StartTimeAtStopPoint      < VersionedChild
+##       ScheduledStopPointRef 1:1 → ScheduledStopPoint  (hard route-data tie)
+##   - DistanceMatrixElement     < PriceableObject
+##       (point-to-point / zone-to-zone fares; Distance, IsDirect, RelativeRanking)
+##
+## PROPOSAL: remaining usage parameters (all UsageParameter < ValidityParameter):
+##   Refunding, PurchaseWindow, Interchanging, Reserving, RoundTrip,
+##   LuggageAllowance, Suspending, Cancelling, Transferability,
+##   Reselling, Exchanging, Replacing, ChargingPolicy, PenaltyPolicy,
+##   Subscribing, GroupTicket, CommercialProfile, OnboardValidity.
+##   (Refunding, PurchaseWindow, Interchanging already appear in the
+##    example limitations — promote to grounded shapes once confirmed
+##    in the base.)
+##
+## PROPOSAL: sales offer + distribution (out of scope of the current
+##   examples but part of the fares handbook):
+##   SalesOfferPackage, GroupOfSalesOfferPackages, DistributionChannel,
+##   FulfilmentMethod, TypeOfTravelDocument, DistributionAssignment.
+##
+## PROPOSAL: pricing detail objects (Pricing group):
+##   FareStructureElementPrice, CellPrice, GeographicalIntervalPrice,
+##   PriceGroup, PricingParameterSet, Rounding.
+##
+## PROPOSAL: route-data dependencies to formalise once a real Nordic
+##   fares export exists (candidates for stricter cross-references):
+##     - GeographicalInterval[IntervalType=tariffZone] → FareZone
+##     - FareZone.members → ScheduledStopPoint      (fare geography ↔ stops)
+##     - StartTimeAtStopPoint → ScheduledStopPointRef  1:1
+##     - AuthorityRef / OperatorRef → Organisation   (central registry)
+##     - product / ValidableElement → TransportSubmode / Line (service scope)
+##   Because current export ids are partly synthetic (e.g. NOR:FareZone:*,
+##   INN:Authority:INN_ID), tighten these to hard sh:class / existence
+##   checks only after products are produced against resolvable data.
+
+## =================================================================
+## END OF FARES OVERLAY
+## =================================================================

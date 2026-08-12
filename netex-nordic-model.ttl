@@ -47,7 +47,9 @@ netex:ResourceFrame nordic:containedIn netex:CompositeFrame ;
         netex:Vehicle ,
         netex:PurposeOfGrouping ,
         netex:CompoundTrain ,
-        netex:Train .
+        netex:Train ,
+        ## typesOfValue — TypeOfPricingRule (VAT/tax) carried by fare exports
+        netex:TypeOfPricingRule .
 
 netex:SiteFrame nordic:containedIn netex:CompositeFrame ;
     nordic:contains netex:StopPlace ,
@@ -86,10 +88,39 @@ netex:VehicleScheduleFrame nordic:containedIn netex:CompositeFrame ;
     nordic:contains netex:TrainBlock .
 
 netex:FareFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:FareZone .
+    nordic:contains netex:FareZone ,
+        netex:FareStructureElement ,
+        netex:FareProduct ,
+        netex:PreassignedFareProduct ,
+        netex:AmountOfPriceUnitProduct ,
+        netex:FareTable ,
+        netex:DistanceMatrixElement ,
+        netex:UserProfile .
 
 netex:SalesTransactionFrame nordic:containedIn netex:CompositeFrame ;
     nordic:contains netex:FareContract .
+
+## =================================================================
+## FARE STRUCTURE SPINE (inline child placement)
+## =================================================================
+## How the fare objects nest inside a fare product / structure element,
+## as seen in the EFIP export examples. Uses nordic:contains for inline
+## child elements (not references).
+## -----------------------------------------------------------------
+
+netex:FareProduct nordic:contains netex:ValidableElement ,
+        netex:AccessRightInProduct ,
+        netex:ConditionSummary .
+
+netex:FareStructureElement nordic:contains netex:GeographicalInterval ,
+        netex:GenericParameterAssignment .
+
+netex:GenericParameterAssignment nordic:contains netex:UserProfile ,
+        netex:CompanionProfile ,
+        netex:FrequencyOfUse ,
+        netex:UsageValidityPeriod .
+
+netex:FareTable nordic:contains netex:Cell .
 
 ## =================================================================
 ## SPECIALISATION SEMANTICS

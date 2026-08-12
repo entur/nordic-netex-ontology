@@ -23,6 +23,7 @@ netex.ttl (+ modules)              ← generated NeTEx base  (external, CEN-owne
 └─ netex-nordic.ttl                ← Nordic Profile: SHACL constraints, ordering
    ├─ netex-nordic-vocab.ttl       ← Nordic vocabulary (nordic:)
    ├─ netex-nordic-model.ttl       ← curated frame containment & specialisation
+   ├─ netex-nordic-fares.ttl       ← Nordic fares overlay (products, structure, pricing)
    ├─ netex-transmodel-alignment.ttl ← NeTEx ⇄ Transmodel (skos)
    └─ netex-siri-bridge.ttl        ← NeTEx ⇄ SIRI real-time bridges
       └─ <your-layer>.ttl          ← Organisation, service, country, …
@@ -57,6 +58,7 @@ naming — the mapping lives in `netex-transmodel-alignment.ttl` via
 | `netex-nordic.ttl` | SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains. |
 | `netex-nordic-vocab.ttl` | Nordic-invented vocabulary in the `nordic:` namespace (profile meta-classes, data-confidence, ordering, domain chains, SIRI bridge property, structural predicates). |
 | `netex-nordic-model.ttl` | Curated structural overlay: frame containment and functional specialisation semantics on the generated classes. |
+| `netex-nordic-fares.ttl` | Nordic **fares** overlay: SHACL shapes and element ordering for fare products, fare structure, usage/geographical parameters and pricing (fare tables). Grounded in the EFIP export examples and Handbook N801 fares v0.96. |
 | `netex-transmodel-alignment.ttl` | `skos:exactMatch` / `skos:closeMatch` alignment from generated NeTEx classes to Transmodel concepts. |
 | `netex-siri-bridge.ttl` | Which generated NeTEx classes are referenced by SIRI services (ET, SX, VM, FM). |
 
