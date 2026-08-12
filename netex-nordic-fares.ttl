@@ -29,8 +29,11 @@
 ##   netex.ttl (generated) — CEN-owned NeTEx base ontology (submodule)
 ##   netex-nordic-vocab.ttl — Nordic-specific vocabulary (nordic:)
 ##
-## Items that the generated base does not yet expose are flagged with
-## "## PROPOSAL:" rather than grounded on ungrounded netex: IRIs.
+## The generated base (netex-part3.ttl) fully projects the NeTEx Part 5
+## fares vocabulary, so every sh:path below is grounded in a real netex:
+## IRI. Open profiling decisions (cross-reference tightening, sales /
+## distribution scope) are captured under FUTURE PROFILING at the end —
+## there is no ungrounded PROPOSAL vocabulary left to add to the base.
 ## -----------------------------------------------------------------
 
 @prefix netex:   <https://netex-cen.eu/ontology#> .
@@ -291,6 +294,71 @@ profile:NP_TimeIntervalShape a sh:NodeShape ;
         sh:name "Duration"
     ] .
 
+## --- GeographicalUnit ---
+## GeographicalUnit < FareUnit < PriceableObject
+
+profile:NP_GeographicalUnitShape a sh:NodeShape ;
+    sh:targetClass netex:GeographicalUnit ;
+    rdfs:label "GeographicalUnit — NP fares constraints" ;
+    sh:property [
+        sh:path netex:distance ;
+        sh:maxCount 1 ;
+        sh:name "Distance" ;
+        sh:description "Length of unit for a distance-based fare unit"
+    ] .
+
+## --- FareQuotaFactor ---
+## FareQuotaFactor < QualityStructureFactor < FareStructureFactor
+
+profile:NP_FareQuotaFactorShape a sh:NodeShape ;
+    sh:targetClass netex:FareQuotaFactor ;
+    rdfs:label "FareQuotaFactor — NP fares constraints" ;
+    ## The quota (e.g. klippekort trip count) is the mandatory element.
+    sh:property [
+        sh:path netex:numberOfUnits ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:name "NumberOfUnits" ;
+        sh:description "Number of units available of the product at a given price"
+    ] .
+
+## --- DistanceMatrixElement ---
+## DistanceMatrixElement < PriceableObject (point-to-point / zone-to-zone)
+
+profile:NP_DistanceMatrixElementShape a sh:NodeShape ;
+    sh:targetClass netex:DistanceMatrixElement ;
+    rdfs:label "DistanceMatrixElement — NP fares constraints" ;
+    sh:property [
+        sh:path netex:distance ;
+        sh:maxCount 1 ;
+        sh:name "Distance"
+    ] , [
+        sh:path netex:isDirect ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:name "IsDirect"
+    ] , [
+        sh:path netex:relativeRanking ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:name "RelativeRanking"
+    ] .
+
+## --- StartTimeAtStopPoint ---
+## StartTimeAtStopPoint < VersionedChild. Hard tie to route data:
+## the fare time band anchors to a specific ScheduledStopPoint.
+
+profile:NP_StartTimeAtStopPointShape a sh:NodeShape ;
+    sh:targetClass netex:StartTimeAtStopPoint ;
+    rdfs:label "StartTimeAtStopPoint — NP fares constraints" ;
+    sh:property [
+        sh:path netex:scheduledStopPointRef ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class netex:ScheduledStopPoint ;
+        sh:name "ScheduledStopPointRef" ;
+        sh:description "The stop the fare time band applies at — the fare-geography tie to route data"
+    ] .
+
 ## =================================================================
 ## USAGE PARAMETERS — SHACL SHAPES
 ## =================================================================
@@ -373,6 +441,58 @@ profile:NP_UsageValidityPeriodShape a sh:NodeShape ;
         sh:path netex:usageEnd ;
         sh:maxCount 1 ;
         sh:name "UsageEnd"
+    ] .
+
+## --- Refunding ---
+
+profile:NP_RefundingShape a sh:NodeShape ;
+    sh:targetClass netex:Refunding ;
+    rdfs:label "Refunding — NP fares constraints" ;
+    sh:property [
+        sh:path netex:allowed ;
+        sh:maxCount 1 ;
+        sh:name "Allowed" ;
+        sh:description "Examples use full, partial"
+    ] , [
+        sh:path netex:refundType ;
+        sh:maxCount 1 ;
+        sh:name "RefundType"
+    ] , [
+        sh:path netex:unusedTicketsOnly ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:name "UnusedTicketsOnly"
+    ] , [
+        sh:path netex:resellWhen ;
+        sh:maxCount 1 ;
+        sh:name "ResellWhen"
+    ] .
+
+## --- PurchaseWindow ---
+
+profile:NP_PurchaseWindowShape a sh:NodeShape ;
+    sh:targetClass netex:PurchaseWindow ;
+    rdfs:label "PurchaseWindow — NP fares constraints" ;
+    sh:property [
+        sh:path netex:purchaseWhen ;
+        sh:maxCount 1 ;
+        sh:name "PurchaseWhen" ;
+        sh:description "Examples use advanceOnly, advanceAndDayOfTravel"
+    ] , [
+        sh:path netex:maximumPeriodBeforeDeparture ;
+        sh:maxCount 1 ;
+        sh:name "MaximumPeriodBeforeDeparture"
+    ] .
+
+## --- Interchanging ---
+
+profile:NP_InterchangingShape a sh:NodeShape ;
+    sh:targetClass netex:Interchanging ;
+    rdfs:label "Interchanging — NP fares constraints" ;
+    sh:property [
+        sh:path netex:typeOfUsageParameterRef ;
+        sh:maxCount 1 ;
+        sh:name "TypeOfUsageParameterRef"
     ] .
 
 ## =================================================================
@@ -641,55 +761,75 @@ netex:TypeOfPricingRule nordic:elementOrder [
     nordic:position 4 ; nordic:element "TaxCategory"
 ] .
 
+netex:DistanceMatrixElement nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "Distance"
+] , [
+    nordic:position 4 ; nordic:element "StartTariffZoneRef"
+] , [
+    nordic:position 5 ; nordic:element "EndTariffZoneRef"
+] , [
+    nordic:position 6 ; nordic:element "RelativeRanking"
+] , [
+    nordic:position 7 ; nordic:element "IsDirect"
+] , [
+    nordic:position 8 ; nordic:element "prices"
+] .
+
+netex:StartTimeAtStopPoint nordic:elementOrder [
+    nordic:position 1 ; nordic:element "@id"
+] , [
+    nordic:position 2 ; nordic:element "@version"
+] , [
+    nordic:position 3 ; nordic:element "ScheduledStopPointRef"
+] , [
+    nordic:position 4 ; nordic:element "StartTime"
+] , [
+    nordic:position 5 ; nordic:element "EndTime"
+] , [
+    nordic:position 6 ; nordic:element "DayOffset"
+] .
+
 ## =================================================================
-## PROPOSAL — fares vocabulary not confirmed in the generated base
+## FUTURE PROFILING — open decisions (base vocabulary is complete)
 ## =================================================================
-## The following Handbook N801 v0.96 fare objects are needed by richer
-## exports but are only added here if the generated base actually
-## exposes them. Where the base does not yet project a class, add it to
-## the base first (mechanical XSD projection), then move it up into a
-## grounded shape above — do NOT mint ungrounded netex: IRIs.
+## The generated base (netex-part3.ttl) projects the full NeTEx Part 5
+## fares vocabulary, verified against the local generator output:
+## every fare-structure factor, usage parameter, sales-offer,
+## distribution and pricing class the Handbook N801 v0.96 lists exists
+## as a grounded netex: class (only OnboardValidity is absent). So the
+## remaining work is profiling choices, NOT base vocabulary to add.
 ##
-## PROPOSAL: additional fare-structure factors (Fare components group):
-##   - GeographicalUnit          < FareUnit          (Distance, prices)
-##   - GeographicalStructureFactor < FareStructureFactor
-##   - QualityStructureFactor    < FareStructureFactor
-##   - FareDemandFactor          < QualityStructureFactor
-##       (FareDemandType enum: peak middle offPeak superOffPeak night specialEvent)
-##   - FareQuotaFactor           < QualityStructureFactor  (NumberOfUnits 1:1)
-##   - StartTimeAtStopPoint      < VersionedChild
-##       ScheduledStopPointRef 1:1 → ScheduledStopPoint  (hard route-data tie)
-##   - DistanceMatrixElement     < PriceableObject
-##       (point-to-point / zone-to-zone fares; Distance, IsDirect, RelativeRanking)
+## OPEN: sales offer + distribution are in the base but out of scope of
+##   the current export examples, so no Nordic shapes are asserted yet:
+##   SalesOfferPackage, GroupOfSalesOfferPackages, SalesOfferPackageElement,
+##   DistributionChannel, FulfilmentMethod, TypeOfTravelDocument,
+##   DistributionAssignment. Add shapes once a real sales/distribution
+##   export exists to ground the cardinalities against.
 ##
-## PROPOSAL: remaining usage parameters (all UsageParameter < ValidityParameter):
-##   Refunding, PurchaseWindow, Interchanging, Reserving, RoundTrip,
-##   LuggageAllowance, Suspending, Cancelling, Transferability,
-##   Reselling, Exchanging, Replacing, ChargingPolicy, PenaltyPolicy,
-##   Subscribing, GroupTicket, CommercialProfile, OnboardValidity.
-##   (Refunding, PurchaseWindow, Interchanging already appear in the
-##    example limitations — promote to grounded shapes once confirmed
-##    in the base.)
+## OPEN: pricing detail objects exist (FareStructureElementPrice,
+##   GeographicalIntervalPrice, PriceGroup, PricingParameterSet,
+##   Rounding). The examples price via FareTable/Cell/FarePrice only, so
+##   only those are constrained above; extend when richer pricing appears.
 ##
-## PROPOSAL: sales offer + distribution (out of scope of the current
-##   examples but part of the fares handbook):
-##   SalesOfferPackage, GroupOfSalesOfferPackages, DistributionChannel,
-##   FulfilmentMethod, TypeOfTravelDocument, DistributionAssignment.
+## OPEN: additional usage parameters exist and can be constrained when
+##   used (Reserving, RoundTrip, LuggageAllowance, Suspending, Cancelling,
+##   Transferability, Reselling, Exchanging, Replacing, ChargingPolicy,
+##   PenaltyPolicy, Subscribing, GroupTicket, CommercialProfile). Only
+##   the parameters seen in the example limitations are shaped above.
 ##
-## PROPOSAL: pricing detail objects (Pricing group):
-##   FareStructureElementPrice, CellPrice, GeographicalIntervalPrice,
-##   PriceGroup, PricingParameterSet, Rounding.
-##
-## PROPOSAL: route-data dependencies to formalise once a real Nordic
-##   fares export exists (candidates for stricter cross-references):
+## OPEN: route-data cross-references to tighten once products are
+##   produced against resolvable registry data (today's ids are partly
+##   synthetic, e.g. NOR:FareZone:*, INN:Authority:INN_ID):
 ##     - GeographicalInterval[IntervalType=tariffZone] → FareZone
 ##     - FareZone.members → ScheduledStopPoint      (fare geography ↔ stops)
-##     - StartTimeAtStopPoint → ScheduledStopPointRef  1:1
 ##     - AuthorityRef / OperatorRef → Organisation   (central registry)
 ##     - product / ValidableElement → TransportSubmode / Line (service scope)
-##   Because current export ids are partly synthetic (e.g. NOR:FareZone:*,
-##   INN:Authority:INN_ID), tighten these to hard sh:class / existence
-##   checks only after products are produced against resolvable data.
+##   StartTimeAtStopPoint → ScheduledStopPointRef is already tied hard
+##   (sh:class netex:ScheduledStopPoint) above, as it is 1:1 in the XSD.
 
 ## =================================================================
 ## END OF FARES OVERLAY
