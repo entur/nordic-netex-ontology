@@ -1,0 +1,479 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix netex: <https://netex-cen.eu/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+netex:DataObjectCapabilitiesResponse a owl:Class ;
+    rdfs:label "DataObjectCapabilitiesResponse" ;
+    rdfs:subClassOf netex:DataObjectCapabilitiesResponseStructure ;
+    netex:xsdElement true .
+
+netex:DataObjectCapabilityRequestPolicyStructure a owl:Class ;
+    rdfs:label "DataObjectCapabilityRequestPolicy" ;
+    rdfs:comment "Type for Monitoring Service Capability Request Policy." ;
+    rdfs:subClassOf netex:CapabilityRequestPolicyStructure .
+
+netex:DataObjectDelivery a owl:Class ;
+    rdfs:label "DataObjectDelivery" ;
+    rdfs:subClassOf netex:DataObjectDeliveryStructure ;
+    netex:xsdElement true .
+
+netex:DataObjectRequest a owl:Class ;
+    rdfs:label "DataObjectRequest" ;
+    rdfs:subClassOf netex:DataObjectRequestStructure ;
+    netex:xsdElement true .
+
+netex:DataObjectServiceCapabilities a owl:Class ;
+    rdfs:label "DataObjectServiceCapabilities" ;
+    rdfs:subClassOf netex:DataObjectServiceCapabilitiesStructure ;
+    netex:xsdElement true .
+
+netex:DataObjectServicePermissionStructure a owl:Class ;
+    rdfs:label "DataObjectServicePermission" ;
+    rdfs:comment "Type for Monitoring Service Permission." .
+
+netex:DataObjectSubscriptionRequest a owl:Class ;
+    rdfs:label "DataObjectSubscriptionRequest" ;
+    rdfs:subClassOf netex:DataObjectSubscriptionStructure ;
+    netex:xsdElement true .
+
+netex:DeliveriesStructure a owl:Class ;
+    rdfs:label "Deliveries" ;
+    rdfs:comment "Type for Deliveries for Service." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:dataObjectDelivery ;
+            netex:xsdSequenceOrder 1 ] .
+
+netex:NetworkFilterByValueStructure a owl:Class ;
+    rdfs:label "NetworkFilterByValue" ;
+    rdfs:comment "Specifies values to filter by reference value, rather than frame." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:networkRef ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:places ;
+            netex:xsdSequenceOrder 2 ],
+        netex:ObjectFilterByValueStructure .
+
+netex:NetworkFrameRequestPolicyStructure a owl:Class ;
+    rdfs:label "NetworkFrameRequestPolicy" ;
+    rdfs:comment "Parameters that affect the request processing. Mostly act to reduce the number of stops returned." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:maximumNumberOfElements ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:includeDeleted ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:urgency ;
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:mustHaveBy ;
+            netex:xsdSequenceOrder 4 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:language ;
+            netex:xsdSequenceOrder 5 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:requestDetail ;
+            netex:xsdSequenceOrder 6 ] .
+
+netex:NetworkFrameSubscriptionPolicyStructure a owl:Class ;
+    rdfs:label "NetworkFrameSubscriptionPolicy" ;
+    rdfs:comment "Data type for Subscription Request for NeTEx Data Object Service." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:incrementalUpdates ;
+            netex:xsdSequenceOrder 1 ] .
+
+netex:NetworkFrameTopic a owl:Class ;
+    rdfs:label "NetworkFrameTopic" ;
+    rdfs:subClassOf netex:NetworkFrameTopicStructure ;
+    netex:xsdElement true .
+
+netex:ObjectFilterByValue a owl:Class ;
+    rdfs:label "ObjectFilterByValue" ;
+    rdfs:subClassOf netex:ObjectFilterByValueStructure ;
+    netex:xsdElement true .
+
+netex:OutputDetailEnumeration a rdfs:Datatype ;
+    rdfs:label "OutputDetailEnumeration" ;
+    rdfs:comment "Detail Levels for Network Request." ;
+    owl:oneOf ( "All" "Basic" "NoGeometry" "Xref" "AllWithXref" ) .
+
+netex:Topic a owl:Class ;
+    rdfs:label "Topic" ;
+    rdfs:subClassOf netex:TopicStructure ;
+    netex:xsdElement true .
+
+netex:isReference a owl:AnnotationProperty ;
+    rdfs:label "is reference" .
+
+netex:xsdElement a owl:AnnotationProperty ;
+    rdfs:label "xsd element" .
+
+netex:xsdSequenceOrder a owl:AnnotationProperty ;
+    rdfs:label "xsd sequence order" .
+
+netex:xsdType a owl:AnnotationProperty ;
+    rdfs:label "xsd type" .
+
+<https://netex-cen.eu/ontology/service> a owl:Ontology ;
+    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:source "NeTEx_publication.xsd" ;
+    dcterms:title "NeTEx service" ;
+    owl:imports <https://netex-cen.eu/ontology/framework> ;
+    owl:versionInfo "482a533" .
+
+netex:DataObjectCapabilitiesResponseStructure a owl:Class ;
+    rdfs:label "DataObjectCapabilitiesResponse" ;
+    rdfs:comment "Type for Delivery for DATA OBJECT Service." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:dataObjectServiceCapabilities ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:dataObjectPermissions ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:extensions ;
+            netex:xsdSequenceOrder 3 ],
+        netex:AbstractServiceCapabilitiesResponseStructure .
+
+netex:DataObjectDeliveryStructure a owl:Class ;
+    rdfs:label "DataObjectDelivery" ;
+    rdfs:comment "Data type for Delivery for Service containing one or more NeTEx Data Objects,." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:dataObjectRequest ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:dataObjects ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:extensions ;
+            netex:xsdSequenceOrder 3 ],
+        netex:AbstractServiceDeliveryStructure .
+
+netex:DataObjectRequestStructure a owl:Class ;
+    rdfs:label "DataObjectRequest" ;
+    rdfs:comment "Type for Service Request Type for one or more NeTEx Data Objects," ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:topics ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:policy ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:extensions ;
+            netex:xsdSequenceOrder 3 ],
+        netex:AbstractFunctionalServiceRequestStructure .
+
+netex:DataObjectServiceCapabilitiesStructure a owl:Class ;
+    rdfs:label "DataObjectServiceCapabilities" ;
+    rdfs:comment "Type for DATA OBJECT Capabilities. This is a stub - needs developing ." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:topicFiltering ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:requestPolicy ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            rdfs:comment "Available Subscription Policy capabilities." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:subscriptionPolicy ;
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:responseFeatures ;
+            netex:xsdSequenceOrder 4 ],
+        netex:AbstractCapabilitiesStructure .
+
+netex:DataObjectSubscriptionStructure a owl:Class ;
+    rdfs:label "DataObjectSubscription" ;
+    rdfs:comment "Data type for Subscription Request for NeTEx Data Object Service." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:dataObjectRequest ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:subscriptionPolicy ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:extensions ;
+            netex:xsdSequenceOrder 3 ],
+        netex:AbstractSubscriptionStructure .
+
+netex:NetworkFrameTopicStructure a owl:Class ;
+    rdfs:label "NetworkFrameTopic" ;
+    rdfs:comment "Type for a Data Object Filter Topic." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:current ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:changedSince ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:currentAt ;
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:historicBetween ;
+            netex:xsdSequenceOrder 4 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:selectionValidityConditions ;
+            netex:xsdSequenceOrder 5 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:typeOfFrameRef ;
+            netex:xsdSequenceOrder 6 ],
+        [ a owl:Restriction ;
+            owl:onProperty netex:versionFrameRef ;
+            netex:xsdSequenceOrder 7 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:networkFilterByValue ;
+            netex:xsdSequenceOrder 8 ],
+        netex:TopicStructure .
+
+netex:boundingBox a owl:ObjectProperty ;
+    rdfs:label "BoundingBox" ;
+    rdfs:comment "Area containing objects to be returned." ;
+    netex:xsdType "BoundingBoxStructure" .
+
+netex:changedSince a owl:DatatypeProperty ;
+    rdfs:label "ChangedSince" ;
+    rdfs:comment "Return the values that have changed since the specified point in time, including current and superseded values. Values that are no longer current will be flagged with the date they were superseded (using the various cleared / deleted /historic dates on different element types)." ;
+    rdfs:range xsd:dateTime ;
+    netex:xsdType "xsd:dateTime" .
+
+netex:codespaceRef a owl:ObjectProperty ;
+    rdfs:label "CodespaceRef" ;
+    rdfs:range netex:Codespace ;
+    netex:isReference true ;
+    netex:xsdType "CodespaceRefStructure" .
+
+netex:current a owl:DatatypeProperty ;
+    rdfs:label "Current" ;
+    rdfs:comment "Return just the latest current values from the producer at the time the response is created." ;
+    rdfs:range xsd:string ;
+    netex:xsdType "EmptyType" .
+
+netex:currentAt a owl:DatatypeProperty ;
+    rdfs:label "CurrentAt" ;
+    rdfs:comment "Return just the values that were current at the specified point in time." ;
+    rdfs:range xsd:dateTime ;
+    netex:xsdType "xsd:dateTime" .
+
+netex:dataObjectDelivery a owl:ObjectProperty ;
+    rdfs:label "DataObjectDelivery" ;
+    rdfs:comment "Delivery for Stop Event service." ;
+    netex:xsdType "DataObjectDeliveryStructure" .
+
+netex:dataObjectPermissions a owl:DatatypeProperty ;
+    rdfs:label "DataObjectPermissions" .
+
+netex:dataObjectServiceCapabilities a owl:ObjectProperty ;
+    rdfs:label "DataObjectServiceCapabilities" ;
+    netex:xsdType "DataObjectServiceCapabilitiesStructure" .
+
+netex:dataObjects a owl:DatatypeProperty ;
+    rdfs:label "dataObjects" ;
+    rdfs:comment "NeTEx Entities of any type." .
+
+netex:description a owl:ObjectProperty ;
+    rdfs:label "Description" ;
+    rdfs:comment "Description of what filter does." ;
+    netex:xsdType "MultilingualString" .
+
+netex:historicBetween a owl:ObjectProperty ;
+    rdfs:label "HistoricBetween" ;
+    rdfs:comment "Return all values created or updated between the specified period, including current and historic values. Values that are no longer current will be flagged with the date they were superseded." ;
+    netex:xsdType "ClosedTimestampRangeStructure" .
+
+netex:includeDeleted a owl:DatatypeProperty ;
+    rdfs:label "IncludeDeleted" ;
+    rdfs:comment "Whether to include in response. elements flagged as deleted. By default this will be false." ;
+    rdfs:range xsd:boolean ;
+    netex:xsdType "xsd:boolean" .
+
+netex:incrementalUpdates a owl:DatatypeProperty ;
+    rdfs:label "IncrementalUpdates" ;
+    rdfs:comment "Whether the producer should return the complete set of current data, or only provide updates to the last data returned, i.e. additions, modifications and deletions. If false each subscription response will contain the full information as specified in this request." ;
+    rdfs:range xsd:boolean ;
+    netex:xsdType "xsd:boolean" .
+
+netex:language a owl:DatatypeProperty ;
+    rdfs:label "Language" ;
+    rdfs:comment "Preferred language for text elements in response." ;
+    rdfs:range xsd:language ;
+    netex:xsdType "xsd:language" .
+
+netex:layerRef a owl:ObjectProperty ;
+    rdfs:label "LayerRef" ;
+    rdfs:range netex:Layer ;
+    netex:isReference true ;
+    netex:xsdType "LayerRefStructure" .
+
+netex:maximumNumberOfElements a owl:DatatypeProperty ;
+    rdfs:label "MaximumNumberOfElements" ;
+    rdfs:comment "Maximum number of objects to include in response. If absent, include all instances." ;
+    rdfs:range xsd:integer ;
+    netex:xsdType "xsd:integer" .
+
+netex:mustHaveBy a owl:DatatypeProperty ;
+    rdfs:label "MustHaveBy" ;
+    rdfs:comment "Allows requestor to indicate that if data cannot be supplied by a given time it will not be useful. Can be used to prioritize data on systems working at full load." ;
+    rdfs:range xsd:dateTime ;
+    netex:xsdType "xsd:dateTime" .
+
+netex:networkFilterByValue a owl:ObjectProperty ;
+    rdfs:label "NetworkFilterByValue" ;
+    rdfs:comment "Values for selecting by value." ;
+    netex:xsdType "NetworkFilterByValueStructure" .
+
+netex:networkRef a owl:ObjectProperty ;
+    rdfs:label "NetworkRef" ;
+    rdfs:range netex:Network ;
+    netex:isReference true ;
+    netex:xsdType "NetworkRefStructure" .
+
+netex:objectReferences a owl:DatatypeProperty ;
+    rdfs:label "objectReferences" ;
+    rdfs:comment "Specifies objects to return Use REF with specific value to identify an object. Use REF with blank value to specify all object of the object type." .
+
+netex:places a owl:DatatypeProperty ;
+    rdfs:label "places" ;
+    rdfs:comment "Return all site elements for given place." .
+
+netex:policy a owl:ObjectProperty ;
+    rdfs:label "Policy" ;
+    rdfs:comment "Policies to apply when fetching data specified by Topics." ;
+    netex:xsdType "NetworkFrameRequestPolicyStructure" .
+
+netex:requestDetail a owl:DatatypeProperty ;
+    rdfs:label "RequestDetail" ;
+    rdfs:comment "Level of detail to return. Default is all. All = Return all data and geometry, but not Xref NoGeometry = Return all, omitting geometry. XRef - Return Xcross Reference data , e.g. links for zones." ;
+    netex:xsdType "OutputDetailListOfEnumerations" .
+
+netex:requestPolicy a owl:DatatypeProperty ;
+    rdfs:label "RequestPolicy" ;
+    rdfs:comment "Available Request Policy capabilities." .
+
+netex:responseFeatures a owl:DatatypeProperty ;
+    rdfs:label "ResponseFeatures" ;
+    rdfs:comment "Available Optional Response capabilities." .
+
+netex:responsibilityRoleAssignment a owl:ObjectProperty ;
+    rdfs:label "ResponsibilityRoleAssignment" ;
+    netex:xsdType "ResponsibilityRoleAssignment_VersionedChildStructure" .
+
+netex:selectionValidityConditions a owl:DatatypeProperty ;
+    rdfs:label "selectionValidityConditions" ;
+    rdfs:comment "Validity conditions to apply when selecting data. Applies to frame." .
+
+netex:sources a owl:ObjectProperty ;
+    rdfs:label "sources" ;
+    rdfs:comment "Data Sources to include. If more than one source is specified it is logically ORed with the others." ;
+    netex:xsdType "dataSources_RelStructure" .
+
+netex:topicFiltering a owl:DatatypeProperty ;
+    rdfs:label "TopicFiltering" ;
+    rdfs:comment "Available Filtering Capabilities." .
+
+netex:topics a owl:DatatypeProperty ;
+    rdfs:label "topics" ;
+    rdfs:comment "One or more Request filters that specify tthe data to be included in output. Multiple filters are logically ANDed." .
+
+netex:typeOfFrameRef a owl:ObjectProperty ;
+    rdfs:label "TypeOfFrameRef" ;
+    rdfs:range netex:TypeOfFrame ;
+    netex:isReference true ;
+    netex:xsdType "TypeOfFrameRefStructure" .
+
+netex:urgency a owl:DatatypeProperty ;
+    rdfs:label "Urgency" ;
+    rdfs:comment "Allows requestor to indicate a relative urgency of request. A longer period can be specified for non urgent requests, e.g. to get historic data. If not specified assume best possible response desired, preferably immediate." ;
+    rdfs:range xsd:duration ;
+    netex:xsdType "xsd:duration" .
+
+netex:versionFrameRef a owl:ObjectProperty ;
+    rdfs:label "VersionFrameRef" ;
+    rdfs:range netex:VersionFrame ;
+    netex:isReference true ;
+    netex:xsdType "VersionFrameRefStructure" .
+
+netex:ObjectFilterByValueStructure a owl:Class ;
+    rdfs:label "ObjectFilterByValue" ;
+    rdfs:comment "Specifies values to filter by reference value, rather than frame." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:layerRef ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:boundingBox ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:objectReferences ;
+            netex:xsdSequenceOrder 3 ] .
+
+netex:TopicStructure a owl:Class ;
+    rdfs:label "Topic" ;
+    rdfs:comment "Type for abstract Request filter." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:description ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:sources ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:codespaceRef ;
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:responsibilityRoleAssignment ;
+            netex:xsdSequenceOrder 4 ] .
+
+netex:dataObjectRequest a owl:ObjectProperty ;
+    rdfs:label "DataObjectRequest" ;
+    netex:xsdType "DataObjectRequestStructure" .
+
+netex:subscriptionPolicy a owl:ObjectProperty ;
+    rdfs:label "SubscriptionPolicy" ;
+    rdfs:comment "Policy to use when processing Network Subscriptions." ;
+    netex:xsdType "NetworkFrameSubscriptionPolicyStructure" .
+
+netex:extensions a owl:ObjectProperty ;
+    rdfs:label "Extensions" ;
+    netex:xsdType "ExtensionsStructure" .
+

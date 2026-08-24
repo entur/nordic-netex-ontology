@@ -1,0 +1,68 @@
+## -----------------------------------------------------------------
+## NeTEx ⇄ Transmodel Alignment
+## -----------------------------------------------------------------
+## ROLE: Curated conceptual alignment between the generated NeTEx base
+##       ontology and the Transmodel conceptual model. This is NOT
+##       derived from the XSD — it is an editorial mapping overlay.
+##
+## Mechanism: skos:exactMatch / skos:closeMatch on generated netex:
+##            classes → Transmodel concept URIs. NeTEx keeps its own
+##            identity and naming; Transmodel governs alignment only.
+##
+## Loaded alongside the generated base ontology.
+## -----------------------------------------------------------------
+
+@prefix netex:       <https://netex-cen.eu/ontology#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:         <http://www.w3.org/2002/07/owl#> .
+@prefix skos:        <http://www.w3.org/2004/02/skos/core#> .
+@prefix tm-commons:  <https://w3id.org/transmodel/commons#> .
+@prefix tm-journeys: <https://w3id.org/transmodel/journeys#> .
+@prefix tm-fac:      <https://w3id.org/transmodel/facilities#> .
+@prefix tm-org:      <https://w3id.org/transmodel/organisations#> .
+
+<https://netex-cen.eu/alignment/transmodel> a owl:Ontology ;
+    rdfs:label "NeTEx–Transmodel Alignment" ;
+    owl:imports <https://netex-cen.eu/ontology> ;
+    rdfs:comment "Editorial skos alignment from generated NeTEx classes to Transmodel concepts." .
+
+netex:Authority skos:exactMatch tm-org:Authority ;
+    rdfs:seeAlso tm-org:Organisation .
+
+netex:Operator skos:exactMatch tm-org:Operator ;
+    rdfs:seeAlso tm-org:Organisation .
+
+netex:StopPlace skos:exactMatch tm-fac:StopPlace .
+netex:Quay skos:exactMatch tm-fac:Quay .
+netex:TopographicPlace skos:closeMatch tm-journeys:TopographicPlace .
+netex:Parking skos:closeMatch tm-fac:Garage .
+
+netex:Line skos:exactMatch tm-journeys:Line .
+netex:Route skos:exactMatch tm-journeys:Route .
+netex:JourneyPattern skos:exactMatch tm-journeys:JourneyPattern .
+netex:ScheduledStopPoint skos:exactMatch tm-journeys:ScheduledStopPoint .
+netex:DestinationDisplay skos:exactMatch tm-journeys:DestinationDisplay .
+netex:Network skos:closeMatch tm-commons:GroupOfEntities .
+
+netex:ServiceJourney skos:exactMatch tm-journeys:ServiceJourney .
+netex:DatedServiceJourney skos:closeMatch tm-journeys:DatedVehicleJourney ;
+    rdfs:comment "closeMatch (not exactMatch): CEN NeTEx issue #292 shows active disagreement on whether DatedServiceJourney truly maps to Transmodel DatedVehicleJourney. The alignment is approximate." .
+netex:Interchange skos:closeMatch tm-journeys:Connection .
+netex:StopPointInJourneyPattern skos:exactMatch tm-journeys:StopPointInJourneyPattern .
+
+netex:DayType skos:exactMatch tm-journeys:DayType .
+netex:DayTypeAssignment skos:exactMatch tm-journeys:DayTypeAssignment .
+netex:OperatingPeriod skos:exactMatch tm-journeys:OperatingPeriod .
+netex:OperatingDay skos:exactMatch tm-journeys:OperatingDay .
+
+netex:Vehicle skos:closeMatch tm-journeys:Vehicle .
+
+netex:ShelterEquipment skos:exactMatch tm-fac:ShelterEquipment .
+netex:WaitingRoomEquipment skos:exactMatch tm-fac:WaitingRoomEquipment .
+netex:SanitaryEquipment skos:exactMatch tm-fac:SanitaryEquipment .
+netex:TicketingEquipment skos:exactMatch tm-fac:TicketingEquipment .
+
+netex:TariffZone skos:closeMatch tm-commons:Zone .
+netex:FareZone skos:closeMatch tm-commons:Zone .
+
+netex:AccessibilityAssessment skos:exactMatch tm-fac:AccessibilityAssessment .

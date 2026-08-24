@@ -1,0 +1,621 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix netex: <https://netex-cen.eu/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+netex:AccessFacility a owl:Class ;
+    rdfs:label "AccessFacility" ;
+    netex:xsdElement true .
+
+netex:AccessFacilityList a owl:Class ;
+    rdfs:label "AccessFacilityList" ;
+    netex:xsdElement true .
+
+netex:AccessMode a owl:Class ;
+    rdfs:label "AccessMode" ;
+    netex:xsdElement true .
+
+netex:AccessibilityInfoFacility a owl:Class ;
+    rdfs:label "AccessibilityInfoFacility" ;
+    netex:xsdElement true .
+
+netex:AccessibilityInfoFacilityList a owl:Class ;
+    rdfs:label "AccessibilityInfoFacilityList" ;
+    netex:xsdElement true .
+
+netex:AccessibilityTool a owl:Class ;
+    rdfs:label "AccessibilityTool" ;
+    netex:xsdElement true .
+
+netex:AccessibilityToolList a owl:Class ;
+    rdfs:label "AccessibilityToolList" ;
+    netex:xsdElement true .
+
+netex:AccommodationAccess a owl:Class ;
+    rdfs:label "AccommodationAccess" ;
+    netex:xsdElement true .
+
+netex:AccommodationAccessList a owl:Class ;
+    rdfs:label "AccommodationAccessList" ;
+    netex:xsdElement true .
+
+netex:AccommodationFacility a owl:Class ;
+    rdfs:label "AccommodationFacility" ;
+    netex:xsdElement true .
+
+netex:AccommodationFacilityList a owl:Class ;
+    rdfs:label "AccommodationFacilityList" ;
+    netex:xsdElement true .
+
+netex:AirSubmode a owl:Class ;
+    rdfs:label "AirSubmode" ;
+    netex:xsdElement true .
+
+netex:AllVehicleModes a owl:Class ;
+    rdfs:label "AllVehicleModes" ;
+    netex:xsdElement true .
+
+netex:AssistanceFacility a owl:Class ;
+    rdfs:label "AssistanceFacility" ;
+    netex:xsdElement true .
+
+netex:AssistanceFacilityList a owl:Class ;
+    rdfs:label "AssistanceFacilityList" ;
+    netex:xsdElement true .
+
+netex:AudibleSignalsAvailable a owl:Class ;
+    rdfs:label "AudibleSignalsAvailable" ;
+    netex:xsdElement true .
+
+netex:BerthFacility a owl:Class ;
+    rdfs:label "BerthFacility" ;
+    netex:xsdElement true .
+
+netex:BoardingPermission a owl:Class ;
+    rdfs:label "BoardingPermission" ;
+    netex:xsdElement true .
+
+netex:BookingProcessFacility a owl:Class ;
+    rdfs:label "BookingProcessFacility" ;
+    netex:xsdElement true .
+
+netex:BookingProcessFacilityList a owl:Class ;
+    rdfs:label "BookingProcessFacilityList" ;
+    netex:xsdElement true .
+
+netex:BusSubmode a owl:Class ;
+    rdfs:label "BusSubmode" ;
+    netex:xsdElement true .
+
+netex:CarServiceFacility a owl:Class ;
+    rdfs:label "CarServiceFacility" ;
+    netex:xsdElement true .
+
+netex:CarServiceFacilityList a owl:Class ;
+    rdfs:label "CarServiceFacilityList" ;
+    netex:xsdElement true .
+
+netex:CateringFacility a owl:Class ;
+    rdfs:label "CateringFacility" ;
+    netex:xsdElement true .
+
+netex:CateringFacilityList a owl:Class ;
+    rdfs:label "CateringFacilityList" ;
+    netex:xsdElement true .
+
+netex:ClimateControl a owl:Class ;
+    rdfs:label "ClimateControl" ;
+    netex:xsdElement true .
+
+netex:ClimateControlList a owl:Class ;
+    rdfs:label "ClimateControlList" ;
+    netex:xsdElement true .
+
+netex:CoachSubmode a owl:Class ;
+    rdfs:label "CoachSubmode" ;
+    netex:xsdElement true .
+
+netex:CodespaceAssignmentRef a owl:Class ;
+    rdfs:label "CodespaceAssignmentRef" ;
+    netex:xsdElement true .
+
+netex:CouchetteFacility a owl:Class ;
+    rdfs:label "CouchetteFacility" ;
+    netex:xsdElement true .
+
+netex:CouchetteFacilityList a owl:Class ;
+    rdfs:label "CouchetteFacilityList" ;
+    netex:xsdElement true .
+
+netex:DirectionType a owl:Class ;
+    rdfs:label "DirectionType" ;
+    netex:xsdElement true .
+
+netex:EmergencyService a owl:Class ;
+    rdfs:label "EmergencyService" ;
+    netex:xsdElement true .
+
+netex:EmergencyServiceList a owl:Class ;
+    rdfs:label "EmergencyServiceList" ;
+    netex:xsdElement true .
+
+netex:EscalatorFreeAccess a owl:Class ;
+    rdfs:label "EscalatorFreeAccess" ;
+    netex:xsdElement true .
+
+netex:FamilyFacility a owl:Class ;
+    rdfs:label "FamilyFacility" ;
+    netex:xsdElement true .
+
+netex:FamilyFacilityList a owl:Class ;
+    rdfs:label "FamilyFacilityList" ;
+    netex:xsdElement true .
+
+netex:FareClass a owl:Class ;
+    rdfs:label "FareClass" ;
+    netex:xsdElement true .
+
+netex:FareClasses a owl:Class ;
+    rdfs:label "FareClasses" ;
+    netex:xsdElement true .
+
+netex:FunicularSubmode a owl:Class ;
+    rdfs:label "FunicularSubmode" ;
+    netex:xsdElement true .
+
+netex:GenderLimitation a owl:Class ;
+    rdfs:label "GenderLimitation" ;
+    netex:xsdElement true .
+
+netex:GroupBookingFacility a owl:Class ;
+    rdfs:label "GroupBookingFacility" ;
+    netex:xsdElement true .
+
+netex:GuideDogAccess a owl:Class ;
+    rdfs:label "GuideDogAccess" ;
+    netex:xsdElement true .
+
+netex:HireFacility a owl:Class ;
+    rdfs:label "HireFacility" ;
+    netex:xsdElement true .
+
+netex:HireFacilityList a owl:Class ;
+    rdfs:label "HireFacilityList" ;
+    netex:xsdElement true .
+
+netex:IncludeTranslations a owl:Class ;
+    rdfs:label "IncludeTranslations" ;
+    netex:xsdElement true .
+
+netex:LevelAccessIntoVehicle a owl:Class ;
+    rdfs:label "LevelAccessIntoVehicle" ;
+    netex:xsdElement true .
+
+netex:LiftFreeAccess a owl:Class ;
+    rdfs:label "LiftFreeAccess" ;
+    netex:xsdElement true .
+
+netex:LightingControlFacility a owl:Class ;
+    rdfs:label "LightingControlFacility" ;
+    netex:xsdElement true .
+
+netex:LightingControlFacilityList a owl:Class ;
+    rdfs:label "LightingControlFacilityList" ;
+    netex:xsdElement true .
+
+netex:LuggageCarriageFacility a owl:Class ;
+    rdfs:label "LuggageCarriageFacility" ;
+    netex:xsdElement true .
+
+netex:LuggageCarriageFacilityList a owl:Class ;
+    rdfs:label "LuggageCarriageFacilityList" ;
+    netex:xsdElement true .
+
+netex:LuggageLockerFacility a owl:Class ;
+    rdfs:label "LuggageLockerFacility" ;
+    netex:xsdElement true .
+
+netex:LuggageLockerFacilityList a owl:Class ;
+    rdfs:label "LuggageLockerFacilityList" ;
+    netex:xsdElement true .
+
+netex:LuggageServiceFacility a owl:Class ;
+    rdfs:label "LuggageServiceFacility" ;
+    netex:xsdElement true .
+
+netex:LuggageServiceFacilityList a owl:Class ;
+    rdfs:label "LuggageServiceFacilityList" ;
+    netex:xsdElement true .
+
+netex:MealFacility a owl:Class ;
+    rdfs:label "MealFacility" ;
+    netex:xsdElement true .
+
+netex:MealFacilityList a owl:Class ;
+    rdfs:label "MealFacilityList" ;
+    netex:xsdElement true .
+
+netex:MedicalFacility a owl:Class ;
+    rdfs:label "MedicalFacility" ;
+    netex:xsdElement true .
+
+netex:MedicalFacilityList a owl:Class ;
+    rdfs:label "MedicalFacilityList" ;
+    netex:xsdElement true .
+
+netex:MetroSubmode a owl:Class ;
+    rdfs:label "MetroSubmode" ;
+    netex:xsdElement true .
+
+netex:MobilityFacility a owl:Class ;
+    rdfs:label "MobilityFacility" ;
+    netex:xsdElement true .
+
+netex:MobilityFacilityList a owl:Class ;
+    rdfs:label "MobilityFacilityList" ;
+    netex:xsdElement true .
+
+netex:MoneyFacility a owl:Class ;
+    rdfs:label "MoneyFacility" ;
+    netex:xsdElement true .
+
+netex:MoneyFacilityList a owl:Class ;
+    rdfs:label "MoneyFacilityList" ;
+    netex:xsdElement true .
+
+netex:NuisanceFacility a owl:Class ;
+    rdfs:label "NuisanceFacility" ;
+    netex:xsdElement true .
+
+netex:NuisanceFacilityList a owl:Class ;
+    rdfs:label "NuisanceFacilityList" ;
+    netex:xsdElement true .
+
+netex:ParkingFacility a owl:Class ;
+    rdfs:label "ParkingFacility" ;
+    netex:xsdElement true .
+
+netex:ParkingFacilityList a owl:Class ;
+    rdfs:label "ParkingFacilityList" ;
+    netex:xsdElement true .
+
+netex:ParticipantRef a owl:Class ;
+    rdfs:label "ParticipantRef" ;
+    netex:xsdElement true .
+
+netex:PassengerCommsFacility a owl:Class ;
+    rdfs:label "PassengerCommsFacility" ;
+    netex:xsdElement true .
+
+netex:PassengerCommsFacilityList a owl:Class ;
+    rdfs:label "PassengerCommsFacilityList" ;
+    netex:xsdElement true .
+
+netex:PassengerInformationFacility a owl:Class ;
+    rdfs:label "PassengerInformationFacility" ;
+    netex:xsdElement true .
+
+netex:PassengerInformationFacilityList a owl:Class ;
+    rdfs:label "PassengerInformationFacilityList" ;
+    netex:xsdElement true .
+
+netex:PublicationDelivery a owl:Class ;
+    rdfs:label "PublicationDelivery" ;
+    rdfs:subClassOf netex:PublicationDeliveryStructure ;
+    netex:xsdElement true .
+
+netex:PublicationRequest a owl:Class ;
+    rdfs:label "PublicationRequest" ;
+    rdfs:subClassOf netex:PublicationRequestStructure ;
+    netex:xsdElement true .
+
+netex:RailSubmode a owl:Class ;
+    rdfs:label "RailSubmode" ;
+    netex:xsdElement true .
+
+netex:RampFreeAccess a owl:Class ;
+    rdfs:label "RampFreeAccess" ;
+    netex:xsdElement true .
+
+netex:RequestTimestamp a owl:Class ;
+    rdfs:label "RequestTimestamp" ;
+    netex:xsdElement true .
+
+netex:ReservedSpaceFacility a owl:Class ;
+    rdfs:label "ReservedSpaceFacility" ;
+    netex:xsdElement true .
+
+netex:ReservedSpaceFacilityList a owl:Class ;
+    rdfs:label "ReservedSpaceFacilityList" ;
+    netex:xsdElement true .
+
+netex:ResponseTimestamp a owl:Class ;
+    rdfs:label "ResponseTimestamp" ;
+    netex:xsdElement true .
+
+netex:RetailFacility a owl:Class ;
+    rdfs:label "RetailFacility" ;
+    netex:xsdElement true .
+
+netex:RetailFacilityList a owl:Class ;
+    rdfs:label "RetailFacilityList" ;
+    netex:xsdElement true .
+
+netex:RoadVehicleMode a owl:Class ;
+    rdfs:label "RoadVehicleMode" ;
+    netex:xsdElement true .
+
+netex:SafetyFacility a owl:Class ;
+    rdfs:label "SafetyFacility" ;
+    netex:xsdElement true .
+
+netex:SafetyFacilityList a owl:Class ;
+    rdfs:label "SafetyFacilityList" ;
+    netex:xsdElement true .
+
+netex:SanitaryFacility a owl:Class ;
+    rdfs:label "SanitaryFacility" ;
+    netex:xsdElement true .
+
+netex:SanitaryFacilityList a owl:Class ;
+    rdfs:label "SanitaryFacilityList" ;
+    netex:xsdElement true .
+
+netex:ScopeOfTicket a owl:Class ;
+    rdfs:label "ScopeOfTicket" ;
+    netex:xsdElement true .
+
+netex:ScopeOfTicketList a owl:Class ;
+    rdfs:label "ScopeOfTicketList" ;
+    netex:xsdElement true .
+
+netex:SelfDriveSubmode a owl:Class ;
+    rdfs:label "SelfDriveSubmode" ;
+    netex:xsdElement true .
+
+netex:ServiceReservationFacility a owl:Class ;
+    rdfs:label "ServiceReservationFacility" ;
+    netex:xsdElement true .
+
+netex:ServiceReservationFacilityList a owl:Class ;
+    rdfs:label "ServiceReservationFacilityList" ;
+    netex:xsdElement true .
+
+netex:SnowAndIceSubmode a owl:Class ;
+    rdfs:label "SnowAndIceSubmode" ;
+    netex:xsdElement true .
+
+netex:SrsName a owl:Class ;
+    rdfs:label "SrsName" ;
+    netex:xsdElement true .
+
+netex:Staffing a owl:Class ;
+    rdfs:label "Staffing" ;
+    netex:xsdElement true .
+
+netex:StairFreeAccess a owl:Class ;
+    rdfs:label "StairFreeAccess" ;
+    netex:xsdElement true .
+
+netex:Status a owl:Class ;
+    rdfs:label "Status" ;
+    netex:xsdElement true .
+
+netex:StepFreeAccess a owl:Class ;
+    rdfs:label "StepFreeAccess" ;
+    netex:xsdElement true .
+
+netex:TactileGuidanceAvailable a owl:Class ;
+    rdfs:label "TactileGuidanceAvailable" ;
+    netex:xsdElement true .
+
+netex:TaxiSubmode a owl:Class ;
+    rdfs:label "TaxiSubmode" ;
+    netex:xsdElement true .
+
+netex:TelecabinSubmode a owl:Class ;
+    rdfs:label "TelecabinSubmode" ;
+    netex:xsdElement true .
+
+netex:TicketingFacility a owl:Class ;
+    rdfs:label "TicketingFacility" ;
+    netex:xsdElement true .
+
+netex:TicketingFacilityList a owl:Class ;
+    rdfs:label "TicketingFacilityList" ;
+    netex:xsdElement true .
+
+netex:TicketingServiceFacility a owl:Class ;
+    rdfs:label "TicketingServiceFacility" ;
+    netex:xsdElement true .
+
+netex:TicketingServiceFacilityList a owl:Class ;
+    rdfs:label "TicketingServiceFacilityList" ;
+    netex:xsdElement true .
+
+netex:TramSubmode a owl:Class ;
+    rdfs:label "TramSubmode" ;
+    netex:xsdElement true .
+
+netex:UicProductCharacteristic a owl:Class ;
+    rdfs:label "UicProductCharacteristic" ;
+    netex:xsdElement true .
+
+netex:UicProductCharacteristicList a owl:Class ;
+    rdfs:label "UicProductCharacteristicList" ;
+    netex:xsdElement true .
+
+netex:UicTrainRate a owl:Class ;
+    rdfs:label "UicTrainRate" ;
+    netex:xsdElement true .
+
+netex:VehicleAccessFacility a owl:Class ;
+    rdfs:label "VehicleAccessFacility" ;
+    netex:xsdElement true .
+
+netex:VehicleAccessFacilityList a owl:Class ;
+    rdfs:label "VehicleAccessFacilityList" ;
+    netex:xsdElement true .
+
+netex:VehicleMode a owl:Class ;
+    rdfs:label "VehicleMode" ;
+    netex:xsdElement true .
+
+netex:VisualSignsAvailable a owl:Class ;
+    rdfs:label "VisualSignsAvailable" ;
+    netex:xsdElement true .
+
+netex:WaterSubmode a owl:Class ;
+    rdfs:label "WaterSubmode" ;
+    netex:xsdElement true .
+
+netex:WheelchairAccess a owl:Class ;
+    rdfs:label "WheelchairAccess" ;
+    netex:xsdElement true .
+
+netex:associationName a owl:Class ;
+    rdfs:label "associationName" ;
+    netex:xsdElement true .
+
+netex:defaultCodeSpace a owl:Class ;
+    rdfs:label "defaultCodeSpace" ;
+    netex:xsdElement true .
+
+netex:gmlProfileSchema a owl:Class ;
+    rdfs:label "gmlProfileSchema" ;
+    netex:xsdElement true .
+
+netex:isReference a owl:AnnotationProperty ;
+    rdfs:label "is reference" .
+
+netex:reversePropertyName a owl:Class ;
+    rdfs:label "reversePropertyName" ;
+    netex:xsdElement true .
+
+netex:targetElement a owl:Class ;
+    rdfs:label "targetElement" ;
+    netex:xsdElement true .
+
+netex:xsdElement a owl:AnnotationProperty ;
+    rdfs:label "xsd element" .
+
+netex:xsdSequenceOrder a owl:AnnotationProperty ;
+    rdfs:label "xsd sequence order" .
+
+netex:xsdType a owl:AnnotationProperty ;
+    rdfs:label "xsd type" .
+
+<https://netex-cen.eu/ontology/core> a owl:Ontology ;
+    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:source "NeTEx_publication.xsd" ;
+    dcterms:title "NeTEx core (root schemas)" ;
+    owl:versionInfo "482a533" .
+
+netex:PublicationDeliveryStructure a owl:Class ;
+    rdfs:label "PublicationDelivery" ;
+    rdfs:comment "Type for Publication Delivery." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:publicationTimestamp ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:participantRef ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:publicationRequest ;
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:publicationRefreshInterval ;
+            netex:xsdSequenceOrder 4 ],
+        [ a owl:Restriction ;
+            rdfs:comment "Description of contents." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:description ;
+            netex:xsdSequenceOrder 5 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:dataObjects ;
+            netex:xsdSequenceOrder 6 ] .
+
+netex:PublicationRequestStructure a owl:Class ;
+    rdfs:label "PublicationRequest" ;
+    rdfs:comment "Type for Publication Request." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:requestTimestamp ;
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:participantRef ;
+            netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:description ;
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:topics ;
+            netex:xsdSequenceOrder 4 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:requestPolicy ;
+            netex:xsdSequenceOrder 5 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty netex:subscriptionPolicy ;
+            netex:xsdSequenceOrder 6 ] .
+
+netex:dataObjects a owl:DatatypeProperty ;
+    rdfs:label "dataObjects" ;
+    rdfs:comment "NeTEx Entities of any type." .
+
+netex:publicationRefreshInterval a owl:DatatypeProperty ;
+    rdfs:label "PublicationRefreshInterval" ;
+    rdfs:comment "How often data in publication is refreshed." ;
+    rdfs:range xsd:duration ;
+    netex:xsdType "xsd:duration" .
+
+netex:publicationRequest a owl:ObjectProperty ;
+    rdfs:label "PublicationRequest" ;
+    rdfs:comment "Echo Request used to create bulk response." ;
+    netex:xsdType "PublicationRequestStructure" .
+
+netex:publicationTimestamp a owl:DatatypeProperty ;
+    rdfs:label "PublicationTimestamp" ;
+    rdfs:comment "Time of output of data." ;
+    rdfs:range xsd:dateTime ;
+    netex:xsdType "xsd:dateTime" .
+
+netex:requestPolicy a owl:ObjectProperty ;
+    rdfs:label "RequestPolicy" ;
+    rdfs:comment "Policies to apply when fetching data specified by Topics." ;
+    netex:xsdType "NetworkFrameRequestPolicyStructure" .
+
+netex:requestTimestamp a owl:DatatypeProperty ;
+    rdfs:label "RequestTimestamp" ;
+    rdfs:comment "Time of request." ;
+    rdfs:range xsd:dateTime ;
+    netex:xsdType "xsd:dateTime" .
+
+netex:subscriptionPolicy a owl:ObjectProperty ;
+    rdfs:label "SubscriptionPolicy" ;
+    rdfs:comment "Policy to use when processing Network Subscriptions." ;
+    netex:xsdType "NetworkFrameSubscriptionPolicyStructure" .
+
+netex:topics a owl:DatatypeProperty ;
+    rdfs:label "topics" ;
+    rdfs:comment "One or more Request filters that specify tthe data to be included in output. Multiple filters are logically ANDed." .
+
+netex:description a owl:ObjectProperty ;
+    rdfs:label "Description" ;
+    netex:xsdType "MultilingualString" .
+
+netex:participantRef a owl:ObjectProperty ;
+    rdfs:label "ParticipantRef" ;
+    netex:isReference true ;
+    netex:xsdType "siri:ParticipantCodeType" .
+

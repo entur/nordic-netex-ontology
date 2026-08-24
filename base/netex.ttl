@@ -1,0 +1,32 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix netex: <https://netex-cen.eu/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://netex-cen.eu/ontology> a owl:Ontology ;
+    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:source "NeTEx_publication.xsd" ;
+    dcterms:title "NeTEx base ontology (generated from XSD)" ;
+    owl:imports <https://netex-cen.eu/ontology/core>,
+        <https://netex-cen.eu/ontology/framework>,
+        <https://netex-cen.eu/ontology/gml>,
+        <https://netex-cen.eu/ontology/part1>,
+        <https://netex-cen.eu/ontology/part2>,
+        <https://netex-cen.eu/ontology/part3>,
+        <https://netex-cen.eu/ontology/part5>,
+        <https://netex-cen.eu/ontology/service>,
+        <https://netex-cen.eu/ontology/siri> ;
+    owl:versionInfo "482a533" .
+
+netex:isReference a owl:AnnotationProperty ;
+    rdfs:label "is reference" .
+
+netex:xsdElement a owl:AnnotationProperty ;
+    rdfs:label "xsd element" .
+
+netex:xsdSequenceOrder a owl:AnnotationProperty ;
+    rdfs:label "xsd sequence order" .
+
+netex:xsdType a owl:AnnotationProperty ;
+    rdfs:label "xsd type" .
+

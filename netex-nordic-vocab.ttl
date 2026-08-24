@@ -1,0 +1,136 @@
+## -----------------------------------------------------------------
+## Nordic NeTEx Vocabulary
+## -----------------------------------------------------------------
+## ROLE: Nordic-invented vocabulary that is NOT derived from the NeTEx
+##       XSD and therefore not produced by the (CEN-owned) generator.
+##       These terms live in the Nordic namespace so they never mint
+##       new terms in the CEN-owned netex: namespace.
+##
+## Contains: profile meta-classes, data-confidence annotations,
+##           profile element-ordering vocabulary, navigational domain
+##           chains, and the SIRI bridge property.
+##
+## Namespace: nordic: — https://netex-cen.eu/nordic#
+## -----------------------------------------------------------------
+
+@prefix nordic: <https://netex-cen.eu/nordic#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+
+<https://netex-cen.eu/nordic> a owl:Ontology ;
+    rdfs:label "Nordic NeTEx Vocabulary" ;
+    rdfs:comment "Nordic-specific vocabulary layered on top of the generated NeTEx base ontology. Terms here are not derived from the NeTEx XSD." .
+
+## =================================================================
+## PROFILE META-CLASSES
+## =================================================================
+
+nordic:Profile a owl:Class ;
+    rdfs:label "Profile" ;
+    skos:definition "A constrained subset of NeTEx for a specific region or use case" .
+
+nordic:DataSource a owl:Class ;
+    rdfs:label "DataSource" ;
+    skos:definition "Origin classification for data ownership (central registry, operator delivery, etc.)" .
+
+## =================================================================
+## DATA CONFIDENCE (provenance of profile constraints)
+## =================================================================
+
+nordic:dataConfidence a owl:ObjectProperty ;
+    rdfs:label "dataConfidence" ;
+    skos:definition "Provenance and confidence metadata for a profile or constraint" .
+
+nordic:level a owl:DatatypeProperty ;
+    rdfs:label "level" ;
+    rdfs:range xsd:string ;
+    skos:definition "Confidence level (e.g. HIGH, MEDIUM, LOW)" .
+
+nordic:basis a owl:DatatypeProperty ;
+    rdfs:label "basis" ;
+    rdfs:range xsd:string ;
+    skos:definition "Human-readable justification for the stated confidence" .
+
+nordic:datasets a owl:DatatypeProperty ;
+    rdfs:label "datasets" ;
+    rdfs:range xsd:string ;
+    skos:definition "Datasets the constraint was validated against" .
+
+nordic:lastValidated a owl:DatatypeProperty ;
+    rdfs:label "lastValidated" ;
+    rdfs:range xsd:string ;
+    skos:definition "When the constraint was last validated against live data" .
+
+## =================================================================
+## ELEMENT ORDERING (profile-canonical sequence)
+## =================================================================
+## The generated base already carries XSD sequence via
+## netex:xsdSequenceOrder on owl:Restrictions. This vocabulary
+## expresses the *profile's* canonical element order, which may
+## subset or annotate — but never contradict — the XSD order.
+## -----------------------------------------------------------------
+
+nordic:elementOrder a owl:ObjectProperty ;
+    rdfs:label "elementOrder" ;
+    skos:definition "Canonical element sequence for a class in the profile" .
+
+nordic:position a owl:DatatypeProperty ;
+    rdfs:label "position" ;
+    rdfs:range xsd:integer ;
+    skos:definition "Ordinal position within the element sequence" .
+
+nordic:element a owl:DatatypeProperty ;
+    rdfs:label "element" ;
+    rdfs:range xsd:string ;
+    skos:definition "XML element or attribute name at this position" .
+
+## =================================================================
+## DOMAIN CHAINS (navigational shortcuts)
+## =================================================================
+
+nordic:step1 a owl:ObjectProperty ; rdfs:label "step1" .
+nordic:step2 a owl:ObjectProperty ; rdfs:label "step2" .
+nordic:step3 a owl:ObjectProperty ; rdfs:label "step3" .
+nordic:step4 a owl:ObjectProperty ; rdfs:label "step4" .
+nordic:step5 a owl:ObjectProperty ; rdfs:label "step5" .
+
+## =================================================================
+## STRUCTURAL MODEL (containment & domain placement)
+## =================================================================
+## The generated base expresses XML containment via owl:Restrictions.
+## These predicates provide a curated, navigable profile view of the
+## same structure (which frame holds what, inline child placement,
+## and functional specialisation that is deliberately NOT subClassOf).
+## -----------------------------------------------------------------
+
+nordic:contains a owl:ObjectProperty ;
+    rdfs:label "contains" ;
+    skos:definition "Frame or object contains these child classes as XML child elements" .
+
+nordic:containedIn a owl:ObjectProperty ;
+    rdfs:label "containedIn" ;
+    owl:inverseOf nordic:contains ;
+    skos:definition "Inverse of contains — this frame is nested within a parent frame" .
+
+nordic:childOf a owl:ObjectProperty ;
+    rdfs:label "childOf" ;
+    skos:definition "Object is modelled as inline child element(s) within the parent class" .
+
+nordic:inFrame a owl:ObjectProperty ;
+    rdfs:label "inFrame" ;
+    skos:definition "Object is a top-level member of this frame type" .
+
+nordic:specializes a owl:ObjectProperty ;
+    rdfs:label "specializes" ;
+    skos:definition "This class is a functional specialization of another (e.g. DatedServiceJourney specializes ServiceJourney)" ;
+    skos:scopeNote "Deliberately NOT modelled as rdfs:subClassOf. DatedServiceJourney is not a true type-theoretic subclass of ServiceJourney — it references one rather than inheriting its identity. Using rdfs:subClassOf would allow a reasoner to wrongly conclude that a DSJ IS-A ServiceJourney, which misrepresents the NeTEx schema semantics." .
+
+## =================================================================
+## SIRI BRIDGE
+## =================================================================
+
+nordic:referencedBySIRI a owl:ObjectProperty ;
+    rdfs:label "referencedBySIRI" ;
+    skos:definition "This NeTEx class is referenced by the given SIRI service via ID" .

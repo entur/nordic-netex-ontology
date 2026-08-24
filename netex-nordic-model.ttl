@@ -1,0 +1,103 @@
+## -----------------------------------------------------------------
+## Nordic NeTEx Structural Model (curated overlay)
+## -----------------------------------------------------------------
+## ROLE: Curated, navigable Nordic view of NeTEx structure that is
+##       editorial rather than mechanical: frame containment, and the
+##       functional specialisation semantics that are deliberately NOT
+##       expressed as rdfs:subClassOf.
+##
+## The generated base ontology remains authoritative for classes,
+## properties, cardinality and XSD sequence. This overlay only adds
+## the profile's structural navigation and semantic clarifications on
+## top of the generated netex: classes, using nordic: predicates.
+##
+## Imports: generated NeTEx base + netex-nordic-vocab.ttl
+## -----------------------------------------------------------------
+
+@prefix netex:  <https://netex-cen.eu/ontology#> .
+@prefix nordic: <https://netex-cen.eu/nordic#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+
+<https://netex-cen.eu/nordic/model> a owl:Ontology ;
+    rdfs:label "Nordic NeTEx Structural Model" ;
+    owl:imports <https://netex-cen.eu/ontology> ,
+                <https://netex-cen.eu/nordic> ;
+    rdfs:comment "Curated frame containment and specialisation semantics layered on the generated NeTEx base." .
+
+## =================================================================
+## FRAME CONTAINMENT
+## =================================================================
+
+netex:CompositeFrame nordic:contains netex:ResourceFrame ,
+        netex:SiteFrame ,
+        netex:ServiceCalendarFrame ,
+        netex:ServiceFrame ,
+        netex:TimetableFrame ,
+        netex:VehicleScheduleFrame ,
+        netex:FareFrame ,
+        netex:SalesTransactionFrame ,
+        netex:Codespace .
+
+netex:ResourceFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:Authority ,
+        netex:Operator ,
+        netex:VehicleType ,
+        netex:Vehicle ,
+        netex:PurposeOfGrouping ,
+        netex:CompoundTrain ,
+        netex:Train .
+
+netex:SiteFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:StopPlace ,
+        netex:TopographicPlace ,
+        netex:Parking ,
+        netex:TariffZone .
+
+netex:ServiceCalendarFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:ServiceCalendar ,
+        netex:DayType ,
+        netex:DayTypeAssignment ,
+        netex:OperatingPeriod ,
+        netex:OperatingDay .
+
+netex:ServiceFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:Line ,
+        netex:Route ,
+        netex:JourneyPattern ,
+        netex:ScheduledStopPoint ,
+        netex:PassengerStopAssignment ,
+        netex:DestinationDisplay ,
+        netex:GroupOfLines ,
+        netex:Notice ,
+        netex:FlexibleServiceProperties ,
+        netex:RoutePoint ,
+        netex:ServiceLink ,
+        netex:SiteConnection .
+
+netex:TimetableFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:ServiceJourney ,
+        netex:DatedServiceJourney ,
+        netex:Interchange ,
+        netex:TrainNumber .
+
+netex:VehicleScheduleFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:TrainBlock .
+
+netex:FareFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:FareZone .
+
+netex:SalesTransactionFrame nordic:containedIn netex:CompositeFrame ;
+    nordic:contains netex:FareContract .
+
+## =================================================================
+## SPECIALISATION SEMANTICS
+## =================================================================
+## Functional specialisation, deliberately NOT rdfs:subClassOf.
+## See nordic:specializes scopeNote in netex-nordic-vocab.ttl.
+## -----------------------------------------------------------------
+
+netex:DatedServiceJourney nordic:specializes netex:ServiceJourney .
+
+netex:VehicleJourney skos:scopeNote "Deliberately not connected via rdfs:subClassOf or nordic:specializes to ServiceJourney or DatedServiceJourney. NeTEx inherits this ambiguity from Transmodel: whether DatedServiceJourney/DatedVehicleJourney are true specializations of VehicleJourney is unresolved in CEN (issue #292). This ontology represents the gap rather than overclaiming a hierarchy that the standard itself does not formalize." .
