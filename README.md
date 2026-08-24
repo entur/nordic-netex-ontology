@@ -3,7 +3,8 @@
 The **Nordic NeTEx Profile** as a machine-readable overlay on top of the
 generated NeTEx base ontology. This repository holds the profile layer only —
 SHACL constraints, element ordering, Nordic vocabulary, and cross-standard
-alignment — and imports the CEN-owned base rather than re-deriving it.
+alignment — layered on a vendored snapshot of the CEN-owned base (`base/`)
+rather than re-deriving it.
 
 ## Purpose
 
@@ -19,7 +20,7 @@ the official NeTEx XSD by the [netex-ontology-generator](#base-ontology-generate
 (intended to be CEN-owned). This repository builds the Nordic layer on top:
 
 ```
-netex.ttl (+ modules)              ← generated NeTEx base  (external, CEN-owned)
+base/ (netex.ttl + modules + netex-shacl.ttl)  ← generated NeTEx base — vendored snapshot
 └─ netex-nordic.ttl                ← Nordic Profile: SHACL constraints, ordering
    ├─ netex-nordic-vocab.ttl       ← Nordic vocabulary (nordic:)
    ├─ netex-nordic-model.ttl       ← curated frame containment & specialisation
@@ -40,20 +41,27 @@ into RDF/OWL and splits it into per-module documents (`netex.ttl` root plus
 `netex-siri`, `netex-gml`). Terms keep their NeTEx identity in the single
 `netex:` namespace; only the documents are split.
 
+A snapshot of this output is **vendored under `base/`** — the ten OWL modules
+plus the generator's SHACL baseline (`netex-shacl.ttl`) — so the profile can be
+validated with standard tooling without fetching anything external.
+
 **Naming philosophy:** term names follow the NeTEx XSD (and the standard RDF
 convention): **PascalCase classes** (`netex:StopPlace`) and **lowerCamelCase
 properties** (`netex:parentSiteRef`). Transmodel governs *alignment*, not
 naming — the mapping lives in `netex-transmodel-alignment.ttl` via
 `skos:exactMatch` / `skos:closeMatch`, so NeTEx keeps its own identity.
 
-> **TODO (living branch):** wire the generated base in as a **git submodule**
-> and add an ingest step that pulls only the relevant `output/*.ttl`. The
-> submodule URL is pending the generator's move to CEN.
+> **Vendored base (living branch):** `base/` is a checked-in snapshot of the
+> generated base, so the repository is self-contained and validatable today.
+> **TODO:** once the generator is hosted (Entur/CEN), replace the manual
+> snapshot with an automated ingest that refreshes `base/` from the published
+> output.
 
 ## Files
 
 | File | Contents |
 |------|----------|
+| `base/` | Vendored snapshot of the generated NeTEx base — ten OWL modules plus the `netex-shacl.ttl` SHACL baseline. Projected from the NeTEx XSD; not hand-edited. |
 | `netex-nordic.ttl` | SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains. |
 | `netex-nordic-vocab.ttl` | Nordic-invented vocabulary in the `nordic:` namespace (profile meta-classes, data-confidence, ordering, domain chains, SIRI bridge property, structural predicates). |
 | `netex-nordic-model.ttl` | Curated structural overlay: frame containment and functional specialisation semantics on the generated classes. |
