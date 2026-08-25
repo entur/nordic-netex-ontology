@@ -117,6 +117,9 @@ Shape naming: `profile:NP_{ClassName}Shape`.
 | `sh:` | `http://www.w3.org/ns/shacl#` |
 | `siri:` | `https://siri-cen.eu/ontology#` |
 | `tm-commons:` | `https://w3id.org/transmodel/commons#` |
+| `tm-journeys:` | `https://w3id.org/transmodel/journeys#` |
+| `tm-fac:` | `https://w3id.org/transmodel/facilities#` |
+| `tm-org:` | `https://w3id.org/transmodel/organisations#` |
 
 ## Tools
 
