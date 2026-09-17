@@ -23,6 +23,7 @@ the official NeTEx XSD by the [netex-ontology-generator](#base-ontology-generate
 base/ (netex.ttl + modules + netex-shacl.ttl)  ← generated NeTEx base — vendored snapshot
 └─ netex-nordic.ttl                ← Nordic Profile: SHACL constraints, ordering
    ├─ netex-nordic-vocab.ttl       ← Nordic vocabulary (nordic:)
+   ├─ netex-nordic-baseline.ttl    ← positive membership allowlist (generated)
    ├─ netex-nordic-model.ttl       ← curated frame containment & specialisation
    ├─ netex-transmodel-alignment.ttl ← NeTEx ⇄ Transmodel (skos)
    └─ netex-siri-bridge.ttl        ← NeTEx ⇄ SIRI real-time bridges
@@ -30,8 +31,9 @@ base/ (netex.ttl + modules + netex-shacl.ttl)  ← generated NeTEx base — vend
 ```
 
 **Design principle:** The generated base stays a faithful, mechanical projection
-of the standard. The Nordic layer only *tightens* (SHACL), *annotates*, and
-*aligns* — it never renames or forks the base.
+of the standard. The Nordic layer *tightens* (SHACL), states positive
+*membership* (the baseline allowlist), *annotates*, and *aligns* — it never
+renames or forks the base.
 
 ## Base ontology (generated)
 
@@ -63,7 +65,8 @@ naming — the mapping lives in `netex-transmodel-alignment.ttl` via
 |------|----------|
 | `base/` | Vendored snapshot of the generated NeTEx base — ten OWL modules plus the `netex-shacl.ttl` SHACL baseline. Projected from the NeTEx XSD; not hand-edited. |
 | `netex-nordic.ttl` | SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains. |
-| `netex-nordic-vocab.ttl` | Nordic-invented vocabulary in the `nordic:` namespace (profile meta-classes, data-confidence, ordering, domain chains, SIRI bridge property, structural predicates). |
+| `netex-nordic-vocab.ttl` | Nordic-invented vocabulary in the `nordic:` namespace (profile meta-classes, data-confidence, ordering, domain chains, SIRI bridge property, structural predicates, membership & provenance). |
+| `netex-nordic-baseline.ttl` | Positive membership allowlist — which classes and fields are *in* the profile, with cardinality, governing `profile:scope`, and `nordic:provenance nordic:Baseline`. Seeded once from the documentation `Table_*.md`; henceforth the profile inherits from CCB decisions, not the documentation. |
 | `netex-nordic-model.ttl` | Curated structural overlay: frame containment and functional specialisation semantics on the generated classes. |
 | `netex-transmodel-alignment.ttl` | `skos:exactMatch` / `skos:closeMatch` alignment from generated NeTEx classes to Transmodel concepts. |
 | `netex-siri-bridge.ttl` | Which generated NeTEx classes are referenced by SIRI services (ET, SX, VM, FM). |

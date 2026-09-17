@@ -1,3 +1,7 @@
 # Python caches from the tools/ analysis scripts
 __pycache__/
 *.pyc
+
+# tools/ holds local bootstrap aids only (e.g. the one-time baseline seeder).
+# The profile inherits from CCB decisions, not from these scripts.
+tools/
