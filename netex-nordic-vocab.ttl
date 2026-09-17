@@ -13,11 +13,13 @@
 ## Namespace: nordic: — https://netex-cen.eu/nordic#
 ## -----------------------------------------------------------------
 
-@prefix nordic: <https://netex-cen.eu/nordic#> .
-@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl:    <http://www.w3.org/2002/07/owl#> .
-@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
-@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix nordic:  <https://netex-cen.eu/nordic#> .
+@prefix profile: <https://netex-cen.eu/profile#> .
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 
 <https://netex-cen.eu/nordic> a owl:Ontology ;
     rdfs:label "Nordic NeTEx Vocabulary" ;
@@ -126,6 +128,82 @@ nordic:specializes a owl:ObjectProperty ;
     rdfs:label "specializes" ;
     skos:definition "This class is a functional specialization of another (e.g. DatedServiceJourney specializes ServiceJourney)" ;
     skos:scopeNote "Deliberately NOT modelled as rdfs:subClassOf. DatedServiceJourney is not a true type-theoretic subclass of ServiceJourney — it references one rather than inheriting its identity. Using rdfs:subClassOf would allow a reasoner to wrongly conclude that a DSJ IS-A ServiceJourney, which misrepresents the NeTEx schema semantics." .
+
+## =================================================================
+## PROFILE MEMBERSHIP & PROVENANCE
+## =================================================================
+## The SHACL shapes in netex-nordic.ttl encode only where the profile
+## *tightens* the base. This vocabulary carries the complementary
+## positive layer: which classes and fields are *in* the profile — the
+## baseline allowlist, projected from the documentation Tables — plus
+## the governing scope and the provenance of each rule.
+## -----------------------------------------------------------------
+
+## --- Scope: which profile level governs a class ---
+## (same IRIs as profile:scope in nordic-netex-documentation)
+profile:Scope a owl:Class ;
+    rdfs:label "Scope" ;
+    skos:definition "A governance level that a class or field belongs to" .
+
+profile:scope a owl:AnnotationProperty ;
+    rdfs:label "scope" ;
+    skos:definition "Which profile level governs this object" .
+
+profile:NordicProfile a profile:Scope ;
+    rdfs:label "Nordic Profile" ;
+    skos:definition "Officially part of the common Nordic NeTEx Profile" .
+
+profile:EnturExtension a profile:Scope ;
+    rdfs:label "Entur Extension" ;
+    skos:definition "Entur-specific implementation, not part of the common Nordic Profile" .
+
+profile:NordicCandidate a profile:Scope ;
+    rdfs:label "Nordic Profile Candidate" ;
+    skos:definition "Proposed for Nordic harmonisation, currently Entur-driven" .
+
+## --- Membership: the positive allowlist ---
+nordic:inProfile a owl:AnnotationProperty ;
+    rdfs:label "inProfile" ;
+    skos:definition "Marks a class as included in the profile, valued by its governing scope" .
+
+nordic:ProfileMember a owl:Class ;
+    rdfs:label "ProfileMember" ;
+    skos:definition "A field (element or attribute) that is part of the profile for a given class, with its cardinality" .
+
+nordic:onClass a owl:ObjectProperty ;
+    rdfs:label "onClass" ;
+    skos:definition "The class this profile member belongs to" .
+
+nordic:path a owl:DatatypeProperty ;
+    rdfs:label "path" ;
+    rdfs:range xsd:string ;
+    skos:definition "XML path of the member within its class" .
+
+nordic:cardinality a owl:DatatypeProperty ;
+    rdfs:label "cardinality" ;
+    rdfs:range xsd:string ;
+    skos:definition "Profile cardinality of the member (e.g. 1..1, 0..n)" .
+
+## --- Provenance: how a rule entered the profile ---
+nordic:Provenance a owl:Class ;
+    rdfs:label "Provenance" ;
+    skos:definition "The origin of a profile rule" .
+
+nordic:provenance a owl:AnnotationProperty ;
+    rdfs:label "provenance" ;
+    skos:definition "Origin of a profile rule: the pre-CCB baseline or a specific CCB decision" .
+
+nordic:Baseline a nordic:Provenance ;
+    rdfs:label "Baseline" ;
+    skos:definition "Established Nordic Profile content predating CCB decision tracking; carries no decision ID" .
+
+nordic:decision a owl:AnnotationProperty ;
+    rdfs:label "decision" ;
+    rdfs:comment "Stable CCB decision ID (e.g. NP-0001) that this rule realises" .
+
+nordic:issue a owl:AnnotationProperty ;
+    rdfs:label "issue" ;
+    rdfs:comment "GitHub issue number behind the decision" .
 
 ## =================================================================
 ## SIRI BRIDGE
