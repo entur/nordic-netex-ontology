@@ -24,6 +24,8 @@
 
 ## --- Import generated NeTEx base + Nordic vocabulary ---
 <https://netex-cen.eu/profile/nordic> a owl:Ontology ;
+    rdfs:label "Nordic NeTEx Profile" ;
+    rdfs:comment "SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains." ;
     owl:imports <https://netex-cen.eu/ontology> ,
                 <https://netex-cen.eu/nordic> .
 

@@ -13,8 +13,11 @@
 @prefix nordic:  <https://netex-cen.eu/nordic#> .
 @prefix profile: <https://netex-cen.eu/profile#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://netex-cen.eu/profile/nordic-baseline> a owl:Ontology ;
+    rdfs:label "Nordic NeTEx Profile — Baseline" ;
+    rdfs:comment "Positive membership allowlist: which classes and fields are in the profile, with cardinality." ;
     owl:imports <https://netex-cen.eu/nordic> .
 
 ## --- AlternativeName (NordicProfile) ---

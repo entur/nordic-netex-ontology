@@ -4,13 +4,16 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 # =============================================================================
+# GENERATED FILE - do not hand-edit.
+# Run: python scripts/generate-catalog.py
+#
 # DCAT manifest of every RDF document this repository is composed of.
-# Hand-maintained; update alongside any file that is added, split or removed.
+# Title/description are harvested from each file's own owl:Ontology header.
 #
 # Predicates:
 #   dcat:keyword       -> layer (base/vocab/model/profile/baseline/bridge/mapping)
 #   dcterms:provenance -> where the file's content originates
-#   void:triples       -> triple count at last update (see void:triples below)
+#   void:triples       -> triple count at generation time
 # =============================================================================
 
 <https://netex-cen.eu/catalog> a dcat:Catalog ;
@@ -18,7 +21,6 @@
     dcterms:description "Manifest of every RDF document this repository composes: the vendored generated NeTEx base and the Nordic profile layer on top of it." ;
     dcterms:modified "2026-09-18"^^xsd:date ;
     dcat:dataset
-        <https://netex-cen.eu/ontology> ,
         <https://netex-cen.eu/ontology/core> ,
         <https://netex-cen.eu/ontology/framework> ,
         <https://netex-cen.eu/ontology/gml> ,
@@ -29,6 +31,7 @@
         <https://netex-cen.eu/ontology/service> ,
         <https://netex-cen.eu/ontology/shacl> ,
         <https://netex-cen.eu/ontology/siri> ,
+        <https://netex-cen.eu/ontology> ,
         <https://netex-cen.eu/nordic> ,
         <https://netex-cen.eu/nordic/model> ,
         <https://netex-cen.eu/profile/nordic> ,
@@ -36,20 +39,8 @@
         <https://netex-cen.eu/bridge/siri> ,
         <https://netex-cen.eu/alignment/transmodel> .
 
-<https://netex-cen.eu/ontology> a dcat:Dataset ;
-    dcterms:title "NeTEx base ontology — root" ;
-    dcterms:description "Root aggregator: imports every generated base module." ;
-    dcat:keyword "base" ;
-    dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 22 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
-    dcat:distribution [ a dcat:Distribution ;
-        dcat:downloadURL <base/netex.ttl> ;
-        dcterms:format "text/turtle" ] .
-
 <https://netex-cen.eu/ontology/core> a dcat:Dataset ;
-    dcterms:title "NeTEx base — core" ;
-    dcterms:description "Core datatypes and enumerations shared across NeTEx modules." ;
+    dcterms:title "NeTEx core (root schemas)" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 488 ;
@@ -59,8 +50,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/framework> a dcat:Dataset ;
-    dcterms:title "NeTEx base — framework" ;
-    dcterms:description "Shared framework classes: frames, versioning, entity structures." ;
+    dcterms:title "NeTEx framework" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 37749 ;
@@ -70,8 +60,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/gml> a dcat:Dataset ;
-    dcterms:title "NeTEx base — GML" ;
-    dcterms:description "Geographic Markup Language types used for spatial data in NeTEx." ;
+    dcterms:title "GML subset" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 482 ;
@@ -81,8 +70,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/part1> a dcat:Dataset ;
-    dcterms:title "NeTEx base — part 1" ;
-    dcterms:description "Sites, stop places, quays, equipment and site connections." ;
+    dcterms:title "NeTEx Part 1 - Network topology" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 19348 ;
@@ -92,8 +80,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/part2> a dcat:Dataset ;
-    dcterms:title "NeTEx base — part 2" ;
-    dcterms:description "Network topology: lines, routes, journey patterns, service frames." ;
+    dcterms:title "NeTEx Part 2 - Scheduled timetables" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 9119 ;
@@ -103,8 +90,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/part3> a dcat:Dataset ;
-    dcterms:title "NeTEx base — part 3" ;
-    dcterms:description "Timetables: service journeys, calendars, vehicle schedules, interchanges." ;
+    dcterms:title "NeTEx Part 3 - Fare information" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 17473 ;
@@ -114,8 +100,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/part5> a dcat:Dataset ;
-    dcterms:title "NeTEx base — part 5" ;
-    dcterms:description "Fares: fare zones, fare frames and related sales structures." ;
+    dcterms:title "NeTEx Part 5 - Alternative modes" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 2895 ;
@@ -125,8 +110,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/service> a dcat:Dataset ;
-    dcterms:title "NeTEx base — service" ;
-    dcterms:description "Data exchange service capabilities and subscription structures." ;
+    dcterms:title "NeTEx service" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 459 ;
@@ -136,8 +120,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/shacl> a dcat:Dataset ;
-    dcterms:title "NeTEx base — SHACL baseline" ;
-    dcterms:description "Generator's SHACL shapes mirroring XSD cardinality, one shape per generated class." ;
+    dcterms:title "NeTEx SHACL shapes (generated from XSD)" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 50231 ;
@@ -147,8 +130,7 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/ontology/siri> a dcat:Dataset ;
-    dcterms:title "NeTEx base — SIRI" ;
-    dcterms:description "SIRI-related classes and properties as generated alongside the NeTEx base." ;
+    dcterms:title "SIRI subset" ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 2719 ;
@@ -157,9 +139,19 @@
         dcat:downloadURL <base/netex-siri.ttl> ;
         dcterms:format "text/turtle" ] .
 
+<https://netex-cen.eu/ontology> a dcat:Dataset ;
+    dcterms:title "NeTEx base ontology (generated from XSD)" ;
+    dcat:keyword "base" ;
+    dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
+    void:triples 22 ;
+    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcat:distribution [ a dcat:Distribution ;
+        dcat:downloadURL <base/netex.ttl> ;
+        dcterms:format "text/turtle" ] .
+
 <https://netex-cen.eu/nordic> a dcat:Dataset ;
     dcterms:title "Nordic NeTEx Vocabulary" ;
-    dcterms:description "Nordic-invented vocabulary not derived from the XSD: profile meta-classes, membership, provenance, ordering." ;
+    dcterms:description "Nordic-specific vocabulary layered on top of the generated NeTEx base ontology. Terms here are not derived from the NeTEx XSD." ;
     dcat:keyword "vocab" ;
     dcterms:provenance "maintained here" ;
     void:triples 116 ;
@@ -170,7 +162,7 @@
 
 <https://netex-cen.eu/nordic/model> a dcat:Dataset ;
     dcterms:title "Nordic NeTEx Structural Model" ;
-    dcterms:description "Curated frame containment, nested class containment, and specialisation semantics." ;
+    dcterms:description "Curated frame containment and specialisation semantics layered on the generated NeTEx base." ;
     dcat:keyword "model" ;
     dcterms:provenance "maintained here" ;
     void:triples 68 ;
@@ -181,10 +173,10 @@
 
 <https://netex-cen.eu/profile/nordic> a dcat:Dataset ;
     dcterms:title "Nordic NeTEx Profile" ;
-    dcterms:description "SHACL shapes for the Nordic Profile (allow/require/exclude), element ordering and domain chains." ;
+    dcterms:description "SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains." ;
     dcat:keyword "profile" ;
     dcterms:provenance "maintained here" ;
-    void:triples 503 ;
+    void:triples 505 ;
     dcterms:modified "2026-08-07"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-nordic.ttl> ;
@@ -195,15 +187,15 @@
     dcterms:description "Positive membership allowlist: which classes and fields are in the profile, with cardinality." ;
     dcat:keyword "baseline" ;
     dcterms:provenance "seeded once from nordic-netex-documentation Table_*.md; now inherits from CCB decisions" ;
-    void:triples 2394 ;
-    dcterms:modified "2026-09-17"^^xsd:date ;
+    void:triples 2396 ;
+    dcterms:modified "2026-09-18"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-nordic-baseline.ttl> ;
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/bridge/siri> a dcat:Dataset ;
-    dcterms:title "NeTEx ⇄ SIRI Real-time Bridges" ;
-    dcterms:description "Which generated NeTEx classes are referenced by SIRI services (ET, SX, VM, FM)." ;
+    dcterms:title "NeTEx–SIRI Real-time Bridges" ;
+    dcterms:description "Editorial mapping of generated NeTEx classes to the SIRI services that reference them." ;
     dcat:keyword "bridge" ;
     dcterms:provenance "maintained here" ;
     void:triples 52 ;
@@ -213,8 +205,8 @@
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/alignment/transmodel> a dcat:Dataset ;
-    dcterms:title "NeTEx ⇄ Transmodel Alignment" ;
-    dcterms:description "skos:exactMatch / skos:closeMatch alignment from generated NeTEx classes to Transmodel concepts." ;
+    dcterms:title "NeTEx–Transmodel Alignment" ;
+    dcterms:description "Editorial skos alignment from generated NeTEx classes to Transmodel concepts." ;
     dcat:keyword "mapping" ;
     dcterms:provenance "maintained here" ;
     void:triples 35 ;
@@ -222,3 +214,4 @@
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-transmodel-alignment.ttl> ;
         dcterms:format "text/turtle" ] .
+
