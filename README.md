@@ -87,6 +87,7 @@ naming — the mapping lives in `netex-transmodel-alignment.ttl` via
 
 | File | Contents |
 |------|----------|
+| `catalog.ttl` | DCAT manifest listing every RDF document in this repository, with title, description, provenance and triple count. Hand-maintained. |
 | `catalog-v001.xml` | OASIS XML catalog mapping every declared ontology IRI to its local file, so `owl:imports` resolves offline. |
 | `base/` | Vendored snapshot of the generated NeTEx base — ten OWL modules plus the `netex-shacl.ttl` SHACL baseline. Projected from the NeTEx XSD; not hand-edited. |
 | `netex-nordic.ttl` | SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains. |
