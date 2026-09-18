@@ -27,6 +27,21 @@
     rdfs:comment "Curated frame containment and specialisation semantics layered on the generated NeTEx base." .
 
 ## =================================================================
+## PUBLICATION DELIVERY ENVELOPE
+## =================================================================
+## The delivery envelope wraps frame content via the dataObjects
+## property. It may wrap a CompositeFrame, or individual frames
+## directly without a CompositeFrame wrapper.
+## -----------------------------------------------------------------
+
+netex:PublicationDelivery nordic:contains netex:CompositeFrame ,
+        netex:SiteFrame ,
+        netex:ServiceFrame .
+
+netex:PublicationTimestamp nordic:childOf netex:PublicationDelivery .
+netex:ParticipantRef nordic:childOf netex:PublicationDelivery .
+
+## =================================================================
 ## FRAME CONTAINMENT
 ## =================================================================
 
@@ -90,6 +105,19 @@ netex:FareFrame nordic:containedIn netex:CompositeFrame ;
 
 netex:SalesTransactionFrame nordic:containedIn netex:CompositeFrame ;
     nordic:contains netex:FareContract .
+
+## =================================================================
+## NESTED CLASS CONTAINMENT
+## =================================================================
+## Containment within frame member classes, one level below the
+## frame-containment table above.
+## -----------------------------------------------------------------
+
+netex:AccessibilityAssessment nordic:contains netex:AccessibilityLimitation .
+netex:AccessibilityLimitation nordic:containedIn netex:AccessibilityAssessment .
+
+netex:StopPlace nordic:contains netex:AlternativeName .
+netex:Quay nordic:contains netex:ShelterEquipment .
 
 ## =================================================================
 ## SPECIALISATION SEMANTICS
