@@ -409,8 +409,8 @@ netex:DestinationDisplay nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- FareContract (NordicProfile) ---
-netex:FareContract nordic:inProfile profile:NordicProfile ;
+## --- FareContract (NordicCandidate — fare profile still a draft) ---
+netex:FareContract nordic:inProfile profile:NordicCandidate ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -462,8 +462,8 @@ netex:FareContract nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- FareZone (NordicProfile) ---
-netex:FareZone nordic:inProfile profile:NordicProfile ;
+## --- FareZone (NordicCandidate — fare profile still a draft) ---
+netex:FareZone nordic:inProfile profile:NordicCandidate ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
