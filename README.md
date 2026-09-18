@@ -87,6 +87,7 @@ naming — the mapping lives in `netex-transmodel-alignment.ttl` via
 
 | File | Contents |
 |------|----------|
+| `catalog-v001.xml` | OASIS XML catalog mapping every declared ontology IRI to its local file, so `owl:imports` resolves offline. |
 | `base/` | Vendored snapshot of the generated NeTEx base — ten OWL modules plus the `netex-shacl.ttl` SHACL baseline. Projected from the NeTEx XSD; not hand-edited. |
 | `netex-nordic.ttl` | SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains. |
 | `netex-nordic-vocab.ttl` | Nordic-invented vocabulary in the `nordic:` namespace (profile meta-classes, data-confidence, ordering, domain chains, SIRI bridge property, structural predicates, membership & provenance). |
@@ -156,6 +157,12 @@ The ontology can be consumed by any standard RDF/SHACL tooling, e.g.:
 - **Apache Jena** — SPARQL queries
 - **TopBraid / Protégé** — Visual exploration and editing
 - **Custom scripts/agents** — Import the `.ttl` files via `owl:imports` or load directly
+
+None of the `https://netex-cen.eu/...` ontology IRIs are hosted online — they
+are identifiers, not fetchable URLs. Point import-aware tooling (Jena,
+Protégé, TopBraid) at `catalog-v001.xml` to resolve `owl:imports` against the
+local files instead of the network. Tools that just load files directly
+(pySHACL, most custom scripts) don't need it.
 
 ## Further reading
 
