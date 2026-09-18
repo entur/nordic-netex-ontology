@@ -13,6 +13,30 @@ rather than re-deriving it.
 - **For machines:** A SHACL-validatable definition of the Nordic Profile that
   standard tooling can execute against real NeTEx data.
 
+## Governance model
+
+Every class and field carries a `profile:scope`, answering *included*,
+*excluded*, or *proposed* directly rather than leaving it implicit:
+
+| Scope | Meaning |
+|-------|---------|
+| `profile:NordicProfile` | Officially part of the common Nordic NeTEx Profile |
+| `profile:EnturExtension` | Entur-specific implementation, not part of the common Nordic Profile |
+| `profile:NordicCandidate` | Proposed for Nordic harmonisation, currently Entur-driven |
+
+`netex-nordic-baseline.ttl` is the positive membership allowlist: each
+`nordic:ProfileMember` records a class's fields with their profile
+`nordic:cardinality`. Every entry carries `nordic:provenance` — either
+`nordic:Baseline` (established content seeded once from prior documentation,
+predating decision tracking) or `nordic:decision "NP-xxxx"` (a specific,
+traceable CCB decision, optionally with `nordic:issue`).
+
+Decisions are proposed, discussed, and accepted in the separate
+[Nordic Profile Change and Control Board](https://github.com/hfjelstad/nordic-profile-change-and-control)
+repository. This repository consumes accepted decisions and records their
+outcome as `nordic:decision` provenance on the baseline; it does not host the
+discussion itself.
+
 ## Architecture
 
 The NeTEx base vocabulary is **generated** — projected deterministically from
