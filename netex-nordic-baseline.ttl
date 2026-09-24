@@ -2,11 +2,13 @@
 ## Nordic NeTEx Profile — Baseline (positive membership allowlist)
 ## -----------------------------------------------------------------
 ## Seeded once from the nordic-netex-documentation Table_*.md files as
-## the pre-CCB baseline: every field is nordic:Baseline (established
-## profile content, no decision ID). From here the profile inherits
-## from CCB decisions — a change flips a field's provenance from
-## nordic:Baseline to nordic:decision "NP-xxxx". This file is not
-## regenerated from documentation; the seeder is a local bootstrap aid.
+## the pre-CCB field inventory. Nordic-owned classes are assigned to
+## profile:NordicProfile; downstream profiles may assign other classes
+## to their own profile while reusing these field definitions. From
+## here the Nordic profile inherits from CCB decisions — a change flips
+## a field's provenance from nordic:Baseline to nordic:decision "NP-xxxx".
+## This file is not regenerated from documentation; the seeder is a local
+## bootstrap aid.
 ## -----------------------------------------------------------------
 
 @prefix netex:   <https://netex-cen.eu/ontology#> .
@@ -142,10 +144,7 @@ netex:Codespace nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- CompoundTrain (EnturExtension) ---
-netex:CompoundTrain nordic:inProfile profile:EnturExtension ;
-    nordic:provenance nordic:Baseline .
-
+## --- CompoundTrain (EnturProfile) ---
 [] a nordic:ProfileMember ;
     nordic:onClass netex:CompoundTrain ;
     nordic:element "@id" ;
@@ -195,10 +194,7 @@ netex:CompoundTrain nordic:inProfile profile:EnturExtension ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Contract (NordicCandidate) ---
-netex:Contract nordic:inProfile profile:NordicCandidate ;
-    nordic:provenance nordic:Baseline .
-
+## --- Contract (EnturProfile) ---
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Contract ;
     nordic:element "@id" ;
@@ -248,10 +244,7 @@ netex:Contract nordic:inProfile profile:NordicCandidate ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
 
-## --- DatedServiceJourney (EnturExtension) ---
-netex:DatedServiceJourney nordic:inProfile profile:EnturExtension ;
-    nordic:provenance nordic:Baseline .
-
+## --- DatedServiceJourney (EnturProfile) ---
 [] a nordic:ProfileMember ;
     nordic:onClass netex:DatedServiceJourney ;
     nordic:element "@id" ;
@@ -412,10 +405,7 @@ netex:DestinationDisplay nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- FareContract (NordicCandidate — fare profile still a draft) ---
-netex:FareContract nordic:inProfile profile:NordicCandidate ;
-    nordic:provenance nordic:Baseline .
-
+## --- FareContract (EnturProfile — fare profile still a draft) ---
 [] a nordic:ProfileMember ;
     nordic:onClass netex:FareContract ;
     nordic:element "@id" ;
@@ -465,10 +455,7 @@ netex:FareContract nordic:inProfile profile:NordicCandidate ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- FareZone (NordicCandidate — fare profile still a draft) ---
-netex:FareZone nordic:inProfile profile:NordicCandidate ;
-    nordic:provenance nordic:Baseline .
-
+## --- FareZone (EnturProfile — fare profile still a draft) ---
 [] a nordic:ProfileMember ;
     nordic:onClass netex:FareZone ;
     nordic:element "@id" ;
@@ -2247,10 +2234,7 @@ netex:TopographicPlace nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Train (EnturExtension) ---
-netex:Train nordic:inProfile profile:EnturExtension ;
-    nordic:provenance nordic:Baseline .
-
+## --- Train (EnturProfile) ---
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Train ;
     nordic:element "@id" ;
@@ -2342,10 +2326,7 @@ netex:Train nordic:inProfile profile:EnturExtension ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- TrainBlock (EnturExtension) ---
-netex:TrainBlock nordic:inProfile profile:EnturExtension ;
-    nordic:provenance nordic:Baseline .
-
+## --- TrainBlock (EnturProfile) ---
 [] a nordic:ProfileMember ;
     nordic:onClass netex:TrainBlock ;
     nordic:element "@id" ;

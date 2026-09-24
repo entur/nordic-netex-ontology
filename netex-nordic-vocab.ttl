@@ -161,14 +161,6 @@ profile:NordicProfile a profile:Scope ,
     rdfs:label "Nordic Profile" ;
     skos:definition "Officially part of the common Nordic NeTEx Profile" .
 
-profile:EnturExtension a profile:Scope ;
-    rdfs:label "Entur Extension" ;
-    skos:definition "Entur-specific implementation, not part of the common Nordic Profile" .
-
-profile:NordicCandidate a profile:Scope ;
-    rdfs:label "Nordic Profile Candidate" ;
-    skos:definition "Proposed for Nordic harmonisation, currently Entur-driven" .
-
 ## --- Membership: the positive allowlist ---
 nordic:inProfile a owl:AnnotationProperty ;
     rdfs:label "inProfile" ;

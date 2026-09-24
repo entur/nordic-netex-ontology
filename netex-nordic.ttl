@@ -238,35 +238,6 @@ profile:NP_InterchangeShape a sh:NodeShape ;
         sh:name "ToPointRef"
     ] .
 
-## --- DatedServiceJourney ---
-
-profile:NP_DatedServiceJourneyShape a sh:NodeShape ;
-    sh:targetClass netex:DatedServiceJourney ;
-    rdfs:label "DatedServiceJourney — NP constraints" ;
-    sh:property [
-        sh:path netex:serviceJourneyRef ;
-        sh:name "ServiceJourneyRef" ;
-        sh:description "Reference to the template ServiceJourney this dated instance realizes" ;
-        sh:minCount 1 ;
-        sh:maxCount 1
-    ] , [
-        sh:path netex:operatingDayRef ;
-        sh:name "OperatingDayRef" ;
-        sh:description "The specific operating day this journey runs on" ;
-        sh:minCount 1 ;
-        sh:maxCount 1
-    ] , [
-        sh:path netex:datedVehicleJourneyRef ;
-        sh:name "DatedVehicleJourneyRef" ;
-        sh:description "Deviation/replacement tracking — allowed in NP"
-    ] , [
-        sh:path netex:serviceAlteration ;
-        sh:name "ServiceAlteration" ;
-        sh:description "Alteration status code when journey deviates from plan" ;
-        sh:maxCount 1 ;
-        sh:in ( "planned" "cancellation" "replaced" "extraJourney" )
-    ] .
-
 ## =================================================================
 ## ELEMENT ORDERING (XSD-derived)
 ## =================================================================
