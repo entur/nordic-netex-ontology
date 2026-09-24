@@ -33,6 +33,13 @@ nordic:Profile a owl:Class ;
     rdfs:label "Profile" ;
     skos:definition "A constrained subset of NeTEx for a specific region or use case" .
 
+nordic:extendsProfile a owl:ObjectProperty ;
+    rdfs:label "extendsProfile" ;
+    rdfs:domain nordic:Profile ;
+    rdfs:range nordic:Profile ;
+    skos:definition "A profile builds on and extends another profile" ;
+    skos:scopeNote "Generic mechanism for downstream profiles (e.g. a vendor profile) to declare that they extend this profile. Nordic defines only this property, never the downstream profile it is used by." .
+
 nordic:DataSource a owl:Class ;
     rdfs:label "DataSource" ;
     skos:definition "Origin classification for data ownership (central registry, operator delivery, etc.)" .
@@ -149,7 +156,8 @@ profile:scope a owl:AnnotationProperty ;
     rdfs:label "scope" ;
     skos:definition "Which profile level governs this object" .
 
-profile:NordicProfile a profile:Scope ;
+profile:NordicProfile a profile:Scope ,
+        nordic:Profile ;
     rdfs:label "Nordic Profile" ;
     skos:definition "Officially part of the common Nordic NeTEx Profile" .
 
