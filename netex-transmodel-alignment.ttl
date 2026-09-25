@@ -1,68 +1,2320 @@
-## -----------------------------------------------------------------
-## NeTEx ⇄ Transmodel Alignment
-## -----------------------------------------------------------------
-## ROLE: Curated conceptual alignment between the generated NeTEx base
-##       ontology and the Transmodel conceptual model. This is NOT
-##       derived from the XSD — it is an editorial mapping overlay.
-##
-## Mechanism: skos:exactMatch / skos:closeMatch on generated netex:
-##            classes → Transmodel concept URIs. NeTEx keeps its own
-##            identity and naming; Transmodel governs alignment only.
-##
-## Loaded alongside the generated base ontology.
-## -----------------------------------------------------------------
-
-@prefix netex:       <https://netex-cen.eu/ontology#> .
-@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl:         <http://www.w3.org/2002/07/owl#> .
-@prefix skos:        <http://www.w3.org/2004/02/skos/core#> .
-@prefix tm-commons:  <https://w3id.org/transmodel/commons#> .
-@prefix tm-journeys: <https://w3id.org/transmodel/journeys#> .
-@prefix tm-fac:      <https://w3id.org/transmodel/facilities#> .
-@prefix tm-org:      <https://w3id.org/transmodel/organisations#> .
+@prefix align: <https://netex-cen.eu/alignment/transmodel#> .
+@prefix netex: <https://netex-cen.eu/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://netex-cen.eu/alignment/transmodel> a owl:Ontology ;
-    rdfs:label "NeTEx–Transmodel Alignment" ;
+    rdfs:label "NeTEx-Transmodel Alignment" ;
+    rdfs:comment "Conservative generated alignment from NeTEx XSD concepts to Transmodel v6.2." ;
     owl:imports <https://netex-cen.eu/ontology> ;
-    rdfs:comment "Editorial skos alignment from generated NeTEx classes to Transmodel concepts." .
+    align:ambiguousClasses 7 ;
+    align:matchedClasses 768 ;
+    align:transmodelSource "https://transmodel-cen.eu/model6.2/Transmodel2024-EA_extract_for_publication.xml" ;
+    align:transmodelVersion "6.2" .
 
-netex:Authority skos:exactMatch tm-org:Authority ;
-    rdfs:seeAlso tm-org:Organisation .
+netex:AcceptedDriverPermit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3FABDCBA_9C60_49f5_8DB8_9C124C00D190> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:Operator skos:exactMatch tm-org:Operator ;
-    rdfs:seeAlso tm-org:Organisation .
+netex:Access skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3569519F_3BFF_4d51_BB11_4E8C091FC3AE> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:StopPlace skos:exactMatch tm-fac:StopPlace .
-netex:Quay skos:exactMatch tm-fac:Quay .
-netex:TopographicPlace skos:closeMatch tm-journeys:TopographicPlace .
-netex:Parking skos:closeMatch tm-fac:Garage .
+netex:AccessEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_93FE7964_F31C_4532_9192_C49FEAB5805E> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:Line skos:exactMatch tm-journeys:Line .
-netex:Route skos:exactMatch tm-journeys:Route .
-netex:JourneyPattern skos:exactMatch tm-journeys:JourneyPattern .
-netex:ScheduledStopPoint skos:exactMatch tm-journeys:ScheduledStopPoint .
-netex:DestinationDisplay skos:exactMatch tm-journeys:DestinationDisplay .
-netex:Network skos:closeMatch tm-commons:GroupOfEntities .
+netex:AccessMode skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2AFACCEF_F38C_42e1_A228_E739EA185109> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:ServiceJourney skos:exactMatch tm-journeys:ServiceJourney .
-netex:DatedServiceJourney skos:closeMatch tm-journeys:DatedVehicleJourney ;
-    rdfs:comment "closeMatch (not exactMatch): CEN NeTEx issue #292 shows active disagreement on whether DatedServiceJourney truly maps to Transmodel DatedVehicleJourney. The alignment is approximate." .
-netex:Interchange skos:closeMatch tm-journeys:Connection .
-netex:StopPointInJourneyPattern skos:exactMatch tm-journeys:StopPointInJourneyPattern .
+netex:AccessRightInProduct skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7FB3D31B_5AF6_47ad_9F28_EDC0BF6995C5> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:DayType skos:exactMatch tm-journeys:DayType .
-netex:DayTypeAssignment skos:exactMatch tm-journeys:DayTypeAssignment .
-netex:OperatingPeriod skos:exactMatch tm-journeys:OperatingPeriod .
-netex:OperatingDay skos:exactMatch tm-journeys:OperatingDay .
+netex:AccessRightParameterAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7AE63F73_5B12_4a5c_878D_842C74400700> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:Vehicle skos:closeMatch tm-journeys:Vehicle .
+netex:AccessRightParameterAssignment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7AE63F73_5B12_4a5c_878D_842C74400700> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:ShelterEquipment skos:exactMatch tm-fac:ShelterEquipment .
-netex:WaitingRoomEquipment skos:exactMatch tm-fac:WaitingRoomEquipment .
-netex:SanitaryEquipment skos:exactMatch tm-fac:SanitaryEquipment .
-netex:TicketingEquipment skos:exactMatch tm-fac:TicketingEquipment .
+netex:AccessSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D627D736_41F1_4e3c_BE6B_A1A41CC7EB69> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:TariffZone skos:closeMatch tm-commons:Zone .
-netex:FareZone skos:closeMatch tm-commons:Zone .
+netex:AccessZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_32527FDC_7ADD_45bd_8829_E842D652BD89> ;
+    align:evidence "matching natural XSD name/documentation" .
 
-netex:AccessibilityAssessment skos:exactMatch tm-fac:AccessibilityAssessment .
+netex:AccessibilityLimitation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A363EE6C_8445_46b4_9927_9684CAB2F25C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Accommodation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C220D12B_87F8_429b_AD43_25427CAFEAB6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ActivatedEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4B3D5DCC_D845_43c3_BF06_3F04B4523BCE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ActivationAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ADB7DC3F_FA7D_4163_AAE5_B61F9A45C281> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ActivationLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_89D1DFB8_086E_4356_8A97_720E84D3FB5D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ActivationPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_741C99BF_0459_4c6d_AC1C_F6AD8F71B544> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ActivationPoint_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_741C99BF_0459_4c6d_AC1C_F6AD8F71B544> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ActualVehicleEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BF4D6EAB_40AE_44eb_A22C_2A63595150B1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AdditionalDriverOption skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E00EF461_9541_4d2f_8760_BB30B584F3BB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Address skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_542C0AFB_C3BB_4b5c_AC61_253D2833D2A5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AddressablePlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_17E02AD8_6545_4d84_BC3B_12C0EA44087A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AdministrativeZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_48F5B30C_A708_4d83_B82E_C707A07D3D7C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AdministrativeZone_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_48F5B30C_A708_4d83_B82E_C707A07D3D7C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AllowedLineDirection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_04B35C2A_D0AE_4336_8EDF_0E852F95F290> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AlternativeModeOfOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_168072F1_5154_4aa6_BA18_AB12FBBDF2E8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AlternativeModeOfOperation_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_168072F1_5154_4aa6_BA18_AB12FBBDF2E8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AlternativeName skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1E8C6D52_8311_4288_A5B1_566D9BB5AF69> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AlternativeText skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_504B755C_BD07_45ef_8BD2_4AF194EE654D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Assignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FE37CDBA_7428_4456_9469_1B5C40C9401E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Assignment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FE37CDBA_7428_4456_9469_1B5C40C9401E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AssistanceBookingService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_98DD5DE8_D34F_4805_B4D7_D82A926237B2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AssistanceService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_037F5AD4_16ED_49ff_AB1C_4DEB39D2F8E8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Authority skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_757087B4_8BD4_45f0_9C32_19B74E720E22> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:AvailabilityCondition skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_73F1843A_F767_498f_A7AA_76D4368BFE02> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BatteryEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3338DDCF_47EC_4d96_B0C4_9E633D1197BC> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BeaconPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CFFEC1CF_EFE5_47ec_B779_4901C34B5ED8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BedEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CD3016D8_64F3_4a88_A761_08ED27E83070> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Block skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3BCBDCCC_067A_4cc7_A2D0_AD6511F6D146> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BlockPart skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_05D3AC2B_6F26_43cb_8469_811A2E071289> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BoardingPosition skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_827A68F0_0D05_4954_9865_3E7382EA68A7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BookingArrangement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_159BD1CE_51E8_459a_9454_415FF2EFBB23> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BookingDebit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_478CB3C5_07EB_4164_9A52_CD9179228FD8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BookingPolicy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A8D4241C_BE13_420b_9428_09A6C39401D2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:BorderPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0E7BA28A_6FF9_42de_B756_5D6AE3DC5CAF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Call skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DE3FB4A4_861B_4463_A84F_30B198BA1A0E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Cancelling skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1B54323D_6BFA_4c07_B12E_E46936122F62> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CappedDiscountRight skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F74E3BCD_177E_40e6_9EA3_19AD2F2BEEEB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CappingRule skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_11BEE71F_789D_4570_8EC0_63299FFA45D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CappingRulePrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_19CE0673_A119_4966_8C79_E89BB531CF33> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CarModelProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D383B807_DA28_4844_B23F_DB598F8A0D9B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CateringService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6B1F0579_CD48_4bda_9285_06A44D5E00EE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Cell skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2A5006FC_7CD7_4c74_A295_F7D2C88601A5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Cell_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2A5006FC_7CD7_4c74_A295_F7D2C88601A5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ChargingMoment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_24E6EECC_B3FF_428b_BA9D_CA08A7B12F47> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ChargingPolicy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_14F1D3A0_5EAE_48cc_A5DC_F224CCD32508> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ChauffeuredVehicleService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9C63FC36_B395_45bc_95F2_390B7694CED3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CheckConstraint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_053D344C_2748_421e_AB0D_A1F6FBC9CB33> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CheckConstraintDelay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B7275184_7C0C_42e6_ABD8_50F7571DD3D9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CheckConstraintThroughput skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4B603020_EB88_4019_9F2C_1751BF0BFF84> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ClassInFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F45EB2DC_F307_4670_95A4_100BF865DF0D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ClassOfUse skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4FF7A009_4B80_4f55_9B94_FF05E18B10D0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CommercialProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F0EF74FF_946C_49bc_A154_0D0CE72840E5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CommercialProfileEligibility skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_863FC6CD_0CA5_4d14_84EC_2766B016E5FE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CommonSection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DB513F9B_2F88_411a_8837_B0273CD1BDA9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CommonVehicleService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D2CD4DA6_3742_4533_BE50_26917BCC0739> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CommonVehicleService_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D2CD4DA6_3742_4533_BE50_26917BCC0739> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CommunicationService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6DF1111A_4568_4037_931A_C72B9F1E5241> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CompanionProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_02838EFA_9706_45be_AC1F_C101066D3763> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ComplaintsService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D45D73A9_95A6_4705_99F4_80CF34F3AA96> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ComplexFeature skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F08C6D3C_7396_4a05_8D61_096C38F2C413> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ComplexFeatureProjection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_98790C52_CD5F_47b9_BDEE_94454B053E70> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CompositeFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_30E05A70_265E_4974_B971_5A67463EE386> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CompoundBlock skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_59DC286A_E6CD_4ee8_9212_6B25D9C65933> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CompoundTrain skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B3E251BE_65A0_4bc3_82B9_143249526CD4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ConditionSummary skos:exactMatch <https://w3id.org/transmodel/xmi/EAnone_ConditionSummary> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Connection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A4E2289F_4A55_4d14_B4AF_99F336FA3D11> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ConnectionEnd skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_093C4828_0F05_4083_98E9_BD6CABB83431> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Contract skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_03793C76_4E32_4264_B46D_474B51B7875F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ControlCentre skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2414CEE7_5012_4da1_A5DD_D68D47510F54> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ControllableElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D33F9D5F_9F13_488d_A872_D32C4776E55A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ControllableElementInSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0C1D030C_FFD2_41f3_A6EE_14F41C794906> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ControllableElementPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0A301DD9_ECA7_474b_A85A_1505A0CAEA16> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ConventionalModeOfOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E2729EFB_1983_4b06_9513_A1398AEEC7EF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ConventionalModeOfOperation_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E2729EFB_1983_4b06_9513_A1398AEEC7EF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Country skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6BC0A582_14FF_4aca_B0CC_4D95DCC99D62> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CoupledJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2A785F53_B75D_4d04_9682_A18253235BAF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CourseOfJourneys skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_92837FE0_11DE_4ac9_B1AC_CB621A238FF7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CrewBase skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9CD9DDD7_37ED_4dc7_9C0D_8BE1658670EA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CrossingEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1E5742D6_DF47_486f_A0EC_23AFB334E8CE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerAccount skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_978A16CE_334B_4dd7_87BA_4DC6B184BC70> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerAccountSecurityListing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4B91C8A0_507B_4449_8343_58A147E05818> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerEligibility skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_138C08B0_3CA1_45de_A157_E5EBA5422451> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerEligibility_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_138C08B0_3CA1_45de_A157_E5EBA5422451> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerPaymentMeans skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_497DD8AB_9FB5_4437_843D_8DFDF84BC88C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerPurchasePackage skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B219CF52_8DE2_4fda_99D3_9BA2D6B176A6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerPurchasePackageElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CCE868EB_3D21_47c7_9917_630C03C74188> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerPurchasePackagePrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C2C65ACD_7853_42fe_B980_45A7370D0567> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerPurchaseParameterAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ADCD4B7A_1000_43ff_BE09_535249D6B2DA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerSecurityListing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0051526E_F286_4efe_BFC0_D715111F4136> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CustomerService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_77A03742_BE0D_4df6_B3CF_14349FFA0913> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CycleModelProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_68E6DD3F_3FD2_4e87_B50A_845C2FB865EB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:CycleStorageEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4F1421EE_0559_4e28_855D_CB577F61EC75> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DataSource skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FD1084E9_9BCB_4a72_8B90_BA0528F5234C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DatedPassingTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C6B0DDA8_87D2_4a30_874A_FF2500FE8E96> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DatedSpecialService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_83DDD106_F2FA_4dcc_B6EE_47033E2ECEAE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DatedVehicleJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_84F7CFC8_B1FC_4764_A81B_B49859F016FD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DayType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_69C24F47_81B8_4f05_8F7F_EE0D6B942595> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DayTypeAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9BA2831B_954B_4b5b_9444_E6D79A8DCA9C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DayType_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_69C24F47_81B8_4f05_8F7F_EE0D6B942595> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeadRun skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_292C4472_6542_447e_8B9B_83A1C264437E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Deck skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FD58AE57_BA7A_452b_B8EF_B1EECD36D39E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckComponent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6AE29EF8_0286_4e0d_822A_F81B0F057256> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BA48161F_67E6_474a_BB12_DB22788763D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckEntranceAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0EB9FD27_4ED7_4f80_B01E_70DDABF92DC3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckEntranceCouple skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E7E6A6DC_6CF5_4eed_9B59_0ACC65D5A32F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckEntranceUsage skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7C870039_C9C9_462e_9D75_D81410CB7292> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckEntrance_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BA48161F_67E6_474a_BB12_DB22788763D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckLevel skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B6034A5B_68F3_4a6a_A3C6_F55CFF618EF3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckNavigationPath skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_12A036F8_7AEC_4ff7_8351_417E435FAFCE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckPathJunction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B5CF4426_F7AD_47c8_B1C9_EE32803AC494> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckPathLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F34A7A93_07C6_41c3_9A80_988D7E015FB4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckPlaceInSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8CCB65EA_E7F7_42e0_BD8B_8C6C539BE462> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckPlan skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ABC078E0_7EAA_479e_8C7D_3CBD3C0326A8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckPlanAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0725C2F6_7112_45a0_BE3D_F303B61D109E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_42A0E9DD_B7BC_4113_8A19_1422355084EF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckSpaceCapacity skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_540711FD_BA79_40c3_807B_748C8E0EAB2C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckSpace_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_42A0E9DD_B7BC_4113_8A19_1422355084EF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckVehicleEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_97E6DFAF_BD69_4e90_B42D_B4BB32FEF4F5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeckWindow skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E911DEED_A258_4a22_9CC4_3487E7DB6909> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DefaultConnection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_08CB78BA_B377_4a31_A5B4_F5F6B087A62E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DefaultDeadRunRunTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AF6EECB3_F7A9_42e2_846F_33830F764DB5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DefaultInterchange skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_572EF970_B9AD_4121_A5C5_0B0DFDA90C29> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DefaultServiceJourneyRunTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_824F8BD5_50B4_4c7c_93E1_871B76F64BD2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DeliveryVariant skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5E5A4359_E086_4abb_BCC4_740EEA39AF41> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Department skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E2A15249_0208_43cb_A4F2_DA4BB1F808C2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DestinationDisplay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B7AEE6CD_8A58_4050_89E2_EC9AC2B3D32F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DestinationDisplayVariant skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_40FC5607_A8F9_4392_9E75_F14EA6B9399B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Direction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FDB047D7_27AF_4e57_A5B4_FC848D80C91A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DiscountingRule skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_74821CCD_8C04_4761_B47A_B9A04380DA74> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DisplayAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8C9D00FF_BE8D_4583_A337_711B78EFE86F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DistanceMatrixElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_994F0DC5_B7CF_4578_B529_9914F38A9084> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DistanceMatrixElementPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CFBCED0B_1B22_4056_947C_1F0776E2B49E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DistanceMatrixElement_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_994F0DC5_B7CF_4578_B529_9914F38A9084> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DistributionAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5E1AE547_A6ED_425a_8AC1_F59DD0FE074D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DistributionChannel skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DAEECE22_D3DB_4b1d_AE4A_05A74D73FC3E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DriverScheduleFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A8C80554_203E_4f29_B89F_B9B0B50C3AE2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DriverTrip skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_88B03828_7CF8_4558_934A_41919D803590> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DriverTripTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D7093663_9294_4ebe_B6C0_67690300FEC2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Duty skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C01A467C_ECB2_4f93_8F60_5AEAD9B79CAD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DutyPart skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A6B7DE76_4F2A_4b89_B430_1EA9CD38A0E4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DynamicStopAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5F013623_1B47_4737_B119_5D1245F30126> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:DynamicVehicleMeetingPointAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A6BB6764_DDD3_4c29_A036_EF94CB71C688> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EmvCard skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2B49A692_E03F_411f_8AE0_72C9ED309E9F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EntitlementGiven skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FD5BECA5_C65A_48f9_B182_8522778C2AFE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EntitlementProduct skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E34BBB98_67E7_4365_98A7_7A0D68381EC0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EntitlementRequired skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_31A750F5_8759_4b35_A1A9_86A0CA560C1B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EntityInVersion skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_73E1542C_1FFD_4e42_A84D_5854970C7B30> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Entrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_310EC91D_1CC4_4d53_A820_0D37D947CB56> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EntranceEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_166D38FD_857C_470e_8348_BE1D65F2E3FD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EntranceSensor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C65594B2_36F4_4c3f_9CDE_556825871B21> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Equipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CA6E4413_40DE_43af_9A8B_9003E6055BA2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EquipmentPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BD5B0F28_D967_4adb_931C_F7B00BE2856E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EquipmentPosition skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EDE04823_E74D_4ab7_A10E_43CF5422D534> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EscalatorEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DDAC541C_1E36_49b4_8691_98ED4848C6CA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:EstimatedPassingTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B1925DA8_50A3_46ea_B513_4927C1826A18> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Exchanging skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FF4BBE73_4733_4cf9_9823_F3DA0B315642> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FacilityRequirement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_009EB9FC_0A90_4c25_B642_5C91B69242E4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FacilitySet skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7EA3E3BE_9E68_4198_A4EF_6901E2D35502> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareContract skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9A93472D_D606_4bd8_9414_8D23A1A7C733> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareContractEntry skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_573824C7_D29A_4e69_8F03_95020FFE7025> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareContractEntry_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_573824C7_D29A_4e69_8F03_95020FFE7025> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareContractSecurityListing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_04F1EF24_5460_4837_918A_98C607806FB6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareDayType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_06C4B509_5166_4c15_AB62_EE4E05FA685F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareDebit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2AFCE813_ADD6_456a_A66B_56875278C0C6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareDebit_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2AFCE813_ADD6_456a_A66B_56875278C0C6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareDemandFactor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_358FAC0C_B54E_459b_B509_DFBEB78B305C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareElementInSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ECA9B6D3_0857_4f94_AE1F_8F2E0AC93237> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5A6E3344_DE4F_4cbc_B90F_1A5F71892FA7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareInterval skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3F8F009A_A4E0_4b11_9A71_C6747CE9F882> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FarePrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E0A05D1E_C849_4b64_BE7B_5F9EE33D7F21> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FarePriceFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CC615A06_5EDA_4680_9D3D_D35F06311675> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FarePrice_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E0A05D1E_C849_4b64_BE7B_5F9EE33D7F21> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareProduct skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FDA9878E_807D_4c76_82FB_2303765F740C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareProductPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6533252A_3893_4ebd_A9CB_A5D6D436E4E0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareProductSaleDebit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_09F6E250_152C_4343_AF02_01DB32F099DF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareProduct_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FDA9878E_807D_4c76_82FB_2303765F740C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareQuotaFactor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_604DC1CC_B7EC_4c9f_ACA3_089C19B69164> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareScheduledStopPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_319AAD6F_B461_4d0c_B340_4C9448EFB773> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareSection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_95DA260A_FE10_4109_B8F4_E073AB5FC330> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareStructureElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_07E2D52C_D0C6_4692_9595_29A2F23EB27E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareStructureElementInSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_82E19939_EB37_41c0_9E6D_F8F54C236C40> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareStructureElementPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7168CDEE_F5B9_439b_B1EF_43B19D1BA23C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareStructureFactor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F2054959_4CB3_44d8_B622_A20C98C8AC03> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareTable skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C789B55F_6049_4fda_B4F1_A07D46ADD105> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareTable_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C789B55F_6049_4fda_B4F1_A07D46ADD105> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareUnit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_28AC2190_0597_44cf_8943_0745D1952C19> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FareZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_584758E1_676D_4b60_8A4C_D3BD268018A2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Fleet skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A2698D8C_B485_4a4c_9E80_7B8804AB33A0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleArea skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D99B1AFD_03ED_49b6_9E01_93E93DFA7FAA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleLine skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C8173B4D_D16F_4a66_A6D0_5808C14C5E5F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleLinkProperties skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_712E17BF_99E5_419d_91FE_0C1FDA4C06D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E78FAAC2_60A5_4371_90F5_E9BA88FCE1CF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexiblePointProperties skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5CBAFF26_86BD_45ee_966F_852CB409D50F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleQuay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1E901325_706C_4164_BA34_839573D49A76> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleRoute skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F363712D_B87C_42bd_9EFC_1D34F374212A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleServiceProperties skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8F231CBA_F752_4e47_BE7E_CAE55C9E3191> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleStopAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_760231FF_2FEF_4b18_A3B9_729386797E21> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FlexibleStopPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_99989F6B_4486_4d3e_92A5_89247BC9708F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FrequencyOfUse skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4371A7AD_1298_4575_BF60_EB45FA12CFC0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FulfilmentMethod skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_841D2EF3_DA6A_4121_8ACD_2C17FAB04CA6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:FulfilmentMethodPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E2394713_0660_47d8_AB68_0667A8EBE8FD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Garage skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_80538EB7_D2E0_448b_8726_F47BAE961903> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GaragePoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D2540235_331B_430e_ABA4_67ACF1AB8365> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeneralFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_564A9B13_51BF_4df6_83D8_0FFABE02AE07> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeneralGroupOfEntities skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CC400527_D169_4b4f_80D4_49AA094505E3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeneralSection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3624254C_2EED_470b_8F95_A7A7CC7045C5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeneralSign skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_325677F9_9913_4cf5_99B8_9CD6D174DB33> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeneralZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_43EEA75D_C0B9_4cf1_B128_3E7E6E5CC005> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GenericNavigationPath skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AB5632D6_94D3_4775_8D06_E900CB17E950> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GenericParameterAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_77905F73_CBA1_418c_BDF4_D7C4551589A7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GenericPathJunction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CAF4DBB7_6C03_4a85_8B41_4A3972C5B5C5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GenericPathLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8F917E63_8DDD_460e_AB25_6F1AD3B3E6ED> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeographicalInterval skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_18BE86D1_632D_4396_A7D5_796A6C7B2098> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeographicalIntervalPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_173CD9A0_A0BE_4890_BDC8_2250BDD46694> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeographicalStructureFactor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F38556E5_71CF_4f75_9D53_4F98BA88B32E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeographicalStructureFactorRef skos:exactMatch <https://w3id.org/transmodel/xmi/EAnone_GeographicalStructureFactorRef> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeographicalUnit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F9F2A40E_F615_4819_BF27_3EA570141685> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GeographicalUnitPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7651161C_2CE6_40d6_8D6A_22389766EF56> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfDistanceMatrixElements skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_14DAE512_85F5_4ab3_A8E9_1F75BE5CC2A8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfDistributionChannels skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_21C7321F_835B_40f8_AE36_B64490013723> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfEntities skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5F973C9D_31F0_4518_BFBD_F44CD6FDE3C5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfLines skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_16B7E341_F7C1_40cb_B209_788B4D5EFBF3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfLinkSequences skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B0D3E77C_AA14_4724_9185_19EDF09E117D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfLinks skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_79D457B8_2905_4d6b_85A6_50B4B6C36292> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfOperators skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AA4FD770_E692_457f_A1F7_3836DED7EB8C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfPoints skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B2D61961_3549_4cc6_80AF_2E8EC31C8211> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfSalesOfferPackages skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EAD58DD2_9FEE_4dc3_AE4B_0356C90D2367> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfServices skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_42CF286E_CDDD_4950_B4C4_7E07706C9200> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfSingleJourneys skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6F24B3CF_4333_4e5c_ACBB_3964D4D4AB5C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfSites skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B26B0AFF_CAD5_4c54_BDFF_BAA82D237310> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfTariffZones skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3D7E549D_A737_4b81_983C_977B4D54A4A4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfTimebands skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ECF2EA38_A628_4d8d_A27A_8C6460B271C8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupOfTimingLinks skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7BBBA28F_4BEC_4eb4_8F7E_8817DF03EB60> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:GroupTicket skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AB39FE64_B1F0_42b2_81FD_AC07D60B47EB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:HailAndRideArea skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3B466A29_9C47_4019_AD77_9827CB4564B1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:HeadingSign skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_42CD1DD7_E56C_4120_9F0E_B1140ED69EAA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:HeadwayJourneyGroup skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4F4E3EB6_CDC6_4cdd_A58C_AD16910FDF40> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:HelpPointEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E0FD85AA_0D71_44ae_924E_5B10753AAB6B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:HireService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EA5A9B02_7B26_42a5_B1EE_5E00BA3E24F1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:IndividualPassengerInfo skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BCE4B2D6_18D7_4e59_BAB1_788E49040ABE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:IndividualTraveller skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CEBEF2B5_12F9_4338_8811_EDD98D4ED9B9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InfoLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAJava_InfoLink> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InfrastructureFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_100CB0F5_0B1D_458d_A88B_401CEA89CC3D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InfrastructureLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F376D31C_D36E_4294_AA9E_AC45C78F6CD2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InfrastructureLink_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F376D31C_D36E_4294_AA9E_AC45C78F6CD2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InfrastructurePoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E426A16C_A17D_4a8c_B53B_FE4D11A42516> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InstalledEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_27066E20_79F8_4cba_8656_6BB3F06EA2A3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Interchange skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F0844E4A_7571_445b_8C32_FB6A8C1265C2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InterchangeRule skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_39852468_BE6A_43b0_ABCA_36F492B352F9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:InterchangeRuleTiming skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4027F504_8F90_4585_B7F8_3662C837BEE8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Interchange_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F0844E4A_7571_445b_8C32_FB6A8C1265C2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Interchanging skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AF8F1788_9D25_4db8_9B43_7AE56F97B8B2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Journey skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ADC0F2AA_DF54_4fa7_8EF9_F02645C7B783> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyAccounting skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FA3515E3_479A_40d7_82ED_718BE53F4B78> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyFrequencyGroup skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F21BCFEE_B7A7_41fb_BE6E_7B8C1947C27E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyHeadway skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EA0ACEC0_B76D_4451_8777_B4D22ED749FD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyLayover skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B0842161_E8CD_454c_826D_A92220C971F7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyMeeting skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CBCCFA7F_10E5_4e8d_BCD2_BC89A4A8AC0E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPart skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A6CC92DC_7AD7_4ec1_8448_42ECEAF9A400> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPartCouple skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E5D6FE74_F5B9_4039_9383_CA8581A00485> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1ED0E8B3_FFD5_44e8_833B_AF43A811871A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPatternHeadway skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B6F04FA2_ED39_4754_99B3_CAE2B2AC54CE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPatternLayover skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B0A25003_BDA2_4716_9504_E64857504267> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPatternRunTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E4D79253_5A42_4693_8213_D21306284794> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPatternWaitTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F03CEBB1_8A42_47b7_B593_1AB033D04D7A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyPattern_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1ED0E8B3_FFD5_44e8_833B_AF43A811871A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyRunTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_19EED1E0_7887_4135_9276_EC0DB211B6C0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyTiming skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0EB071B6_8C92_4222_BD38_0F10B4F2ABDF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:JourneyWaitTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_510F2918_A2BB_46ce_AFE9_BD45985EA5E4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Journey_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ADC0F2AA_DF54_4fa7_8EF9_F02645C7B783> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Layer skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6719DB3B_F8FD_4854_A855_6D329AE38822> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LeftLuggageService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_99568D9C_394C_4f50_9F91_F2EBCB0FEC5A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Level skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7893F04A_C213_4a37_B670_E7A15A996883> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LiftCallEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6D417BE7_3156_459a_B381_C2C82AE75DDD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LiftEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_258CD8DE_E59F_49a5_9F57_0BB083F9C769> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LimitingRule skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3F41107A_7D18_4677_B290_0EB1FDCC7B3B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Line skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0BB5000E_3A96_4422_9771_334B869B4ABA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LineNetwork skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0FBB1CB0_2D6D_4f9f_8662_F29936205A56> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LineSection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B2316EB5_9F60_4ffb_B647_DA347481C42D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LineShape skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_00820200_1C7A_4981_96CB_526C96B935D4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Line_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0BB5000E_3A96_4422_9771_334B869B4ABA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Link skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E58E2656_9DB8_44ea_8ED6_3C1F44AB8E42> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LinkInLinkSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_34B06882_85D5_40a4_9B9D_37F5741F0800> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LinkProjection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_130ACFD8_280A_49fa_802F_9D277124C9AB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LinkSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_868862CF_750D_42e3_9020_7BFE11032DE5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LocalService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AAD39E1F_1993_40be_8C86_E672EB9911A6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Locale skos:exactMatch <https://w3id.org/transmodel/xmi/EAJava_Locale> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LocatableSpot skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F80875CA_64A2_4dd3_84DE_8485AB35E007> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Log skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_40801038_F00B_4f78_B669_530F4B3E6A60> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LogEntry skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0C139DCA_6E6E_48da_8D4A_CD713DDC731F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LogicalDisplay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_341EE7CB_8E98_4c3c_92D0_96CFC2263ABE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LostPropertyService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8CCB84C9_91AA_40fd_B9DA_2AD5B55829E9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LuggageAllowance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4EE38719_17BA_4a39_A18B_82DED1BF4D1A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LuggageLockerEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C2E1B179_2FB8_4f22_BEB8_527A825C345F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LuggageService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A2EF2937_B248_4ea8_B69E_1D7380DBF756> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LuggageSpot skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_038045CD_C654_4e47_85D0_0826EF157782> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:LuggageSpotEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3190E726_C40A_4d08_A195_18128E548EC4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ManagementAgent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_885C17C6_79B6_4248_AA2E_AF7CDB13F4E2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MediumAccessDevice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6B35C21C_9805_40f4_9191_67BE241EEBCF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MediumAccessDeviceSecurityListing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_99894437_37A0_4839_98F9_3E145009BC2D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MediumAccessDevice_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6B35C21C_9805_40f4_9191_67BE241EEBCF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MediumApplicationInstance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3A7F31EB_83F6_42c7_BBC8_A389E15A4D96> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MeetingPointService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CEDA5A19_E693_45d5_80A2_2F031E7241DB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MeetingRestriction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9AFD240C_76AA_4db2_B88C_0510AEADDDC9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MinimumStay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_17A7D0F3_A03E_4654_AE13_33FECA98F09E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MobileDevice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E22221F7_F6D3_4ae8_A163_A9107BD46354> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MobilityJourneyFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5EFDDFEE_D8F2_4944_8C89_3FB60AB60B5E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MobilityService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B3E9D438_5932_467a_9CB9_070001ED1583> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MobilityServiceConstraintZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_13B6869D_1B1F_4d60_9F12_F3954AF824BE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MobilityServiceFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_76DC6492_EC1B_4baa_9B30_C7694790DABE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MobilityService_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B3E9D438_5932_467a_9CB9_070001ED1583> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ModeOfOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6EF4F468_9792_47e0_A898_69A4A53D3BFE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ModeOfOperation_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6EF4F468_9792_47e0_A898_69A4A53D3BFE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ModeRestrictionAssessment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4B911D38_9143_47fa_BC0D_6FDCB493A3D4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MoneyService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_057EB1CC_6A80_4a77_98DF_23D75007FBFF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:MonthValidityOffset skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F4B488AF_C59D_437a_925A_E452C9F8F136> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:NavigationPathAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9A91337C_99DF_48e0_9EE2_2AF86204C892> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Network skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5A5683C6_C1B9_431c_BE09_FA23AABB69DC> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:NormalDatedVehicleJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4170E12B_C20A_4ef1_9BAD_DF38EBF8B570> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Notice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0321718E_7A5B_47f1_A376_D01316BE6CEE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:NoticeAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9ED34E7C_6860_459c_BC0B_D9B9DA078B86> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:NoticeAssignment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9ED34E7C_6860_459c_BC0B_D9B9DA078B86> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ObservedPassingTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_48E195E8_CFAA_46a1_A652_32B0B852CBAF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OffenceDebit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1B211469_EDC5_4c5c_8C4F_370E99B8EAE8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OfferedTravelSpecification skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_82960FBB_0DD7_40d4_92F8_AAA515F801C3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OnboardSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4EDF08CD_B991_495e_A0CD_08C242DC2541> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OnboardStay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1F573B2A_219C_43b6_A72B_7FACCA134466> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OnlineService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_00DB5512_79BA_458b_AA1F_8C9486052336> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OnlineServiceOperator skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B7331D25_D7A0_4e61_B66D_80C7F289F541> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OperatingDay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_62B8D647_8810_4d30_9EE3_C3750CF6D7EA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OperatingDepartment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_608D4CEC_5B65_4c11_9FEE_0B68E4B34BC9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OperatingPeriod skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CA8AD492_DAF4_4c1b_A56D_968110D0E111> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OperatingPeriod_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CA8AD492_DAF4_4c1b_A56D_968110D0E111> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OperationalContext skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A49023DF_EB71_4ec9_A3A7_0A13FC164BFF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Operator skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F82ACB80_56F2_4274_B9B9_A2A77E83A158> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Organisation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_13AA2F90_BC8C_4381_AE09_FE738DFF4047> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OrganisationDayType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_957673AB_7019_44ce_8A64_BE2AACB32451> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OrganisationPart skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A47A7F59_BCBA_44b1_835F_A7657346C783> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OrganisationPart_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A47A7F59_BCBA_44b1_835F_A7657346C783> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Organisation_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_13AA2F90_BC8C_4381_AE09_FE738DFF4047> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OrganisationalUnit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1C87CC31_DC06_4cf3_A6E9_40188DCAFC81> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OtherDebit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9AAD0C9E_ED11_4f69_80AC_A2B01FD13509> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OtherDeckEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_67D633D5_A0A5_409b_9CBF_517D97EC79BC> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OtherDeckSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_501496FB_2C3E_47b8_A3F3_3C4490824D68> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OtherOrganisation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_23CC1A37_77D8_4d4d_A97F_33C80268D4DC> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:OvertakingPossibility skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CC53F469_5B94_47b9_9E12_93600080D0AF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Parking skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5DD2890A_2B57_45b5_952B_68EA93BF19FF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingArea skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E8CBDD4C_7869_428c_B4D9_43B6C551F543> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingArea_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E8CBDD4C_7869_428c_B4D9_43B6C551F543> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingBay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AEF267AD_D72C_4b9b_89AE_EF4CC7C199FA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingBayCondition skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B10A2238_B326_424e_8FC2_250D33FF6FCA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingBayStatus skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4B0855BF_B53A_4384_89C5_14CAE5BE7337> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingBay_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AEF267AD_D72C_4b9b_89AE_EF4CC7C199FA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingCapacity skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B9B5B648_B797_44c0_B88C_3C3A5CE17315> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingChargeBand skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2FCB34CD_37CE_4495_9F06_286F699B8F4E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingComponent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0020E79F_59C6_467e_98AF_5619BC81426D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingEntranceForVehicles skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6621D985_B5EA_4ace_9A81_AA65BDB1A3E9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingPassengerEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_73444B4F_FEC4_4c2b_B6E9_840238F00E7D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B54BCC66_FB51_4234_9DB2_D3B69D150DA4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingPoint_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B54BCC66_FB51_4234_9DB2_D3B69D150DA4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4912CC5E_736A_412c_A548_D07E07C277EB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingProperties skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E88A4677_C5EF_4568_A9CE_34D7A5B81077> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ParkingTariff skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_71F4BEBD_23B3_430d_8467_88D38B9AFFAA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Parking_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5DD2890A_2B57_45b5_952B_68EA93BF19FF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerAtStopTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_32DEA26E_9F88_4209_896E_20D959A1B723> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerBeaconEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EF1E2F7B_A15D_425b_9413_99A98AB4CB81> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerBoardingPositionAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4F3BA0E8_2823_4aa5_83D8_FBEAEE7DFB53> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerBoardingPositionAssignment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4F3BA0E8_2823_4aa5_83D8_FBEAEE7DFB53> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerCapacity skos:exactMatch <https://w3id.org/transmodel/xmi/EAJava_PassengerCapacity> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerCarryingRequirement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_75915767_ED3D_45dc_A232_DBEEBF0F1E50> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0937096D_F5B1_4796_8DAD_0FCFB1CAD574> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4BADFB18_C231_45bb_B777_61DBD4FA878F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerInformationEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_274B4F1B_C969_48a8_80BE_36F5DCEFBA07> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerSafetyEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6E33197D_0FC3_4da0_A5DD_8A6988F0B3E0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6DF8E0CA_292E_46a5_8D84_318FD8F51429> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerSpot skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B960BA22_AA25_4538_AD08_2A0DAEF30212> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerSpotAllocation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F55B6FAD_11B2_4751_8161_0781FE8FEDB1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerStopAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DE20679A_FBDE_4f45_92D1_15BD07F20FBF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassengerVehicleSpot skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_726E705A_F5A9_4f23_ABCA_2124959FC1CA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PassingTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0F9B4B25_CD76_49d1_9897_E61C377604A6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PathInstruction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DCD1C203_0A63_4a95_9F1E_6AA708C14752> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PathJunction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_66E2EB87_0379_4c34_8907_8F4EADFEBCF4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PathLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_563A8BBC_9CB8_451d_B2F1_CAFB6963C5A2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PathLinkInSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_546DDED7_768F_4b18_9898_27C041845BC2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PenaltyPolicy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_57D0F4A4_D529_44c6_BD61_1174974DE63C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PersonalModeOfOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D8DCECA4_B7EE_4d1e_87AE_08019BD21A49> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Place skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6EB801CA_0885_4340_A5A2_575CF79DA49F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PlaceEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E96E3D2D_048E_4e35_B844_8715FE60FEFC> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PlaceInSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4439DE76_B15D_4158_9DF3_CCFF378A5951> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PlaceLighting skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E6853BF1_B186_4437_B0A5_2780B74DA6D4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PlaceSign skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6C15414E_0BCE_4af5_B873_4E7833C90886> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Point skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_971FC364_7043_4d6f_919D_137E30A68145> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointInJourneyPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_113A1D6C_D5F1_45ce_897F_EB8585E94B85> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointInLinkSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C307E062_5B71_452e_929B_1952DD9D4F01> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOfInterest skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D55F3F37_A824_4197_8B8B_B34A5064DE17> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOfInterestClassification skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A99D534C_9AA6_4a61_8638_DE61152C683E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOfInterestClassificationHierarchy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_46800291_1A59_4b88_AD57_766341478A3A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOfInterestComponent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A4EB8CF6_CC2A_4216_913C_AC8BBF1C4282> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOfInterestEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_781B4CF6_3041_48d2_98E3_A421E45495CD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOfInterestSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BF1436DB_6E4B_47a1_8F13_0CA3AFA1378F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOfInterestVehicleEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B977A81B_1C17_41cd_B66C_A9780F58B22F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOnLineSection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E4509E81_154D_4328_A870_1B2A5240E321> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOnLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_350ADC00_EAB7_486e_B65B_B9229ECF116A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOnRoute skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_49126E80_400A_4597_84CA_0E6F8D7FC09B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOnSection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_667664F1_4ED1_4433_9FD7_89961DB64B5E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointOnSection_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_667664F1_4ED1_4433_9FD7_89961DB64B5E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PointProjection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_093B6E5D_C495_4390_955F_098FF39C0132> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PoolOfVehicles skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_24082B95_5425_4cc5_9104_9045B0939A78> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PostalAddress skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_32DD6733_B0C2_4718_9376_09F051371323> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PoweredTrain skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7347BD1E_7D0D_4d33_841B_38039852CB34> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PreassignedFareProduct skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B9E22A3F_1B84_46d6_9960_2A9C3390D719> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PriceGroup skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C79FE82E_38CC_4bd2_84C1_86F0BB8549D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PriceGroup_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C79FE82E_38CC_4bd2_84C1_86F0BB8549D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PriceUnit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BE7AFD49_1675_4f10_A33D_F8C03759EDB8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PriceableObject skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F8ECF438_7648_436b_A920_264F5D27075A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PriceableObject_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F8ECF438_7648_436b_A920_264F5D27075A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PricingParameterSet skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C2C37D3D_536D_4329_AF39_931049959214> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PricingRule skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B2A46FB6_6413_4f67_A09A_0EB2D09938D2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PricingRule_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B2A46FB6_6413_4f67_A09A_0EB2D09938D2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PricingService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5BD3B215_95F7_4894_9DAC_04BF03ADD2F5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Projection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_248984FE_14EC_493b_A53A_6F4D0D49AD18> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PropertyOfDay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_77A46C50_6368_485f_931F_5629F348C91F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PurchaseWindow skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_44E6A37C_34C1_478a_8F44_9E273ADB181F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PurposeOfEquipmentProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AA106715_E675_4641_A3DC_B6F6FB7BEEB3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PurposeOfGrouping skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9C36A883_F11B_4a99_8EDB_BD827950B20C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:PurposeOfJourneyPartition skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_16F0DA2E_4326_40ab_885E_08EC27C4ECA9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:QualityStructureFactor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_281B0641_A304_4a22_92F0_B4970E477C13> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:QualityStructureFactorPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_82FC1BDD_4FB0_4234_A228_EC3DD0C3773B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:QualityStructureFactor_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_281B0641_A304_4a22_92F0_B4970E477C13> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Quay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_11F7D4E1_999E_4974_ADAD_9E02C0F42AD4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Quay_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_11F7D4E1_999E_4974_ADAD_9E02C0F42AD4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RailwayElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_262AB1C5_E4FE_4005_BD8F_7E086998C0C4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RailwayJunction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2DA472CA_688B_4164_A2FE_5AF21C42111C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RampEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F594D034_FDF5_4e49_99D5_C857FBFF2AFD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RechargingEquipmentProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F14053E2_8A8D_4b13_B482_86C16E93BC7C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RechargingPlan skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_37D11C54_1007_4de1_9BB0_C958D59798ED> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RechargingPointAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7A31C079_50B5_4b02_8B54_9C855B761214> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RechargingStep skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A372C05C_09CD_4113_A7C3_E16CD71421DE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RefuellingEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1FB18E38_24AC_43a9_A547_AD71DB8B3FB1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Refunding skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_997FA22A_4E7C_41c0_8A4E_4C4AB1F1A31A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RelatedOrganisation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_92919BA5_C8F6_491d_80E8_0A11FF4A55B9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ReliefOpportunity skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2D9A908C_24C1_4e9c_A2D2_B315690DCA87> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ReliefPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_123741AA_3572_408c_B373_3FEF662D6A3A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ReliefPoint_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_123741AA_3572_408c_B373_3FEF662D6A3A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RentalOption skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DC55C4FA_B8D0_481e_A498_83E0409955B5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RentalPenaltyPolicy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B2A8807C_324A_4073_9823_B6F02F72FEE5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Replacing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_82F513A1_244F_459d_A10E_C79AF5EC69C1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RequestedTravelSpecification skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EE7CDDB8_089E_4024_8357_A39B9D5607E5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Reselling skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B412C90D_1F85_4fdf_B9AA_6336B1151232> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Reserving skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6B4824AB_2D56_4ead_9886_5E8B8CEE3BE7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ResidentialQualification skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BF930F9A_122B_4afe_BCB5_1C22E5FD5FA1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ResourceFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B4BF193F_10FB_4870_89D3_1D208BDFD7FC> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ResponsibilityRole skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FBAE0D49_782A_442d_8306_69914E55236C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ResponsibilityRoleAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BA558FF6_65DF_41b1_9F19_980BAC2F5550> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ResponsibilitySet skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E779CAC8_1DC7_4c41_8B6A_7DB12D5F3556> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RetailConsortium skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5B4C4121_5A6C_435d_B5A9_620BAE744BE5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RetailDevice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_36D5B4E9_4063_42e0_AC14_1A5221462CB2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RetailDeviceSecurityListing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6019E157_BD27_400a_BA39_2C17B5C16539> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RetailService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BDA1904B_78AE_4361_987B_210BD466F6F9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RhythmicalJourneyGroup skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4A6C84D8_283C_4a7b_A859_8EE05AA443E3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoadAddress skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ACB464FD_CD89_4b48_ABCA_FBA99FC470E7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoadElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2D4FDE33_97E1_49eb_9F38_82D82C74FFF1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoadJunction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F61B4332_E988_4627_B4BC_115147A0F725> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RollingStockInventory skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_83F5C329_DCE2_45fa_BD08_D999DBEF2CC5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RollingStockItem skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9EE5F914_8E01_4342_BE1C_690450B3A842> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RollingStockItem_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9EE5F914_8E01_4342_BE1C_690450B3A842> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoughSurface skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1E763003_2B8F_41df_932E_30B7AD8D5AB0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoundTrip skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_149152B2_C661_4752_B100_EBEDDF4BA41B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoundingStep skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4980CADB_8070_497d_BA84_98339B57948F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Route skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_24476127_618B_4bd7_B6DA_94F9849E98A7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RouteInstruction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_938F6E2C_04E0_40f4_89B7_FF19FB13B5E1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RouteLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2D5BACC0_F84A_4aab_BC54_110BD4AFDC23> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoutePoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_02F1F9FC_9530_4be3_9C71_1F7751CDC6CC> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Route_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_24476127_618B_4bd7_B6DA_94F9849E98A7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Routing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D963D422_F393_4100_886D_3D9B43B05A9C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:RoutingConstraintZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A6ACC0AD_EC3C_4fba_9AC7_E92FA0DB092A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SaleDiscountRight skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F0955395_0B45_4271_8272_92DA9AF85F16> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SalesNoticeAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_15EACB9A_7D24_4d2f_9FEA_3BE5601B4352> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SalesOfferPackage skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E3E395D8_7E5A_4082_98DF_42BF224FAE33> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SalesOfferPackageElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E9857D28_E69F_476b_9505_0D7BB481D8E7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SalesOfferPackagePrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1411E03E_79ED_4aa7_880A_A316FAFF1B38> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SalesOfferPackageSubstitution skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C5979F00_2FC1_45f1_9E1B_29DE971D8DB0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SalesTransaction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_52425AAE_42C2_4096_9AD4_815A24CA9317> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SalesTransactionFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ABDD4D3C_4D8B_4cf3_B13F_BA4A862F3B3C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SanitaryEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_94352174_97D1_49c5_902F_F57DF7E87715> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ScheduledOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_25CE05F9_42E1_489d_B5FD_0DF803A0E7CD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ScheduledStopPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9B14477D_EA87_43df_ABA9_8ED405FC852A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SchematicMap skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A01B8726_8466_424c_97A9_1FCC8E8ECDF0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SeatEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_137E96D1_93B9_4f06_8166_343E8E100F33> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SeatingEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_411004D3_CB67_4b66_8FE8_8FCDF1D80723> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Section skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5115EA9C_33FA_4e5b_B5AF_FFAB2CA6387B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Section_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5115EA9C_33FA_4e5b_B5AF_FFAB2CA6387B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SecurityList skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FBC1831F_732E_44ea_8DD4_1DE8FB3DDF31> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SecurityListing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4497D332_9987_4e0a_A2D2_E2E6142DAAEE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SecurityListing_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4497D332_9987_4e0a_A2D2_E2E6142DAAEE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SensorEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AE8DBD3C_2226_4bbe_93EB_A929DA682CD4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SensorEquipment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AE8DBD3C_2226_4bbe_93EB_A929DA682CD4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SensorInEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_51BC5277_1969_46af_8943_1D79A5E8CC88> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SensorInSpot skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_040AAB91_7F96_45e7_895B_4E6EF8FBB3CE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SeriesConstraint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1C4EA3AC_822A_4d9e_A7F6_65DCCD651986> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SeriesConstraintPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3FBFECDA_FED7_4c04_AEB0_E01EDF126120> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceAccessCode skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BA63E7F0_524A_4fd2_876A_776EC45129E3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceAccessRight skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C89F1BAB_0055_4947_9F9A_2EFE6C499721> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceAccessRight_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C89F1BAB_0055_4947_9F9A_2EFE6C499721> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceBookingArrangement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BD774BF8_52E2_4208_AD00_89C42AAD5809> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceCalendar skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6579DE11_DD2F_4f61_A997_E77100EE9837> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceCalendarFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2C0F1C05_DC07_4c31_94D6_495EE04E965B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceExclusion skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FDF036AD_7DCB_4d2b_8AC6_B0AA3D2A41D9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceFacilitySet skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0F553C3F_4415_4f51_A099_CAD0E702FC6F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E3033DA2_807D_4af7_8C0E_03CB6ED046ED> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_53AB374C_377E_4517_9AFF_5C52FDE8D4BE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceJourneyInterchange skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_81AF0099_5749_4539_9A70_D9EF821F68B6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceJourneyPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_90B01A7D_5E82_42ea_B7DC_198AA02F0EDB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceJourneyPatternInterchange skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_883C3D3B_4320_48bc_AB79_E6D653BD938B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceJourney_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_53AB374C_377E_4517_9AFF_5C52FDE8D4BE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_576365AC_F645_4a98_BC7E_5BFA5EDA6430> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServicePattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_59593D2C_4CCA_4c04_9F38_38FB103A660B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServiceSite skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BE1982EB_CB44_48b6_B538_09EC551965C1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ServicedOrganisation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A7F7CABE_F6BC_41c2_A7FD_F761379627F5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ShelterEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C550D811_3E90_4b9c_9D7A_E2904421C5F3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SignEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_011D08BA_729C_44b6_8B50_E38FC8030242> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SimpleFeature skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_97A8FEAF_2CBD_44ca_9A7F_DBBDC846696E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SimpleVehicleType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1E3B762B_7257_4c41_A478_1EF9D72BE1F9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SingleJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8E3A5314_957E_4033_9057_F6F7530A0111> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SingleJourneyPath skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2C8B283F_2908_40c3_AEC0_443C8A78530A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Site skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7435084B_B9A6_40a2_81C1_D02D6824F6B4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SiteComponent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1607D2AA_5B05_419f_87AE_66F492B4BF06> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SiteConnection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FBB15434_0B86_4e5a_A8B2_B03BAEE8A980> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SiteElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E0B8BD46_FF9E_4f4e_AC87_0B993BA14B25> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SiteEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_36B5FD17_BE8F_4043_81B6_DEA22091E7F0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SiteFacilitySet skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1B35F6DC_AA42_463a_886A_D61D50E0A2C8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SiteFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6FC48645_DE5A_4c4e_95F5_25B65E84E247> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SiteStructure skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7435084B_B9A6_40a2_81C1_D02D6824F6B4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Smartcard skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1CBEF306_B956_470f_AE94_906F577A85CD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpecialService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_59BF618B_A53F_4371_94BD_99A03133B99C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpecificParameterAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F8207286_7E3F_4644_828D_7ACF759FD4BD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpotAffinity skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E4EF607E_A71C_4588_8A9A_91246852B4D9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpotColumn skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B36AFE3E_356C_4cd5_B77B_D0D31186487F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpotEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B08BB326_3557_4616_A722_1772215B1313> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpotEquipment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B08BB326_3557_4616_A722_1772215B1313> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpotRow skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B0223AF1_CC9B_4036_BD57_C87B2F8FB77F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SpotSensor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_95DD484A_F76F_4ff2_9B89_9B3B831D0870> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StairEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E95AA0EC_FB65_415e_AA39_FA0569E4D9B1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StaircaseEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E8D03E6A_2588_4b0c_AEC5_7099DBFE3D01> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StartTimeAtStopPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E0A643F7_8263_4bc6_B53F_BD364662BB9E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StepLimit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6C84C046_81E4_4568_B5C6_A8D3A37CA795> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopArea skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CBCD4540_48AD_4556_929B_27EEF23D0FF0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_44370227_D5B5_42e6_944A_BB029532D26A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_06B01244_7E43_4925_8610_0B0B61508E7D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopPlaceComponent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_922107D5_48A4_42f2_BC06_415992489BFD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopPlaceEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6197081D_432B_4aa4_8987_3B8EF68ACD8B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopPlaceSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4122A845_4570_4a2f_A537_16C34587A096> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopPlaceVehicleEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_913578F0_6E55_476d_A2DE_4E5ED51B686A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopPlace_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_06B01244_7E43_4925_8610_0B0B61508E7D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:StopPointInJourneyPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F73CB5B4_2792_49f5_BC9D_1820FD8C86C4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Submode skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DFEEA3AC_D484_4141_B546_71B64A87C5CE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Subscribing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E25A6BBC_40AD_4aa3_BA05_B3358F33BDF4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Suitability skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BBCEFB3C_7332_4e90_AD7A_7354548C200A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:SupplementProduct skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E6EE9D2A_C333_457a_8D58_899F04D2CC58> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Suspending skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2344A9EA_9DA3_49fb_86AB_27D9D9286BD8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TargetPassingTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6709019A_AE73_41d3_961B_9FFD0D258F81> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Tariff skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B698AF15_C49A_413a_802F_A427B7525C1D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TariffZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_110F8AC9_CBBF_46f5_8909_AB91F7F586FA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TariffZone_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_110F8AC9_CBBF_46f5_8909_AB91F7F586FA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TaxiParkingArea skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1680D5C9_7371_421c_BB23_ED0E4D2A705C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TaxiRank skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E290A960_FFAA_4282_A46F_AC01AA81F4B3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TaxiService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_34C88208_F86F_4944_8D37_0FC366138D34> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TaxiServicePlaceAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2C3494DC_4D08_4c73_BDCF_455697054571> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TaxiStand skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DF990F3D_4833_4179_9D3A_FD3E89600C1B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TemplateServiceJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_732D3B3D_8D6F_4d00_A354_9C48A90ACC9E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TemplateVehicleJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_15CA6ED5_75EB_473d_9DF8_18726B058F98> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ThirdPartyProduct skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_112C3BB6_FD6D_42e0_9EFB_10C984B0D4FF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TicketValidatorEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4BEF1288_FAFA_40ab_919F_4553621AB0BD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TicketingEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4E18E2E3_9265_422d_ABE0_CDE8A3B30504> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TicketingService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BAE4AEB1_250B_4209_8C79_2C15315701CF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimeDemandType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0ED715EB_31CE_4584_9AE8_014E453B776E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimeDemandTypeAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B30CEED3_3789_413d_9872_C4682A236351> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimeInterval skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C961352F_0F52_489d_A242_ACC6DC00C5AA> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimeIntervalPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9CDCC7A8_056A_4745_9F3E_2CAE970959B8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimeStructureFactor skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2BB397C7_DF85_48c7_A327_88EFF31C06E8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimeUnit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DF638E88_B770_4a72_A1A6_B5923F9AA51F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimeUnitPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2A1E60A7_CDE7_4eaa_A389_D7B6ABE5E0BB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Timeband skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AE40DA02_A1D9_4ce0_9966_DD3BA000C48B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimetableFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8CAEF962_056F_4ef6_BFB7_02DC4933C896> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimetabledPassingTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F4441705_66AF_4d9e_A9BC_CD6628DA0AF6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimingLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C14F5EB3_E451_48db_AE0B_6320823DB8B5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimingLinkInJourneyPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EF3273EC_023D_49ee_92F2_BEC25E64130C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimingPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E449D105_47DC_4551_B6E6_EEBD884E2D8C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimingPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0018CEB5_C0B7_4e4a_B154_0E0F618D3D25> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimingPointInJourneyPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_700AF201_ED6A_48c3_8559_80491FEA7561> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TimingPoint_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0018CEB5_C0B7_4e4a_B154_0E0F618D3D25> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TopographicPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_38D196A5_4310_4078_9192_FD82675464C5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TopographicProjection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_21FD1691_20D7_4120_B74E_C439872B03AE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Trace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8F1AF126_39CB_4924_BE93_CD304A1B01AD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TractiveElementType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_18A8D59E_D3DF_4c4b_80F8_89DCDF1A6B18> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TractiveRollingStockItem skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1D25FC43_30BD_420b_8414_848682DFF6E4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrafficControlPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7F099787_C656_4396_A965_C868CBE9B043> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrailingElementType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1AED05A4_4062_400c_B424_D88BAC35E5C6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrailingRollingStockItem skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D78AB4A3_BDA9_4e04_9822_8604B4734543> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Train skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_22DA094D_8681_416b_A16A_1BF0A76B41BE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrainComponent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_47D5CF60_BB6B_4687_B704_469C2AF5F64F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrainComponentLabelAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4182CE9E_1730_4995_8716_0240C803996C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrainComponentStopAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_88F5F930_EC8A_4e1f_98BF_67266E3FD830> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrainElementType_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A78B0F95_676E_4b47_8162_C84215E9471F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrainNumber skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_181AB2C6_6F6A_45f1_98EA_CEF8A75248F2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Train_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_22DA094D_8681_416b_A16A_1BF0A76B41BE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Transfer skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_03C94131_7881_4ebf_820E_CDC83A142E7D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TransferDuration skos:exactMatch <https://w3id.org/transmodel/xmi/EAJava_TransferDuration> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TransferRestriction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BE3291B7_D7A7_482d_8BB6_5E19D11CFE44> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Transferability skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AD3FCFB1_371D_48b4_A14F_434191835159> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TransportOrganisation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5DCBA677_9E98_44e6_A0F8_FCA19183D9AE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TransportOrganisation_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5DCBA677_9E98_44e6_A0F8_FCA19183D9AE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TransportSubmode skos:exactMatch <https://w3id.org/transmodel/xmi/EAJava_TransportSubMode> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TransportType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5DB520FB_9E2B_4d25_9752_60AA8DE060A8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TransportType_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5DB520FB_9E2B_4d25_9752_60AA8DE060A8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TravelAgent skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AD37DA1F_84CA_4cdd_9C5D_9EAA15669E0E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TravelDocument skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2E027A4A_3620_4958_905D_DF4009150B1B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TravelDocumentSecurityListing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_931F82C0_ADDA_4283_8A6D_78CF3540DDCF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TravelSpecification skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_954C5000_BD2E_4077_A122_1394DC77AFE8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TravelSpecification_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_954C5000_BD2E_4077_A122_1394DC77AFE8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TravelatorEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_805D71B4_FD97_4d62_9493_341D26A16C24> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TripDebit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_ED85DD7D_33BF_4848_894A_D41D3D34A2D4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TrolleyStandEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_343E8B76_F8E8_4795_8F52_E848314C66B6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfAccessRightAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_094A6ADE_F0F7_4f9e_B558_5480BF661D2C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfActivation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7B36F210_B203_42d2_AA89_7CDB849E70A6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfBatteryChemistry skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A48E5961_9E94_4a24_BF6C_D99828E1770C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfConcession skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_53BE6522_E8C4_4a18_844E_8FF82FDA7E69> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfCongestion skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1FC42E4D_FFAD_401a_9F26_54D5CD7E4646> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfCustomerAccount skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_326C5BCC_F426_4a47_8AE1_DE777FA1D9A8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfDeckEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B8AB4623_C649_4f55_A1C4_FE0997EC52A4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfDeckSpace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6BBF56F7_3EE2_498d_8351_47369DEA0BC1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfDeliveryVariant skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CBBD9A34_145F_4a46_B355_61D915C1C5E5> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfDriverPermit skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_929519B6_510C_4265_9AF3_D853D311CB5C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfEntity skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E6ACAEEB_81D4_4278_8E1F_999798E89896> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_573D6364_8532_44f5_B9A1_E000C13A58FF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFacility skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9982A5DF_B872_4651_9C93_403A6F7F3378> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFareContract skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E8D49D99_954C_409e_90B5_A104B229CEB6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFareContractEntry skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6804DFC2_CD9F_48ca_9574_1FD0D67A4612> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFareProduct skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EF6AC819_9FA4_4c94_A88B_D93C2169205F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFareStructureElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C4A304BD_227D_488c_ADB8_EE7D6674143B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFleet skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CFBDBE0E_E4D0_4329_BF31_8D1CBB9B3AEB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFlexibleService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_79BB7312_81E3_4250_95C4_125CD5B0E938> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5533271B_A158_4000_9BFA_3CBB4D4F10F3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfJourneyPattern skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_03E81E42_FCA8_421a_86DD_28E1DBF3A633> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfLine skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_99D48879_6BF5_4c1b_A380_73911053C8C1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DDC990A2_5833_47ad_8AA5_26DF8C0EDA65> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfLinkSequence skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CE97CD9F_21C2_479c_94A0_30C27218FF5F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfLocatableSpot skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1BD49E27_F77C_44f4_9F37_1190123BA7D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfMachineReadability skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4AE7026A_E3E3_485a_A921_907ECEE4F9B7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfMediumAccessDevice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9AC50C20_90CE_4b9b_B3C8_CB347B82C2B4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfMobilityService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0B98B27C_657D_407e_ABCC_21642AE18F6C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfModeOfOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0310D1D7_49B0_4d5d_B39C_81DAD2001A4B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfNotice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D7979ECD_BFCC_42de_811A_5CECC0EACA38> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfOperation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_06827926_3353_41dd_ABE5_72BB2D5350EF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfOrganisation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_2F8EB91A_8B06_4660_BA40_02F1776D5C9F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfParking skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CA2F4940_84A6_4eed_87F6_E03634BF4944> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfPassengerInformationEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_62AFCD45_E123_4a4d_A42F_DF033D0807F0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfPaymentMethod skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B976D473_6888_48bf_8574_0A0386DA1AE1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CC5D6774_D572_40d4_A0FC_2EB820654A4D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfPlug skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_438FB81B_F227_4cea_AA8B_2C252556FE48> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_54E449CB_9D1F_4354_A1B8_FDF333A32730> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfPricingRule skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3361C6B6_D810_4af0_9C41_BB445631AF36> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfProductCategory skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_35D6AF0F_4C16_493c_8FF2_1ED41E643DD1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfProjection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C07DD7F3_5C75_4d18_9C6C_D4E1F4008A06> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfResponsibilityRole skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B6027B58_CE31_4fe6_AB86_76F3DF8A79C4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfRetailDevice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E10EEC9B_D1EB_406f_9DD8_29852C3440EF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfRollingStock skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F4AE21D4_2675_4f14_B914_7654E7523D69> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfSalesOfferPackage skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_67872273_29C0_45e3_BC51_E7ED549D8A46> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfSecurityList skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_708ADFA0_A24B_4a1f_8F63_91696C090B74> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A04FA288_ED16_4e10_B6FB_FBA8CC1C7769> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfTariff skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_651A2C1B_C26F_4436_A01F_73A13DDC572C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfTransfer skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0CDD9A97_E482_404c_9CA8_68B83763052C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfTravelDocument skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7882ABEE_9459_4895_AA56_D5A4DEB50EE9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfUsageParameter skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B77C8B96_DA92_4c86_A35B_F4A752A047E4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfValidity skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7D291BE3_9945_4fcd_B015_7545A9BC032E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfValue skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9AE2EA91_A432_415a_AA6C_4A295216C96A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfVersion skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_DC2C2B37_F15B_4ea5_8742_8F1EFD0E5F31> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfWheelchair skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_04AAE77F_760F_470e_B481_562A01014F31> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:TypeOfZone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_6DBB77EE_2071_4aff_AE94_E6DD45C22AAF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UnpoweredTrain skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7338CC51_0FE0_4381_B7AB_F82C2FF91F43> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UsageDiscountRight skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_17503813_D6F8_4900_A765_333DA3DD33EE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UsageParameter skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C69D4420_55CB_4f8a_B2C7_41CA50159F90> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UsageParameterPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3B14EEEA_EA3B_4ef5_BC20_9D923B9ACD5F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UsageParameter_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C69D4420_55CB_4f8a_B2C7_41CA50159F90> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UsageValidityPeriod skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_181CDF0F_BB50_4b01_BCEE_FA027E496A3B> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UserNeed skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_26062B83_D1E4_497b_866E_F53E2DA13139> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UserProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_BCDE8D63_837B_4006_906E_903D7E1C0912> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:UserProfileEligibility skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_30B93496_BB22_4dee_BE31_86DADDE0F410> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ValidableElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9E329226_01C8_4af7_A6D0_DD2000EBB022> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ValidableElementPrice skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7CE09A0B_0DC3_4063_930D_027CDB46C0B4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ValidityCondition skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0F02D13B_491D_45e4_96C6_344FEC4239D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ValidityCondition_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0F02D13B_491D_45e4_96C6_344FEC4239D6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ValidityParameterAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_69199985_72A0_42e0_AB10_D1E86CFF37E1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ValidityRuleParameter skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9C675DDA_31B6_4ff7_9CD1_4719335813B6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ValidityTrigger skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7EF5C762_42B5_4e51_9F79_BFE22FE246BB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Vehicle skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F5929D08_CACB_4e7f_B76E_C992EBE7E9EB> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleChargingEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8184918D_A2E9_4f4d_973E_58B36AF52A3C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleEntrance skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3DC42BF8_8D12_4896_A286_F46BB5D20C9C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleEquipmentProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A68A04F0_8F9C_419a_94AE_57F421F8CA6F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleEquipmentProfileMember skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7BE32235_9CF3_4906_B794_36068C744DF9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourney skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_501781D9_BE5F_4fa8_B081_98650F067E2F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourneyHeadway skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1B4C0561_BD55_4fa1_9C16_7B8ADA02F636> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourneyLayover skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0119DF78_7AB5_49fd_9356_B7E8947377D2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourneyRunTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_70B83128_841B_4217_A0F5_5D66D5D6FFA3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourneySpotAllocation skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_EAB04BD1_E175_4315_B6F7_4F8894A22023> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourneyStopAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C162D6B2_3380_453e_B6C8_60E0BA824E02> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourneyWaitTime skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3ABBAF9B_F398_47cf_87AB_360AD3E2EFE7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleJourney_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_501781D9_BE5F_4fa8_B081_98650F067E2F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleMeetingLink skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_48D22045_9439_4e67_989C_F4B362872E2A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleMeetingPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A839F0A9_80DC_4ba2_8CEB_5239799C2C1D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleMeetingPlace_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A839F0A9_80DC_4ba2_8CEB_5239799C2C1D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleMeetingPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_095C82D7_242D_4b89_A493_9C570532EB4D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleMeetingPointAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_15929C99_EBFA_4aab_AEBC_EF676478B2A3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleMeetingPointAssignment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_15929C99_EBFA_4aab_AEBC_EF676478B2A3> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleMeetingPointInPath skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FDD6F1A9_FC6A_4287_9965_01489884B15E> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleModel skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_582850D2_35B8_4dfe_8808_CFA84A30AC3A> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleModelProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F38D823A_1011_464a_B5F7_C0B543640EB9> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolerProfile skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_1BB17E4A_9F7F_471d_A02D_5F2AED4AA9A1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePooling skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D4E5712D_8C0C_44ff_B713_52E6155165E8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolingDriverInfo skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_805B88D7_7D27_4361_9516_A81BD68A5477> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolingMeetingPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C2E7FEFE_4029_478a_887A_D2C34E7552A7> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolingParkingArea skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_344B42C7_62BB_480e_814F_1F77E701F1EF> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolingParkingBay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E0FE9EBC_CB5A_4dcd_AE92_7B4DD109039D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolingPlaceAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_4412FC0D_368C_4689_8512_4FEA71274F80> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolingService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C4519596_8E57_4cbe_A325_2835E7D78486> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePoolingService_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_C4519596_8E57_4cbe_A325_2835E7D78486> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehiclePositionAlignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_9EB0C159_24AB_4666_812F_885FCBF906F2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleQuayAlignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8752CF5A_FDA9_4002_8762_D685322E08B4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleReleaseEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_B5E833B3_E739_4c29_B304_626D16AF6815> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleRental skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_FD1EE9CD_C599_438a_B315_BDB6C7BBEDAE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleRentalService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3D4716E6_0D18_4b34_A127_B27CBA3ACA65> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleScheduleFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_25183358_8FFD_492d_9062_6D7FC38B45E1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CD4301FC_E9AD_4087_8637_5D20109478D1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleServicePart skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_0C4EFB7F_0DBF_4dce_9108_36895E806D7D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleServicePlaceAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A7625FBE_02C8_416e_A02D_2E24EE02FF1C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleServicePlaceAssignment_Dummy skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A7625FBE_02C8_416e_A02D_2E24EE02FF1C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleSharing skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E38C296D_C335_4626_9F36_914696F5FCB4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleSharingParkingArea skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_5AB3A14D_C18B_461f_B8ED_4513E9F6DE27> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleSharingParkingBay skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E8565E0C_E4A8_43bf_970D_B5B1B78930A2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleSharingPlaceAssignment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_F807C7DE_3350_4ceb_A52E_82C7FA92CCC6> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleSharingService skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_A5E43283_9556_4e90_B83A_2A8C9F3E23FD> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleStoppingPlace skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_97C1D0BD_8C5A_4f6c_B764_885306BC1537> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleStoppingPosition skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AFBCB126_28B4_408e_89D4_B8BFC9A4A662> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleType skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E53B2445_877E_4b95_8FA1_FCAE94298789> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleTypeAtPoint skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8A69EB53_38FD_49ff_8219_2B668734099C> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleTypePreference skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_AF02527C_2C21_4f66_A01B_AE78E9DAC788> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VehicleTypeZoneRestriction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8740A143_3898_405b_81D8_996CFE9B9E30> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Version skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_D0A886D7_8A50_404e_BF48_6258A7859AF0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:VersionFrame skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7B067BCC_57DC_43ed_BAAB_060F541CC8C8> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:WaitingEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_918632AD_1C25_4a8f_8D60_95FB63C8D846> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:WaitingRoomEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8197D890_4D1B_483e_8110_4AD9EDF33BAE> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:WheelchairVehicleEquipment skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_E407EA19_D189_41a5_B1D9_EED2D566B28F> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Whitelist skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_8F2B829A_6FC8_4f9c_82C1_41B0C9BB18F1> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:WireElement skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_48387759_52E4_4e02_A606_FC589237E0E2> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:WireJunction skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_3C05BA13_73C9_4931_9D77_0A46C151856D> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:Zone skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_87B165DE_9095_419f_8804_65DA77E52BE4> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ZoneInSeries skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_7DC3EE8E_3F49_4244_9CB4_58863DA1B0D0> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:ZoneProjection skos:exactMatch <https://w3id.org/transmodel/xmi/EAID_CFF4CE48_1796_4236_975C_4AED332E7F39> ;
+    align:evidence "matching natural XSD name/documentation" .
+
+netex:name skos:exactMatch <https://w3id.org/transmodel/xmi/EAnone_Name> ;
+    align:evidence "matching natural XSD name/documentation" .
+
