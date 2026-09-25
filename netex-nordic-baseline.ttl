@@ -259,14 +259,14 @@ netex:Codespace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:DatedServiceJourney ;
-    nordic:element "ServiceJourney/@ref" ;
-    nordic:path "ServiceJourneyRef/@ref" ;
+    nordic:element "Journey/@ref" ;
+    nordic:path "journeyRef" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:DatedServiceJourney ;
     nordic:element "OperatingDay/@ref" ;
-    nordic:path "OperatingDayRef/@ref" ;
+    nordic:path "operatingDayRef" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;

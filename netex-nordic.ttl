@@ -226,7 +226,7 @@ profile:NP_FareZoneShape a sh:NodeShape ;
 ## --- Interchange ---
 
 profile:NP_InterchangeShape a sh:NodeShape ;
-    sh:targetClass netex:Interchange ;
+    sh:targetClass netex:ServiceJourneyInterchange ;
     rdfs:label "Interchange — NP constraints" ;
     sh:property [
         sh:path netex:fromPointRef ;
