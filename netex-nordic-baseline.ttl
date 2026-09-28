@@ -2106,6 +2106,18 @@ netex:StopPlace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:StopPlace ;
+    nordic:element "Key" ;
+    nordic:path "StopPlace/keyList/KeyValue/Key" ;
+    nordic:cardinality "1..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
+    nordic:element "Value" ;
+    nordic:path "StopPlace/keyList/KeyValue/Value" ;
+    nordic:cardinality "1..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
     nordic:element "Name" ;
     nordic:path "StopPlace/Name" ;
     nordic:cardinality "1..1" ;
