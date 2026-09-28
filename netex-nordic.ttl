@@ -66,11 +66,6 @@ profile:NP_StopPlaceShape a sh:NodeShape ;
     rdfs:label "StopPlace — NP constraints" ;
     ## Excluded
     sh:property [
-        sh:path netex:parentSiteRef ;
-        sh:maxCount 0 ;
-        sh:name "ParentSiteRef" ;
-        sh:description "Not used in NP — stop hierarchy managed by central registry"
-    ] , [
         sh:path netex:tariffZoneRef ;
         sh:maxCount 0 ;
         sh:name "TariffZoneRef" ;
@@ -81,6 +76,11 @@ profile:NP_StopPlaceShape a sh:NodeShape ;
         sh:path netex:topographicPlaceRef ;
         sh:maxCount 1 ;
         sh:name "TopographicPlaceRef"
+    ] , [
+        sh:path netex:parentSiteRef ;
+        sh:maxCount 1 ;
+        sh:name "ParentSiteRef" ;
+        sh:description "Used for multimodal StopPlace hierarchy (child stop referencing its parent), confirmed present in NSR exports"
     ] , [
         sh:path netex:validBetween ;
         sh:maxCount 1 ;

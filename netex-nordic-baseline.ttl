@@ -2184,6 +2184,12 @@ netex:StopPlace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:StopPlace ;
+    nordic:element "ParentSite@ref" ;
+    nordic:path "StopPlace/ParentSiteRef/@ref" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
     nordic:element "TransportMode" ;
     nordic:path "StopPlace/TransportMode" ;
     nordic:cardinality "1..1" ;

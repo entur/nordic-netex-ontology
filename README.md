@@ -118,7 +118,7 @@ constrain their generated (lowerCamelCase) properties directly:
 
 | Constraint | SHACL expression | Example |
 |------------|------------------|---------|
-| Excluded | `sh:maxCount 0` | `netex:parentSiteRef` not used in NP |
+| Excluded | `sh:maxCount 0` | `netex:tariffZoneRef` not used in NP |
 | Allowed | `sh:maxCount 1` | `netex:topographicPlaceRef` optional |
 | Required | `sh:minCount 1; sh:maxCount 1` | `netex:routeRef` mandatory (XSD says optional) |
 | Type check | `sh:class` | `netex:routeRef` must point to a `netex:Route` |
