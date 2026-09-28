@@ -183,7 +183,7 @@ netex:Codespace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:CompoundTrain ;
-    nordic:element "Train@ref" ;
+    nordic:element "TrainRef/@ref" ;
     nordic:path "CompoundTrain/components/TrainInCompoundTrain/TrainRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -233,13 +233,13 @@ netex:Codespace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Contract ;
-    nordic:element "Authority@ref" ;
+    nordic:element "OrganisationRef/@ref" ;
     nordic:path "Contract/contractees/OrganisationRef/@ref" ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Contract ;
-    nordic:element "Operator@ref" ;
+    nordic:element "OrganisationRef/@ref" ;
     nordic:path "Contract/contractors/OrganisationRef/@ref" ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
@@ -576,7 +576,7 @@ netex:GroupOfLines nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:GroupOfLines ;
-    nordic:element "Line@ref" ;
+    nordic:element "LineRef/@ref" ;
     nordic:path "GroupOfLines/members/LineRef/@ref" ;
     nordic:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
@@ -599,25 +599,25 @@ netex:Interchange nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Interchange ;
-    nordic:element "ServiceJourney@ref" ;
+    nordic:element "FromJourneyRef/@ref" ;
     nordic:path "ServiceJourneyInterchange/FromJourneyRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Interchange ;
-    nordic:element "ServiceJourney@ref" ;
+    nordic:element "ToJourneyRef/@ref" ;
     nordic:path "ServiceJourneyInterchange/ToJourneyRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Interchange ;
-    nordic:element "ScheduledStopPoint@ref" ;
+    nordic:element "FromPointRef/@ref" ;
     nordic:path "ServiceJourneyInterchange/FromPointRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Interchange ;
-    nordic:element "ScheduledStopPoint@ref" ;
+    nordic:element "ToPointRef/@ref" ;
     nordic:path "ServiceJourneyInterchange/ToPointRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
@@ -652,7 +652,7 @@ netex:JourneyPattern nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
-    nordic:element "Route@ref" ;
+    nordic:element "RouteRef/@ref" ;
     nordic:path "JourneyPattern/RouteRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -676,7 +676,7 @@ netex:JourneyPattern nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
-    nordic:element "ScheduledStopPoint@ref" ;
+    nordic:element "ScheduledStopPointRef/@ref" ;
     nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ScheduledStopPointRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -694,104 +694,104 @@ netex:JourneyPattern nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
-    nordic:element "DestinationDisplay@ref" ;
+    nordic:element "DestinationDisplayRef/@ref" ;
     nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/DestinationDisplayRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "RequestMethod" ;
-    nordic:path "How to request the stop: `handSignal`, `phoneCall`, `sms`, `stopButton`, `none`" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/RequestMethod" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "ChangeOfDestinationDisplay" ;
-    nordic:path "Whether the destination display changes at this stop" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ChangeOfDestinationDisplay" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "StopUse" ;
-    nordic:path "How the stop is used: `access`, `passthrough`, `interchangeOnly`" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/StopUse" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "noticeAssignments" ;
-    nordic:path "Container for stop-specific notice assignments" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "NoticeAssignment/@id" ;
-    nordic:path "Unique identifier for the notice assignment" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@id" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "NoticeAssignment/@version" ;
-    nordic:path "Version label" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@version" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "NoticeAssignment/@order" ;
-    nordic:path "Evaluation order" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@order" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
-    nordic:element "Notice@ref" ;
-    nordic:path "Reference to the Notice text" ;
+    nordic:element "NoticeRef/@ref" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/NoticeRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "BookingArrangements" ;
-    nordic:path "Booking rules for flexible/demand-responsive transport" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "BookingAccess" ;
-    nordic:path "Who can book: `public`, `authorisedPublic`, `staff`" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingAccess" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "BookWhen" ;
-    nordic:path "When to book: `advanceOnly`, `dayOfTravelOnly`, `untilPreviousDay`" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookWhen" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "LatestBookingTime" ;
-    nordic:path "Latest time a booking can be made (e.g., 16:00:00)" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/LatestBookingTime" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "MinimumBookingPeriod" ;
-    nordic:path "Minimum advance booking period (e.g., PT2H)" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/MinimumBookingPeriod" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "BookingUrl" ;
-    nordic:path "URL for online booking" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingUrl" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "BookingNote" ;
-    nordic:path "Human-readable booking instructions" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingNote" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:JourneyPattern ;
     nordic:element "BookingMethod" ;
-    nordic:path "How to book: `callDriver`, `callOffice`, `online`, `phoneAtStop`, `text`" ;
+    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingMethods/BookingMethod" ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
@@ -867,7 +867,7 @@ netex:Line nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Line ;
-    nordic:element "Operator@ref" ;
+    nordic:element "OperatorRef/@ref" ;
     nordic:path "Line/OperatorRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -979,25 +979,25 @@ netex:Network nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Network ;
-    nordic:element "Authority@ref" ;
+    nordic:element "AuthorityRef/@ref" ;
     nordic:path "Network/AuthorityRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Network ;
-    nordic:element "Line@ref" ;
+    nordic:element "LineRef/@ref" ;
     nordic:path "Network/members/LineRef/@ref" ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Network ;
-    nordic:element "GroupOfLines@ref" ;
+    nordic:element "GroupOfLinesRef/@ref" ;
     nordic:path "Network/groupsOfLines/GroupOfLinesRef/@ref" ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Network ;
-    nordic:element "TariffZone@ref" ;
+    nordic:element "TariffZoneRef/@ref" ;
     nordic:path "Network/tariffZones/TariffZoneRef/@ref" ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
@@ -1333,19 +1333,19 @@ netex:PassengerStopAssignment nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "ScheduledStopPoint@ref" ;
+    nordic:element "ScheduledStopPointRef/@ref" ;
     nordic:path "PassengerStopAssignment/ScheduledStopPointRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "StopPlace@ref" ;
+    nordic:element "StopPlaceRef/@ref" ;
     nordic:path "PassengerStopAssignment/StopPlaceRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "Quay@ref" ;
+    nordic:element "QuayRef/@ref" ;
     nordic:path "PassengerStopAssignment/QuayRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -1546,7 +1546,7 @@ netex:ResponsibilitySet nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "Authority@ref" ;
+    nordic:element "ResponsibleOrganisationRef/@ref" ;
     nordic:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
@@ -1558,7 +1558,7 @@ netex:ResponsibilitySet nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "Contract@ref" ;
+    nordic:element "ContractRef/@ref" ;
     nordic:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/AssociatedContract/ContractRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
@@ -1593,7 +1593,7 @@ netex:Route nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Route ;
-    nordic:element "Line@ref" ;
+    nordic:element "LineRef/@ref" ;
     nordic:path "Route/LineRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -1652,7 +1652,7 @@ netex:RoutePoint nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:RoutePoint ;
-    nordic:element "ScheduledStopPoint@ref" ;
+    nordic:element "ProjectToPointRef/@ref" ;
     nordic:path "RoutePoint/projections/PointProjection/ProjectToPointRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
@@ -1893,13 +1893,13 @@ netex:ServiceLink nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:ServiceLink ;
-    nordic:element "ScheduledStopPoint@ref" ;
+    nordic:element "FromPointRef/@ref" ;
     nordic:path "ServiceLink/FromPointRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:ServiceLink ;
-    nordic:element "ScheduledStopPoint@ref" ;
+    nordic:element "ToPointRef/@ref" ;
     nordic:path "ServiceLink/ToPointRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -1975,13 +1975,13 @@ netex:SiteConnection nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:SiteConnection ;
-    nordic:element "StopPlace@ref" ;
+    nordic:element "StopPlaceRef/@ref" ;
     nordic:path "SiteConnection/From/StopPlaceRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:SiteConnection ;
-    nordic:element "StopPlace@ref" ;
+    nordic:element "StopPlaceRef/@ref" ;
     nordic:path "SiteConnection/To/StopPlaceRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
@@ -2059,19 +2059,19 @@ netex:DefaultConnection nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:DefaultConnection ;
-    nordic:element "TopographicPlace@ref" ;
+    nordic:element "TopographicPlaceView/@ref" ;
     nordic:path "DefaultConnection/TopographicPlaceView/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:DefaultConnection ;
-    nordic:element "StopArea@ref" ;
+    nordic:element "StopAreaRef/@ref" ;
     nordic:path "DefaultConnection/StopAreaRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:DefaultConnection ;
-    nordic:element "SiteElement@ref" ;
+    nordic:element "SiteElementRef/@ref" ;
     nordic:path "DefaultConnection/SiteElementRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
@@ -2190,13 +2190,13 @@ netex:StopPlace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:StopPlace ;
-    nordic:element "TopographicPlace@ref" ;
+    nordic:element "TopographicPlaceRef/@ref" ;
     nordic:path "StopPlace/TopographicPlaceRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:StopPlace ;
-    nordic:element "ParentSite@ref" ;
+    nordic:element "ParentSiteRef/@ref" ;
     nordic:path "StopPlace/ParentSiteRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
@@ -2515,7 +2515,7 @@ netex:TopographicPlace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:TrainBlock ;
-    nordic:element "Operator@ref" ;
+    nordic:element "OperatorRef/@ref" ;
     nordic:path "Block/OperatorRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
@@ -2573,13 +2573,13 @@ netex:Vehicle nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Vehicle ;
-    nordic:element "Operator@ref" ;
+    nordic:element "OperatorRef/@ref" ;
     nordic:path "Vehicle/OperatorRef/@ref" ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Vehicle ;
-    nordic:element "VehicleType@ref" ;
+    nordic:element "VehicleTypeRef/@ref" ;
     nordic:path "Vehicle/VehicleTypeRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
