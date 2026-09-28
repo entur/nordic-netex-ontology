@@ -1463,6 +1463,30 @@ netex:Quay nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:Quay ;
+    nordic:element "AudibleSignalsAvailable" ;
+    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/AudibleSignalsAvailable" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:Quay ;
+    nordic:element "VisualSignsAvailable" ;
+    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/VisualSignsAvailable" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:Quay ;
+    nordic:element "EscalatorFreeAccess" ;
+    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/EscalatorFreeAccess" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:Quay ;
+    nordic:element "LiftFreeAccess" ;
+    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/LiftFreeAccess" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:Quay ;
     nordic:element "PublicCode" ;
     nordic:path "Quay/PublicCode" ;
     nordic:cardinality "0..1" ;
@@ -1961,6 +1985,96 @@ netex:SiteConnection nordic:inProfile profile:NordicProfile ;
     nordic:path "SiteConnection/To/StopPlaceRef/@ref" ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:SiteConnection ;
+    nordic:element "BothWays" ;
+    nordic:path "SiteConnection/BothWays" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+
+## --- DefaultConnection (NordicProfile) ---
+## Default transfer times at area/national level (TopographicPlace, StopArea or SiteElement scope), distinct from the site-level SiteConnection.
+netex:DefaultConnection nordic:inProfile profile:NordicProfile ;
+    nordic:provenance nordic:Baseline .
+
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "@id" ;
+    nordic:path "DefaultConnection/@id" ;
+    nordic:cardinality "1..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "@version" ;
+    nordic:path "DefaultConnection/@version" ;
+    nordic:cardinality "1..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "Name" ;
+    nordic:path "DefaultConnection/Name" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "TransferDuration" ;
+    nordic:path "DefaultConnection/TransferDuration" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "DefaultDuration" ;
+    nordic:path "DefaultConnection/TransferDuration/DefaultDuration" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "WalkTransferDuration" ;
+    nordic:path "DefaultConnection/WalkTransferDuration" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "BothWays" ;
+    nordic:path "DefaultConnection/BothWays" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "TransferMode" ;
+    nordic:path "DefaultConnection/TransferMode" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "From" ;
+    nordic:path "DefaultConnection/From" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "To" ;
+    nordic:path "DefaultConnection/To" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "TopographicPlace@ref" ;
+    nordic:path "DefaultConnection/TopographicPlaceView/@ref" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "StopArea@ref" ;
+    nordic:path "DefaultConnection/StopAreaRef/@ref" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:DefaultConnection ;
+    nordic:element "SiteElement@ref" ;
+    nordic:path "DefaultConnection/SiteElementRef/@ref" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
 
 ## --- StopPlace (NordicProfile) ---
 netex:StopPlace nordic:inProfile profile:NordicProfile ;
@@ -2040,6 +2154,30 @@ netex:StopPlace nordic:inProfile profile:NordicProfile ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:StopPlace ;
+    nordic:element "AudibleSignalsAvailable" ;
+    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/AudibleSignalsAvailable" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
+    nordic:element "VisualSignsAvailable" ;
+    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/VisualSignsAvailable" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
+    nordic:element "EscalatorFreeAccess" ;
+    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/EscalatorFreeAccess" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
+    nordic:element "LiftFreeAccess" ;
+    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/LiftFreeAccess" ;
+    nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
     nordic:element "TopographicPlace@ref" ;
     nordic:path "StopPlace/TopographicPlaceRef/@ref" ;
     nordic:cardinality "0..1" ;
@@ -2049,6 +2187,12 @@ netex:StopPlace nordic:inProfile profile:NordicProfile ;
     nordic:element "TransportMode" ;
     nordic:path "StopPlace/TransportMode" ;
     nordic:cardinality "1..1" ;
+    nordic:provenance nordic:Baseline .
+[] a nordic:ProfileMember ;
+    nordic:onClass netex:StopPlace ;
+    nordic:element "OtherTransportModes" ;
+    nordic:path "StopPlace/OtherTransportModes" ;
+    nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 [] a nordic:ProfileMember ;
     nordic:onClass netex:StopPlace ;

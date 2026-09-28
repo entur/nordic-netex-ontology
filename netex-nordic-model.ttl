@@ -89,7 +89,8 @@ netex:ServiceFrame nordic:containedIn netex:CompositeFrame ;
         netex:FlexibleServiceProperties ,
         netex:RoutePoint ,
         netex:ServiceLink ,
-        netex:SiteConnection .
+        netex:SiteConnection ,
+        netex:DefaultConnection .
 
 netex:TimetableFrame nordic:containedIn netex:CompositeFrame ;
     nordic:contains netex:ServiceJourney ,
@@ -116,8 +117,10 @@ netex:SalesTransactionFrame nordic:containedIn netex:CompositeFrame ;
 netex:AccessibilityAssessment nordic:contains netex:AccessibilityLimitation .
 netex:AccessibilityLimitation nordic:containedIn netex:AccessibilityAssessment .
 
-netex:StopPlace nordic:contains netex:AlternativeName .
-netex:Quay nordic:contains netex:ShelterEquipment .
+netex:StopPlace nordic:contains netex:AlternativeName ,
+        netex:Quay .
+netex:Quay nordic:containedIn netex:StopPlace ;
+    nordic:contains netex:ShelterEquipment .
 
 ## =================================================================
 ## SPECIALISATION SEMANTICS
