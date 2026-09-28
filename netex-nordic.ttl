@@ -211,18 +211,6 @@ profile:NP_VehicleTypeShape a sh:NodeShape ;
         sh:description "XSD allows 0..1, NP mandates 1..1"
     ] .
 
-## --- FareZone ---
-
-profile:NP_FareZoneShape a sh:NodeShape ;
-    sh:targetClass netex:FareZone ;
-    rdfs:label "FareZone — NP constraints" ;
-    sh:property [
-        sh:path netex:name ;
-        sh:minCount 1 ; sh:maxCount 1 ;
-        sh:name "Name" ;
-        sh:description "XSD allows 0..1, NP mandates 1..1"
-    ] .
-
 ## --- Interchange ---
 
 profile:NP_InterchangeShape a sh:NodeShape ;
@@ -508,15 +496,6 @@ nordic:CalendarChain rdfs:comment """
     nordic:step1 netex:DayType ;
     nordic:step2 netex:DayTypeAssignment ;
     nordic:step3 netex:OperatingPeriod .
-
-nordic:OrganisationChain rdfs:comment """
-    Authority → Contract → Operator → ResponsibilitySet
-    Organisational governance and responsibility.
-""" ;
-    nordic:step1 netex:Authority ;
-    nordic:step2 netex:Contract ;
-    nordic:step3 netex:Operator ;
-    nordic:step4 netex:ResponsibilitySet .
 
 ## =================================================================
 ## END OF NORDIC PROFILE ONTOLOGY
