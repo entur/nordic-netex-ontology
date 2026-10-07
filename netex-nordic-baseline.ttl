@@ -20,7 +20,8 @@
 <https://netex-cen.eu/profile/nordic-baseline> a owl:Ontology ;
     rdfs:label "Nordic NeTEx Profile — Baseline" ;
     rdfs:comment "Positive membership allowlist: which classes and fields are in the profile, with cardinality." ;
-    owl:imports <https://netex-cen.eu/nordic> .
+    owl:imports <https://netex-cen.eu/nordic> ,
+                <https://netex-cen.eu/profile/nordic> .
 
 ## --- AlternativeName (NP) ---
 netex:AlternativeName profile:scope profile:NP ;
