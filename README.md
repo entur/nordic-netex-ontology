@@ -20,7 +20,7 @@ Every class and field carries a `profile:scope`, answering *included*,
 
 | Scope | Meaning |
 |-------|---------|
-| `profile:NordicProfile` | Officially part of the common Nordic NeTEx Profile |
+| `profile:NP` | Officially part of the common Nordic NeTEx Profile |
 | `profile:EnturExtension` | Entur-specific implementation, not part of the common Nordic Profile |
 | `profile:NordicCandidate` | Proposed for Nordic harmonisation, currently Entur-driven |
 

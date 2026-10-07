@@ -2,8 +2,8 @@
 ## Nordic NeTEx Profile — Baseline (positive membership allowlist)
 ## -----------------------------------------------------------------
 ## Seeded once from the nordic-netex-documentation Table_*.md files as
-## the pre-CCB field inventory. Nordic-owned classes are assigned to
-## profile:NordicProfile; downstream profiles may assign other classes
+## the pre-CCB field inventory. Nordic-owned classes carry
+## profile:scope profile:NP; downstream profiles may assign other classes
 ## to their own profile while reusing these field definitions. From
 ## here the Nordic profile inherits from CCB decisions — a change flips
 ## a field's provenance from nordic:Baseline to nordic:decision "NP-xxxx".
@@ -22,8 +22,8 @@
     rdfs:comment "Positive membership allowlist: which classes and fields are in the profile, with cardinality." ;
     owl:imports <https://netex-cen.eu/nordic> .
 
-## --- AlternativeName (NordicProfile) ---
-netex:AlternativeName nordic:inProfile profile:NordicProfile ;
+## --- AlternativeName (NP) ---
+netex:AlternativeName profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -39,8 +39,8 @@ netex:AlternativeName nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- AlternativeText (NordicProfile) ---
-netex:AlternativeText nordic:inProfile profile:NordicProfile ;
+## --- AlternativeText (NP) ---
+netex:AlternativeText profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -62,8 +62,8 @@ netex:AlternativeText nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Authority (NordicProfile) ---
-netex:Authority nordic:inProfile profile:NordicProfile ;
+## --- Authority (NP) ---
+netex:Authority profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -121,8 +121,8 @@ netex:Authority nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Codespace (NordicProfile) ---
-netex:Codespace nordic:inProfile profile:NordicProfile ;
+## --- Codespace (NP) ---
+netex:Codespace profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -144,8 +144,8 @@ netex:Codespace nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- DayType (NordicProfile) ---
-netex:DayType nordic:inProfile profile:NordicProfile ;
+## --- DayType (NP) ---
+netex:DayType profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -173,8 +173,8 @@ netex:DayType nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- DayTypeAssignment (NordicProfile) ---
-netex:DayTypeAssignment nordic:inProfile profile:NordicProfile ;
+## --- DayTypeAssignment (NP) ---
+netex:DayTypeAssignment profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -220,8 +220,8 @@ netex:DayTypeAssignment nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- DestinationDisplay (NordicProfile) ---
-netex:DestinationDisplay nordic:inProfile profile:NordicProfile ;
+## --- DestinationDisplay (NP) ---
+netex:DestinationDisplay profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -255,8 +255,8 @@ netex:DestinationDisplay nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- FlexibleServiceProperties (NordicProfile) ---
-netex:FlexibleServiceProperties nordic:inProfile profile:NordicProfile ;
+## --- FlexibleServiceProperties (NP) ---
+netex:FlexibleServiceProperties profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -296,8 +296,8 @@ netex:FlexibleServiceProperties nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- GroupOfLines (NordicProfile) ---
-netex:GroupOfLines nordic:inProfile profile:NordicProfile ;
+## --- GroupOfLines (NP) ---
+netex:GroupOfLines profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -343,8 +343,8 @@ netex:GroupOfLines nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
 
-## --- Interchange (NordicProfile) ---
-netex:Interchange nordic:inProfile profile:NordicProfile ;
+## --- Interchange (NP) ---
+netex:Interchange profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -390,8 +390,8 @@ netex:Interchange nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- JourneyPattern (NordicProfile) ---
-netex:JourneyPattern nordic:inProfile profile:NordicProfile ;
+## --- JourneyPattern (NP) ---
+netex:JourneyPattern profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -587,8 +587,8 @@ netex:JourneyPattern nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Line (NordicProfile) ---
-netex:Line nordic:inProfile profile:NordicProfile ;
+## --- Line (NP) ---
+netex:Line profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -670,8 +670,8 @@ netex:Line nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- LinkSequenceProjection (NordicProfile) ---
-netex:LinkSequenceProjection nordic:inProfile profile:NordicProfile ;
+## --- LinkSequenceProjection (NP) ---
+netex:LinkSequenceProjection profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -705,8 +705,8 @@ netex:LinkSequenceProjection nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "" ;
     nordic:provenance nordic:Baseline .
 
-## --- Network (NordicProfile) ---
-netex:Network nordic:inProfile profile:NordicProfile ;
+## --- Network (NP) ---
+netex:Network profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -764,8 +764,8 @@ netex:Network nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
 
-## --- Notice (NordicProfile) ---
-netex:Notice nordic:inProfile profile:NordicProfile ;
+## --- Notice (NP) ---
+netex:Notice profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -787,8 +787,8 @@ netex:Notice nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- OperatingDay (NordicProfile) ---
-netex:OperatingDay nordic:inProfile profile:NordicProfile ;
+## --- OperatingDay (NP) ---
+netex:OperatingDay profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -822,8 +822,8 @@ netex:OperatingDay nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "" ;
     nordic:provenance nordic:Baseline .
 
-## --- OperatingPeriod (NordicProfile) ---
-netex:OperatingPeriod nordic:inProfile profile:NordicProfile ;
+## --- OperatingPeriod (NP) ---
+netex:OperatingPeriod profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -851,8 +851,8 @@ netex:OperatingPeriod nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Operator (NordicProfile) ---
-netex:Operator nordic:inProfile profile:NordicProfile ;
+## --- Operator (NP) ---
+netex:Operator profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -934,8 +934,8 @@ netex:Operator nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Parking (NordicProfile) ---
-netex:Parking nordic:inProfile profile:NordicProfile ;
+## --- Parking (NP) ---
+netex:Parking profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1071,8 +1071,8 @@ netex:Parking nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- PassengerStopAssignment (NordicProfile) ---
-netex:PassengerStopAssignment nordic:inProfile profile:NordicProfile ;
+## --- PassengerStopAssignment (NP) ---
+netex:PassengerStopAssignment profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1124,8 +1124,8 @@ netex:PassengerStopAssignment nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- PurposeOfGrouping (NordicProfile) ---
-netex:PurposeOfGrouping nordic:inProfile profile:NordicProfile ;
+## --- PurposeOfGrouping (NP) ---
+netex:PurposeOfGrouping profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1147,8 +1147,8 @@ netex:PurposeOfGrouping nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Quay (NordicProfile) ---
-netex:Quay nordic:inProfile profile:NordicProfile ;
+## --- Quay (NP) ---
+netex:Quay profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1272,8 +1272,8 @@ netex:Quay nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
 
-## --- ResponsibilitySet (NordicProfile) ---
-netex:ResponsibilitySet nordic:inProfile profile:NordicProfile ;
+## --- ResponsibilitySet (NP) ---
+netex:ResponsibilitySet profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1325,8 +1325,8 @@ netex:ResponsibilitySet nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Route (NordicProfile) ---
-netex:Route nordic:inProfile profile:NordicProfile ;
+## --- Route (NP) ---
+netex:Route profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1378,8 +1378,8 @@ netex:Route nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- RoutePoint (NordicProfile) ---
-netex:RoutePoint nordic:inProfile profile:NordicProfile ;
+## --- RoutePoint (NP) ---
+netex:RoutePoint profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1419,8 +1419,8 @@ netex:RoutePoint nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- SanitaryEquipment (NordicProfile) ---
-netex:SanitaryEquipment nordic:inProfile profile:NordicProfile ;
+## --- SanitaryEquipment (NP) ---
+netex:SanitaryEquipment profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1460,8 +1460,8 @@ netex:SanitaryEquipment nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- ScheduledStopPoint (NordicProfile) ---
-netex:ScheduledStopPoint nordic:inProfile profile:NordicProfile ;
+## --- ScheduledStopPoint (NP) ---
+netex:ScheduledStopPoint profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1495,8 +1495,8 @@ netex:ScheduledStopPoint nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- ServiceCalendar (NordicProfile) ---
-netex:ServiceCalendar nordic:inProfile profile:NordicProfile ;
+## --- ServiceCalendar (NP) ---
+netex:ServiceCalendar profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1530,8 +1530,8 @@ netex:ServiceCalendar nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- ServiceJourney (NordicProfile) ---
-netex:ServiceJourney nordic:inProfile profile:NordicProfile ;
+## --- ServiceJourney (NP) ---
+netex:ServiceJourney profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1613,8 +1613,8 @@ netex:ServiceJourney nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- ServiceLink (NordicProfile) ---
-netex:ServiceLink nordic:inProfile profile:NordicProfile ;
+## --- ServiceLink (NP) ---
+netex:ServiceLink profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1666,8 +1666,8 @@ netex:ServiceLink nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- ShelterEquipment (NordicProfile) ---
-netex:ShelterEquipment nordic:inProfile profile:NordicProfile ;
+## --- ShelterEquipment (NP) ---
+netex:ShelterEquipment profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1701,8 +1701,8 @@ netex:ShelterEquipment nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- SiteConnection (NordicProfile) ---
-netex:SiteConnection nordic:inProfile profile:NordicProfile ;
+## --- SiteConnection (NP) ---
+netex:SiteConnection profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1754,9 +1754,9 @@ netex:SiteConnection nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- DefaultConnection (NordicProfile) ---
+## --- DefaultConnection (NP) ---
 ## Default transfer times at area/national level (TopographicPlace, StopArea or SiteElement scope), distinct from the site-level SiteConnection.
-netex:DefaultConnection nordic:inProfile profile:NordicProfile ;
+netex:DefaultConnection profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1838,8 +1838,8 @@ netex:DefaultConnection nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- StopPlace (NordicProfile) ---
-netex:StopPlace nordic:inProfile profile:NordicProfile ;
+## --- StopPlace (NP) ---
+netex:StopPlace profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -1993,8 +1993,8 @@ netex:StopPlace nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
 
-## --- TariffZone (NordicProfile) ---
-netex:TariffZone nordic:inProfile profile:NordicProfile ;
+## --- TariffZone (NP) ---
+netex:TariffZone profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -2028,8 +2028,8 @@ netex:TariffZone nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- TicketingEquipment (NordicProfile) ---
-netex:TicketingEquipment nordic:inProfile profile:NordicProfile ;
+## --- TicketingEquipment (NP) ---
+netex:TicketingEquipment profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -2093,8 +2093,8 @@ netex:TicketingEquipment nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- TopographicPlace (NordicProfile) ---
-netex:TopographicPlace nordic:inProfile profile:NordicProfile ;
+## --- TopographicPlace (NP) ---
+netex:TopographicPlace profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -2158,8 +2158,8 @@ netex:TopographicPlace nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- TrainNumber (NordicProfile) ---
-netex:TrainNumber nordic:inProfile profile:NordicProfile ;
+## --- TrainNumber (NP) ---
+netex:TrainNumber profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -2181,8 +2181,8 @@ netex:TrainNumber nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- Vehicle (NordicProfile) ---
-netex:Vehicle nordic:inProfile profile:NordicProfile ;
+## --- Vehicle (NP) ---
+netex:Vehicle profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -2216,8 +2216,8 @@ netex:Vehicle nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- VehicleType (NordicProfile) ---
-netex:VehicleType nordic:inProfile profile:NordicProfile ;
+## --- VehicleType (NP) ---
+netex:VehicleType profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;
@@ -2287,8 +2287,8 @@ netex:VehicleType nordic:inProfile profile:NordicProfile ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- WaitingRoomEquipment (NordicProfile) ---
-netex:WaitingRoomEquipment nordic:inProfile profile:NordicProfile ;
+## --- WaitingRoomEquipment (NP) ---
+netex:WaitingRoomEquipment profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a nordic:ProfileMember ;

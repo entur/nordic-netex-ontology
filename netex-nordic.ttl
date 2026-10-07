@@ -33,7 +33,8 @@
 ## PROFILE DEFINITION
 ## =================================================================
 
-profile:NP a nordic:Profile ;
+profile:NP a nordic:Profile ,
+        profile:Scope ;
     rdfs:label "Nordic Profile" ;
     skos:notation "NP" ;
     skos:definition "Shared NeTEx profile for Norway, Sweden, Finland and Denmark" ;
