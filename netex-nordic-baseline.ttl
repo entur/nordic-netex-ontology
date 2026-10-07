@@ -145,6 +145,11 @@ netex:Codespace profile:scope profile:NP ;
     nordic:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
+## --- CompositeFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:CompositeFrame profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
 ## --- DayType (NP) ---
 netex:DayType profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
@@ -254,6 +259,11 @@ netex:DestinationDisplay profile:scope profile:NP ;
     nordic:element "SideText" ;
     nordic:path "DestinationDisplay/SideText" ;
     nordic:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+
+## --- FareFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:FareFrame profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- FlexibleServiceProperties (NP) ---
@@ -1273,6 +1283,11 @@ netex:Quay profile:scope profile:NP ;
     nordic:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
 
+## --- ResourceFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:ResourceFrame profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
 ## --- ResponsibilitySet (NP) ---
 netex:ResponsibilitySet profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
@@ -1420,6 +1435,11 @@ netex:RoutePoint profile:scope profile:NP ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
+## --- SalesTransactionFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:SalesTransactionFrame profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
 ## --- SanitaryEquipment (NP) ---
 netex:SanitaryEquipment profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
@@ -1529,6 +1549,16 @@ netex:ServiceCalendar profile:scope profile:NP ;
     nordic:element "ToDate" ;
     nordic:path "ServiceCalendar/ToDate" ;
     nordic:cardinality "1..1" ;
+    nordic:provenance nordic:Baseline .
+
+## --- ServiceCalendarFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:ServiceCalendarFrame profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
+## --- ServiceFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:ServiceFrame profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceJourney (NP) ---
@@ -1839,6 +1869,11 @@ netex:DefaultConnection profile:scope profile:NP ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
+## --- SiteFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:SiteFrame profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
 ## --- StopPlace (NP) ---
 netex:StopPlace profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
@@ -2094,6 +2129,11 @@ netex:TicketingEquipment profile:scope profile:NP ;
     nordic:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
+## --- TimetableFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:TimetableFrame profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
 ## --- TopographicPlace (NP) ---
 netex:TopographicPlace profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
@@ -2215,6 +2255,11 @@ netex:Vehicle profile:scope profile:NP ;
     nordic:element "VehicleTypeRef/@ref" ;
     nordic:path "Vehicle/VehicleTypeRef/@ref" ;
     nordic:cardinality "1..1" ;
+    nordic:provenance nordic:Baseline .
+
+## --- VehicleScheduleFrame (NP) ---
+## Frame-level membership only; field containment is in netex-nordic-model.ttl.
+netex:VehicleScheduleFrame profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- VehicleType (NP) ---
