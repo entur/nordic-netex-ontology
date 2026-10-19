@@ -290,22 +290,10 @@ nordic:DestinationDisplay a profile:ProfileClass ;
     profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
-## --- FareContract (NP) ---
-nordic:FareContract a profile:ProfileClass ;
-    profile:onClass netex:FareContract ;
-    profile:scope profile:NP ;
-    nordic:provenance nordic:Baseline .
-
 ## --- FareFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
 nordic:FareFrame a profile:ProfileClass ;
     profile:onClass netex:FareFrame ;
-    profile:scope profile:NP ;
-    nordic:provenance nordic:Baseline .
-
-## --- FareZone (NP) ---
-nordic:FareZone a profile:ProfileClass ;
-    profile:onClass netex:FareZone ;
     profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 

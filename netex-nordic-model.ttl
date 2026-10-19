@@ -89,11 +89,9 @@ nordic:TimetableFrame nordic:containedIn nordic:CompositeFrame ;
         nordic:Interchange ,
         nordic:TrainNumber .
 
-nordic:FareFrame nordic:containedIn nordic:CompositeFrame ;
-    nordic:contains nordic:FareZone .
+nordic:FareFrame nordic:containedIn nordic:CompositeFrame .
 
-nordic:SalesTransactionFrame nordic:containedIn nordic:CompositeFrame ;
-    nordic:contains nordic:FareContract .
+nordic:SalesTransactionFrame nordic:containedIn nordic:CompositeFrame .
 
 ## =================================================================
 ## NESTED CLASS CONTAINMENT
