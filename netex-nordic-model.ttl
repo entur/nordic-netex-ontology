@@ -7,7 +7,8 @@
 ## The generated base ontology remains authoritative for classes,
 ## properties, cardinality and XSD sequence. This overlay only adds
 ## the profile's frame containment between the Nordic profile nodes
-## (nordic:X); nothing here is asserted on the netex: classes themselves.
+## (nordic:X, defined in netex-nordic.ttl); nothing here is asserted on
+## the netex: classes themselves.
 ##
 ## Imports: generated NeTEx base + netex-nordic-vocab.ttl + netex-nordic.ttl
 ## -----------------------------------------------------------------

@@ -126,7 +126,7 @@ nordic:inFrame a owl:ObjectProperty ;
 ## The SHACL shapes in netex-nordic.ttl encode only where the profile
 ## *tightens* the base. This vocabulary carries the complementary
 ## positive layer: which classes and fields are *in* the profile — the
-## baseline allowlist, projected from the documentation Tables — plus
+## membership allowlist, also in netex-nordic.ttl — plus
 ## the governing scope and the provenance of each rule.
 ## -----------------------------------------------------------------
 
