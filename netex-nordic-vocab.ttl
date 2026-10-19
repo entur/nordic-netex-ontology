@@ -40,10 +40,6 @@ nordic:extendsProfile a owl:ObjectProperty ;
     skos:definition "A profile builds on and extends another profile" ;
     skos:scopeNote "Generic mechanism for downstream profiles (e.g. a vendor profile) to declare that they extend this profile. Nordic defines only this property, never the downstream profile it is used by." .
 
-nordic:DataSource a owl:Class ;
-    rdfs:label "DataSource" ;
-    skos:definition "Origin classification for data ownership (central registry, operator delivery, etc.)" .
-
 ## =================================================================
 ## DATA CONFIDENCE (provenance of profile constraints)
 ## =================================================================
@@ -159,20 +155,40 @@ profile:scope a owl:AnnotationProperty ;
     skos:definition "Which profile level governs this object" .
 
 ## --- Membership: the positive allowlist ---
-nordic:ProfileMember a owl:Class ;
-    rdfs:label "ProfileMember" ;
-    skos:definition "A field (element or attribute) that is part of the profile for a given class, with its cardinality" .
+## Shared profile vocabulary (profile:), reusable by any profile. Each
+## profile mints its own ProfileClass nodes in its own namespace
+## (nordic:Quay, entur:Quay, ...) pointing at the standard class, so no
+## profile ever writes statements on a netex: class.
+profile:ProfileClass a owl:Class ;
+    rdfs:label "ProfileClass" ;
+    skos:definition "A profile's own resource for a NeTEx class it includes; carries the profile's scope and provenance for that class" .
 
-nordic:onClass a owl:ObjectProperty ;
+profile:onClass a owl:ObjectProperty ;
     rdfs:label "onClass" ;
-    skos:definition "The class this profile member belongs to" .
+    rdfs:domain profile:ProfileClass ;
+    skos:definition "The standard NeTEx class this profile class profiles" .
 
-nordic:path a owl:DatatypeProperty ;
+profile:ProfileMember a owl:Class ;
+    rdfs:label "ProfileMember" ;
+    skos:definition "A field (element or attribute) that is part of a profile class, with its cardinality" .
+
+profile:memberOf a owl:ObjectProperty ;
+    rdfs:label "memberOf" ;
+    rdfs:domain profile:ProfileMember ;
+    rdfs:range profile:ProfileClass ;
+    skos:definition "The profile class this member belongs to" .
+
+profile:element a owl:DatatypeProperty ;
+    rdfs:label "element" ;
+    rdfs:range xsd:string ;
+    skos:definition "XML element or attribute name of the member" .
+
+profile:path a owl:DatatypeProperty ;
     rdfs:label "path" ;
     rdfs:range xsd:string ;
     skos:definition "XML path of the member within its class" .
 
-nordic:cardinality a owl:DatatypeProperty ;
+profile:cardinality a owl:DatatypeProperty ;
     rdfs:label "cardinality" ;
     rdfs:range xsd:string ;
     skos:definition "Profile cardinality of the member (e.g. 1..1, 0..n)" .
