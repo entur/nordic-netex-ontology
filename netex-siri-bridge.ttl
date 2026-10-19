@@ -46,9 +46,6 @@ netex:Route nordic:referencedBySIRI siri:SIRI_ET , siri:SIRI_SX ;
 netex:ServiceJourney nordic:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX ;
     rdfs:comment "Via FramedVehicleJourneyRef / DatedVehicleJourneyRef" .
 
-netex:DatedServiceJourney nordic:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX , siri:SIRI_FM ;
-    rdfs:comment "Via DatedVehicleJourneyRef in all services" .
-
 netex:JourneyPattern nordic:referencedBySIRI siri:SIRI_ET ;
     rdfs:comment "Via JourneyPatternRef in EstimatedVehicleJourney" .
 

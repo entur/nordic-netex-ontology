@@ -15,22 +15,17 @@ rather than re-deriving it.
 
 ## Governance model
 
-Every class and field carries a `profile:scope`, answering *included*,
-*excluded*, or *proposed* directly rather than leaving it implicit:
+Every profiled class carries `profile:scope profile:NP` — officially part of
+the common Nordic NeTEx Profile. Classes and scopes that belong to
+downstream profiles are defined downstream, not here.
 
-| Scope | Meaning |
-|-------|---------|
-| `profile:NP` | Officially part of the common Nordic NeTEx Profile |
-| `profile:EnturExtension` | Entur-specific implementation, not part of the common Nordic Profile |
-| `profile:NordicCandidate` | Proposed for Nordic harmonisation, currently Entur-driven |
-
-`netex-nordic-baseline.ttl` is the positive membership allowlist. Profile
+The membership allowlist lives in `netex-nordic.ttl`. Profile
 statements are never written on the standard `netex:` classes: each profiled
 class is a Nordic-owned `profile:ProfileClass` node (e.g. `nordic:Quay`,
 `profile:onClass netex:Quay`) carrying the scope, and each
 `profile:ProfileMember` records a field with its `profile:cardinality` via
-`profile:memberOf nordic:Quay`. Other profiles mint their own nodes
-(`entur:Quay`, …) with the same `profile:` vocabulary. Every entry carries
+`profile:memberOf nordic:Quay`. Downstream profiles mint their own nodes in
+their own namespace with the same `profile:` vocabulary. Every entry carries
 `nordic:provenance` — either
 `nordic:Baseline` (established content seeded once from prior documentation,
 predating decision tracking) or `nordic:decision "NP-xxxx"` (a specific,
@@ -47,9 +42,9 @@ profile owns, which points at the standard class.
 | Prefix | Owner | Holds |
 |--------|-------|-------|
 | `netex:` | CEN (generated, `base/`) | Standard classes and properties. Never written on by a profile. |
-| `profile:` | Shared | Profile vocabulary reusable by any profile: `ProfileClass`, `onClass`, `ProfileMember`, `memberOf`, `element`, `path`, `cardinality`, `scope`, `Scope`. |
-| `nordic:` | Nordic Profile | NP's profile resources (`nordic:Quay`, …) and NP-specific terms (`provenance`, `Baseline`, `decision`, `issue`). |
-| `entur:` | Entur ([entur-netex-ontology](https://github.com/entur/entur-netex-ontology)) | Entur's profile resources (`entur:DatedServiceJourney`, …), using the same `profile:` vocabulary. |
+| `profile:` | Shared | Profile vocabulary reusable by any profile: `ProfileClass`, `onClass`, `ProfileMember`, `memberOf`, `element`, `path`, `cardinality`, `elementOrder`, `position`, `scope`, `Scope`. |
+| `nordic:` | Nordic Profile | NP's profile resources (`nordic:Quay`, …), frame containment between them (`contains`, `containedIn`), and NP-specific terms (`provenance`, `Baseline`, `decision`, `issue`). |
+| *downstream* | Each downstream profile | Its own profile resources in its own namespace, using the same `profile:` vocabulary. Not defined in this repository. |
 
 Because each profile mints its own node, the same CEN class can be profiled
 by several profiles side by side without their fields, scope, or
@@ -57,14 +52,13 @@ documentation links being mixed up on `netex:Quay`. Layers that annotate a
 profile (e.g. documentation) should point at the profile node
 (`nordic:Quay`) and read scope from it, rather than restating it.
 
-Not yet migrated: frame containment in `netex-nordic-model.ttl` and element
-ordering (`nordic:elementOrder`) in `netex-nordic.ttl` are still asserted
-directly on `netex:` classes.
+Not yet migrated: `netex-siri-bridge.ttl` still asserts
+`nordic:referencedBySIRI` directly on `netex:` classes.
 
 Decisions are proposed, discussed, and accepted in the separate
 [Nordic Profile Change and Control Board](https://github.com/hfjelstad/nordic-profile-change-and-control)
 repository. This repository consumes accepted decisions and records their
-outcome as `nordic:decision` provenance on the baseline; it does not host the
+outcome as `nordic:decision` provenance in `netex-nordic.ttl`; it does not host the
 discussion itself.
 
 ## Architecture
@@ -75,10 +69,9 @@ the official NeTEx XSD by the [netex-ontology-generator](#base-ontology-generate
 
 ```
 base/ (netex.ttl + modules + netex-shacl.ttl)  ← generated NeTEx base — vendored snapshot
-└─ netex-nordic.ttl                ← Nordic Profile: SHACL constraints, ordering
+└─ netex-nordic.ttl                ← Nordic Profile: membership allowlist, SHACL constraints, ordering
    ├─ netex-nordic-vocab.ttl       ← Nordic + shared profile vocabulary (nordic:, profile:)
-   ├─ netex-nordic-baseline.ttl    ← positive membership allowlist (generated)
-   ├─ netex-nordic-model.ttl       ← curated frame containment & specialisation
+   ├─ netex-nordic-model.ttl       ← curated frame containment
    ├─ netex-transmodel-alignment.ttl ← NeTEx ⇄ Transmodel (skos, vendored)
    └─ netex-siri-bridge.ttl        ← NeTEx ⇄ SIRI real-time bridges
       └─ <your-layer>.ttl          ← Organisation, service, country, …
@@ -86,7 +79,7 @@ base/ (netex.ttl + modules + netex-shacl.ttl)  ← generated NeTEx base — vend
 
 **Design principle:** The generated base stays a faithful, mechanical projection
 of the standard. The Nordic layer *tightens* (SHACL), states positive
-*membership* (the baseline allowlist), *annotates*, and *aligns* — it never
+*membership* (the allowlist), *annotates*, and *aligns* — it never
 renames or forks the base.
 
 ## Base ontology (generated)
@@ -125,10 +118,9 @@ naming — the mapping lives in `netex-transmodel-alignment.ttl` via
 |------|----------|
 | `catalog.ttl` | DCAT manifest listing every RDF document in this repository, with title, description, provenance and triple count. Generated by `scripts/generate-catalog.py`; do not hand-edit. |
 | `base/` | Vendored snapshot of the generated NeTEx base — ten OWL modules plus the `netex-shacl.ttl` SHACL baseline. Projected from the NeTEx XSD; not hand-edited. |
-| `netex-nordic.ttl` | SHACL shapes for the Nordic Profile (allow / require / exclude), plus profile element ordering and navigational domain chains. |
+| `netex-nordic.ttl` | The Nordic Profile: membership allowlist (`nordic:X` profile nodes and their fields, with cardinality, `profile:scope` and `nordic:provenance`), SHACL shapes (allow / require / exclude), profile element ordering and navigational domain chains. Pre-CCB content carries `nordic:Baseline`; changes come from CCB decisions. |
 | `netex-nordic-vocab.ttl` | Nordic-invented vocabulary in the `nordic:` namespace (profile meta-classes, data-confidence, ordering, domain chains, SIRI bridge property, structural predicates, membership & provenance). |
-| `netex-nordic-baseline.ttl` | Positive membership allowlist — which classes and fields are *in* the profile, with cardinality, governing `profile:scope`, and `nordic:provenance nordic:Baseline`. Seeded once from the documentation `Table_*.md`; henceforth the profile inherits from CCB decisions, not the documentation. |
-| `netex-nordic-model.ttl` | Curated structural overlay: frame containment and functional specialisation semantics on the generated classes. |
+| `netex-nordic-model.ttl` | Curated structural overlay: frame containment between the Nordic profile nodes. |
 | `netex-transmodel-alignment.ttl` | Vendored snapshot, generated by `netex-ontology-generator`: `skos:exactMatch` alignment from generated NeTEx classes to Transmodel v6.2 concepts (by name/documentation matching). Not hand-edited. |
 | `netex-siri-bridge.ttl` | Which generated NeTEx classes are referenced by SIRI services (ET, SX, VM, FM). |
 
