@@ -7,10 +7,9 @@
 ## The generated base ontology remains authoritative for classes,
 ## properties, cardinality and XSD sequence. This overlay only adds
 ## the profile's frame containment between the Nordic profile nodes
-## (nordic:X, defined in netex-nordic-baseline.ttl); nothing here is
-## asserted on the netex: classes themselves.
+## (nordic:X); nothing here is asserted on the netex: classes themselves.
 ##
-## Imports: generated NeTEx base + netex-nordic-vocab.ttl + baseline
+## Imports: generated NeTEx base + netex-nordic-vocab.ttl + netex-nordic.ttl
 ## -----------------------------------------------------------------
 
 @prefix netex:  <https://netex-cen.eu/ontology#> .
@@ -22,7 +21,7 @@
     rdfs:label "Nordic NeTEx Structural Model" ;
     owl:imports <https://netex-cen.eu/ontology> ,
                 <https://netex-cen.eu/nordic> ,
-                <https://netex-cen.eu/profile/nordic-baseline> ;
+                <https://netex-cen.eu/profile/nordic> ;
     rdfs:comment "Curated frame containment between Nordic profile nodes." .
 
 ## =================================================================
