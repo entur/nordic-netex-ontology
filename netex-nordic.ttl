@@ -145,7 +145,7 @@ profile:NP_ServiceJourneyShape a sh:NodeShape ;
         sh:path netex:blockRef ;
         sh:maxCount 0 ;
         sh:name "BlockRef" ;
-        sh:description "Not used in NP — block assignment via DatedServiceJourney"
+        sh:description "Not used in NP"
     ] .
 
 ## --- JourneyPattern ---
@@ -397,22 +397,6 @@ netex:JourneyPattern nordic:elementOrder [
     nordic:position 6 ; nordic:element "linksInSequence"
 ] .
 
-netex:DatedServiceJourney nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
-] , [
-    nordic:position 2 ; nordic:element "@version"
-] , [
-    nordic:position 3 ; nordic:element "ServiceAlteration"
-] , [
-    nordic:position 4 ; nordic:element "BlockRef"
-] , [
-    nordic:position 5 ; nordic:element "ServiceJourneyRef"
-] , [
-    nordic:position 6 ; nordic:element "replacedJourneys"
-] , [
-    nordic:position 7 ; nordic:element "OperatingDayRef"
-] .
-
 netex:DayType nordic:elementOrder [
     nordic:position 1 ; nordic:element "@id"
 ] , [
@@ -470,16 +454,14 @@ netex:DestinationDisplay nordic:elementOrder [
 ## =================================================================
 
 nordic:TimetableChain rdfs:comment """
-    Line → Route → JourneyPattern → ServiceJourney → DatedServiceJourney
+    Line → Route → JourneyPattern → ServiceJourney
     The core modelling chain: from abstract line identity
-    through physical route, stop sequence, timed trip template,
-    to a concrete instance on a specific date.
+    through physical route and stop sequence to the timed trip.
 """ ;
     nordic:step1 netex:Line ;
     nordic:step2 netex:Route ;
     nordic:step3 netex:JourneyPattern ;
-    nordic:step4 netex:ServiceJourney ;
-    nordic:step5 netex:DatedServiceJourney .
+    nordic:step4 netex:ServiceJourney .
 
 nordic:StopChain rdfs:comment """
     ScheduledStopPoint → PassengerStopAssignment → StopPlace → Quay

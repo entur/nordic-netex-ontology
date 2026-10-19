@@ -99,15 +99,13 @@ nordic:step1 a owl:ObjectProperty ; rdfs:label "step1" .
 nordic:step2 a owl:ObjectProperty ; rdfs:label "step2" .
 nordic:step3 a owl:ObjectProperty ; rdfs:label "step3" .
 nordic:step4 a owl:ObjectProperty ; rdfs:label "step4" .
-nordic:step5 a owl:ObjectProperty ; rdfs:label "step5" .
 
 ## =================================================================
 ## STRUCTURAL MODEL (containment & domain placement)
 ## =================================================================
 ## The generated base expresses XML containment via owl:Restrictions.
 ## These predicates provide a curated, navigable profile view of the
-## same structure (which frame holds what, inline child placement,
-## and functional specialisation that is deliberately NOT subClassOf).
+## same structure (which frame holds what, inline child placement).
 ## -----------------------------------------------------------------
 
 nordic:contains a owl:ObjectProperty ;
@@ -126,11 +124,6 @@ nordic:childOf a owl:ObjectProperty ;
 nordic:inFrame a owl:ObjectProperty ;
     rdfs:label "inFrame" ;
     skos:definition "Object is a top-level member of this frame type" .
-
-nordic:specializes a owl:ObjectProperty ;
-    rdfs:label "specializes" ;
-    skos:definition "This class is a functional specialization of another (e.g. DatedServiceJourney specializes ServiceJourney)" ;
-    skos:scopeNote "Deliberately NOT modelled as rdfs:subClassOf. DatedServiceJourney is not a true type-theoretic subclass of ServiceJourney — it references one rather than inheriting its identity. Using rdfs:subClassOf would allow a reasoner to wrongly conclude that a DSJ IS-A ServiceJourney, which misrepresents the NeTEx schema semantics." .
 
 ## =================================================================
 ## PROFILE MEMBERSHIP & PROVENANCE
@@ -157,7 +150,7 @@ profile:scope a owl:AnnotationProperty ;
 ## --- Membership: the positive allowlist ---
 ## Shared profile vocabulary (profile:), reusable by any profile. Each
 ## profile mints its own ProfileClass nodes in its own namespace
-## (nordic:Quay, entur:Quay, ...) pointing at the standard class, so no
+## (nordic:Quay, or a downstream namespace) pointing at the standard class, so no
 ## profile ever writes statements on a netex: class.
 profile:ProfileClass a owl:Class ;
     rdfs:label "ProfileClass" ;

@@ -15,22 +15,17 @@ rather than re-deriving it.
 
 ## Governance model
 
-Every class and field carries a `profile:scope`, answering *included*,
-*excluded*, or *proposed* directly rather than leaving it implicit:
-
-| Scope | Meaning |
-|-------|---------|
-| `profile:NP` | Officially part of the common Nordic NeTEx Profile |
-| `profile:EnturExtension` | Entur-specific implementation, not part of the common Nordic Profile |
-| `profile:NordicCandidate` | Proposed for Nordic harmonisation, currently Entur-driven |
+Every profiled class carries `profile:scope profile:NP` — officially part of
+the common Nordic NeTEx Profile. Classes and scopes that belong to
+downstream profiles are defined downstream, not here.
 
 `netex-nordic-baseline.ttl` is the positive membership allowlist. Profile
 statements are never written on the standard `netex:` classes: each profiled
 class is a Nordic-owned `profile:ProfileClass` node (e.g. `nordic:Quay`,
 `profile:onClass netex:Quay`) carrying the scope, and each
 `profile:ProfileMember` records a field with its `profile:cardinality` via
-`profile:memberOf nordic:Quay`. Other profiles mint their own nodes
-(`entur:Quay`, …) with the same `profile:` vocabulary. Every entry carries
+`profile:memberOf nordic:Quay`. Downstream profiles mint their own nodes in
+their own namespace with the same `profile:` vocabulary. Every entry carries
 `nordic:provenance` — either
 `nordic:Baseline` (established content seeded once from prior documentation,
 predating decision tracking) or `nordic:decision "NP-xxxx"` (a specific,
@@ -49,7 +44,7 @@ profile owns, which points at the standard class.
 | `netex:` | CEN (generated, `base/`) | Standard classes and properties. Never written on by a profile. |
 | `profile:` | Shared | Profile vocabulary reusable by any profile: `ProfileClass`, `onClass`, `ProfileMember`, `memberOf`, `element`, `path`, `cardinality`, `scope`, `Scope`. |
 | `nordic:` | Nordic Profile | NP's profile resources (`nordic:Quay`, …) and NP-specific terms (`provenance`, `Baseline`, `decision`, `issue`). |
-| `entur:` | Entur ([entur-netex-ontology](https://github.com/entur/entur-netex-ontology)) | Entur's profile resources (`entur:DatedServiceJourney`, …), using the same `profile:` vocabulary. |
+| *downstream* | Each downstream profile | Its own profile resources in its own namespace, using the same `profile:` vocabulary. Not defined in this repository. |
 
 Because each profile mints its own node, the same CEN class can be profiled
 by several profiles side by side without their fields, scope, or
