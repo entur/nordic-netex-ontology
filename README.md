@@ -24,12 +24,42 @@ Every class and field carries a `profile:scope`, answering *included*,
 | `profile:EnturExtension` | Entur-specific implementation, not part of the common Nordic Profile |
 | `profile:NordicCandidate` | Proposed for Nordic harmonisation, currently Entur-driven |
 
-`netex-nordic-baseline.ttl` is the positive membership allowlist: each
-`nordic:ProfileMember` records a class's fields with their profile
-`nordic:cardinality`. Every entry carries `nordic:provenance` — either
+`netex-nordic-baseline.ttl` is the positive membership allowlist. Profile
+statements are never written on the standard `netex:` classes: each profiled
+class is a Nordic-owned `profile:ProfileClass` node (e.g. `nordic:Quay`,
+`profile:onClass netex:Quay`) carrying the scope, and each
+`profile:ProfileMember` records a field with its `profile:cardinality` via
+`profile:memberOf nordic:Quay`. Other profiles mint their own nodes
+(`entur:Quay`, …) with the same `profile:` vocabulary. Every entry carries
+`nordic:provenance` — either
 `nordic:Baseline` (established content seeded once from prior documentation,
 predating decision tracking) or `nordic:decision "NP-xxxx"` (a specific,
 traceable CCB decision, optionally with `nordic:issue`).
+
+### Namespaces and ownership
+
+A profile describes the standard; it does not write on it. A statement may
+only sit on a `netex:` class if it is true of NeTEx regardless of any
+profile. Anything a profile chooses — membership, cardinality, scope,
+provenance, frame placement, documentation — lives on a resource the
+profile owns, which points at the standard class.
+
+| Prefix | Owner | Holds |
+|--------|-------|-------|
+| `netex:` | CEN (generated, `base/`) | Standard classes and properties. Never written on by a profile. |
+| `profile:` | Shared | Profile vocabulary reusable by any profile: `ProfileClass`, `onClass`, `ProfileMember`, `memberOf`, `element`, `path`, `cardinality`, `scope`, `Scope`. |
+| `nordic:` | Nordic Profile | NP's profile resources (`nordic:Quay`, …) and NP-specific terms (`provenance`, `Baseline`, `decision`, `issue`). |
+| `entur:` | Entur ([entur-netex-ontology](https://github.com/entur/entur-netex-ontology)) | Entur's profile resources (`entur:DatedServiceJourney`, …), using the same `profile:` vocabulary. |
+
+Because each profile mints its own node, the same CEN class can be profiled
+by several profiles side by side without their fields, scope, or
+documentation links being mixed up on `netex:Quay`. Layers that annotate a
+profile (e.g. documentation) should point at the profile node
+(`nordic:Quay`) and read scope from it, rather than restating it.
+
+Not yet migrated: frame containment in `netex-nordic-model.ttl` and element
+ordering (`nordic:elementOrder`) in `netex-nordic.ttl` are still asserted
+directly on `netex:` classes.
 
 Decisions are proposed, discussed, and accepted in the separate
 [Nordic Profile Change and Control Board](https://github.com/hfjelstad/nordic-profile-change-and-control)
@@ -46,7 +76,7 @@ the official NeTEx XSD by the [netex-ontology-generator](#base-ontology-generate
 ```
 base/ (netex.ttl + modules + netex-shacl.ttl)  ← generated NeTEx base — vendored snapshot
 └─ netex-nordic.ttl                ← Nordic Profile: SHACL constraints, ordering
-   ├─ netex-nordic-vocab.ttl       ← Nordic vocabulary (nordic:)
+   ├─ netex-nordic-vocab.ttl       ← Nordic + shared profile vocabulary (nordic:, profile:)
    ├─ netex-nordic-baseline.ttl    ← positive membership allowlist (generated)
    ├─ netex-nordic-model.ttl       ← curated frame containment & specialisation
    ├─ netex-transmodel-alignment.ttl ← NeTEx ⇄ Transmodel (skos, vendored)

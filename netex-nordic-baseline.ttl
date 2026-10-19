@@ -2,9 +2,10 @@
 ## Nordic NeTEx Profile — Baseline (positive membership allowlist)
 ## -----------------------------------------------------------------
 ## Seeded once from the nordic-netex-documentation Table_*.md files as
-## the pre-CCB field inventory. Nordic-owned classes carry
-## profile:scope profile:NP; downstream profiles may assign other classes
-## to their own profile while reusing these field definitions. From
+## the pre-CCB field inventory. Each profiled class is a nordic:X
+## profile:ProfileClass pointing at netex:X via profile:onClass, with
+## profile:scope profile:NP; fields hang on it via profile:memberOf.
+## Nothing here is asserted on the netex: classes themselves. From
 ## here the Nordic profile inherits from CCB decisions — a change flips
 ## a field's provenance from nordic:Baseline to nordic:decision "NP-xxxx".
 ## This file is not regenerated from documentation; the seeder is a local
@@ -24,2353 +25,2453 @@
                 <https://netex-cen.eu/profile/nordic> .
 
 ## --- AlternativeName (NP) ---
-netex:AlternativeName profile:scope profile:NP ;
+nordic:AlternativeName a profile:ProfileClass ;
+    profile:onClass netex:AlternativeName ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:AlternativeName ;
-    nordic:element "NameType" ;
-    nordic:path "AlternativeName/NameType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:AlternativeName ;
+    profile:element "NameType" ;
+    profile:path "AlternativeName/NameType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:AlternativeName ;
-    nordic:element "Name" ;
-    nordic:path "AlternativeName/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:AlternativeName ;
+    profile:element "Name" ;
+    profile:path "AlternativeName/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- AlternativeText (NP) ---
-netex:AlternativeText profile:scope profile:NP ;
+nordic:AlternativeText a profile:ProfileClass ;
+    profile:onClass netex:AlternativeText ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:AlternativeText ;
-    nordic:element "@id" ;
-    nordic:path "AlternativeText/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:AlternativeText ;
+    profile:element "@id" ;
+    profile:path "AlternativeText/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:AlternativeText ;
-    nordic:element "@version" ;
-    nordic:path "AlternativeText/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:AlternativeText ;
+    profile:element "@version" ;
+    profile:path "AlternativeText/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:AlternativeText ;
-    nordic:element "Text" ;
-    nordic:path "AlternativeText/Text" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:AlternativeText ;
+    profile:element "Text" ;
+    profile:path "AlternativeText/Text" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Authority (NP) ---
-netex:Authority profile:scope profile:NP ;
+nordic:Authority a profile:ProfileClass ;
+    profile:onClass netex:Authority ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "@id" ;
-    nordic:path "Authority/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "@id" ;
+    profile:path "Authority/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "@version" ;
-    nordic:path "Authority/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "@version" ;
+    profile:path "Authority/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "Name" ;
-    nordic:path "Authority/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "Name" ;
+    profile:path "Authority/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "LegalName" ;
-    nordic:path "Authority/LegalName" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "LegalName" ;
+    profile:path "Authority/LegalName" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "CompanyNumber" ;
-    nordic:path "Authority/CompanyNumber" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "CompanyNumber" ;
+    profile:path "Authority/CompanyNumber" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "ContactDetails" ;
-    nordic:path "Authority/ContactDetails" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "ContactDetails" ;
+    profile:path "Authority/ContactDetails" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "Phone" ;
-    nordic:path "Authority/ContactDetails/Phone" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "Phone" ;
+    profile:path "Authority/ContactDetails/Phone" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "Url" ;
-    nordic:path "Authority/ContactDetails/Url" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "Url" ;
+    profile:path "Authority/ContactDetails/Url" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Authority ;
-    nordic:element "OrganisationType" ;
-    nordic:path "Authority/OrganisationType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Authority ;
+    profile:element "OrganisationType" ;
+    profile:path "Authority/OrganisationType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Codespace (NP) ---
-netex:Codespace profile:scope profile:NP ;
+nordic:Codespace a profile:ProfileClass ;
+    profile:onClass netex:Codespace ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Codespace ;
-    nordic:element "@id" ;
-    nordic:path "Codespace/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Codespace ;
+    profile:element "@id" ;
+    profile:path "Codespace/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Codespace ;
-    nordic:element "Xmlns" ;
-    nordic:path "Codespace/Xmlns" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Codespace ;
+    profile:element "Xmlns" ;
+    profile:path "Codespace/Xmlns" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Codespace ;
-    nordic:element "XmlnsUrl" ;
-    nordic:path "Codespace/XmlnsUrl" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Codespace ;
+    profile:element "XmlnsUrl" ;
+    profile:path "Codespace/XmlnsUrl" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- CompositeFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:CompositeFrame profile:scope profile:NP ;
+nordic:CompositeFrame a profile:ProfileClass ;
+    profile:onClass netex:CompositeFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- DayType (NP) ---
-netex:DayType profile:scope profile:NP ;
+nordic:DayType a profile:ProfileClass ;
+    profile:onClass netex:DayType ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayType ;
-    nordic:element "@id" ;
-    nordic:path "DayType/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayType ;
+    profile:element "@id" ;
+    profile:path "DayType/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayType ;
-    nordic:element "@version" ;
-    nordic:path "DayType/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayType ;
+    profile:element "@version" ;
+    profile:path "DayType/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayType ;
-    nordic:element "PropertyOfDay" ;
-    nordic:path "DayType/properties/PropertyOfDay" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayType ;
+    profile:element "PropertyOfDay" ;
+    profile:path "DayType/properties/PropertyOfDay" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayType ;
-    nordic:element "DaysOfWeek" ;
-    nordic:path "DayType/properties/PropertyOfDay/DaysOfWeek" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayType ;
+    profile:element "DaysOfWeek" ;
+    profile:path "DayType/properties/PropertyOfDay/DaysOfWeek" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- DayTypeAssignment (NP) ---
-netex:DayTypeAssignment profile:scope profile:NP ;
+nordic:DayTypeAssignment a profile:ProfileClass ;
+    profile:onClass netex:DayTypeAssignment ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayTypeAssignment ;
-    nordic:element "@id" ;
-    nordic:path "DayTypeAssignment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayTypeAssignment ;
+    profile:element "@id" ;
+    profile:path "DayTypeAssignment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayTypeAssignment ;
-    nordic:element "@version" ;
-    nordic:path "DayTypeAssignment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayTypeAssignment ;
+    profile:element "@version" ;
+    profile:path "DayTypeAssignment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayTypeAssignment ;
-    nordic:element "@order" ;
-    nordic:path "DayTypeAssignment/@order" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayTypeAssignment ;
+    profile:element "@order" ;
+    profile:path "DayTypeAssignment/@order" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayTypeAssignment ;
-    nordic:element "OperatingPeriod/@ref" ;
-    nordic:path "OperatingPeriodRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayTypeAssignment ;
+    profile:element "OperatingPeriod/@ref" ;
+    profile:path "OperatingPeriodRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayTypeAssignment ;
-    nordic:element "Date" ;
-    nordic:path "Date" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayTypeAssignment ;
+    profile:element "Date" ;
+    profile:path "Date" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayTypeAssignment ;
-    nordic:element "DayType/@ref" ;
-    nordic:path "DayTypeRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayTypeAssignment ;
+    profile:element "DayType/@ref" ;
+    profile:path "DayTypeRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DayTypeAssignment ;
-    nordic:element "isAvailable" ;
-    nordic:path "isAvailable" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DayTypeAssignment ;
+    profile:element "isAvailable" ;
+    profile:path "isAvailable" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- DestinationDisplay (NP) ---
-netex:DestinationDisplay profile:scope profile:NP ;
+nordic:DestinationDisplay a profile:ProfileClass ;
+    profile:onClass netex:DestinationDisplay ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DestinationDisplay ;
-    nordic:element "@id" ;
-    nordic:path "DestinationDisplay/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "@id" ;
+    profile:path "DestinationDisplay/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DestinationDisplay ;
-    nordic:element "@version" ;
-    nordic:path "DestinationDisplay/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "@version" ;
+    profile:path "DestinationDisplay/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DestinationDisplay ;
-    nordic:element "Name" ;
-    nordic:path "DestinationDisplay/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "Name" ;
+    profile:path "DestinationDisplay/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DestinationDisplay ;
-    nordic:element "FrontText" ;
-    nordic:path "DestinationDisplay/FrontText" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "FrontText" ;
+    profile:path "DestinationDisplay/FrontText" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DestinationDisplay ;
-    nordic:element "SideText" ;
-    nordic:path "DestinationDisplay/SideText" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "SideText" ;
+    profile:path "DestinationDisplay/SideText" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- FareFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:FareFrame profile:scope profile:NP ;
+nordic:FareFrame a profile:ProfileClass ;
+    profile:onClass netex:FareFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- FlexibleServiceProperties (NP) ---
-netex:FlexibleServiceProperties profile:scope profile:NP ;
+nordic:FlexibleServiceProperties a profile:ProfileClass ;
+    profile:onClass netex:FlexibleServiceProperties ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:FlexibleServiceProperties ;
-    nordic:element "@id" ;
-    nordic:path "FlexibleServiceProperties/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:FlexibleServiceProperties ;
+    profile:element "@id" ;
+    profile:path "FlexibleServiceProperties/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:FlexibleServiceProperties ;
-    nordic:element "@version" ;
-    nordic:path "FlexibleServiceProperties/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:FlexibleServiceProperties ;
+    profile:element "@version" ;
+    profile:path "FlexibleServiceProperties/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:FlexibleServiceProperties ;
-    nordic:element "BookingMethods" ;
-    nordic:path "FlexibleServiceProperties/BookingMethods" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:FlexibleServiceProperties ;
+    profile:element "BookingMethods" ;
+    profile:path "FlexibleServiceProperties/BookingMethods" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:FlexibleServiceProperties ;
-    nordic:element "BookingAccess" ;
-    nordic:path "FlexibleServiceProperties/BookingAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:FlexibleServiceProperties ;
+    profile:element "BookingAccess" ;
+    profile:path "FlexibleServiceProperties/BookingAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:FlexibleServiceProperties ;
-    nordic:element "BookWhen" ;
-    nordic:path "FlexibleServiceProperties/BookWhen" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:FlexibleServiceProperties ;
+    profile:element "BookWhen" ;
+    profile:path "FlexibleServiceProperties/BookWhen" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:FlexibleServiceProperties ;
-    nordic:element "LatestBookingTime" ;
-    nordic:path "FlexibleServiceProperties/LatestBookingTime" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:FlexibleServiceProperties ;
+    profile:element "LatestBookingTime" ;
+    profile:path "FlexibleServiceProperties/LatestBookingTime" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- GroupOfLines (NP) ---
-netex:GroupOfLines profile:scope profile:NP ;
+nordic:GroupOfLines a profile:ProfileClass ;
+    profile:onClass netex:GroupOfLines ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:GroupOfLines ;
-    nordic:element "@id" ;
-    nordic:path "GroupOfLines/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:GroupOfLines ;
+    profile:element "@id" ;
+    profile:path "GroupOfLines/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:GroupOfLines ;
-    nordic:element "@version" ;
-    nordic:path "GroupOfLines/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:GroupOfLines ;
+    profile:element "@version" ;
+    profile:path "GroupOfLines/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:GroupOfLines ;
-    nordic:element "Name" ;
-    nordic:path "GroupOfLines/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:GroupOfLines ;
+    profile:element "Name" ;
+    profile:path "GroupOfLines/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:GroupOfLines ;
-    nordic:element "ShortName" ;
-    nordic:path "GroupOfLines/ShortName" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:GroupOfLines ;
+    profile:element "ShortName" ;
+    profile:path "GroupOfLines/ShortName" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:GroupOfLines ;
-    nordic:element "Description" ;
-    nordic:path "GroupOfLines/Description" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:GroupOfLines ;
+    profile:element "Description" ;
+    profile:path "GroupOfLines/Description" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:GroupOfLines ;
-    nordic:element "PrivateCode" ;
-    nordic:path "GroupOfLines/PrivateCode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:GroupOfLines ;
+    profile:element "PrivateCode" ;
+    profile:path "GroupOfLines/PrivateCode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:GroupOfLines ;
-    nordic:element "LineRef/@ref" ;
-    nordic:path "GroupOfLines/members/LineRef/@ref" ;
-    nordic:cardinality "1..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:GroupOfLines ;
+    profile:element "LineRef/@ref" ;
+    profile:path "GroupOfLines/members/LineRef/@ref" ;
+    profile:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Interchange (NP) ---
-netex:Interchange profile:scope profile:NP ;
+nordic:Interchange a profile:ProfileClass ;
+    profile:onClass netex:Interchange ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Interchange ;
-    nordic:element "@id" ;
-    nordic:path "ServiceJourneyInterchange/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Interchange ;
+    profile:element "@id" ;
+    profile:path "ServiceJourneyInterchange/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Interchange ;
-    nordic:element "@version" ;
-    nordic:path "ServiceJourneyInterchange/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Interchange ;
+    profile:element "@version" ;
+    profile:path "ServiceJourneyInterchange/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Interchange ;
-    nordic:element "FromJourneyRef/@ref" ;
-    nordic:path "ServiceJourneyInterchange/FromJourneyRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Interchange ;
+    profile:element "FromJourneyRef/@ref" ;
+    profile:path "ServiceJourneyInterchange/FromJourneyRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Interchange ;
-    nordic:element "ToJourneyRef/@ref" ;
-    nordic:path "ServiceJourneyInterchange/ToJourneyRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Interchange ;
+    profile:element "ToJourneyRef/@ref" ;
+    profile:path "ServiceJourneyInterchange/ToJourneyRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Interchange ;
-    nordic:element "FromPointRef/@ref" ;
-    nordic:path "ServiceJourneyInterchange/FromPointRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Interchange ;
+    profile:element "FromPointRef/@ref" ;
+    profile:path "ServiceJourneyInterchange/FromPointRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Interchange ;
-    nordic:element "ToPointRef/@ref" ;
-    nordic:path "ServiceJourneyInterchange/ToPointRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Interchange ;
+    profile:element "ToPointRef/@ref" ;
+    profile:path "ServiceJourneyInterchange/ToPointRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Interchange ;
-    nordic:element "Guaranteed" ;
-    nordic:path "ServiceJourneyInterchange/Guaranteed" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Interchange ;
+    profile:element "Guaranteed" ;
+    profile:path "ServiceJourneyInterchange/Guaranteed" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- JourneyPattern (NP) ---
-netex:JourneyPattern profile:scope profile:NP ;
+nordic:JourneyPattern a profile:ProfileClass ;
+    profile:onClass netex:JourneyPattern ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "@id" ;
-    nordic:path "JourneyPattern/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "@id" ;
+    profile:path "JourneyPattern/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "@version" ;
-    nordic:path "JourneyPattern/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "@version" ;
+    profile:path "JourneyPattern/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "Name" ;
-    nordic:path "JourneyPattern/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "Name" ;
+    profile:path "JourneyPattern/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "RouteRef/@ref" ;
-    nordic:path "JourneyPattern/RouteRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "RouteRef/@ref" ;
+    profile:path "JourneyPattern/RouteRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "StopPointInJourneyPattern/@id" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "StopPointInJourneyPattern/@id" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "StopPointInJourneyPattern/@version" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "StopPointInJourneyPattern/@version" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "StopPointInJourneyPattern/@order" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@order" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "StopPointInJourneyPattern/@order" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@order" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ScheduledStopPointRef/@ref" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ScheduledStopPointRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ScheduledStopPointRef/@ref" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ScheduledStopPointRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ForAlighting" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ForAlighting" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ForAlighting" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ForAlighting" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ForBoarding" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ForBoarding" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ForBoarding" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ForBoarding" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "DestinationDisplayRef/@ref" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/DestinationDisplayRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "DestinationDisplayRef/@ref" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/DestinationDisplayRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "RequestMethod" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/RequestMethod" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "RequestMethod" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/RequestMethod" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ChangeOfDestinationDisplay" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ChangeOfDestinationDisplay" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ChangeOfDestinationDisplay" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ChangeOfDestinationDisplay" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "StopUse" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/StopUse" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "StopUse" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/StopUse" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "noticeAssignments" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "noticeAssignments" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "NoticeAssignment/@id" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "NoticeAssignment/@id" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "NoticeAssignment/@version" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "NoticeAssignment/@version" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "NoticeAssignment/@order" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@order" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "NoticeAssignment/@order" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@order" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "NoticeRef/@ref" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/NoticeRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "NoticeRef/@ref" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/NoticeRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "BookingArrangements" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "BookingArrangements" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "BookingAccess" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "BookingAccess" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "BookWhen" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookWhen" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "BookWhen" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookWhen" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "LatestBookingTime" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/LatestBookingTime" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "LatestBookingTime" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/LatestBookingTime" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "MinimumBookingPeriod" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/MinimumBookingPeriod" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "MinimumBookingPeriod" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/MinimumBookingPeriod" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "BookingUrl" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingUrl" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "BookingUrl" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingUrl" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "BookingNote" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingNote" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "BookingNote" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingNote" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "BookingMethod" ;
-    nordic:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingMethods/BookingMethod" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "BookingMethod" ;
+    profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingMethods/BookingMethod" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "linksInSequence" ;
-    nordic:path "JourneyPattern/linksInSequence" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "linksInSequence" ;
+    profile:path "JourneyPattern/linksInSequence" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ServiceLinkInJourneyPattern/@id" ;
-    nordic:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ServiceLinkInJourneyPattern/@id" ;
+    profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ServiceLinkInJourneyPattern/@version" ;
-    nordic:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ServiceLinkInJourneyPattern/@version" ;
+    profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ServiceLinkInJourneyPattern/@order" ;
-    nordic:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@order" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ServiceLinkInJourneyPattern/@order" ;
+    profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@order" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:JourneyPattern ;
-    nordic:element "ServiceLinkRef/@ref" ;
-    nordic:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/ServiceLinkRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:JourneyPattern ;
+    profile:element "ServiceLinkRef/@ref" ;
+    profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/ServiceLinkRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Line (NP) ---
-netex:Line profile:scope profile:NP ;
+nordic:Line a profile:ProfileClass ;
+    profile:onClass netex:Line ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "@id" ;
-    nordic:path "Line/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "@id" ;
+    profile:path "Line/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "@version" ;
-    nordic:path "Line/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "@version" ;
+    profile:path "Line/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "Name" ;
-    nordic:path "Line/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "Name" ;
+    profile:path "Line/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "TransportMode" ;
-    nordic:path "Line/TransportMode" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "TransportMode" ;
+    profile:path "Line/TransportMode" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "TransportSubmode" ;
-    nordic:path "Line/TransportSubmode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "TransportSubmode" ;
+    profile:path "Line/TransportSubmode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "BusSubmode" ;
-    nordic:path "Line/TransportSubmode/BusSubmode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "BusSubmode" ;
+    profile:path "Line/TransportSubmode/BusSubmode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "OperatorRef/@ref" ;
-    nordic:path "Line/OperatorRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "OperatorRef/@ref" ;
+    profile:path "Line/OperatorRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "PublicCode" ;
-    nordic:path "Line/PublicCode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "PublicCode" ;
+    profile:path "Line/PublicCode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "PrivateCode" ;
-    nordic:path "Line/PrivateCode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "PrivateCode" ;
+    profile:path "Line/PrivateCode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "RepresentedByGroupRef/@ref" ;
-    nordic:path "Line/RepresentedByGroupRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "RepresentedByGroupRef/@ref" ;
+    profile:path "Line/RepresentedByGroupRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "Monitored" ;
-    nordic:path "Line/Monitored" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "Monitored" ;
+    profile:path "Line/Monitored" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "Colour" ;
-    nordic:path "Line/Presentation/Colour" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "Colour" ;
+    profile:path "Line/Presentation/Colour" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Line ;
-    nordic:element "TextColour" ;
-    nordic:path "Line/Presentation/TextColour" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "TextColour" ;
+    profile:path "Line/Presentation/TextColour" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- LinkSequenceProjection (NP) ---
-netex:LinkSequenceProjection profile:scope profile:NP ;
+nordic:LinkSequenceProjection a profile:ProfileClass ;
+    profile:onClass netex:LinkSequenceProjection ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:LinkSequenceProjection ;
-    nordic:element "@id" ;
-    nordic:path "LinkSequenceProjection/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:LinkSequenceProjection ;
+    profile:element "@id" ;
+    profile:path "LinkSequenceProjection/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:LinkSequenceProjection ;
-    nordic:element "@version" ;
-    nordic:path "LinkSequenceProjection/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:LinkSequenceProjection ;
+    profile:element "@version" ;
+    profile:path "LinkSequenceProjection/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:LinkSequenceProjection ;
-    nordic:element "gml:LineString" ;
-    nordic:path "LinkSequenceProjection/gml:LineString" ;
-    nordic:cardinality "" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:LinkSequenceProjection ;
+    profile:element "gml:LineString" ;
+    profile:path "LinkSequenceProjection/gml:LineString" ;
+    profile:cardinality "" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:LinkSequenceProjection ;
-    nordic:element "@srsName" ;
-    nordic:path "LinkSequenceProjection/gml:LineString/@srsName" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:LinkSequenceProjection ;
+    profile:element "@srsName" ;
+    profile:path "LinkSequenceProjection/gml:LineString/@srsName" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:LinkSequenceProjection ;
-    nordic:element "gml:posList" ;
-    nordic:path "LinkSequenceProjection/gml:LineString/gml:posList" ;
-    nordic:cardinality "" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:LinkSequenceProjection ;
+    profile:element "gml:posList" ;
+    profile:path "LinkSequenceProjection/gml:LineString/gml:posList" ;
+    profile:cardinality "" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Network (NP) ---
-netex:Network profile:scope profile:NP ;
+nordic:Network a profile:ProfileClass ;
+    profile:onClass netex:Network ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "@id" ;
-    nordic:path "Network/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "@id" ;
+    profile:path "Network/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "@version" ;
-    nordic:path "Network/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "@version" ;
+    profile:path "Network/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "Name" ;
-    nordic:path "Network/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "Name" ;
+    profile:path "Network/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "Description" ;
-    nordic:path "Network/Description" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "Description" ;
+    profile:path "Network/Description" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "TransportMode" ;
-    nordic:path "Network/TransportMode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "TransportMode" ;
+    profile:path "Network/TransportMode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "AuthorityRef/@ref" ;
-    nordic:path "Network/AuthorityRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "AuthorityRef/@ref" ;
+    profile:path "Network/AuthorityRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "LineRef/@ref" ;
-    nordic:path "Network/members/LineRef/@ref" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "LineRef/@ref" ;
+    profile:path "Network/members/LineRef/@ref" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "GroupOfLinesRef/@ref" ;
-    nordic:path "Network/groupsOfLines/GroupOfLinesRef/@ref" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "GroupOfLinesRef/@ref" ;
+    profile:path "Network/groupsOfLines/GroupOfLinesRef/@ref" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Network ;
-    nordic:element "TariffZoneRef/@ref" ;
-    nordic:path "Network/tariffZones/TariffZoneRef/@ref" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Network ;
+    profile:element "TariffZoneRef/@ref" ;
+    profile:path "Network/tariffZones/TariffZoneRef/@ref" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Notice (NP) ---
-netex:Notice profile:scope profile:NP ;
+nordic:Notice a profile:ProfileClass ;
+    profile:onClass netex:Notice ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Notice ;
-    nordic:element "@id" ;
-    nordic:path "Notice/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Notice ;
+    profile:element "@id" ;
+    profile:path "Notice/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Notice ;
-    nordic:element "@version" ;
-    nordic:path "Notice/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Notice ;
+    profile:element "@version" ;
+    profile:path "Notice/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Notice ;
-    nordic:element "Text" ;
-    nordic:path "Notice/Text" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Notice ;
+    profile:element "Text" ;
+    profile:path "Notice/Text" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- OperatingDay (NP) ---
-netex:OperatingDay profile:scope profile:NP ;
+nordic:OperatingDay a profile:ProfileClass ;
+    profile:onClass netex:OperatingDay ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingDay ;
-    nordic:element "@id" ;
-    nordic:path "OperatingDay/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingDay ;
+    profile:element "@id" ;
+    profile:path "OperatingDay/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingDay ;
-    nordic:element "@version" ;
-    nordic:path "OperatingDay/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingDay ;
+    profile:element "@version" ;
+    profile:path "OperatingDay/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingDay ;
-    nordic:element "CalendarDate" ;
-    nordic:path "OperatingDay/CalendarDate" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingDay ;
+    profile:element "CalendarDate" ;
+    profile:path "OperatingDay/CalendarDate" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingDay ;
-    nordic:element "Name" ;
-    nordic:path "OperatingDay/Name" ;
-    nordic:cardinality "" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingDay ;
+    profile:element "Name" ;
+    profile:path "OperatingDay/Name" ;
+    profile:cardinality "" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingDay ;
-    nordic:element "EarliestTime" ;
-    nordic:path "OperatingDay/EarliestTime" ;
-    nordic:cardinality "" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingDay ;
+    profile:element "EarliestTime" ;
+    profile:path "OperatingDay/EarliestTime" ;
+    profile:cardinality "" ;
     nordic:provenance nordic:Baseline .
 
 ## --- OperatingPeriod (NP) ---
-netex:OperatingPeriod profile:scope profile:NP ;
+nordic:OperatingPeriod a profile:ProfileClass ;
+    profile:onClass netex:OperatingPeriod ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingPeriod ;
-    nordic:element "@id" ;
-    nordic:path "OperatingPeriod/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingPeriod ;
+    profile:element "@id" ;
+    profile:path "OperatingPeriod/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingPeriod ;
-    nordic:element "@version" ;
-    nordic:path "OperatingPeriod/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingPeriod ;
+    profile:element "@version" ;
+    profile:path "OperatingPeriod/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingPeriod ;
-    nordic:element "FromDate" ;
-    nordic:path "OperatingPeriod/FromDate" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingPeriod ;
+    profile:element "FromDate" ;
+    profile:path "OperatingPeriod/FromDate" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:OperatingPeriod ;
-    nordic:element "ToDate" ;
-    nordic:path "OperatingPeriod/ToDate" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:OperatingPeriod ;
+    profile:element "ToDate" ;
+    profile:path "OperatingPeriod/ToDate" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Operator (NP) ---
-netex:Operator profile:scope profile:NP ;
+nordic:Operator a profile:ProfileClass ;
+    profile:onClass netex:Operator ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "@id" ;
-    nordic:path "Operator/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "@id" ;
+    profile:path "Operator/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "@version" ;
-    nordic:path "Operator/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "@version" ;
+    profile:path "Operator/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "CompanyNumber" ;
-    nordic:path "Operator/CompanyNumber" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "CompanyNumber" ;
+    profile:path "Operator/CompanyNumber" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "Name" ;
-    nordic:path "Operator/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "Name" ;
+    profile:path "Operator/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "LegalName" ;
-    nordic:path "Operator/LegalName" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "LegalName" ;
+    profile:path "Operator/LegalName" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "ContactDetails" ;
-    nordic:path "Operator/ContactDetails" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "ContactDetails" ;
+    profile:path "Operator/ContactDetails" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "Phone" ;
-    nordic:path "Operator/ContactDetails/Phone" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "Phone" ;
+    profile:path "Operator/ContactDetails/Phone" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "Url" ;
-    nordic:path "Operator/ContactDetails/Url" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "Url" ;
+    profile:path "Operator/ContactDetails/Url" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "OrganisationType" ;
-    nordic:path "Operator/OrganisationType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "OrganisationType" ;
+    profile:path "Operator/OrganisationType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "CustomerServiceContactDetails" ;
-    nordic:path "Operator/CustomerServiceContactDetails" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "CustomerServiceContactDetails" ;
+    profile:path "Operator/CustomerServiceContactDetails" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "Email" ;
-    nordic:path "Operator/CustomerServiceContactDetails/Email" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "Email" ;
+    profile:path "Operator/CustomerServiceContactDetails/Email" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "Phone" ;
-    nordic:path "Operator/CustomerServiceContactDetails/Phone" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "Phone" ;
+    profile:path "Operator/CustomerServiceContactDetails/Phone" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Operator ;
-    nordic:element "Url" ;
-    nordic:path "Operator/CustomerServiceContactDetails/Url" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Operator ;
+    profile:element "Url" ;
+    profile:path "Operator/CustomerServiceContactDetails/Url" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Parking (NP) ---
-netex:Parking profile:scope profile:NP ;
+nordic:Parking a profile:ProfileClass ;
+    profile:onClass netex:Parking ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "@id" ;
-    nordic:path "Parking/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "@id" ;
+    profile:path "Parking/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "@version" ;
-    nordic:path "Parking/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "@version" ;
+    profile:path "Parking/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "Name" ;
-    nordic:path "Parking/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "Name" ;
+    profile:path "Parking/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "Centroid" ;
-    nordic:path "Parking/Centroid" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "Centroid" ;
+    profile:path "Parking/Centroid" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "Location" ;
-    nordic:path "Parking/Centroid/Location" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "Location" ;
+    profile:path "Parking/Centroid/Location" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "Longitude" ;
-    nordic:path "Parking/Centroid/Location/Longitude" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "Longitude" ;
+    profile:path "Parking/Centroid/Location/Longitude" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "Latitude" ;
-    nordic:path "Parking/Centroid/Location/Latitude" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "Latitude" ;
+    profile:path "Parking/Centroid/Location/Latitude" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "Covered" ;
-    nordic:path "Parking/Covered" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "Covered" ;
+    profile:path "Parking/Covered" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParentSiteRef/@ref" ;
-    nordic:path "Parking/ParentSiteRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParentSiteRef/@ref" ;
+    profile:path "Parking/ParentSiteRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParkingType" ;
-    nordic:path "Parking/ParkingType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParkingType" ;
+    profile:path "Parking/ParkingType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParkingVehicleTypes" ;
-    nordic:path "Parking/ParkingVehicleTypes" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParkingVehicleTypes" ;
+    profile:path "Parking/ParkingVehicleTypes" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParkingLayout" ;
-    nordic:path "Parking/ParkingLayout" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParkingLayout" ;
+    profile:path "Parking/ParkingLayout" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "TotalCapacity" ;
-    nordic:path "Parking/TotalCapacity" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "TotalCapacity" ;
+    profile:path "Parking/TotalCapacity" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "RechargingAvailable" ;
-    nordic:path "Parking/RechargingAvailable" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "RechargingAvailable" ;
+    profile:path "Parking/RechargingAvailable" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParkingPaymentProcess" ;
-    nordic:path "Parking/ParkingPaymentProcess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParkingPaymentProcess" ;
+    profile:path "Parking/ParkingPaymentProcess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "parkingProperties" ;
-    nordic:path "Parking/parkingProperties" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "parkingProperties" ;
+    profile:path "Parking/parkingProperties" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParkingProperties" ;
-    nordic:path "Parking/parkingProperties/ParkingProperties" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParkingProperties" ;
+    profile:path "Parking/parkingProperties/ParkingProperties" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "spaces" ;
-    nordic:path "Parking/parkingProperties/ParkingProperties/spaces" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "spaces" ;
+    profile:path "Parking/parkingProperties/ParkingProperties/spaces" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParkingCapacity" ;
-    nordic:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParkingCapacity" ;
+    profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "ParkingUserType" ;
-    nordic:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/ParkingUserType" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "ParkingUserType" ;
+    profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/ParkingUserType" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "NumberOfSpaces" ;
-    nordic:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/NumberOfSpaces" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "NumberOfSpaces" ;
+    profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/NumberOfSpaces" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Parking ;
-    nordic:element "NumberOfSpacesWithRechargePoint" ;
-    nordic:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/NumberOfSpacesWithRechargePoint" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Parking ;
+    profile:element "NumberOfSpacesWithRechargePoint" ;
+    profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/NumberOfSpacesWithRechargePoint" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- PassengerStopAssignment (NP) ---
-netex:PassengerStopAssignment profile:scope profile:NP ;
+nordic:PassengerStopAssignment a profile:ProfileClass ;
+    profile:onClass netex:PassengerStopAssignment ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "@id" ;
-    nordic:path "PassengerStopAssignment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "@id" ;
+    profile:path "PassengerStopAssignment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "@version" ;
-    nordic:path "PassengerStopAssignment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "@version" ;
+    profile:path "PassengerStopAssignment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "@order" ;
-    nordic:path "PassengerStopAssignment/@order" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "@order" ;
+    profile:path "PassengerStopAssignment/@order" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "ScheduledStopPointRef/@ref" ;
-    nordic:path "PassengerStopAssignment/ScheduledStopPointRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "ScheduledStopPointRef/@ref" ;
+    profile:path "PassengerStopAssignment/ScheduledStopPointRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "StopPlaceRef/@ref" ;
-    nordic:path "PassengerStopAssignment/StopPlaceRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "StopPlaceRef/@ref" ;
+    profile:path "PassengerStopAssignment/StopPlaceRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "QuayRef/@ref" ;
-    nordic:path "PassengerStopAssignment/QuayRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "QuayRef/@ref" ;
+    profile:path "PassengerStopAssignment/QuayRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "ValidBetween" ;
-    nordic:path "PassengerStopAssignment/ValidBetween" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "ValidBetween" ;
+    profile:path "PassengerStopAssignment/ValidBetween" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PassengerStopAssignment ;
-    nordic:element "FromDate" ;
-    nordic:path "PassengerStopAssignment/ValidBetween/FromDate" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PassengerStopAssignment ;
+    profile:element "FromDate" ;
+    profile:path "PassengerStopAssignment/ValidBetween/FromDate" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- PurposeOfGrouping (NP) ---
-netex:PurposeOfGrouping profile:scope profile:NP ;
+nordic:PurposeOfGrouping a profile:ProfileClass ;
+    profile:onClass netex:PurposeOfGrouping ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PurposeOfGrouping ;
-    nordic:element "@id" ;
-    nordic:path "PurposeOfGrouping/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PurposeOfGrouping ;
+    profile:element "@id" ;
+    profile:path "PurposeOfGrouping/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PurposeOfGrouping ;
-    nordic:element "@version" ;
-    nordic:path "PurposeOfGrouping/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PurposeOfGrouping ;
+    profile:element "@version" ;
+    profile:path "PurposeOfGrouping/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:PurposeOfGrouping ;
-    nordic:element "Name" ;
-    nordic:path "PurposeOfGrouping/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PurposeOfGrouping ;
+    profile:element "Name" ;
+    profile:path "PurposeOfGrouping/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Quay (NP) ---
-netex:Quay profile:scope profile:NP ;
+nordic:Quay a profile:ProfileClass ;
+    profile:onClass netex:Quay ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "@id" ;
-    nordic:path "Quay/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "@id" ;
+    profile:path "Quay/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "@version" ;
-    nordic:path "Quay/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "@version" ;
+    profile:path "Quay/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "Name" ;
-    nordic:path "Quay/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "Name" ;
+    profile:path "Quay/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "PrivateCode" ;
-    nordic:path "Quay/PrivateCode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "PrivateCode" ;
+    profile:path "Quay/PrivateCode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "Longitude" ;
-    nordic:path "Quay/Centroid/Location/Longitude" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "Longitude" ;
+    profile:path "Quay/Centroid/Location/Longitude" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "Latitude" ;
-    nordic:path "Quay/Centroid/Location/Latitude" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "Latitude" ;
+    profile:path "Quay/Centroid/Location/Latitude" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "AccessibilityAssessment" ;
-    nordic:path "Quay/AccessibilityAssessment" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "AccessibilityAssessment" ;
+    profile:path "Quay/AccessibilityAssessment" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "MobilityImpairedAccess" ;
-    nordic:path "Quay/AccessibilityAssessment/MobilityImpairedAccess" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "MobilityImpairedAccess" ;
+    profile:path "Quay/AccessibilityAssessment/MobilityImpairedAccess" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "limitations" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "limitations" ;
+    profile:path "Quay/AccessibilityAssessment/limitations" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "AccessibilityLimitation" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation" ;
-    nordic:cardinality "1..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "AccessibilityLimitation" ;
+    profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation" ;
+    profile:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "WheelchairAccess" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/WheelchairAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "WheelchairAccess" ;
+    profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/WheelchairAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "StepFreeAccess" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/StepFreeAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "StepFreeAccess" ;
+    profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/StepFreeAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "AudibleSignalsAvailable" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/AudibleSignalsAvailable" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "AudibleSignalsAvailable" ;
+    profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/AudibleSignalsAvailable" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "VisualSignsAvailable" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/VisualSignsAvailable" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "VisualSignsAvailable" ;
+    profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/VisualSignsAvailable" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "EscalatorFreeAccess" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/EscalatorFreeAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "EscalatorFreeAccess" ;
+    profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/EscalatorFreeAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "LiftFreeAccess" ;
-    nordic:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/LiftFreeAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "LiftFreeAccess" ;
+    profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/LiftFreeAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "PublicCode" ;
-    nordic:path "Quay/PublicCode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "PublicCode" ;
+    profile:path "Quay/PublicCode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "CompassBearing" ;
-    nordic:path "Quay/CompassBearing" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "CompassBearing" ;
+    profile:path "Quay/CompassBearing" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "boardingPositions" ;
-    nordic:path "Quay/boardingPositions" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "boardingPositions" ;
+    profile:path "Quay/boardingPositions" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Quay ;
-    nordic:element "BoardingPosition" ;
-    nordic:path "Quay/boardingPositions/BoardingPosition" ;
-    nordic:cardinality "1..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Quay ;
+    profile:element "BoardingPosition" ;
+    profile:path "Quay/boardingPositions/BoardingPosition" ;
+    profile:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
 
 ## --- ResourceFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:ResourceFrame profile:scope profile:NP ;
+nordic:ResourceFrame a profile:ProfileClass ;
+    profile:onClass netex:ResourceFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- ResponsibilitySet (NP) ---
-netex:ResponsibilitySet profile:scope profile:NP ;
+nordic:ResponsibilitySet a profile:ProfileClass ;
+    profile:onClass netex:ResponsibilitySet ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "@id" ;
-    nordic:path "ResponsibilitySet/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "@id" ;
+    profile:path "ResponsibilitySet/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "@version" ;
-    nordic:path "ResponsibilitySet/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "@version" ;
+    profile:path "ResponsibilitySet/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "Name" ;
-    nordic:path "ResponsibilitySet/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "Name" ;
+    profile:path "ResponsibilitySet/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "ResponsibilityRoleAssignment/@id" ;
-    nordic:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "ResponsibilityRoleAssignment/@id" ;
+    profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "ResponsibilityRoleAssignment/@version" ;
-    nordic:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "ResponsibilityRoleAssignment/@version" ;
+    profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "ResponsibleOrganisationRef/@ref" ;
-    nordic:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "ResponsibleOrganisationRef/@ref" ;
+    profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "TypeOfResponsibilityRoleRef/@ref" ;
-    nordic:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/TypeOfResponsibilityRoleRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "TypeOfResponsibilityRoleRef/@ref" ;
+    profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/TypeOfResponsibilityRoleRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ResponsibilitySet ;
-    nordic:element "ContractRef/@ref" ;
-    nordic:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/AssociatedContract/ContractRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ResponsibilitySet ;
+    profile:element "ContractRef/@ref" ;
+    profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/AssociatedContract/ContractRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Route (NP) ---
-netex:Route profile:scope profile:NP ;
+nordic:Route a profile:ProfileClass ;
+    profile:onClass netex:Route ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "@id" ;
-    nordic:path "Route/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "@id" ;
+    profile:path "Route/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "@version" ;
-    nordic:path "Route/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "@version" ;
+    profile:path "Route/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "Name" ;
-    nordic:path "Route/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "Name" ;
+    profile:path "Route/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "ShortName" ;
-    nordic:path "Route/ShortName" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "ShortName" ;
+    profile:path "Route/ShortName" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "LineRef/@ref" ;
-    nordic:path "Route/LineRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "LineRef/@ref" ;
+    profile:path "Route/LineRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "DirectionType" ;
-    nordic:path "Route/DirectionType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "DirectionType" ;
+    profile:path "Route/DirectionType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "@order" ;
-    nordic:path "Route/pointsInSequence/PointOnRoute/@order" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "@order" ;
+    profile:path "Route/pointsInSequence/PointOnRoute/@order" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Route ;
-    nordic:element "RoutePointRef/@ref" ;
-    nordic:path "Route/pointsInSequence/PointOnRoute/RoutePointRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "RoutePointRef/@ref" ;
+    profile:path "Route/pointsInSequence/PointOnRoute/RoutePointRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- RoutePoint (NP) ---
-netex:RoutePoint profile:scope profile:NP ;
+nordic:RoutePoint a profile:ProfileClass ;
+    profile:onClass netex:RoutePoint ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:RoutePoint ;
-    nordic:element "@id" ;
-    nordic:path "RoutePoint/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:RoutePoint ;
+    profile:element "@id" ;
+    profile:path "RoutePoint/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:RoutePoint ;
-    nordic:element "@version" ;
-    nordic:path "RoutePoint/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:RoutePoint ;
+    profile:element "@version" ;
+    profile:path "RoutePoint/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:RoutePoint ;
-    nordic:element "BorderCrossing" ;
-    nordic:path "RoutePoint/BorderCrossing" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:RoutePoint ;
+    profile:element "BorderCrossing" ;
+    profile:path "RoutePoint/BorderCrossing" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:RoutePoint ;
-    nordic:element "projections" ;
-    nordic:path "RoutePoint/projections" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:RoutePoint ;
+    profile:element "projections" ;
+    profile:path "RoutePoint/projections" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:RoutePoint ;
-    nordic:element "PointProjection/@id" ;
-    nordic:path "RoutePoint/projections/PointProjection/@id" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:RoutePoint ;
+    profile:element "PointProjection/@id" ;
+    profile:path "RoutePoint/projections/PointProjection/@id" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:RoutePoint ;
-    nordic:element "ProjectToPointRef/@ref" ;
-    nordic:path "RoutePoint/projections/PointProjection/ProjectToPointRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:RoutePoint ;
+    profile:element "ProjectToPointRef/@ref" ;
+    profile:path "RoutePoint/projections/PointProjection/ProjectToPointRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- SalesTransactionFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:SalesTransactionFrame profile:scope profile:NP ;
+nordic:SalesTransactionFrame a profile:ProfileClass ;
+    profile:onClass netex:SalesTransactionFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- SanitaryEquipment (NP) ---
-netex:SanitaryEquipment profile:scope profile:NP ;
+nordic:SanitaryEquipment a profile:ProfileClass ;
+    profile:onClass netex:SanitaryEquipment ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SanitaryEquipment ;
-    nordic:element "@id" ;
-    nordic:path "SanitaryEquipment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SanitaryEquipment ;
+    profile:element "@id" ;
+    profile:path "SanitaryEquipment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SanitaryEquipment ;
-    nordic:element "@version" ;
-    nordic:path "SanitaryEquipment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SanitaryEquipment ;
+    profile:element "@version" ;
+    profile:path "SanitaryEquipment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SanitaryEquipment ;
-    nordic:element "Gender" ;
-    nordic:path "SanitaryEquipment/Gender" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SanitaryEquipment ;
+    profile:element "Gender" ;
+    profile:path "SanitaryEquipment/Gender" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SanitaryEquipment ;
-    nordic:element "SanitaryFacilityList" ;
-    nordic:path "SanitaryEquipment/SanitaryFacilityList" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SanitaryEquipment ;
+    profile:element "SanitaryFacilityList" ;
+    profile:path "SanitaryEquipment/SanitaryFacilityList" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SanitaryEquipment ;
-    nordic:element "NumberOfToilets" ;
-    nordic:path "SanitaryEquipment/NumberOfToilets" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SanitaryEquipment ;
+    profile:element "NumberOfToilets" ;
+    profile:path "SanitaryEquipment/NumberOfToilets" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SanitaryEquipment ;
-    nordic:element "PaymentMethods" ;
-    nordic:path "SanitaryEquipment/PaymentMethods" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SanitaryEquipment ;
+    profile:element "PaymentMethods" ;
+    profile:path "SanitaryEquipment/PaymentMethods" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- ScheduledStopPoint (NP) ---
-netex:ScheduledStopPoint profile:scope profile:NP ;
+nordic:ScheduledStopPoint a profile:ProfileClass ;
+    profile:onClass netex:ScheduledStopPoint ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ScheduledStopPoint ;
-    nordic:element "@id" ;
-    nordic:path "ScheduledStopPoint/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ScheduledStopPoint ;
+    profile:element "@id" ;
+    profile:path "ScheduledStopPoint/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ScheduledStopPoint ;
-    nordic:element "@version" ;
-    nordic:path "ScheduledStopPoint/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ScheduledStopPoint ;
+    profile:element "@version" ;
+    profile:path "ScheduledStopPoint/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ScheduledStopPoint ;
-    nordic:element "Name" ;
-    nordic:path "ScheduledStopPoint/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ScheduledStopPoint ;
+    profile:element "Name" ;
+    profile:path "ScheduledStopPoint/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ScheduledStopPoint ;
-    nordic:element "ValidBetween" ;
-    nordic:path "ScheduledStopPoint/ValidBetween" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ScheduledStopPoint ;
+    profile:element "ValidBetween" ;
+    profile:path "ScheduledStopPoint/ValidBetween" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ScheduledStopPoint ;
-    nordic:element "FromDate" ;
-    nordic:path "ScheduledStopPoint/ValidBetween/FromDate" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ScheduledStopPoint ;
+    profile:element "FromDate" ;
+    profile:path "ScheduledStopPoint/ValidBetween/FromDate" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceCalendar (NP) ---
-netex:ServiceCalendar profile:scope profile:NP ;
+nordic:ServiceCalendar a profile:ProfileClass ;
+    profile:onClass netex:ServiceCalendar ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceCalendar ;
-    nordic:element "@id" ;
-    nordic:path "ServiceCalendar/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceCalendar ;
+    profile:element "@id" ;
+    profile:path "ServiceCalendar/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceCalendar ;
-    nordic:element "@version" ;
-    nordic:path "ServiceCalendar/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceCalendar ;
+    profile:element "@version" ;
+    profile:path "ServiceCalendar/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceCalendar ;
-    nordic:element "Name" ;
-    nordic:path "ServiceCalendar/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceCalendar ;
+    profile:element "Name" ;
+    profile:path "ServiceCalendar/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceCalendar ;
-    nordic:element "FromDate" ;
-    nordic:path "ServiceCalendar/FromDate" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceCalendar ;
+    profile:element "FromDate" ;
+    profile:path "ServiceCalendar/FromDate" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceCalendar ;
-    nordic:element "ToDate" ;
-    nordic:path "ServiceCalendar/ToDate" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceCalendar ;
+    profile:element "ToDate" ;
+    profile:path "ServiceCalendar/ToDate" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceCalendarFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:ServiceCalendarFrame profile:scope profile:NP ;
+nordic:ServiceCalendarFrame a profile:ProfileClass ;
+    profile:onClass netex:ServiceCalendarFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:ServiceFrame profile:scope profile:NP ;
+nordic:ServiceFrame a profile:ProfileClass ;
+    profile:onClass netex:ServiceFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceJourney (NP) ---
-netex:ServiceJourney profile:scope profile:NP ;
+nordic:ServiceJourney a profile:ProfileClass ;
+    profile:onClass netex:ServiceJourney ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "@id" ;
-    nordic:path "ServiceJourney/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "@id" ;
+    profile:path "ServiceJourney/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "@version" ;
-    nordic:path "ServiceJourney/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "@version" ;
+    profile:path "ServiceJourney/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "Name" ;
-    nordic:path "Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "Name" ;
+    profile:path "Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "PrivateCode" ;
-    nordic:path "PrivateCode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "PrivateCode" ;
+    profile:path "PrivateCode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "DayTypeRef/@ref" ;
-    nordic:path "dayTypes/DayTypeRef/@ref" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "DayTypeRef/@ref" ;
+    profile:path "dayTypes/DayTypeRef/@ref" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "JourneyPatternRef/@ref" ;
-    nordic:path "JourneyPatternRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "JourneyPatternRef/@ref" ;
+    profile:path "JourneyPatternRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "OperatorRef/@ref" ;
-    nordic:path "OperatorRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "OperatorRef/@ref" ;
+    profile:path "OperatorRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "LineRef/@ref" ;
-    nordic:path "LineRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "LineRef/@ref" ;
+    profile:path "LineRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "TimetabledPassingTime" ;
-    nordic:path "passingTimes/TimetabledPassingTime" ;
-    nordic:cardinality "1..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TimetabledPassingTime" ;
+    profile:path "passingTimes/TimetabledPassingTime" ;
+    profile:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "TimetabledPassingTime/@id" ;
-    nordic:path "passingTimes/TimetabledPassingTime/@id" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TimetabledPassingTime/@id" ;
+    profile:path "passingTimes/TimetabledPassingTime/@id" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "StopPointInJourneyPatternRef/@ref" ;
-    nordic:path "passingTimes/TimetabledPassingTime/StopPointInJourneyPatternRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "StopPointInJourneyPatternRef/@ref" ;
+    profile:path "passingTimes/TimetabledPassingTime/StopPointInJourneyPatternRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "ArrivalTime" ;
-    nordic:path "passingTimes/TimetabledPassingTime/ArrivalTime" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "ArrivalTime" ;
+    profile:path "passingTimes/TimetabledPassingTime/ArrivalTime" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceJourney ;
-    nordic:element "DepartureTime" ;
-    nordic:path "passingTimes/TimetabledPassingTime/DepartureTime" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "DepartureTime" ;
+    profile:path "passingTimes/TimetabledPassingTime/DepartureTime" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceLink (NP) ---
-netex:ServiceLink profile:scope profile:NP ;
+nordic:ServiceLink a profile:ProfileClass ;
+    profile:onClass netex:ServiceLink ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "@id" ;
-    nordic:path "ServiceLink/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "@id" ;
+    profile:path "ServiceLink/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "@version" ;
-    nordic:path "ServiceLink/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "@version" ;
+    profile:path "ServiceLink/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "Distance" ;
-    nordic:path "ServiceLink/Distance" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "Distance" ;
+    profile:path "ServiceLink/Distance" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "projections" ;
-    nordic:path "ServiceLink/projections" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "projections" ;
+    profile:path "ServiceLink/projections" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "LinkSequenceProjection/@id" ;
-    nordic:path "ServiceLink/projections/LinkSequenceProjection/@id" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "LinkSequenceProjection/@id" ;
+    profile:path "ServiceLink/projections/LinkSequenceProjection/@id" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "gml:LineString" ;
-    nordic:path "ServiceLink/projections/LinkSequenceProjection/gml:LineString" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "gml:LineString" ;
+    profile:path "ServiceLink/projections/LinkSequenceProjection/gml:LineString" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "FromPointRef/@ref" ;
-    nordic:path "ServiceLink/FromPointRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "FromPointRef/@ref" ;
+    profile:path "ServiceLink/FromPointRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ServiceLink ;
-    nordic:element "ToPointRef/@ref" ;
-    nordic:path "ServiceLink/ToPointRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceLink ;
+    profile:element "ToPointRef/@ref" ;
+    profile:path "ServiceLink/ToPointRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- ShelterEquipment (NP) ---
-netex:ShelterEquipment profile:scope profile:NP ;
+nordic:ShelterEquipment a profile:ProfileClass ;
+    profile:onClass netex:ShelterEquipment ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ShelterEquipment ;
-    nordic:element "@id" ;
-    nordic:path "ShelterEquipment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ShelterEquipment ;
+    profile:element "@id" ;
+    profile:path "ShelterEquipment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ShelterEquipment ;
-    nordic:element "@version" ;
-    nordic:path "ShelterEquipment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ShelterEquipment ;
+    profile:element "@version" ;
+    profile:path "ShelterEquipment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ShelterEquipment ;
-    nordic:element "Seats" ;
-    nordic:path "ShelterEquipment/Seats" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ShelterEquipment ;
+    profile:element "Seats" ;
+    profile:path "ShelterEquipment/Seats" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ShelterEquipment ;
-    nordic:element "StepFree" ;
-    nordic:path "ShelterEquipment/StepFree" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ShelterEquipment ;
+    profile:element "StepFree" ;
+    profile:path "ShelterEquipment/StepFree" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:ShelterEquipment ;
-    nordic:element "Enclosed" ;
-    nordic:path "ShelterEquipment/Enclosed" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ShelterEquipment ;
+    profile:element "Enclosed" ;
+    profile:path "ShelterEquipment/Enclosed" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- SiteConnection (NP) ---
-netex:SiteConnection profile:scope profile:NP ;
+nordic:SiteConnection a profile:ProfileClass ;
+    profile:onClass netex:SiteConnection ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "@id" ;
-    nordic:path "SiteConnection/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "@id" ;
+    profile:path "SiteConnection/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "@version" ;
-    nordic:path "SiteConnection/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "@version" ;
+    profile:path "SiteConnection/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "Name" ;
-    nordic:path "SiteConnection/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "Name" ;
+    profile:path "SiteConnection/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "TransferDuration" ;
-    nordic:path "SiteConnection/TransferDuration" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "TransferDuration" ;
+    profile:path "SiteConnection/TransferDuration" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "DefaultDuration" ;
-    nordic:path "SiteConnection/TransferDuration/DefaultDuration" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "DefaultDuration" ;
+    profile:path "SiteConnection/TransferDuration/DefaultDuration" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "StopPlaceRef/@ref" ;
-    nordic:path "SiteConnection/From/StopPlaceRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "StopPlaceRef/@ref" ;
+    profile:path "SiteConnection/From/StopPlaceRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "StopPlaceRef/@ref" ;
-    nordic:path "SiteConnection/To/StopPlaceRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "StopPlaceRef/@ref" ;
+    profile:path "SiteConnection/To/StopPlaceRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:SiteConnection ;
-    nordic:element "BothWays" ;
-    nordic:path "SiteConnection/BothWays" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:SiteConnection ;
+    profile:element "BothWays" ;
+    profile:path "SiteConnection/BothWays" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- DefaultConnection (NP) ---
 ## Default transfer times at area/national level (TopographicPlace, StopArea or SiteElement scope), distinct from the site-level SiteConnection.
-netex:DefaultConnection profile:scope profile:NP ;
+nordic:DefaultConnection a profile:ProfileClass ;
+    profile:onClass netex:DefaultConnection ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "@id" ;
-    nordic:path "DefaultConnection/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "@id" ;
+    profile:path "DefaultConnection/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "@version" ;
-    nordic:path "DefaultConnection/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "@version" ;
+    profile:path "DefaultConnection/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "Name" ;
-    nordic:path "DefaultConnection/Name" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "Name" ;
+    profile:path "DefaultConnection/Name" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "TransferDuration" ;
-    nordic:path "DefaultConnection/TransferDuration" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "TransferDuration" ;
+    profile:path "DefaultConnection/TransferDuration" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "DefaultDuration" ;
-    nordic:path "DefaultConnection/TransferDuration/DefaultDuration" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "DefaultDuration" ;
+    profile:path "DefaultConnection/TransferDuration/DefaultDuration" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "WalkTransferDuration" ;
-    nordic:path "DefaultConnection/WalkTransferDuration" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "WalkTransferDuration" ;
+    profile:path "DefaultConnection/WalkTransferDuration" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "BothWays" ;
-    nordic:path "DefaultConnection/BothWays" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "BothWays" ;
+    profile:path "DefaultConnection/BothWays" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "TransferMode" ;
-    nordic:path "DefaultConnection/TransferMode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "TransferMode" ;
+    profile:path "DefaultConnection/TransferMode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "From" ;
-    nordic:path "DefaultConnection/From" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "From" ;
+    profile:path "DefaultConnection/From" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "To" ;
-    nordic:path "DefaultConnection/To" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "To" ;
+    profile:path "DefaultConnection/To" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "TopographicPlaceView/@ref" ;
-    nordic:path "DefaultConnection/TopographicPlaceView/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "TopographicPlaceView/@ref" ;
+    profile:path "DefaultConnection/TopographicPlaceView/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "StopAreaRef/@ref" ;
-    nordic:path "DefaultConnection/StopAreaRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "StopAreaRef/@ref" ;
+    profile:path "DefaultConnection/StopAreaRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:DefaultConnection ;
-    nordic:element "SiteElementRef/@ref" ;
-    nordic:path "DefaultConnection/SiteElementRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DefaultConnection ;
+    profile:element "SiteElementRef/@ref" ;
+    profile:path "DefaultConnection/SiteElementRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- SiteFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:SiteFrame profile:scope profile:NP ;
+nordic:SiteFrame a profile:ProfileClass ;
+    profile:onClass netex:SiteFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- StopPlace (NP) ---
-netex:StopPlace profile:scope profile:NP ;
+nordic:StopPlace a profile:ProfileClass ;
+    profile:onClass netex:StopPlace ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "@id" ;
-    nordic:path "StopPlace/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "@id" ;
+    profile:path "StopPlace/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "@version" ;
-    nordic:path "StopPlace/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "@version" ;
+    profile:path "StopPlace/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "ValidBetween" ;
-    nordic:path "StopPlace/ValidBetween" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "ValidBetween" ;
+    profile:path "StopPlace/ValidBetween" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "KeyValue" ;
-    nordic:path "StopPlace/keyList/KeyValue" ;
-    nordic:cardinality "0..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "KeyValue" ;
+    profile:path "StopPlace/keyList/KeyValue" ;
+    profile:cardinality "0..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "Key" ;
-    nordic:path "StopPlace/keyList/KeyValue/Key" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "Key" ;
+    profile:path "StopPlace/keyList/KeyValue/Key" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "Value" ;
-    nordic:path "StopPlace/keyList/KeyValue/Value" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "Value" ;
+    profile:path "StopPlace/keyList/KeyValue/Value" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "Name" ;
-    nordic:path "StopPlace/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "Name" ;
+    profile:path "StopPlace/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "Centroid" ;
-    nordic:path "StopPlace/Centroid/Location" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "Centroid" ;
+    profile:path "StopPlace/Centroid/Location" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "AccessibilityAssessment" ;
-    nordic:path "StopPlace/AccessibilityAssessment" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "AccessibilityAssessment" ;
+    profile:path "StopPlace/AccessibilityAssessment" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "MobilityImpairedAccess" ;
-    nordic:path "StopPlace/AccessibilityAssessment/MobilityImpairedAccess" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "MobilityImpairedAccess" ;
+    profile:path "StopPlace/AccessibilityAssessment/MobilityImpairedAccess" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "limitations" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "limitations" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "AccessibilityLimitation" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation" ;
-    nordic:cardinality "1..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "AccessibilityLimitation" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation" ;
+    profile:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "WheelchairAccess" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/WheelchairAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "WheelchairAccess" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/WheelchairAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "StepFreeAccess" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/StepFreeAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "StepFreeAccess" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/StepFreeAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "AudibleSignalsAvailable" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/AudibleSignalsAvailable" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "AudibleSignalsAvailable" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/AudibleSignalsAvailable" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "VisualSignsAvailable" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/VisualSignsAvailable" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "VisualSignsAvailable" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/VisualSignsAvailable" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "EscalatorFreeAccess" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/EscalatorFreeAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "EscalatorFreeAccess" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/EscalatorFreeAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "LiftFreeAccess" ;
-    nordic:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/LiftFreeAccess" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "LiftFreeAccess" ;
+    profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/LiftFreeAccess" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "TopographicPlaceRef/@ref" ;
-    nordic:path "StopPlace/TopographicPlaceRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "TopographicPlaceRef/@ref" ;
+    profile:path "StopPlace/TopographicPlaceRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "ParentSiteRef/@ref" ;
-    nordic:path "StopPlace/ParentSiteRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "ParentSiteRef/@ref" ;
+    profile:path "StopPlace/ParentSiteRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "TransportMode" ;
-    nordic:path "StopPlace/TransportMode" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "TransportMode" ;
+    profile:path "StopPlace/TransportMode" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "OtherTransportModes" ;
-    nordic:path "StopPlace/OtherTransportModes" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "OtherTransportModes" ;
+    profile:path "StopPlace/OtherTransportModes" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "StopPlaceType" ;
-    nordic:path "StopPlace/StopPlaceType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "StopPlaceType" ;
+    profile:path "StopPlace/StopPlaceType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "Weighting" ;
-    nordic:path "StopPlace/Weighting" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "Weighting" ;
+    profile:path "StopPlace/Weighting" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:StopPlace ;
-    nordic:element "Quay" ;
-    nordic:path "StopPlace/quays/Quay" ;
-    nordic:cardinality "1..n" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:StopPlace ;
+    profile:element "Quay" ;
+    profile:path "StopPlace/quays/Quay" ;
+    profile:cardinality "1..n" ;
     nordic:provenance nordic:Baseline .
 
 ## --- TariffZone (NP) ---
-netex:TariffZone profile:scope profile:NP ;
+nordic:TariffZone a profile:ProfileClass ;
+    profile:onClass netex:TariffZone ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TariffZone ;
-    nordic:element "@id" ;
-    nordic:path "TariffZone/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TariffZone ;
+    profile:element "@id" ;
+    profile:path "TariffZone/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TariffZone ;
-    nordic:element "@version" ;
-    nordic:path "TariffZone/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TariffZone ;
+    profile:element "@version" ;
+    profile:path "TariffZone/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TariffZone ;
-    nordic:element "Name" ;
-    nordic:path "TariffZone/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TariffZone ;
+    profile:element "Name" ;
+    profile:path "TariffZone/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TariffZone ;
-    nordic:element "ValidBetween" ;
-    nordic:path "TariffZone/ValidBetween" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TariffZone ;
+    profile:element "ValidBetween" ;
+    profile:path "TariffZone/ValidBetween" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TariffZone ;
-    nordic:element "FromDate" ;
-    nordic:path "TariffZone/ValidBetween/FromDate" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TariffZone ;
+    profile:element "FromDate" ;
+    profile:path "TariffZone/ValidBetween/FromDate" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- TicketingEquipment (NP) ---
-netex:TicketingEquipment profile:scope profile:NP ;
+nordic:TicketingEquipment a profile:ProfileClass ;
+    profile:onClass netex:TicketingEquipment ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "@id" ;
-    nordic:path "TicketingEquipment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "@id" ;
+    profile:path "TicketingEquipment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "@version" ;
-    nordic:path "TicketingEquipment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "@version" ;
+    profile:path "TicketingEquipment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "VehicleModes" ;
-    nordic:path "TicketingEquipment/VehicleModes" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "VehicleModes" ;
+    profile:path "TicketingEquipment/VehicleModes" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "TicketMachines" ;
-    nordic:path "TicketingEquipment/TicketMachines" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "TicketMachines" ;
+    profile:path "TicketingEquipment/TicketMachines" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "NumberOfMachines" ;
-    nordic:path "TicketingEquipment/NumberOfMachines" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "NumberOfMachines" ;
+    profile:path "TicketingEquipment/NumberOfMachines" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "TicketingFacilityList" ;
-    nordic:path "TicketingEquipment/TicketingFacilityList" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "TicketingFacilityList" ;
+    profile:path "TicketingEquipment/TicketingFacilityList" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "TicketOffice" ;
-    nordic:path "TicketingEquipment/TicketOffice" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "TicketOffice" ;
+    profile:path "TicketingEquipment/TicketOffice" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "PaymentMethods" ;
-    nordic:path "TicketingEquipment/PaymentMethods" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "PaymentMethods" ;
+    profile:path "TicketingEquipment/PaymentMethods" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "TicketTypesAvailable" ;
-    nordic:path "TicketingEquipment/TicketTypesAvailable" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "TicketTypesAvailable" ;
+    profile:path "TicketingEquipment/TicketTypesAvailable" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TicketingEquipment ;
-    nordic:element "ScopeOfTicketsAvailable" ;
-    nordic:path "TicketingEquipment/ScopeOfTicketsAvailable" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TicketingEquipment ;
+    profile:element "ScopeOfTicketsAvailable" ;
+    profile:path "TicketingEquipment/ScopeOfTicketsAvailable" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- TimetableFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:TimetableFrame profile:scope profile:NP ;
+nordic:TimetableFrame a profile:ProfileClass ;
+    profile:onClass netex:TimetableFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- TopographicPlace (NP) ---
-netex:TopographicPlace profile:scope profile:NP ;
+nordic:TopographicPlace a profile:ProfileClass ;
+    profile:onClass netex:TopographicPlace ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "@id" ;
-    nordic:path "TopographicPlace/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "@id" ;
+    profile:path "TopographicPlace/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "@version" ;
-    nordic:path "TopographicPlace/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "@version" ;
+    profile:path "TopographicPlace/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "ValidBetween" ;
-    nordic:path "TopographicPlace/ValidBetween" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "ValidBetween" ;
+    profile:path "TopographicPlace/ValidBetween" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "FromDate" ;
-    nordic:path "TopographicPlace/ValidBetween/FromDate" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "FromDate" ;
+    profile:path "TopographicPlace/ValidBetween/FromDate" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "IsoCode" ;
-    nordic:path "TopographicPlace/IsoCode" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "IsoCode" ;
+    profile:path "TopographicPlace/IsoCode" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "Descriptor" ;
-    nordic:path "TopographicPlace/Descriptor" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "Descriptor" ;
+    profile:path "TopographicPlace/Descriptor" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "Name" ;
-    nordic:path "TopographicPlace/Descriptor/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "Name" ;
+    profile:path "TopographicPlace/Descriptor/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "TopographicPlaceType" ;
-    nordic:path "TopographicPlace/TopographicPlaceType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "TopographicPlaceType" ;
+    profile:path "TopographicPlace/TopographicPlaceType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "CountryRef/@ref" ;
-    nordic:path "TopographicPlace/CountryRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "CountryRef/@ref" ;
+    profile:path "TopographicPlace/CountryRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TopographicPlace ;
-    nordic:element "ParentTopographicPlaceRef/@ref" ;
-    nordic:path "TopographicPlace/ParentTopographicPlaceRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TopographicPlace ;
+    profile:element "ParentTopographicPlaceRef/@ref" ;
+    profile:path "TopographicPlace/ParentTopographicPlaceRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- TrainNumber (NP) ---
-netex:TrainNumber profile:scope profile:NP ;
+nordic:TrainNumber a profile:ProfileClass ;
+    profile:onClass netex:TrainNumber ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TrainNumber ;
-    nordic:element "@id" ;
-    nordic:path "TrainNumber/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TrainNumber ;
+    profile:element "@id" ;
+    profile:path "TrainNumber/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TrainNumber ;
-    nordic:element "@version" ;
-    nordic:path "TrainNumber/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TrainNumber ;
+    profile:element "@version" ;
+    profile:path "TrainNumber/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:TrainNumber ;
-    nordic:element "ForAdvertisement" ;
-    nordic:path "TrainNumber/ForAdvertisement" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:TrainNumber ;
+    profile:element "ForAdvertisement" ;
+    profile:path "TrainNumber/ForAdvertisement" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- Vehicle (NP) ---
-netex:Vehicle profile:scope profile:NP ;
+nordic:Vehicle a profile:ProfileClass ;
+    profile:onClass netex:Vehicle ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Vehicle ;
-    nordic:element "@id" ;
-    nordic:path "Vehicle/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Vehicle ;
+    profile:element "@id" ;
+    profile:path "Vehicle/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Vehicle ;
-    nordic:element "@version" ;
-    nordic:path "Vehicle/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Vehicle ;
+    profile:element "@version" ;
+    profile:path "Vehicle/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Vehicle ;
-    nordic:element "RegistrationNumber" ;
-    nordic:path "Vehicle/RegistrationNumber" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Vehicle ;
+    profile:element "RegistrationNumber" ;
+    profile:path "Vehicle/RegistrationNumber" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Vehicle ;
-    nordic:element "OperatorRef/@ref" ;
-    nordic:path "Vehicle/OperatorRef/@ref" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Vehicle ;
+    profile:element "OperatorRef/@ref" ;
+    profile:path "Vehicle/OperatorRef/@ref" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:Vehicle ;
-    nordic:element "VehicleTypeRef/@ref" ;
-    nordic:path "Vehicle/VehicleTypeRef/@ref" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Vehicle ;
+    profile:element "VehicleTypeRef/@ref" ;
+    profile:path "Vehicle/VehicleTypeRef/@ref" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- VehicleScheduleFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-netex:VehicleScheduleFrame profile:scope profile:NP ;
+nordic:VehicleScheduleFrame a profile:ProfileClass ;
+    profile:onClass netex:VehicleScheduleFrame ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- VehicleType (NP) ---
-netex:VehicleType profile:scope profile:NP ;
+nordic:VehicleType a profile:ProfileClass ;
+    profile:onClass netex:VehicleType ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "@id" ;
-    nordic:path "VehicleType/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "@id" ;
+    profile:path "VehicleType/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "@version" ;
-    nordic:path "VehicleType/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "@version" ;
+    profile:path "VehicleType/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "Name" ;
-    nordic:path "VehicleType/Name" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "Name" ;
+    profile:path "VehicleType/Name" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "Description" ;
-    nordic:path "VehicleType/Description" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "Description" ;
+    profile:path "VehicleType/Description" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "PropulsionType" ;
-    nordic:path "VehicleType/PropulsionType" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "PropulsionType" ;
+    profile:path "VehicleType/PropulsionType" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "SeatedCapacity" ;
-    nordic:path "VehicleType/PassengerCapacity/SeatedCapacity" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "SeatedCapacity" ;
+    profile:path "VehicleType/PassengerCapacity/SeatedCapacity" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "StandingCapacity" ;
-    nordic:path "VehicleType/PassengerCapacity/StandingCapacity" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "StandingCapacity" ;
+    profile:path "VehicleType/PassengerCapacity/StandingCapacity" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "WheelchairCapacity" ;
-    nordic:path "VehicleType/PassengerCapacity/WheelchairCapacity" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "WheelchairCapacity" ;
+    profile:path "VehicleType/PassengerCapacity/WheelchairCapacity" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "Length" ;
-    nordic:path "VehicleType/Length" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "Length" ;
+    profile:path "VehicleType/Length" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "Width" ;
-    nordic:path "VehicleType/Width" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "Width" ;
+    profile:path "VehicleType/Width" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:VehicleType ;
-    nordic:element "Height" ;
-    nordic:path "VehicleType/Height" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:VehicleType ;
+    profile:element "Height" ;
+    profile:path "VehicleType/Height" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- WaitingRoomEquipment (NP) ---
-netex:WaitingRoomEquipment profile:scope profile:NP ;
+nordic:WaitingRoomEquipment a profile:ProfileClass ;
+    profile:onClass netex:WaitingRoomEquipment ;
+    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:WaitingRoomEquipment ;
-    nordic:element "@id" ;
-    nordic:path "WaitingRoomEquipment/@id" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:WaitingRoomEquipment ;
+    profile:element "@id" ;
+    profile:path "WaitingRoomEquipment/@id" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:WaitingRoomEquipment ;
-    nordic:element "@version" ;
-    nordic:path "WaitingRoomEquipment/@version" ;
-    nordic:cardinality "1..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:WaitingRoomEquipment ;
+    profile:element "@version" ;
+    profile:path "WaitingRoomEquipment/@version" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:WaitingRoomEquipment ;
-    nordic:element "Seats" ;
-    nordic:path "WaitingRoomEquipment/Seats" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:WaitingRoomEquipment ;
+    profile:element "Seats" ;
+    profile:path "WaitingRoomEquipment/Seats" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:WaitingRoomEquipment ;
-    nordic:element "StepFree" ;
-    nordic:path "WaitingRoomEquipment/StepFree" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:WaitingRoomEquipment ;
+    profile:element "StepFree" ;
+    profile:path "WaitingRoomEquipment/StepFree" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:WaitingRoomEquipment ;
-    nordic:element "Heated" ;
-    nordic:path "WaitingRoomEquipment/Heated" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:WaitingRoomEquipment ;
+    profile:element "Heated" ;
+    profile:path "WaitingRoomEquipment/Heated" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
-[] a nordic:ProfileMember ;
-    nordic:onClass netex:WaitingRoomEquipment ;
-    nordic:element "Sanitary" ;
-    nordic:path "WaitingRoomEquipment/Sanitary" ;
-    nordic:cardinality "0..1" ;
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:WaitingRoomEquipment ;
+    profile:element "Sanitary" ;
+    profile:path "WaitingRoomEquipment/Sanitary" ;
+    profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
