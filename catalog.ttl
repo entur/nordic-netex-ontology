@@ -162,7 +162,7 @@
 
 <https://netex-cen.eu/nordic/model> a dcat:Dataset ;
     dcterms:title "Nordic NeTEx Structural Model" ;
-    dcterms:description "Curated frame containment and specialisation semantics layered on the generated NeTEx base." ;
+    dcterms:description "Curated frame containment between Nordic profile nodes." ;
     dcat:keyword "model" ;
     dcterms:provenance "maintained here" ;
     void:triples 68 ;

@@ -75,21 +75,19 @@ nordic:lastValidated a owl:DatatypeProperty ;
 ## netex:xsdSequenceOrder on owl:Restrictions. This vocabulary
 ## expresses the *profile's* canonical element order, which may
 ## subset or annotate — but never contradict — the XSD order.
+## Shared profile vocabulary; the subject is a profile:ProfileClass node
+## and each entry names its member via profile:element.
 ## -----------------------------------------------------------------
 
-nordic:elementOrder a owl:ObjectProperty ;
+profile:elementOrder a owl:ObjectProperty ;
     rdfs:label "elementOrder" ;
+    rdfs:domain profile:ProfileClass ;
     skos:definition "Canonical element sequence for a class in the profile" .
 
-nordic:position a owl:DatatypeProperty ;
+profile:position a owl:DatatypeProperty ;
     rdfs:label "position" ;
     rdfs:range xsd:integer ;
     skos:definition "Ordinal position within the element sequence" .
-
-nordic:element a owl:DatatypeProperty ;
-    rdfs:label "element" ;
-    rdfs:range xsd:string ;
-    skos:definition "XML element or attribute name at this position" .
 
 ## =================================================================
 ## DOMAIN CHAINS (navigational shortcuts)
@@ -104,8 +102,9 @@ nordic:step4 a owl:ObjectProperty ; rdfs:label "step4" .
 ## STRUCTURAL MODEL (containment & domain placement)
 ## =================================================================
 ## The generated base expresses XML containment via owl:Restrictions.
-## These predicates provide a curated, navigable profile view of the
-## same structure (which frame holds what, inline child placement).
+## These predicates give the profile's curated view of which frame
+## holds what, between profile:ProfileClass nodes (never on netex:).
+## Inline child elements are profile:ProfileMember entries instead.
 ## -----------------------------------------------------------------
 
 nordic:contains a owl:ObjectProperty ;
@@ -116,10 +115,6 @@ nordic:containedIn a owl:ObjectProperty ;
     rdfs:label "containedIn" ;
     owl:inverseOf nordic:contains ;
     skos:definition "Inverse of contains — this frame is nested within a parent frame" .
-
-nordic:childOf a owl:ObjectProperty ;
-    rdfs:label "childOf" ;
-    skos:definition "Object is modelled as inline child element(s) within the parent class" .
 
 nordic:inFrame a owl:ObjectProperty ;
     rdfs:label "inFrame" ;

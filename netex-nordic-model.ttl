@@ -6,23 +6,24 @@
 ##
 ## The generated base ontology remains authoritative for classes,
 ## properties, cardinality and XSD sequence. This overlay only adds
-## the profile's structural navigation on top of the generated
-## netex: classes, using nordic: predicates.
+## the profile's frame containment between the Nordic profile nodes
+## (nordic:X, defined in netex-nordic-baseline.ttl); nothing here is
+## asserted on the netex: classes themselves.
 ##
-## Imports: generated NeTEx base + netex-nordic-vocab.ttl
+## Imports: generated NeTEx base + netex-nordic-vocab.ttl + baseline
 ## -----------------------------------------------------------------
 
 @prefix netex:  <https://netex-cen.eu/ontology#> .
 @prefix nordic: <https://netex-cen.eu/nordic#> .
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:    <http://www.w3.org/2002/07/owl#> .
-@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
 
 <https://netex-cen.eu/nordic/model> a owl:Ontology ;
     rdfs:label "Nordic NeTEx Structural Model" ;
     owl:imports <https://netex-cen.eu/ontology> ,
-                <https://netex-cen.eu/nordic> ;
-    rdfs:comment "Curated frame containment layered on the generated NeTEx base." .
+                <https://netex-cen.eu/nordic> ,
+                <https://netex-cen.eu/profile/nordic-baseline> ;
+    rdfs:comment "Curated frame containment between Nordic profile nodes." .
 
 ## =================================================================
 ## PUBLICATION DELIVERY ENVELOPE
@@ -32,72 +33,68 @@
 ## directly without a CompositeFrame wrapper.
 ## -----------------------------------------------------------------
 
-netex:PublicationDelivery nordic:contains netex:CompositeFrame ,
-        netex:SiteFrame ,
-        netex:ServiceFrame .
-
-netex:PublicationTimestamp nordic:childOf netex:PublicationDelivery .
-netex:ParticipantRef nordic:childOf netex:PublicationDelivery .
+nordic:PublicationDelivery nordic:contains nordic:CompositeFrame ,
+        nordic:SiteFrame ,
+        nordic:ServiceFrame .
 
 ## =================================================================
 ## FRAME CONTAINMENT
 ## =================================================================
 
-netex:CompositeFrame nordic:contains netex:ResourceFrame ,
-        netex:SiteFrame ,
-        netex:ServiceCalendarFrame ,
-        netex:ServiceFrame ,
-        netex:TimetableFrame ,
-        netex:VehicleScheduleFrame ,
-        netex:FareFrame ,
-        netex:SalesTransactionFrame ,
-        netex:Codespace .
+nordic:CompositeFrame nordic:contains nordic:ResourceFrame ,
+        nordic:SiteFrame ,
+        nordic:ServiceCalendarFrame ,
+        nordic:ServiceFrame ,
+        nordic:TimetableFrame ,
+        nordic:FareFrame ,
+        nordic:SalesTransactionFrame ,
+        nordic:Codespace .
 
-netex:ResourceFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:Authority ,
-        netex:Operator ,
-        netex:VehicleType ,
-        netex:Vehicle ,
-        netex:PurposeOfGrouping .
+nordic:ResourceFrame nordic:containedIn nordic:CompositeFrame ;
+    nordic:contains nordic:Authority ,
+        nordic:Operator ,
+        nordic:VehicleType ,
+        nordic:Vehicle ,
+        nordic:PurposeOfGrouping .
 
-netex:SiteFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:StopPlace ,
-        netex:TopographicPlace ,
-        netex:Parking ,
-        netex:TariffZone .
+nordic:SiteFrame nordic:containedIn nordic:CompositeFrame ;
+    nordic:contains nordic:StopPlace ,
+        nordic:TopographicPlace ,
+        nordic:Parking ,
+        nordic:TariffZone .
 
-netex:ServiceCalendarFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:ServiceCalendar ,
-        netex:DayType ,
-        netex:DayTypeAssignment ,
-        netex:OperatingPeriod ,
-        netex:OperatingDay .
+nordic:ServiceCalendarFrame nordic:containedIn nordic:CompositeFrame ;
+    nordic:contains nordic:ServiceCalendar ,
+        nordic:DayType ,
+        nordic:DayTypeAssignment ,
+        nordic:OperatingPeriod ,
+        nordic:OperatingDay .
 
-netex:ServiceFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:Line ,
-        netex:Route ,
-        netex:JourneyPattern ,
-        netex:ScheduledStopPoint ,
-        netex:PassengerStopAssignment ,
-        netex:DestinationDisplay ,
-        netex:GroupOfLines ,
-        netex:Notice ,
-        netex:FlexibleServiceProperties ,
-        netex:RoutePoint ,
-        netex:ServiceLink ,
-        netex:SiteConnection ,
-        netex:DefaultConnection .
+nordic:ServiceFrame nordic:containedIn nordic:CompositeFrame ;
+    nordic:contains nordic:Line ,
+        nordic:Route ,
+        nordic:JourneyPattern ,
+        nordic:ScheduledStopPoint ,
+        nordic:PassengerStopAssignment ,
+        nordic:DestinationDisplay ,
+        nordic:GroupOfLines ,
+        nordic:Notice ,
+        nordic:FlexibleServiceProperties ,
+        nordic:RoutePoint ,
+        nordic:ServiceLink ,
+        nordic:SiteConnection ,
+        nordic:DefaultConnection .
 
-netex:TimetableFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:ServiceJourney ,
-        netex:Interchange ,
-        netex:TrainNumber .
+nordic:TimetableFrame nordic:containedIn nordic:CompositeFrame ;
+    nordic:contains nordic:ServiceJourney ,
+        nordic:Interchange ,
+        nordic:TrainNumber .
 
-netex:FareFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:FareZone .
+nordic:FareFrame nordic:containedIn nordic:CompositeFrame ;
+    nordic:contains nordic:FareZone .
 
-netex:SalesTransactionFrame nordic:containedIn netex:CompositeFrame ;
-    nordic:contains netex:FareContract .
+nordic:SalesTransactionFrame nordic:containedIn nordic:CompositeFrame ;
+    nordic:contains nordic:FareContract .
 
 ## =================================================================
 ## NESTED CLASS CONTAINMENT
@@ -106,10 +103,10 @@ netex:SalesTransactionFrame nordic:containedIn netex:CompositeFrame ;
 ## frame-containment table above.
 ## -----------------------------------------------------------------
 
-netex:AccessibilityAssessment nordic:contains netex:AccessibilityLimitation .
-netex:AccessibilityLimitation nordic:containedIn netex:AccessibilityAssessment .
+nordic:AccessibilityAssessment nordic:contains nordic:AccessibilityLimitation .
+nordic:AccessibilityLimitation nordic:containedIn nordic:AccessibilityAssessment .
 
-netex:StopPlace nordic:contains netex:AlternativeName ,
-        netex:Quay .
-netex:Quay nordic:containedIn netex:StopPlace ;
-    nordic:contains netex:ShelterEquipment .
+nordic:StopPlace nordic:contains nordic:AlternativeName ,
+        nordic:Quay .
+nordic:Quay nordic:containedIn nordic:StopPlace ;
+    nordic:contains nordic:ShelterEquipment .

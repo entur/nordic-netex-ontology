@@ -24,6 +24,18 @@
     owl:imports <https://netex-cen.eu/nordic> ,
                 <https://netex-cen.eu/profile/nordic> .
 
+## --- AccessibilityAssessment (NP) ---
+nordic:AccessibilityAssessment a profile:ProfileClass ;
+    profile:onClass netex:AccessibilityAssessment ;
+    profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
+## --- AccessibilityLimitation (NP) ---
+nordic:AccessibilityLimitation a profile:ProfileClass ;
+    profile:onClass netex:AccessibilityLimitation ;
+    profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
 ## --- AlternativeName (NP) ---
 nordic:AlternativeName a profile:ProfileClass ;
     profile:onClass netex:AlternativeName ;
@@ -278,10 +290,22 @@ nordic:DestinationDisplay a profile:ProfileClass ;
     profile:cardinality "0..1" ;
     nordic:provenance nordic:Baseline .
 
+## --- FareContract (NP) ---
+nordic:FareContract a profile:ProfileClass ;
+    profile:onClass netex:FareContract ;
+    profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
 ## --- FareFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
 nordic:FareFrame a profile:ProfileClass ;
     profile:onClass netex:FareFrame ;
+    profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
+## --- FareZone (NP) ---
+nordic:FareZone a profile:ProfileClass ;
+    profile:onClass netex:FareZone ;
     profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
@@ -1178,6 +1202,23 @@ nordic:PassengerStopAssignment a profile:ProfileClass ;
     profile:element "FromDate" ;
     profile:path "PassengerStopAssignment/ValidBetween/FromDate" ;
     profile:cardinality "0..1" ;
+    nordic:provenance nordic:Baseline .
+
+## --- PublicationDelivery (NP) ---
+nordic:PublicationDelivery a profile:ProfileClass ;
+    profile:onClass netex:PublicationDelivery ;
+    profile:scope profile:NP ;
+    nordic:provenance nordic:Baseline .
+
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PublicationDelivery ;
+    profile:element "PublicationTimestamp" ;
+    profile:path "PublicationDelivery/PublicationTimestamp" ;
+    nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:PublicationDelivery ;
+    profile:element "ParticipantRef" ;
+    profile:path "PublicationDelivery/ParticipantRef" ;
     nordic:provenance nordic:Baseline .
 
 ## --- PurposeOfGrouping (NP) ---
@@ -2350,13 +2391,6 @@ nordic:Vehicle a profile:ProfileClass ;
     profile:element "VehicleTypeRef/@ref" ;
     profile:path "Vehicle/VehicleTypeRef/@ref" ;
     profile:cardinality "1..1" ;
-    nordic:provenance nordic:Baseline .
-
-## --- VehicleScheduleFrame (NP) ---
-## Frame-level membership only; field containment is in netex-nordic-model.ttl.
-nordic:VehicleScheduleFrame a profile:ProfileClass ;
-    profile:onClass netex:VehicleScheduleFrame ;
-    profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 ## --- VehicleType (NP) ---

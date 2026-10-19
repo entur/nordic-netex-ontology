@@ -237,216 +237,216 @@ profile:NP_InterchangeShape a sh:NodeShape ;
 ## Only elements documented in the profile Tables are listed.
 ## -----------------------------------------------------------------
 
-netex:ServiceJourney nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:ServiceJourney profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "keyList"
+    profile:position 3 ; profile:element "keyList"
 ] , [
-    nordic:position 4 ; nordic:element "Name"
+    profile:position 4 ; profile:element "Name"
 ] , [
-    nordic:position 5 ; nordic:element "PrivateCode"
+    profile:position 5 ; profile:element "PrivateCode"
 ] , [
-    nordic:position 6 ; nordic:element "Description"
+    profile:position 6 ; profile:element "Description"
 ] , [
-    nordic:position 7 ; nordic:element "TransportMode"
+    profile:position 7 ; profile:element "TransportMode"
 ] , [
-    nordic:position 8 ; nordic:element "TransportSubmode"
+    profile:position 8 ; profile:element "TransportSubmode"
 ] , [
     ## XSD: ServiceTimeGroup — DepartureTime before dayTypes
-    nordic:position 9 ; nordic:element "DepartureTime"
+    profile:position 9 ; profile:element "DepartureTime"
 ] , [
-    nordic:position 10 ; nordic:element "DepartureDayOffset"
+    profile:position 10 ; profile:element "DepartureDayOffset"
 ] , [
-    nordic:position 11 ; nordic:element "dayTypes"
+    profile:position 11 ; profile:element "dayTypes"
 ] , [
-    nordic:position 12 ; nordic:element "JourneyPatternRef"
+    profile:position 12 ; profile:element "JourneyPatternRef"
 ] , [
     ## XSD: ServiceJourneyPatternRef is the specialised alternative to JourneyPatternRef
-    nordic:position 12 ; nordic:element "ServiceJourneyPatternRef"
+    profile:position 12 ; profile:element "ServiceJourneyPatternRef"
 ] , [
-    nordic:position 13 ; nordic:element "VehicleTypeRef"
+    profile:position 13 ; profile:element "VehicleTypeRef"
 ] , [
-    nordic:position 14 ; nordic:element "BlockRef"
+    profile:position 14 ; profile:element "BlockRef"
 ] , [
-    nordic:position 15 ; nordic:element "OperatorRef"
+    profile:position 15 ; profile:element "OperatorRef"
 ] , [
-    nordic:position 16 ; nordic:element "LineRef"
+    profile:position 16 ; profile:element "LineRef"
 ] , [
-    nordic:position 17 ; nordic:element "FlexibleLineRef"
+    profile:position 17 ; profile:element "FlexibleLineRef"
 ] , [
-    nordic:position 18 ; nordic:element "passingTimes"
+    profile:position 18 ; profile:element "passingTimes"
 ] , [
-    nordic:position 19 ; nordic:element "parts"
+    profile:position 19 ; profile:element "parts"
 ] .
 
-netex:Operator nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:Operator profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "CompanyNumber"
+    profile:position 3 ; profile:element "CompanyNumber"
 ] , [
-    nordic:position 4 ; nordic:element "Name"
+    profile:position 4 ; profile:element "Name"
 ] , [
-    nordic:position 5 ; nordic:element "ShortName"
+    profile:position 5 ; profile:element "ShortName"
 ] , [
-    nordic:position 6 ; nordic:element "LegalName"
+    profile:position 6 ; profile:element "LegalName"
 ] , [
-    nordic:position 7 ; nordic:element "ContactDetails"
+    profile:position 7 ; profile:element "ContactDetails"
 ] , [
-    nordic:position 8 ; nordic:element "OrganisationType"
+    profile:position 8 ; profile:element "OrganisationType"
 ] , [
-    nordic:position 9 ; nordic:element "CountryRef"
+    profile:position 9 ; profile:element "CountryRef"
 ] , [
-    nordic:position 10 ; nordic:element "PrimaryMode"
+    profile:position 10 ; profile:element "PrimaryMode"
 ] , [
-    nordic:position 11 ; nordic:element "CustomerServiceContactDetails"
+    profile:position 11 ; profile:element "CustomerServiceContactDetails"
 ] .
 
-netex:StopPlace nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:StopPlace profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "ValidBetween"
+    profile:position 3 ; profile:element "ValidBetween"
 ] , [
-    nordic:position 4 ; nordic:element "keyList"
+    profile:position 4 ; profile:element "keyList"
 ] , [
-    nordic:position 5 ; nordic:element "Name"
+    profile:position 5 ; profile:element "Name"
 ] , [
-    nordic:position 6 ; nordic:element "Centroid"
+    profile:position 6 ; profile:element "Centroid"
 ] , [
-    nordic:position 7 ; nordic:element "AccessibilityAssessment"
+    profile:position 7 ; profile:element "AccessibilityAssessment"
 ] , [
-    nordic:position 8 ; nordic:element "TopographicPlaceRef"
+    profile:position 8 ; profile:element "TopographicPlaceRef"
 ] , [
-    nordic:position 9 ; nordic:element "ParentSiteRef"
+    profile:position 9 ; profile:element "ParentSiteRef"
 ] , [
-    nordic:position 10 ; nordic:element "TransportMode"
+    profile:position 10 ; profile:element "TransportMode"
 ] , [
-    nordic:position 11 ; nordic:element "StopPlaceType"
+    profile:position 11 ; profile:element "StopPlaceType"
 ] , [
-    nordic:position 12 ; nordic:element "Weighting"
+    profile:position 12 ; profile:element "Weighting"
 ] , [
-    nordic:position 13 ; nordic:element "quays"
+    profile:position 13 ; profile:element "quays"
 ] .
 
-netex:Line nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:Line profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "Name"
+    profile:position 3 ; profile:element "Name"
 ] , [
     ## XSD: DataManagedObjectGroup — ShortName follows Name
-    nordic:position 4 ; nordic:element "ShortName"
+    profile:position 4 ; profile:element "ShortName"
 ] , [
-    nordic:position 5 ; nordic:element "TransportMode"
+    profile:position 5 ; profile:element "TransportMode"
 ] , [
-    nordic:position 6 ; nordic:element "TransportSubmode"
+    profile:position 6 ; profile:element "TransportSubmode"
 ] , [
-    nordic:position 7 ; nordic:element "PublicCode"
+    profile:position 7 ; profile:element "PublicCode"
 ] , [
-    nordic:position 8 ; nordic:element "PrivateCode"
+    profile:position 8 ; profile:element "PrivateCode"
 ] , [
     ## XSD: LinePropertiesGroup — AuthorityRef before OperatorRef
-    nordic:position 9 ; nordic:element "AuthorityRef"
+    profile:position 9 ; profile:element "AuthorityRef"
 ] , [
-    nordic:position 10 ; nordic:element "OperatorRef"
+    profile:position 10 ; profile:element "OperatorRef"
 ] , [
-    nordic:position 11 ; nordic:element "Monitored"
+    profile:position 11 ; profile:element "Monitored"
 ] , [
-    nordic:position 12 ; nordic:element "RepresentedByGroupRef"
+    profile:position 12 ; profile:element "RepresentedByGroupRef"
 ] , [
-    nordic:position 13 ; nordic:element "Presentation"
+    profile:position 13 ; profile:element "Presentation"
 ] .
 
-netex:Route nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:Route profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "Name"
+    profile:position 3 ; profile:element "Name"
 ] , [
-    nordic:position 4 ; nordic:element "ShortName"
+    profile:position 4 ; profile:element "ShortName"
 ] , [
-    nordic:position 5 ; nordic:element "Description"
+    profile:position 5 ; profile:element "Description"
 ] , [
-    nordic:position 6 ; nordic:element "LineRef"
+    profile:position 6 ; profile:element "LineRef"
 ] , [
-    nordic:position 7 ; nordic:element "DirectionType"
+    profile:position 7 ; profile:element "DirectionType"
 ] , [
-    nordic:position 8 ; nordic:element "pointsInSequence"
+    profile:position 8 ; profile:element "pointsInSequence"
 ] , [
-    nordic:position 9 ; nordic:element "InverseRouteRef"
+    profile:position 9 ; profile:element "InverseRouteRef"
 ] .
 
-netex:JourneyPattern nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:JourneyPattern profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "Name"
+    profile:position 3 ; profile:element "Name"
 ] , [
-    nordic:position 4 ; nordic:element "RouteRef"
+    profile:position 4 ; profile:element "RouteRef"
 ] , [
-    nordic:position 5 ; nordic:element "pointsInSequence"
+    profile:position 5 ; profile:element "pointsInSequence"
 ] , [
-    nordic:position 6 ; nordic:element "linksInSequence"
+    profile:position 6 ; profile:element "linksInSequence"
 ] .
 
-netex:DayType nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:DayType profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "Name"
+    profile:position 3 ; profile:element "Name"
 ] , [
-    nordic:position 4 ; nordic:element "properties"
+    profile:position 4 ; profile:element "properties"
 ] .
 
-netex:ScheduledStopPoint nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:ScheduledStopPoint profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "ValidBetween"
+    profile:position 3 ; profile:element "ValidBetween"
 ] , [
-    nordic:position 4 ; nordic:element "Name"
+    profile:position 4 ; profile:element "Name"
 ] , [
-    nordic:position 5 ; nordic:element "TimingPointStatus"
+    profile:position 5 ; profile:element "TimingPointStatus"
 ] .
 
-netex:PassengerStopAssignment nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:PassengerStopAssignment profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "@order"
+    profile:position 3 ; profile:element "@order"
 ] , [
-    nordic:position 4 ; nordic:element "ValidBetween"
+    profile:position 4 ; profile:element "ValidBetween"
 ] , [
-    nordic:position 5 ; nordic:element "ScheduledStopPointRef"
+    profile:position 5 ; profile:element "ScheduledStopPointRef"
 ] , [
-    nordic:position 6 ; nordic:element "StopPlaceRef"
+    profile:position 6 ; profile:element "StopPlaceRef"
 ] , [
-    nordic:position 7 ; nordic:element "QuayRef"
+    profile:position 7 ; profile:element "QuayRef"
 ] .
 
-netex:DestinationDisplay nordic:elementOrder [
-    nordic:position 1 ; nordic:element "@id"
+nordic:DestinationDisplay profile:elementOrder [
+    profile:position 1 ; profile:element "@id"
 ] , [
-    nordic:position 2 ; nordic:element "@version"
+    profile:position 2 ; profile:element "@version"
 ] , [
-    nordic:position 3 ; nordic:element "Name"
+    profile:position 3 ; profile:element "Name"
 ] , [
-    nordic:position 4 ; nordic:element "SideText"
+    profile:position 4 ; profile:element "SideText"
 ] , [
-    nordic:position 5 ; nordic:element "FrontText"
+    profile:position 5 ; profile:element "FrontText"
 ] , [
-    nordic:position 6 ; nordic:element "vias"
+    profile:position 6 ; profile:element "vias"
 ] .
 
 ## =================================================================
