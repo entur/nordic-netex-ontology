@@ -1134,7 +1134,7 @@ nordic:Operator a profile:ProfileClass ;
     profile:element "OrganisationType" ;
     profile:path "Operator/OrganisationType" ;
     profile:cardinality "0..1" ;
-    skos:definition "Type of organisation (e.g., company, cooperative)"@en ;
+    skos:definition "Type of organisation (e.g., operator, railOperator)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
