@@ -1029,7 +1029,7 @@ nordic:OperatingDay a profile:ProfileClass ;
     profile:element "EarliestTime" ;
     profile:path "OperatingDay/EarliestTime" ;
     profile:cardinality "" ;
-    skos:definition "Earliest departure time when service day spans past midnight"@en ;
+    skos:definition "Start time of the operating day (defaults to 00:00)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- OperatingPeriod (NP) ---
