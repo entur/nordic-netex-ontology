@@ -1693,7 +1693,7 @@ nordic:Route a profile:ProfileClass ;
     profile:element "DirectionType" ;
     profile:path "Route/DirectionType" ;
     profile:cardinality "0..1" ;
-    skos:definition "Direction indicator (inbound, outbound, clockwise, counterclockwise)"@en ;
+    skos:definition "Direction indicator (inbound, outbound, clockwise, anticlockwise)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
