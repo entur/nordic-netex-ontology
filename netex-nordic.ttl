@@ -784,7 +784,7 @@ nordic:Line a profile:ProfileClass ;
     profile:element "TransportMode" ;
     profile:path "Line/TransportMode" ;
     profile:cardinality "1..1" ;
-    skos:definition "Primary transport mode (bus, rail, water, tram, metro, air, coach, telecabin)"@en ;
+    skos:definition "Primary transport mode (bus, rail, water, tram, metro, air, coach, cableway)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
