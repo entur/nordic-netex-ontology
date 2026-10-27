@@ -1791,7 +1791,7 @@ nordic:SanitaryEquipment a profile:ProfileClass ;
     profile:element "Gender" ;
     profile:path "SanitaryEquipment/Gender" ;
     profile:cardinality "0..1" ;
-    skos:definition "Gender designation (e.g., both, male, female)"@en ;
+    skos:definition "Gender restriction for use of the facility (both, femaleOnly, maleOnly, sameSexOnly)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SanitaryEquipment ;
