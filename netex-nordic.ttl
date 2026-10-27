@@ -610,7 +610,7 @@ nordic:JourneyPattern a profile:ProfileClass ;
     profile:element "RequestMethod" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/RequestMethod" ;
     profile:cardinality "0..1" ;
-    skos:definition "How to request the stop: `handSignal`, `phoneCall`, `sms`, `stopButton`, `none`"@en ;
+    skos:definition "How to request the stop: `handSignal`, `phoneCall`, `sms`, `stopButton`, `noneRequired`"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
