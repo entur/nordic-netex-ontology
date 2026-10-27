@@ -158,7 +158,8 @@ profile:onClass a owl:ObjectProperty ;
 
 profile:ProfileMember a owl:Class ;
     rdfs:label "ProfileMember" ;
-    skos:definition "A field (element or attribute) that is part of a profile class, with its cardinality" .
+    skos:definition "A field (element or attribute) that is part of a profile class, with its cardinality" ;
+    rdfs:comment "A member may carry skos:definition (@en): what the field means in the context of its class. Documentation tables are generated from it." .
 
 profile:memberOf a owl:ObjectProperty ;
     rdfs:label "memberOf" ;

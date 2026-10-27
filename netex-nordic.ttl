@@ -78,12 +78,14 @@ nordic:AlternativeName a profile:ProfileClass ;
     profile:element "NameType" ;
     profile:path "AlternativeName/NameType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Classification of the alternative name (e.g., alias, translation, copy)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:AlternativeName ;
     profile:element "Name" ;
     profile:path "AlternativeName/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "The alternative name text"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- AlternativeText (NP) ---
@@ -97,18 +99,21 @@ nordic:AlternativeText a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "AlternativeText/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the alternative text"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:AlternativeText ;
     profile:element "@version" ;
     profile:path "AlternativeText/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:AlternativeText ;
     profile:element "Text" ;
     profile:path "AlternativeText/Text" ;
     profile:cardinality "1..1" ;
+    skos:definition "The alternative text content"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Authority (NP) ---
@@ -122,54 +127,63 @@ nordic:Authority a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Authority/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Authority"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "@version" ;
     profile:path "Authority/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "Name" ;
     profile:path "Authority/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Name of the Authority"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "LegalName" ;
     profile:path "Authority/LegalName" ;
     profile:cardinality "0..1" ;
+    skos:definition "Official legal name of the authority"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "CompanyNumber" ;
     profile:path "Authority/CompanyNumber" ;
     profile:cardinality "0..1" ;
+    skos:definition "Official company registration number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "ContactDetails" ;
     profile:path "Authority/ContactDetails" ;
     profile:cardinality "0..1" ;
+    skos:definition "Contact information"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "Phone" ;
     profile:path "Authority/ContactDetails/Phone" ;
     profile:cardinality "0..1" ;
+    skos:definition "Contact telephone number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "Url" ;
     profile:path "Authority/ContactDetails/Url" ;
     profile:cardinality "0..1" ;
+    skos:definition "Website URL"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
     profile:element "OrganisationType" ;
     profile:path "Authority/OrganisationType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Type of organisation (always \"authority\" for Authority)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Codespace (NP) ---
@@ -183,18 +197,21 @@ nordic:Codespace a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Codespace/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the codespace"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Codespace ;
     profile:element "Xmlns" ;
     profile:path "Codespace/Xmlns" ;
     profile:cardinality "1..1" ;
+    skos:definition "XML namespace prefix (e.g., NP, NSR)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Codespace ;
     profile:element "XmlnsUrl" ;
     profile:path "Codespace/XmlnsUrl" ;
     profile:cardinality "1..1" ;
+    skos:definition "Full namespace URL for global uniqueness"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- CompositeFrame (NP) ---
@@ -215,24 +232,28 @@ nordic:DayType a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "DayType/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the DayType"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayType ;
     profile:element "@version" ;
     profile:path "DayType/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayType ;
     profile:element "PropertyOfDay" ;
     profile:path "DayType/properties/PropertyOfDay" ;
     profile:cardinality "0..n" ;
+    skos:definition "Operational characteristic of the day type"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayType ;
     profile:element "DaysOfWeek" ;
     profile:path "DayType/properties/PropertyOfDay/DaysOfWeek" ;
     profile:cardinality "0..1" ;
+    skos:definition "Space-separated list of day names (Monday Tuesday Wednesday Thursday Friday Saturday Sunday)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- DayTypeAssignment (NP) ---
@@ -246,42 +267,49 @@ nordic:DayTypeAssignment a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "DayTypeAssignment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the assignment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "@version" ;
     profile:path "DayTypeAssignment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "@order" ;
     profile:path "DayTypeAssignment/@order" ;
     profile:cardinality "1..1" ;
+    skos:definition "Evaluation precedence — higher order overrides lower for the same DayType"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "OperatingPeriod/@ref" ;
     profile:path "OperatingPeriodRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to a date range. Mutually exclusive with Date"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "Date" ;
     profile:path "Date" ;
     profile:cardinality "0..1" ;
+    skos:definition "Specific date (YYYY-MM-DD). Mutually exclusive with OperatingPeriodRef"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "DayType/@ref" ;
     profile:path "DayTypeRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the DayType being assigned"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "isAvailable" ;
     profile:path "isAvailable" ;
     profile:cardinality "1..1" ;
+    skos:definition "`true` = DayType is active; `false` = DayType is suppressed on this date/period"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- DestinationDisplay (NP) ---
@@ -295,30 +323,35 @@ nordic:DestinationDisplay a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "DestinationDisplay/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the destination display"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DestinationDisplay ;
     profile:element "@version" ;
     profile:path "DestinationDisplay/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DestinationDisplay ;
     profile:element "Name" ;
     profile:path "DestinationDisplay/Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Internal name for the destination display definition"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DestinationDisplay ;
     profile:element "FrontText" ;
     profile:path "DestinationDisplay/FrontText" ;
     profile:cardinality "1..1" ;
+    skos:definition "Text shown on the vehicle's destination display"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DestinationDisplay ;
     profile:element "SideText" ;
     profile:path "DestinationDisplay/SideText" ;
     profile:cardinality "0..1" ;
+    skos:definition "Text shown on the side display of a vehicle"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- FareFrame (NP) ---
@@ -339,36 +372,42 @@ nordic:FlexibleServiceProperties a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "FlexibleServiceProperties/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the flexible service properties"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:FlexibleServiceProperties ;
     profile:element "@version" ;
     profile:path "FlexibleServiceProperties/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:FlexibleServiceProperties ;
     profile:element "BookingMethods" ;
     profile:path "FlexibleServiceProperties/BookingMethods" ;
     profile:cardinality "0..1" ;
+    skos:definition "Accepted booking methods (e.g., online, callOffice)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:FlexibleServiceProperties ;
     profile:element "BookingAccess" ;
     profile:path "FlexibleServiceProperties/BookingAccess" ;
     profile:cardinality "0..1" ;
+    skos:definition "Who may book (e.g., public)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:FlexibleServiceProperties ;
     profile:element "BookWhen" ;
     profile:path "FlexibleServiceProperties/BookWhen" ;
     profile:cardinality "0..1" ;
+    skos:definition "When booking must be made (e.g., untilPreviousDay)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:FlexibleServiceProperties ;
     profile:element "LatestBookingTime" ;
     profile:path "FlexibleServiceProperties/LatestBookingTime" ;
     profile:cardinality "0..1" ;
+    skos:definition "Latest allowed booking time"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- GroupOfLines (NP) ---
@@ -382,42 +421,49 @@ nordic:GroupOfLines a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "GroupOfLines/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the GroupOfLines"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:GroupOfLines ;
     profile:element "@version" ;
     profile:path "GroupOfLines/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:GroupOfLines ;
     profile:element "Name" ;
     profile:path "GroupOfLines/Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Public name of the group"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:GroupOfLines ;
     profile:element "ShortName" ;
     profile:path "GroupOfLines/ShortName" ;
     profile:cardinality "0..1" ;
+    skos:definition "Short public name or label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:GroupOfLines ;
     profile:element "Description" ;
     profile:path "GroupOfLines/Description" ;
     profile:cardinality "0..1" ;
+    skos:definition "Description of purpose and content"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:GroupOfLines ;
     profile:element "PrivateCode" ;
     profile:path "GroupOfLines/PrivateCode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Private back-office code"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:GroupOfLines ;
     profile:element "LineRef/@ref" ;
     profile:path "GroupOfLines/members/LineRef/@ref" ;
     profile:cardinality "1..n" ;
+    skos:definition "Reference to a Line that is a member of this group"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Interchange (NP) ---
@@ -431,42 +477,49 @@ nordic:Interchange a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "ServiceJourneyInterchange/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the interchange"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Interchange ;
     profile:element "@version" ;
     profile:path "ServiceJourneyInterchange/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Interchange ;
     profile:element "FromJourneyRef/@ref" ;
     profile:path "ServiceJourneyInterchange/FromJourneyRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the originating (feeder) journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Interchange ;
     profile:element "ToJourneyRef/@ref" ;
     profile:path "ServiceJourneyInterchange/ToJourneyRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the destination (distributor) journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Interchange ;
     profile:element "FromPointRef/@ref" ;
     profile:path "ServiceJourneyInterchange/FromPointRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the stop point of the feeder journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Interchange ;
     profile:element "ToPointRef/@ref" ;
     profile:path "ServiceJourneyInterchange/ToPointRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the stop point of the distributor journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Interchange ;
     profile:element "Guaranteed" ;
     profile:path "ServiceJourneyInterchange/Guaranteed" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the connection is guaranteed"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- JourneyPattern (NP) ---
@@ -480,108 +533,126 @@ nordic:JourneyPattern a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "JourneyPattern/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the JourneyPattern"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "@version" ;
     profile:path "JourneyPattern/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "Name" ;
     profile:path "JourneyPattern/Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Human-readable name of the pattern variant"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "RouteRef/@ref" ;
     profile:path "JourneyPattern/RouteRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the Route this pattern belongs to"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "StopPointInJourneyPattern/@id" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the stop point entry"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "StopPointInJourneyPattern/@version" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "StopPointInJourneyPattern/@order" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@order" ;
     profile:cardinality "1..1" ;
+    skos:definition "Sequential position in the stop sequence (1, 2, 3...)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ScheduledStopPointRef/@ref" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ScheduledStopPointRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the logical stop point"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ForAlighting" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ForAlighting" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether passengers may alight at this stop (false on first stop)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ForBoarding" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ForBoarding" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether passengers may board at this stop (false on last stop)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "DestinationDisplayRef/@ref" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/DestinationDisplayRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the DestinationDisplay shown from this stop onwards"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "RequestMethod" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/RequestMethod" ;
     profile:cardinality "0..1" ;
+    skos:definition "How to request the stop: `handSignal`, `phoneCall`, `sms`, `stopButton`, `noneRequired`"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ChangeOfDestinationDisplay" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/ChangeOfDestinationDisplay" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the destination display changes at this stop"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "StopUse" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/StopUse" ;
     profile:cardinality "0..1" ;
+    skos:definition "How the stop is used: `access`, `passthrough`, `interchangeOnly`"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "noticeAssignments" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments" ;
     profile:cardinality "0..1" ;
+    skos:definition "Container for stop-specific notice assignments"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "NoticeAssignment/@id" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the notice assignment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "NoticeAssignment/@version" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "NoticeAssignment/@order" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@order" ;
     profile:cardinality "1..1" ;
+    skos:definition "Evaluation order"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
@@ -594,78 +665,91 @@ nordic:JourneyPattern a profile:ProfileClass ;
     profile:element "BookingArrangements" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements" ;
     profile:cardinality "0..1" ;
+    skos:definition "Booking rules for flexible/demand-responsive transport"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "BookingAccess" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingAccess" ;
     profile:cardinality "0..1" ;
+    skos:definition "Who can book: `public`, `authorisedPublic`, `staff`"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "BookWhen" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookWhen" ;
     profile:cardinality "0..1" ;
+    skos:definition "When to book: `advanceOnly`, `dayOfTravelOnly`, `untilPreviousDay`"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "LatestBookingTime" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/LatestBookingTime" ;
     profile:cardinality "0..1" ;
+    skos:definition "Latest time a booking can be made (e.g., 16:00:00)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "MinimumBookingPeriod" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/MinimumBookingPeriod" ;
     profile:cardinality "0..1" ;
+    skos:definition "Minimum advance booking period (e.g., PT2H)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "BookingUrl" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingUrl" ;
     profile:cardinality "0..1" ;
+    skos:definition "URL for online booking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "BookingNote" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingNote" ;
     profile:cardinality "0..1" ;
+    skos:definition "Human-readable booking instructions"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "BookingMethod" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingMethods/BookingMethod" ;
     profile:cardinality "0..n" ;
+    skos:definition "How to book: `callDriver`, `callOffice`, `online`, `phoneAtStop`, `text`"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "linksInSequence" ;
     profile:path "JourneyPattern/linksInSequence" ;
     profile:cardinality "0..1" ;
+    skos:definition "Ordered sequence of service links between stops"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ServiceLinkInJourneyPattern/@id" ;
     profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ServiceLinkInJourneyPattern/@version" ;
     profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ServiceLinkInJourneyPattern/@order" ;
     profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@order" ;
     profile:cardinality "1..1" ;
+    skos:definition "Sequential position"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "ServiceLinkRef/@ref" ;
     profile:path "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/ServiceLinkRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to a ServiceLink"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Line (NP) ---
@@ -679,78 +763,91 @@ nordic:Line a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Line/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Line (e.g., NP:Line:5)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "@version" ;
     profile:path "Line/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "Name" ;
     profile:path "Line/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Human-readable line name"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "TransportMode" ;
     profile:path "Line/TransportMode" ;
     profile:cardinality "1..1" ;
+    skos:definition "Primary transport mode (bus, rail, water, tram, metro, air, coach, cableway)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "TransportSubmode" ;
     profile:path "Line/TransportSubmode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Transport submode container"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "BusSubmode" ;
     profile:path "Line/TransportSubmode/BusSubmode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Bus submode (localBus, regionalBus, expressBus, etc.)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "OperatorRef/@ref" ;
     profile:path "Line/OperatorRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the Operator running this Line"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "PublicCode" ;
     profile:path "Line/PublicCode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Public-facing line number or code"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "PrivateCode" ;
     profile:path "Line/PrivateCode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Internal non-public code"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "RepresentedByGroupRef/@ref" ;
     profile:path "Line/RepresentedByGroupRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the Network or GroupOfLines this line belongs to"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "Monitored" ;
     profile:path "Line/Monitored" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the line is tracked by a real-time monitoring system"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "Colour" ;
     profile:path "Line/Presentation/Colour" ;
     profile:cardinality "0..1" ;
+    skos:definition "Line colour as 6-digit uppercase hex (e.g., 005EB8)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "TextColour" ;
     profile:path "Line/Presentation/TextColour" ;
     profile:cardinality "0..1" ;
+    skos:definition "Text colour as 6-digit uppercase hex (e.g., FFFFFF)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- LinkSequenceProjection (NP) ---
@@ -764,30 +861,35 @@ nordic:LinkSequenceProjection a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "LinkSequenceProjection/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the projection"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:LinkSequenceProjection ;
     profile:element "@version" ;
     profile:path "LinkSequenceProjection/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:LinkSequenceProjection ;
     profile:element "gml:LineString" ;
     profile:path "LinkSequenceProjection/gml:LineString" ;
     profile:cardinality "" ;
+    skos:definition "Geographic path geometry"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:LinkSequenceProjection ;
     profile:element "@srsName" ;
     profile:path "LinkSequenceProjection/gml:LineString/@srsName" ;
     profile:cardinality "1..1" ;
+    skos:definition "Spatial reference system (e.g., `EPSG:4326`)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:LinkSequenceProjection ;
     profile:element "gml:posList" ;
     profile:path "LinkSequenceProjection/gml:LineString/gml:posList" ;
     profile:cardinality "" ;
+    skos:definition "Ordered coordinate pairs defining the line shape"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Network (NP) ---
@@ -801,54 +903,63 @@ nordic:Network a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Network/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Network"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "@version" ;
     profile:path "Network/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "Name" ;
     profile:path "Network/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Branded network name visible to passengers"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "Description" ;
     profile:path "Network/Description" ;
     profile:cardinality "0..1" ;
+    skos:definition "Description of the network"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "TransportMode" ;
     profile:path "Network/TransportMode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Primary transport mode of the network (bus, rail, metro, etc.)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "AuthorityRef/@ref" ;
     profile:path "Network/AuthorityRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the Authority responsible for the network"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "LineRef/@ref" ;
     profile:path "Network/members/LineRef/@ref" ;
     profile:cardinality "0..n" ;
+    skos:definition "Reference to a Line that is a direct member of this network"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "GroupOfLinesRef/@ref" ;
     profile:path "Network/groupsOfLines/GroupOfLinesRef/@ref" ;
     profile:cardinality "0..n" ;
+    skos:definition "Reference to a GroupOfLines within this network"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
     profile:element "TariffZoneRef/@ref" ;
     profile:path "Network/tariffZones/TariffZoneRef/@ref" ;
     profile:cardinality "0..n" ;
+    skos:definition "Reference to a TariffZone belonging to this network"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Notice (NP) ---
@@ -862,18 +973,21 @@ nordic:Notice a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Notice/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Notice"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Notice ;
     profile:element "@version" ;
     profile:path "Notice/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Notice ;
     profile:element "Text" ;
     profile:path "Notice/Text" ;
     profile:cardinality "1..1" ;
+    skos:definition "The notice text content displayed to passengers"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- OperatingDay (NP) ---
@@ -887,30 +1001,35 @@ nordic:OperatingDay a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "OperatingDay/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the OperatingDay"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingDay ;
     profile:element "@version" ;
     profile:path "OperatingDay/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingDay ;
     profile:element "CalendarDate" ;
     profile:path "OperatingDay/CalendarDate" ;
     profile:cardinality "1..1" ;
+    skos:definition "The specific calendar date (YYYY-MM-DD)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingDay ;
     profile:element "Name" ;
     profile:path "OperatingDay/Name" ;
     profile:cardinality "" ;
+    skos:definition "Optional human-readable label for the day"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingDay ;
     profile:element "EarliestTime" ;
     profile:path "OperatingDay/EarliestTime" ;
     profile:cardinality "" ;
+    skos:definition "Start time of the operating day (defaults to 00:00)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- OperatingPeriod (NP) ---
@@ -924,24 +1043,28 @@ nordic:OperatingPeriod a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "OperatingPeriod/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the operating period"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingPeriod ;
     profile:element "@version" ;
     profile:path "OperatingPeriod/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingPeriod ;
     profile:element "FromDate" ;
     profile:path "OperatingPeriod/FromDate" ;
     profile:cardinality "1..1" ;
+    skos:definition "Start of the period (inclusive)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingPeriod ;
     profile:element "ToDate" ;
     profile:path "OperatingPeriod/ToDate" ;
     profile:cardinality "1..1" ;
+    skos:definition "End of the period (inclusive)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Operator (NP) ---
@@ -955,78 +1078,91 @@ nordic:Operator a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Operator/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Operator"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "@version" ;
     profile:path "Operator/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "CompanyNumber" ;
     profile:path "Operator/CompanyNumber" ;
     profile:cardinality "0..1" ;
+    skos:definition "Official company registration number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "Name" ;
     profile:path "Operator/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Name of the Operator organisation"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "LegalName" ;
     profile:path "Operator/LegalName" ;
     profile:cardinality "0..1" ;
+    skos:definition "Official legal name of the operator"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "ContactDetails" ;
     profile:path "Operator/ContactDetails" ;
     profile:cardinality "0..1" ;
+    skos:definition "Contact information (phone, email, website)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "Phone" ;
     profile:path "Operator/ContactDetails/Phone" ;
     profile:cardinality "0..1" ;
+    skos:definition "Contact telephone number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "Url" ;
     profile:path "Operator/ContactDetails/Url" ;
     profile:cardinality "0..1" ;
+    skos:definition "Website URL"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "OrganisationType" ;
     profile:path "Operator/OrganisationType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Type of organisation (e.g., operator, railOperator)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "CustomerServiceContactDetails" ;
     profile:path "Operator/CustomerServiceContactDetails" ;
     profile:cardinality "0..1" ;
+    skos:definition "Public-facing customer service contact details"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "Email" ;
     profile:path "Operator/CustomerServiceContactDetails/Email" ;
     profile:cardinality "0..1" ;
+    skos:definition "Customer service email"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "Phone" ;
     profile:path "Operator/CustomerServiceContactDetails/Phone" ;
     profile:cardinality "0..1" ;
+    skos:definition "Customer service phone"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
     profile:element "Url" ;
     profile:path "Operator/CustomerServiceContactDetails/Url" ;
     profile:cardinality "0..1" ;
+    skos:definition "Customer service URL"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Parking (NP) ---
@@ -1040,132 +1176,154 @@ nordic:Parking a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Parking/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the parking facility"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "@version" ;
     profile:path "Parking/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "Name" ;
     profile:path "Parking/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Human-readable name of the parking facility"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "Centroid" ;
     profile:path "Parking/Centroid" ;
     profile:cardinality "0..1" ;
+    skos:definition "Geographic location"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "Location" ;
     profile:path "Parking/Centroid/Location" ;
     profile:cardinality "1..1" ;
+    skos:definition "Coordinate container"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "Longitude" ;
     profile:path "Parking/Centroid/Location/Longitude" ;
     profile:cardinality "1..1" ;
+    skos:definition "WGS84 longitude"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "Latitude" ;
     profile:path "Parking/Centroid/Location/Latitude" ;
     profile:cardinality "1..1" ;
+    skos:definition "WGS84 latitude"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "Covered" ;
     profile:path "Parking/Covered" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether parking is covered (e.g., outdoors)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParentSiteRef/@ref" ;
     profile:path "Parking/ParentSiteRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the parent StopPlace"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParkingType" ;
     profile:path "Parking/ParkingType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Type of parking (e.g., parkAndRide, urbanParking)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParkingVehicleTypes" ;
     profile:path "Parking/ParkingVehicleTypes" ;
     profile:cardinality "0..1" ;
+    skos:definition "Types of vehicles accepted (e.g., car, pedalCycle)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParkingLayout" ;
     profile:path "Parking/ParkingLayout" ;
     profile:cardinality "0..1" ;
+    skos:definition "Layout of the parking (e.g., openSpace)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "TotalCapacity" ;
     profile:path "Parking/TotalCapacity" ;
     profile:cardinality "0..1" ;
+    skos:definition "Total number of parking spaces"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "RechargingAvailable" ;
     profile:path "Parking/RechargingAvailable" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether electric vehicle recharging is available"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParkingPaymentProcess" ;
     profile:path "Parking/ParkingPaymentProcess" ;
     profile:cardinality "0..1" ;
+    skos:definition "Payment process description"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "parkingProperties" ;
     profile:path "Parking/parkingProperties" ;
     profile:cardinality "0..1" ;
+    skos:definition "Collection of parking property definitions"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParkingProperties" ;
     profile:path "Parking/parkingProperties/ParkingProperties" ;
     profile:cardinality "0..n" ;
+    skos:definition "Parking property definition"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "spaces" ;
     profile:path "Parking/parkingProperties/ParkingProperties/spaces" ;
     profile:cardinality "0..1" ;
+    skos:definition "Collection of parking capacity definitions"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParkingCapacity" ;
     profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity" ;
     profile:cardinality "0..n" ;
+    skos:definition "Capacity for a specific user type"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "ParkingUserType" ;
     profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/ParkingUserType" ;
     profile:cardinality "1..1" ;
+    skos:definition "User type (allUsers, registeredDisabled)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "NumberOfSpaces" ;
     profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/NumberOfSpaces" ;
     profile:cardinality "0..1" ;
+    skos:definition "Number of parking spaces for this user type"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Parking ;
     profile:element "NumberOfSpacesWithRechargePoint" ;
     profile:path "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/NumberOfSpacesWithRechargePoint" ;
     profile:cardinality "0..1" ;
+    skos:definition "Spaces with electric recharging"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- PassengerStopAssignment (NP) ---
@@ -1179,48 +1337,56 @@ nordic:PassengerStopAssignment a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "PassengerStopAssignment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the assignment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PassengerStopAssignment ;
     profile:element "@version" ;
     profile:path "PassengerStopAssignment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PassengerStopAssignment ;
     profile:element "@order" ;
     profile:path "PassengerStopAssignment/@order" ;
     profile:cardinality "1..1" ;
+    skos:definition "Technical sequence number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PassengerStopAssignment ;
     profile:element "ScheduledStopPointRef/@ref" ;
     profile:path "PassengerStopAssignment/ScheduledStopPointRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the logical timetable stop"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PassengerStopAssignment ;
     profile:element "StopPlaceRef/@ref" ;
     profile:path "PassengerStopAssignment/StopPlaceRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the parent stop location"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PassengerStopAssignment ;
     profile:element "QuayRef/@ref" ;
     profile:path "PassengerStopAssignment/QuayRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the physical boarding platform"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PassengerStopAssignment ;
     profile:element "ValidBetween" ;
     profile:path "PassengerStopAssignment/ValidBetween" ;
     profile:cardinality "0..1" ;
+    skos:definition "Validity period for the assignment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PassengerStopAssignment ;
     profile:element "FromDate" ;
     profile:path "PassengerStopAssignment/ValidBetween/FromDate" ;
     profile:cardinality "0..1" ;
+    skos:definition "Start date of validity"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- PublicationDelivery (NP) ---
@@ -1251,18 +1417,21 @@ nordic:PurposeOfGrouping a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "PurposeOfGrouping/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the purpose of grouping"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PurposeOfGrouping ;
     profile:element "@version" ;
     profile:path "PurposeOfGrouping/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PurposeOfGrouping ;
     profile:element "Name" ;
     profile:path "PurposeOfGrouping/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Descriptive name of the grouping purpose"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Quay (NP) ---
@@ -1276,72 +1445,84 @@ nordic:Quay a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Quay/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Quay (e.g., NP:Quay:1001)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "@version" ;
     profile:path "Quay/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "Name" ;
     profile:path "Quay/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Passenger-facing quay name"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "PrivateCode" ;
     profile:path "Quay/PrivateCode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Internal platform identifier (may have type attribute)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "Longitude" ;
     profile:path "Quay/Centroid/Location/Longitude" ;
     profile:cardinality "1..1" ;
+    skos:definition "WGS84 longitude"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "Latitude" ;
     profile:path "Quay/Centroid/Location/Latitude" ;
     profile:cardinality "1..1" ;
+    skos:definition "WGS84 latitude"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "AccessibilityAssessment" ;
     profile:path "Quay/AccessibilityAssessment" ;
     profile:cardinality "0..1" ;
+    skos:definition "Accessibility evaluation of the quay"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "MobilityImpairedAccess" ;
     profile:path "Quay/AccessibilityAssessment/MobilityImpairedAccess" ;
     profile:cardinality "1..1" ;
+    skos:definition "Overall mobility access status (true, false, unknown)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "limitations" ;
     profile:path "Quay/AccessibilityAssessment/limitations" ;
     profile:cardinality "0..1" ;
+    skos:definition "Collection of specific accessibility limitations"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "AccessibilityLimitation" ;
     profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation" ;
     profile:cardinality "1..n" ;
+    skos:definition "Specific accessibility limitation assessment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "WheelchairAccess" ;
     profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/WheelchairAccess" ;
     profile:cardinality "0..1" ;
+    skos:definition "Wheelchair accessibility (true, false, unknown)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "StepFreeAccess" ;
     profile:path "Quay/AccessibilityAssessment/limitations/AccessibilityLimitation/StepFreeAccess" ;
     profile:cardinality "0..1" ;
+    skos:definition "Step-free access availability (true, false, unknown)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
@@ -1372,24 +1553,28 @@ nordic:Quay a profile:ProfileClass ;
     profile:element "PublicCode" ;
     profile:path "Quay/PublicCode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Short public code printed on signage"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "CompassBearing" ;
     profile:path "Quay/CompassBearing" ;
     profile:cardinality "0..1" ;
+    skos:definition "Compass bearing of the quay in degrees (0-360)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "boardingPositions" ;
     profile:path "Quay/boardingPositions" ;
     profile:cardinality "0..1" ;
+    skos:definition "Collection of boarding positions within the quay"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Quay ;
     profile:element "BoardingPosition" ;
     profile:path "Quay/boardingPositions/BoardingPosition" ;
     profile:cardinality "1..n" ;
+    skos:definition "Specific boarding position with location"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- ResourceFrame (NP) ---
@@ -1410,48 +1595,56 @@ nordic:ResponsibilitySet a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "ResponsibilitySet/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the ResponsibilitySet"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ResponsibilitySet ;
     profile:element "@version" ;
     profile:path "ResponsibilitySet/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ResponsibilitySet ;
     profile:element "Name" ;
     profile:path "ResponsibilitySet/Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Human-readable name of the responsibility set"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ResponsibilitySet ;
     profile:element "ResponsibilityRoleAssignment/@id" ;
     profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the role assignment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ResponsibilitySet ;
     profile:element "ResponsibilityRoleAssignment/@version" ;
     profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ResponsibilitySet ;
     profile:element "ResponsibleOrganisationRef/@ref" ;
     profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the responsible organisation"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ResponsibilitySet ;
     profile:element "TypeOfResponsibilityRoleRef/@ref" ;
     profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/TypeOfResponsibilityRoleRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the role type qualifier"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ResponsibilitySet ;
     profile:element "ContractRef/@ref" ;
     profile:path "ResponsibilitySet/roles/ResponsibilityRoleAssignment/AssociatedContract/ContractRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the governing contract"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Route (NP) ---
@@ -1465,48 +1658,56 @@ nordic:Route a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Route/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Route"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
     profile:element "@version" ;
     profile:path "Route/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
     profile:element "Name" ;
     profile:path "Route/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Display name for the route"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
     profile:element "ShortName" ;
     profile:path "Route/ShortName" ;
     profile:cardinality "0..1" ;
+    skos:definition "Short name or number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
     profile:element "LineRef/@ref" ;
     profile:path "Route/LineRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the Line this route belongs to"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
     profile:element "DirectionType" ;
     profile:path "Route/DirectionType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Direction indicator (inbound, outbound, clockwise, anticlockwise)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
     profile:element "@order" ;
     profile:path "Route/pointsInSequence/PointOnRoute/@order" ;
     profile:cardinality "1..1" ;
+    skos:definition "Sequence number for the point in the route"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Route ;
     profile:element "RoutePointRef/@ref" ;
     profile:path "Route/pointsInSequence/PointOnRoute/RoutePointRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to a RoutePoint (used in NP profile)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- RoutePoint (NP) ---
@@ -1520,36 +1721,42 @@ nordic:RoutePoint a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "RoutePoint/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the RoutePoint"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:RoutePoint ;
     profile:element "@version" ;
     profile:path "RoutePoint/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:RoutePoint ;
     profile:element "BorderCrossing" ;
     profile:path "RoutePoint/BorderCrossing" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the point is on a country border"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:RoutePoint ;
     profile:element "projections" ;
     profile:path "RoutePoint/projections" ;
     profile:cardinality "0..1" ;
+    skos:definition "Projection to map coordinates or ScheduledStopPoint"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:RoutePoint ;
     profile:element "PointProjection/@id" ;
     profile:path "RoutePoint/projections/PointProjection/@id" ;
     profile:cardinality "0..1" ;
+    skos:definition "Projection identifier"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:RoutePoint ;
     profile:element "ProjectToPointRef/@ref" ;
     profile:path "RoutePoint/projections/PointProjection/ProjectToPointRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the ScheduledStopPoint this RoutePoint projects to"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- SalesTransactionFrame (NP) ---
@@ -1570,36 +1777,42 @@ nordic:SanitaryEquipment a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "SanitaryEquipment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the sanitary equipment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SanitaryEquipment ;
     profile:element "@version" ;
     profile:path "SanitaryEquipment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SanitaryEquipment ;
     profile:element "Gender" ;
     profile:path "SanitaryEquipment/Gender" ;
     profile:cardinality "0..1" ;
+    skos:definition "Gender restriction for use of the facility (both, femaleOnly, maleOnly, sameSexOnly)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SanitaryEquipment ;
     profile:element "SanitaryFacilityList" ;
     profile:path "SanitaryEquipment/SanitaryFacilityList" ;
     profile:cardinality "0..1" ;
+    skos:definition "List of sanitary facilities available"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SanitaryEquipment ;
     profile:element "NumberOfToilets" ;
     profile:path "SanitaryEquipment/NumberOfToilets" ;
     profile:cardinality "0..1" ;
+    skos:definition "Total number of toilets"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SanitaryEquipment ;
     profile:element "PaymentMethods" ;
     profile:path "SanitaryEquipment/PaymentMethods" ;
     profile:cardinality "0..1" ;
+    skos:definition "Accepted payment methods"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- ScheduledStopPoint (NP) ---
@@ -1613,30 +1826,35 @@ nordic:ScheduledStopPoint a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "ScheduledStopPoint/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the ScheduledStopPoint"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ScheduledStopPoint ;
     profile:element "@version" ;
     profile:path "ScheduledStopPoint/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ScheduledStopPoint ;
     profile:element "Name" ;
     profile:path "ScheduledStopPoint/Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Human-readable name of the stop point"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ScheduledStopPoint ;
     profile:element "ValidBetween" ;
     profile:path "ScheduledStopPoint/ValidBetween" ;
     profile:cardinality "0..1" ;
+    skos:definition "Validity period for the stop point"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ScheduledStopPoint ;
     profile:element "FromDate" ;
     profile:path "ScheduledStopPoint/ValidBetween/FromDate" ;
     profile:cardinality "0..1" ;
+    skos:definition "Start date of validity"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceCalendar (NP) ---
@@ -1650,30 +1868,35 @@ nordic:ServiceCalendar a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "ServiceCalendar/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the ServiceCalendar"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceCalendar ;
     profile:element "@version" ;
     profile:path "ServiceCalendar/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceCalendar ;
     profile:element "Name" ;
     profile:path "ServiceCalendar/Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Human-readable calendar name"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceCalendar ;
     profile:element "FromDate" ;
     profile:path "ServiceCalendar/FromDate" ;
     profile:cardinality "1..1" ;
+    skos:definition "Start date of the calendar validity period"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceCalendar ;
     profile:element "ToDate" ;
     profile:path "ServiceCalendar/ToDate" ;
     profile:cardinality "1..1" ;
+    skos:definition "End date of the calendar validity period"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceCalendarFrame (NP) ---
@@ -1701,78 +1924,91 @@ nordic:ServiceJourney a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "ServiceJourney/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier following {CODESPACE}:ServiceJourney:{LocalId}"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "@version" ;
     profile:path "ServiceJourney/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label (e.g., \"1\"). Increment on changes."@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "Name" ;
     profile:path "Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Human-readable name of the journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "PrivateCode" ;
     profile:path "PrivateCode" ;
     profile:cardinality "0..1" ;
+    skos:definition "Internal non-public code (e.g., trip or train number)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "DayTypeRef/@ref" ;
     profile:path "dayTypes/DayTypeRef/@ref" ;
     profile:cardinality "0..n" ;
+    skos:definition "DayType(s) on which the journey operates"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "JourneyPatternRef/@ref" ;
     profile:path "JourneyPatternRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the JourneyPattern defining the stop sequence"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "OperatorRef/@ref" ;
     profile:path "OperatorRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to an Operator"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "LineRef/@ref" ;
     profile:path "LineRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the served Line"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "TimetabledPassingTime" ;
     profile:path "passingTimes/TimetabledPassingTime" ;
     profile:cardinality "1..n" ;
+    skos:definition "Collection of scheduled passing/stop times"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "TimetabledPassingTime/@id" ;
     profile:path "passingTimes/TimetabledPassingTime/@id" ;
     profile:cardinality "0..1" ;
+    skos:definition "Optional identifier for the TimetabledPassingTime element"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "StopPointInJourneyPatternRef/@ref" ;
     profile:path "passingTimes/TimetabledPassingTime/StopPointInJourneyPatternRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to a StopPointInJourneyPattern"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "ArrivalTime" ;
     profile:path "passingTimes/TimetabledPassingTime/ArrivalTime" ;
     profile:cardinality "0..1" ;
+    skos:definition "Planned arrival time at the stop"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "DepartureTime" ;
     profile:path "passingTimes/TimetabledPassingTime/DepartureTime" ;
     profile:cardinality "0..1" ;
+    skos:definition "Planned departure time from the stop"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- ServiceLink (NP) ---
@@ -1786,48 +2022,56 @@ nordic:ServiceLink a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "ServiceLink/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the ServiceLink"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "@version" ;
     profile:path "ServiceLink/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "Distance" ;
     profile:path "ServiceLink/Distance" ;
     profile:cardinality "0..1" ;
+    skos:definition "Distance in metres between the two stop points"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "projections" ;
     profile:path "ServiceLink/projections" ;
     profile:cardinality "0..1" ;
+    skos:definition "GML geometry for map rendering"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "LinkSequenceProjection/@id" ;
     profile:path "ServiceLink/projections/LinkSequenceProjection/@id" ;
     profile:cardinality "0..1" ;
+    skos:definition "Projection identifier"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "gml:LineString" ;
     profile:path "ServiceLink/projections/LinkSequenceProjection/gml:LineString" ;
     profile:cardinality "0..1" ;
+    skos:definition "GML LineString representing the spatial path"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "FromPointRef/@ref" ;
     profile:path "ServiceLink/FromPointRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Origin stop point"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "ToPointRef/@ref" ;
     profile:path "ServiceLink/ToPointRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Destination stop point"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- ShelterEquipment (NP) ---
@@ -1841,30 +2085,35 @@ nordic:ShelterEquipment a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "ShelterEquipment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the shelter equipment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ShelterEquipment ;
     profile:element "@version" ;
     profile:path "ShelterEquipment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ShelterEquipment ;
     profile:element "Seats" ;
     profile:path "ShelterEquipment/Seats" ;
     profile:cardinality "0..1" ;
+    skos:definition "Number of seats in the shelter"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ShelterEquipment ;
     profile:element "StepFree" ;
     profile:path "ShelterEquipment/StepFree" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the shelter has step-free access"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ShelterEquipment ;
     profile:element "Enclosed" ;
     profile:path "ShelterEquipment/Enclosed" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the shelter is enclosed"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- SiteConnection (NP) ---
@@ -1878,42 +2127,49 @@ nordic:SiteConnection a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "SiteConnection/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the SiteConnection"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SiteConnection ;
     profile:element "@version" ;
     profile:path "SiteConnection/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SiteConnection ;
     profile:element "Name" ;
     profile:path "SiteConnection/Name" ;
     profile:cardinality "0..1" ;
+    skos:definition "Human-readable name for the transfer path"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SiteConnection ;
     profile:element "TransferDuration" ;
     profile:path "SiteConnection/TransferDuration" ;
     profile:cardinality "0..1" ;
+    skos:definition "Walking duration for the transfer"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SiteConnection ;
     profile:element "DefaultDuration" ;
     profile:path "SiteConnection/TransferDuration/DefaultDuration" ;
     profile:cardinality "0..1" ;
+    skos:definition "Default walking time (ISO 8601 duration, e.g. PT4M)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SiteConnection ;
     profile:element "StopPlaceRef/@ref" ;
     profile:path "SiteConnection/From/StopPlaceRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Origin stop place"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SiteConnection ;
     profile:element "StopPlaceRef/@ref" ;
     profile:path "SiteConnection/To/StopPlaceRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Destination stop place"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:SiteConnection ;
@@ -2026,24 +2282,28 @@ nordic:StopPlace a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "StopPlace/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier (e.g., NP:StopPlace:1001)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "@version" ;
     profile:path "StopPlace/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "ValidBetween" ;
     profile:path "StopPlace/ValidBetween" ;
     profile:cardinality "0..1" ;
+    skos:definition "Validity period (FromDate, ToDate)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "KeyValue" ;
     profile:path "StopPlace/keyList/KeyValue" ;
     profile:cardinality "0..n" ;
+    skos:definition "Alternative keys (e.g., external IDs)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
@@ -2062,48 +2322,56 @@ nordic:StopPlace a profile:ProfileClass ;
     profile:element "Name" ;
     profile:path "StopPlace/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Name of the stop place"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "Centroid" ;
     profile:path "StopPlace/Centroid/Location" ;
     profile:cardinality "0..1" ;
+    skos:definition "Geographic point representation"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "AccessibilityAssessment" ;
     profile:path "StopPlace/AccessibilityAssessment" ;
     profile:cardinality "0..1" ;
+    skos:definition "Accessibility evaluation of the stop place"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "MobilityImpairedAccess" ;
     profile:path "StopPlace/AccessibilityAssessment/MobilityImpairedAccess" ;
     profile:cardinality "1..1" ;
+    skos:definition "Overall mobility access status (true, false, unknown)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "limitations" ;
     profile:path "StopPlace/AccessibilityAssessment/limitations" ;
     profile:cardinality "0..1" ;
+    skos:definition "Collection of specific accessibility limitations"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "AccessibilityLimitation" ;
     profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation" ;
     profile:cardinality "1..n" ;
+    skos:definition "Specific accessibility limitation assessment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "WheelchairAccess" ;
     profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/WheelchairAccess" ;
     profile:cardinality "0..1" ;
+    skos:definition "Wheelchair accessibility (true, false, unknown)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "StepFreeAccess" ;
     profile:path "StopPlace/AccessibilityAssessment/limitations/AccessibilityLimitation/StepFreeAccess" ;
     profile:cardinality "0..1" ;
+    skos:definition "Step-free access availability (true, false, unknown)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
@@ -2134,42 +2402,49 @@ nordic:StopPlace a profile:ProfileClass ;
     profile:element "TopographicPlaceRef/@ref" ;
     profile:path "StopPlace/TopographicPlaceRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to city or region"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "ParentSiteRef/@ref" ;
     profile:path "StopPlace/ParentSiteRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to multimodal parent StopPlace"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "TransportMode" ;
     profile:path "StopPlace/TransportMode" ;
     profile:cardinality "1..1" ;
+    skos:definition "Primary mode (bus, rail, metro, tram, water, etc.)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "OtherTransportModes" ;
     profile:path "StopPlace/OtherTransportModes" ;
     profile:cardinality "0..1" ;
+    skos:definition "Additional transport modes served"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "StopPlaceType" ;
     profile:path "StopPlace/StopPlaceType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Functional type (onstreetBus, railStation, metroStation, busStation, etc.)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "Weighting" ;
     profile:path "StopPlace/Weighting" ;
     profile:cardinality "0..1" ;
+    skos:definition "Interchange weighting (e.g., interchangeAllowed)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:StopPlace ;
     profile:element "Quay" ;
     profile:path "StopPlace/quays/Quay" ;
     profile:cardinality "1..n" ;
+    skos:definition "Boarding/alighting positions (not on multimodal parent)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- TariffZone (NP) ---
@@ -2183,30 +2458,35 @@ nordic:TariffZone a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "TariffZone/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the tariff zone"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TariffZone ;
     profile:element "@version" ;
     profile:path "TariffZone/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TariffZone ;
     profile:element "Name" ;
     profile:path "TariffZone/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Human-readable name of the tariff zone"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TariffZone ;
     profile:element "ValidBetween" ;
     profile:path "TariffZone/ValidBetween" ;
     profile:cardinality "0..1" ;
+    skos:definition "Validity period"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TariffZone ;
     profile:element "FromDate" ;
     profile:path "TariffZone/ValidBetween/FromDate" ;
     profile:cardinality "1..1" ;
+    skos:definition "Start date of validity"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- TicketingEquipment (NP) ---
@@ -2220,60 +2500,70 @@ nordic:TicketingEquipment a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "TicketingEquipment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the ticketing equipment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "@version" ;
     profile:path "TicketingEquipment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "VehicleModes" ;
     profile:path "TicketingEquipment/VehicleModes" ;
     profile:cardinality "0..1" ;
+    skos:definition "Vehicle modes served by this equipment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "TicketMachines" ;
     profile:path "TicketingEquipment/TicketMachines" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether ticket machines are available"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "NumberOfMachines" ;
     profile:path "TicketingEquipment/NumberOfMachines" ;
     profile:cardinality "0..1" ;
+    skos:definition "Number of ticket machines"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "TicketingFacilityList" ;
     profile:path "TicketingEquipment/TicketingFacilityList" ;
     profile:cardinality "0..1" ;
+    skos:definition "List of ticketing facilities"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "TicketOffice" ;
     profile:path "TicketingEquipment/TicketOffice" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether a staffed ticket office is present"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "PaymentMethods" ;
     profile:path "TicketingEquipment/PaymentMethods" ;
     profile:cardinality "0..1" ;
+    skos:definition "Accepted payment methods"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "TicketTypesAvailable" ;
     profile:path "TicketingEquipment/TicketTypesAvailable" ;
     profile:cardinality "0..1" ;
+    skos:definition "Types of tickets that can be purchased"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TicketingEquipment ;
     profile:element "ScopeOfTicketsAvailable" ;
     profile:path "TicketingEquipment/ScopeOfTicketsAvailable" ;
     profile:cardinality "0..1" ;
+    skos:definition "Scope of tickets available (local, regional, etc.)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- TimetableFrame (NP) ---
@@ -2294,60 +2584,70 @@ nordic:TopographicPlace a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "TopographicPlace/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the topographic place"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "@version" ;
     profile:path "TopographicPlace/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "ValidBetween" ;
     profile:path "TopographicPlace/ValidBetween" ;
     profile:cardinality "0..1" ;
+    skos:definition "Validity period"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "FromDate" ;
     profile:path "TopographicPlace/ValidBetween/FromDate" ;
     profile:cardinality "1..1" ;
+    skos:definition "Start date of validity"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "IsoCode" ;
     profile:path "TopographicPlace/IsoCode" ;
     profile:cardinality "0..1" ;
+    skos:definition "ISO code for the municipality"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "Descriptor" ;
     profile:path "TopographicPlace/Descriptor" ;
     profile:cardinality "1..1" ;
+    skos:definition "Container for name information"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "Name" ;
     profile:path "TopographicPlace/Descriptor/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Full name of the geographic area"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "TopographicPlaceType" ;
     profile:path "TopographicPlace/TopographicPlaceType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Classification of the area (e.g., city, municipality, county)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "CountryRef/@ref" ;
     profile:path "TopographicPlace/CountryRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "ISO country code reference (e.g., no)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TopographicPlace ;
     profile:element "ParentTopographicPlaceRef/@ref" ;
     profile:path "TopographicPlace/ParentTopographicPlaceRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to parent topographic place (county/region)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- TrainNumber (NP) ---
@@ -2361,18 +2661,21 @@ nordic:TrainNumber a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "TrainNumber/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the TrainNumber"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TrainNumber ;
     profile:element "@version" ;
     profile:path "TrainNumber/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:TrainNumber ;
     profile:element "ForAdvertisement" ;
     profile:path "TrainNumber/ForAdvertisement" ;
     profile:cardinality "0..1" ;
+    skos:definition "The train number as advertised to passengers (e.g. \"41\")"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Vehicle (NP) ---
@@ -2386,30 +2689,35 @@ nordic:Vehicle a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "Vehicle/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the Vehicle"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Vehicle ;
     profile:element "@version" ;
     profile:path "Vehicle/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Vehicle ;
     profile:element "RegistrationNumber" ;
     profile:path "Vehicle/RegistrationNumber" ;
     profile:cardinality "0..1" ;
+    skos:definition "Vehicle registration or license plate number"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Vehicle ;
     profile:element "OperatorRef/@ref" ;
     profile:path "Vehicle/OperatorRef/@ref" ;
     profile:cardinality "0..1" ;
+    skos:definition "Reference to the operating organisation"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Vehicle ;
     profile:element "VehicleTypeRef/@ref" ;
     profile:path "Vehicle/VehicleTypeRef/@ref" ;
     profile:cardinality "1..1" ;
+    skos:definition "Reference to the vehicle type definition"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- VehicleType (NP) ---
@@ -2423,66 +2731,77 @@ nordic:VehicleType a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "VehicleType/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the VehicleType"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "@version" ;
     profile:path "VehicleType/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "Name" ;
     profile:path "VehicleType/Name" ;
     profile:cardinality "1..1" ;
+    skos:definition "Name of the vehicle type"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "Description" ;
     profile:path "VehicleType/Description" ;
     profile:cardinality "0..1" ;
+    skos:definition "Description of the vehicle type"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "PropulsionType" ;
     profile:path "VehicleType/PropulsionType" ;
     profile:cardinality "0..1" ;
+    skos:definition "Fuel or propulsion type (combustion, electric, electricAssist, hybrid, human, other)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "SeatedCapacity" ;
     profile:path "VehicleType/PassengerCapacity/SeatedCapacity" ;
     profile:cardinality "0..1" ;
+    skos:definition "Number of seated passenger positions"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "StandingCapacity" ;
     profile:path "VehicleType/PassengerCapacity/StandingCapacity" ;
     profile:cardinality "0..1" ;
+    skos:definition "Number of standing passenger positions"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "WheelchairCapacity" ;
     profile:path "VehicleType/PassengerCapacity/WheelchairCapacity" ;
     profile:cardinality "0..1" ;
+    skos:definition "Number of wheelchair positions"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "Length" ;
     profile:path "VehicleType/Length" ;
     profile:cardinality "0..1" ;
+    skos:definition "Total vehicle length in meters"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "Width" ;
     profile:path "VehicleType/Width" ;
     profile:cardinality "0..1" ;
+    skos:definition "Total vehicle width in meters"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:VehicleType ;
     profile:element "Height" ;
     profile:path "VehicleType/Height" ;
     profile:cardinality "0..1" ;
+    skos:definition "Total vehicle height in meters"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- WaitingRoomEquipment (NP) ---
@@ -2496,36 +2815,42 @@ nordic:WaitingRoomEquipment a profile:ProfileClass ;
     profile:element "@id" ;
     profile:path "WaitingRoomEquipment/@id" ;
     profile:cardinality "1..1" ;
+    skos:definition "Unique identifier for the waiting room equipment"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:WaitingRoomEquipment ;
     profile:element "@version" ;
     profile:path "WaitingRoomEquipment/@version" ;
     profile:cardinality "1..1" ;
+    skos:definition "Version number for change tracking"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:WaitingRoomEquipment ;
     profile:element "Seats" ;
     profile:path "WaitingRoomEquipment/Seats" ;
     profile:cardinality "0..1" ;
+    skos:definition "Number of seats in the waiting room"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:WaitingRoomEquipment ;
     profile:element "StepFree" ;
     profile:path "WaitingRoomEquipment/StepFree" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the waiting room has step-free access"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:WaitingRoomEquipment ;
     profile:element "Heated" ;
     profile:path "WaitingRoomEquipment/Heated" ;
     profile:cardinality "0..1" ;
+    skos:definition "Whether the waiting room is heated"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:WaitingRoomEquipment ;
     profile:element "Sanitary" ;
     profile:path "WaitingRoomEquipment/Sanitary" ;
     profile:cardinality "0..1" ;
+    skos:definition "Sanitary facility description"@en ;
     nordic:provenance nordic:Baseline .
 
 ## =================================================================
