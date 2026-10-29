@@ -192,3 +192,7 @@ Run `python scripts/generate-catalog.py` after adding, splitting or removing a
 - [W3C RDF Primer](https://www.w3.org/TR/rdf11-primer/) — Introduction to RDF and Turtle syntax
 - [W3C SHACL Specification](https://www.w3.org/TR/shacl/) — Shapes Constraint Language
 - [Transmodel](https://www.transmodel-cen.eu/) — The conceptual model behind NeTEx
+
+## Concrete interchange class
+
+The planned journey-transfer entry is `nordic:ServiceJourneyInterchange`, profiling `netex:ServiceJourneyInterchange`. Its member paths already use `ServiceJourneyInterchange/`. The previous `nordic:Interchange` node pointed at the abstract superclass and has been renamed to make that distinction explicit. Consumers of the old profile-node IRI must update to the concrete node; the CEN superclass and its generated inheritance remain unchanged.
