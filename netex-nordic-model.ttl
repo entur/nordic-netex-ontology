@@ -87,7 +87,7 @@ nordic:ServiceFrame nordic:containedIn nordic:CompositeFrame ;
 
 nordic:TimetableFrame nordic:containedIn nordic:CompositeFrame ;
     nordic:contains nordic:ServiceJourney ,
-        nordic:Interchange ,
+        nordic:ServiceJourneyInterchange ,
         nordic:TrainNumber .
 
 nordic:FareFrame nordic:containedIn nordic:CompositeFrame .

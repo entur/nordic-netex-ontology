@@ -466,56 +466,56 @@ nordic:GroupOfLines a profile:ProfileClass ;
     skos:definition "Reference to a Line that is a member of this group"@en ;
     nordic:provenance nordic:Baseline .
 
-## --- Interchange (NP) ---
-nordic:Interchange a profile:ProfileClass ;
-    profile:onClass netex:Interchange ;
+## --- ServiceJourneyInterchange (NP) ---
+nordic:ServiceJourneyInterchange a profile:ProfileClass ;
+    profile:onClass netex:ServiceJourneyInterchange ;
     profile:scope profile:NP ;
     nordic:provenance nordic:Baseline .
 
 [] a profile:ProfileMember ;
-    profile:memberOf nordic:Interchange ;
+    profile:memberOf nordic:ServiceJourneyInterchange ;
     profile:element "@id" ;
     profile:path "ServiceJourneyInterchange/@id" ;
     profile:cardinality "1..1" ;
     skos:definition "Unique identifier for the interchange"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
-    profile:memberOf nordic:Interchange ;
+    profile:memberOf nordic:ServiceJourneyInterchange ;
     profile:element "@version" ;
     profile:path "ServiceJourneyInterchange/@version" ;
     profile:cardinality "1..1" ;
     skos:definition "Version label"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
-    profile:memberOf nordic:Interchange ;
+    profile:memberOf nordic:ServiceJourneyInterchange ;
     profile:element "FromJourneyRef/@ref" ;
     profile:path "ServiceJourneyInterchange/FromJourneyRef/@ref" ;
     profile:cardinality "1..1" ;
     skos:definition "Reference to the originating (feeder) journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
-    profile:memberOf nordic:Interchange ;
+    profile:memberOf nordic:ServiceJourneyInterchange ;
     profile:element "ToJourneyRef/@ref" ;
     profile:path "ServiceJourneyInterchange/ToJourneyRef/@ref" ;
     profile:cardinality "1..1" ;
     skos:definition "Reference to the destination (distributor) journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
-    profile:memberOf nordic:Interchange ;
+    profile:memberOf nordic:ServiceJourneyInterchange ;
     profile:element "FromPointRef/@ref" ;
     profile:path "ServiceJourneyInterchange/FromPointRef/@ref" ;
     profile:cardinality "0..1" ;
     skos:definition "Reference to the stop point of the feeder journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
-    profile:memberOf nordic:Interchange ;
+    profile:memberOf nordic:ServiceJourneyInterchange ;
     profile:element "ToPointRef/@ref" ;
     profile:path "ServiceJourneyInterchange/ToPointRef/@ref" ;
     profile:cardinality "0..1" ;
     skos:definition "Reference to the stop point of the distributor journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
-    profile:memberOf nordic:Interchange ;
+    profile:memberOf nordic:ServiceJourneyInterchange ;
     profile:element "Guaranteed" ;
     profile:path "ServiceJourneyInterchange/Guaranteed" ;
     profile:cardinality "0..1" ;
