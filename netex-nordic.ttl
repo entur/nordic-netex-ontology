@@ -2954,6 +2954,13 @@ profile:NP_ServiceJourneyShape a sh:NodeShape ;
         sh:maxCount 0 ;
         sh:name "BlockRef" ;
         sh:description "Not used in NP"
+    ] ,
+    ## Required (tightened from XSD 0..1)
+    [
+        sh:path netex:passingTimes ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:name "passingTimes" ;
+        sh:description "XSD allows 0..1, NP mandates 1..1 (passingTimes/TimetabledPassingTime is 1..n)"
     ] .
 
 ## --- JourneyPattern ---
