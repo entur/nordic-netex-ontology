@@ -19,7 +19,7 @@
 <https://netex-cen.eu/catalog> a dcat:Catalog ;
     dcterms:title "Nordic NeTEx Ontology — catalog" ;
     dcterms:description "Manifest of every RDF document this repository composes: the vendored generated NeTEx base and the Nordic profile layer on top of it." ;
-    dcterms:modified "2026-10-19"^^xsd:date ;
+    dcterms:modified "2026-10-30"^^xsd:date ;
     dcat:dataset
         <https://netex-cen.eu/ontology/core> ,
         <https://netex-cen.eu/ontology/framework> ,
@@ -153,8 +153,8 @@
     dcterms:description "Nordic-specific vocabulary layered on top of the generated NeTEx base ontology. Terms here are not derived from the NeTEx XSD." ;
     dcat:keyword "vocab" ;
     dcterms:provenance "maintained here" ;
-    void:triples 108 ;
-    dcterms:modified "2026-10-19"^^xsd:date ;
+    void:triples 109 ;
+    dcterms:modified "2026-10-27"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-nordic-vocab.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -165,7 +165,7 @@
     dcat:keyword "model" ;
     dcterms:provenance "maintained here" ;
     void:triples 60 ;
-    dcterms:modified "2026-10-19"^^xsd:date ;
+    dcterms:modified "2026-10-29"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-nordic-model.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -175,8 +175,8 @@
     dcterms:description "The Nordic Profile: membership allowlist (profile nodes and fields), SHACL shapes (allow / require / exclude), profile element ordering and navigational domain chains." ;
     dcat:keyword "profile" ;
     dcterms:provenance "maintained here" ;
-    void:triples 2755 ;
-    dcterms:modified "2026-10-19"^^xsd:date ;
+    void:triples 3086 ;
+    dcterms:modified "2026-10-29"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-nordic.ttl> ;
         dcterms:format "text/turtle" ] .
