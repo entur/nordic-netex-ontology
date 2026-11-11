@@ -286,28 +286,28 @@ nordic:DayTypeAssignment a profile:ProfileClass ;
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "OperatingPeriod/@ref" ;
-    profile:path "OperatingPeriodRef/@ref" ;
+    profile:path "DayTypeAssignment/OperatingPeriodRef/@ref" ;
     profile:cardinality "0..1" ;
     skos:definition "Reference to a date range. Mutually exclusive with Date"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "Date" ;
-    profile:path "Date" ;
+    profile:path "DayTypeAssignment/Date" ;
     profile:cardinality "0..1" ;
     skos:definition "Specific date (YYYY-MM-DD). Mutually exclusive with OperatingPeriodRef"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "DayType/@ref" ;
-    profile:path "DayTypeRef/@ref" ;
+    profile:path "DayTypeAssignment/DayTypeRef/@ref" ;
     profile:cardinality "1..1" ;
     skos:definition "Reference to the DayType being assigned"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:DayTypeAssignment ;
     profile:element "isAvailable" ;
-    profile:path "isAvailable" ;
+    profile:path "DayTypeAssignment/isAvailable" ;
     profile:cardinality "1..1" ;
     skos:definition "`true` = DayType is active; `false` = DayType is suppressed on this date/period"@en ;
     nordic:provenance nordic:Baseline .
@@ -874,7 +874,7 @@ nordic:LinkSequenceProjection a profile:ProfileClass ;
     profile:memberOf nordic:LinkSequenceProjection ;
     profile:element "gml:LineString" ;
     profile:path "LinkSequenceProjection/gml:LineString" ;
-    profile:cardinality "" ;
+    profile:cardinality "0..1" ;
     skos:definition "Geographic path geometry"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
@@ -888,7 +888,7 @@ nordic:LinkSequenceProjection a profile:ProfileClass ;
     profile:memberOf nordic:LinkSequenceProjection ;
     profile:element "gml:posList" ;
     profile:path "LinkSequenceProjection/gml:LineString/gml:posList" ;
-    profile:cardinality "" ;
+    profile:cardinality "1..1" ;
     skos:definition "Ordered coordinate pairs defining the line shape"@en ;
     nordic:provenance nordic:Baseline .
 
@@ -1021,14 +1021,14 @@ nordic:OperatingDay a profile:ProfileClass ;
     profile:memberOf nordic:OperatingDay ;
     profile:element "Name" ;
     profile:path "OperatingDay/Name" ;
-    profile:cardinality "" ;
+    profile:cardinality "0..1" ;
     skos:definition "Optional human-readable label for the day"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:OperatingDay ;
     profile:element "EarliestTime" ;
     profile:path "OperatingDay/EarliestTime" ;
-    profile:cardinality "" ;
+    profile:cardinality "0..1" ;
     skos:definition "Start time of the operating day (defaults to 00:00)"@en ;
     nordic:provenance nordic:Baseline .
 
@@ -1399,11 +1399,13 @@ nordic:PublicationDelivery a profile:ProfileClass ;
     profile:memberOf nordic:PublicationDelivery ;
     profile:element "PublicationTimestamp" ;
     profile:path "PublicationDelivery/PublicationTimestamp" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:PublicationDelivery ;
     profile:element "ParticipantRef" ;
     profile:path "PublicationDelivery/ParticipantRef" ;
+    profile:cardinality "1..1" ;
     nordic:provenance nordic:Baseline .
 
 ## --- PurposeOfGrouping (NP) ---
@@ -1936,77 +1938,77 @@ nordic:ServiceJourney a profile:ProfileClass ;
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "Name" ;
-    profile:path "Name" ;
+    profile:path "ServiceJourney/Name" ;
     profile:cardinality "0..1" ;
     skos:definition "Human-readable name of the journey"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "PrivateCode" ;
-    profile:path "PrivateCode" ;
+    profile:path "ServiceJourney/PrivateCode" ;
     profile:cardinality "0..1" ;
     skos:definition "Internal non-public code (e.g., trip or train number)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "DayTypeRef/@ref" ;
-    profile:path "dayTypes/DayTypeRef/@ref" ;
+    profile:path "ServiceJourney/dayTypes/DayTypeRef/@ref" ;
     profile:cardinality "0..n" ;
     skos:definition "DayType(s) on which the journey operates"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "JourneyPatternRef/@ref" ;
-    profile:path "JourneyPatternRef/@ref" ;
+    profile:path "ServiceJourney/JourneyPatternRef/@ref" ;
     profile:cardinality "1..1" ;
     skos:definition "Reference to the JourneyPattern defining the stop sequence"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "OperatorRef/@ref" ;
-    profile:path "OperatorRef/@ref" ;
+    profile:path "ServiceJourney/OperatorRef/@ref" ;
     profile:cardinality "0..1" ;
     skos:definition "Reference to an Operator"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "LineRef/@ref" ;
-    profile:path "LineRef/@ref" ;
+    profile:path "ServiceJourney/LineRef/@ref" ;
     profile:cardinality "0..1" ;
     skos:definition "Reference to the served Line"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "TimetabledPassingTime" ;
-    profile:path "passingTimes/TimetabledPassingTime" ;
+    profile:path "ServiceJourney/passingTimes/TimetabledPassingTime" ;
     profile:cardinality "1..n" ;
     skos:definition "Collection of scheduled passing/stop times"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "TimetabledPassingTime/@id" ;
-    profile:path "passingTimes/TimetabledPassingTime/@id" ;
+    profile:path "ServiceJourney/passingTimes/TimetabledPassingTime/@id" ;
     profile:cardinality "0..1" ;
     skos:definition "Optional identifier for the TimetabledPassingTime element"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "StopPointInJourneyPatternRef/@ref" ;
-    profile:path "passingTimes/TimetabledPassingTime/StopPointInJourneyPatternRef/@ref" ;
+    profile:path "ServiceJourney/passingTimes/TimetabledPassingTime/StopPointInJourneyPatternRef/@ref" ;
     profile:cardinality "1..1" ;
     skos:definition "Reference to a StopPointInJourneyPattern"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "ArrivalTime" ;
-    profile:path "passingTimes/TimetabledPassingTime/ArrivalTime" ;
+    profile:path "ServiceJourney/passingTimes/TimetabledPassingTime/ArrivalTime" ;
     profile:cardinality "0..1" ;
     skos:definition "Planned arrival time at the stop"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "DepartureTime" ;
-    profile:path "passingTimes/TimetabledPassingTime/DepartureTime" ;
+    profile:path "ServiceJourney/passingTimes/TimetabledPassingTime/DepartureTime" ;
     profile:cardinality "0..1" ;
     skos:definition "Planned departure time from the stop"@en ;
     nordic:provenance nordic:Baseline .
