@@ -175,7 +175,9 @@ def build(args):
 
         p_lo, p_hi = parse_cardinality(card)
         x_lo, x_hi = base.bounds(chain[-1].base_shape)
-        if p_lo < x_lo or p_hi > x_hi:
+        # An exclusion (0..0) is never looser, even where the XSD requires at
+        # least one item inside an optional container.
+        if p_hi != 0 and (p_lo < x_lo or p_hi > x_hi):
             looser.append((path, card, fmt(x_lo, x_hi)))
         if chain[-1].via_head:
             # The base's bounds sit on the head's path, so in SHACL nothing
