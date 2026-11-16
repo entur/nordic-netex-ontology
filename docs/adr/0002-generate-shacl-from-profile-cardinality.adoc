@@ -4,7 +4,9 @@ Date: 2026-11-16
 
 == Status
 
-Proposed. Owner: the maintainer of `entur/nordic-netex-ontology`.
+Proposed. Requires the base from `netex-ontology-generator` v0.4.0 or later
+(attributes, `sh:name`, substitution groups). Owner: the maintainer of
+`entur/nordic-netex-ontology`.
 
 == Context
 
@@ -35,23 +37,38 @@ repository) already assigns this step here: "The Nordic NeTEx repository ...
 generates or updates SHACL". No generator for it exists; the only generator
 in this repository writes `catalog.ttl`.
 
-A feasibility check on `6bc8b10` resolved every member path against the
-generated XSD baseline (`base/netex-shacl.ttl`), turning each step into the
-lowerCamelCase `netex:` property and following `sh:class` from one step to the
-next, starting from the class's `rdfs:subClassOf` chain:
+A first feasibility check on the base vendored at `6bc8b10` turned each path
+step into the lowerCamelCase `netex:` property and followed `sh:class` from
+step to step. It resolved 199 of 209 element paths and none of the 143
+attribute paths, and showed four gaps in the base generator: XSD attributes
+were not projected at all, element names differing only in first-letter case
+shared one property (`BookingArrangements`/`bookingArrangements`),
+substitution group members were missing (`AuthorityRef` where the XSD declares
+`TransportOrganisationRef`), and some inline-typed elements had no type.
+
+These are fixed in `netex-ontology-generator` v0.2.0 to v0.4.0, vendored in
+`base/` by `chore(base): vendor netex-ontology-generator v0.4.0`. The base now
+has attributes as `netex:@name`, keeps colliding names apart
+(`netex:parkingProperties_Collection`), states the exact XML name of every
+property at each use as `sh:name`, and makes each substitution group member
+`rdfs:subPropertyOf` its head. Against that base, resolving by name as decided
+below:
 
 ----
-element paths      209   resolved 199, unresolved 10
-attribute paths    143   resolved 0   (the base has no attribute properties)
+element paths      209   resolved 203
+attribute paths    143   resolved 141
+                   352   resolved 344
 
-required members whose path resolves:
-  already required by the XSD    16   (nothing to generate)
-  stricter than the XSD          31   (a shape is needed)
+required members (160), path resolves (158):
+  already required by the XSD    26   (nothing to generate)
+  stricter than the XSD         132   (a shape is needed)
 ----
 
-The 10 unresolved element paths go through XSD substitution groups or
-wrapper elements (`projections/PointProjection`,
-`noticeAssignments/NoticeAssignment`, `BookingArrangements/...`).
+Of the 8 paths that do not resolve, 4 go through `gml:LineString` (GML is
+projected into `netex:` without its prefix) and 4 name elements that do not
+exist in the NeTEx 2.0 XSD, which are errors in this profile
+(`BookingMethods/BookingMethod`, `Network/groupsOfLines/GroupOfLinesRef`,
+`PassengerCapacity/SeatedCapacity`, `PassengerCapacity/WheelchairCapacity`).
 
 == Decision
 
@@ -69,6 +86,19 @@ wrapper elements (`projections/PointProjection`,
   so a downstream profile runs the same script on its own layer and gets its
   own generated file. It never writes into another profile's file.
 
+=== How a path is resolved
+
+* Each step of `profile:path` is matched by name, never by computing an IRI
+  from the name. The step is looked up as `sh:name` on the base's property
+  shapes for the current class and its `rdfs:subClassOf` ancestors, and
+  `sh:class` of the match gives the class for the next step.
+* When no shape on the class has that name, the step is a substitution group
+  member: the property labelled with the name is followed up
+  `rdfs:subPropertyOf` to a property shape the class has, and the next step
+  continues from the member's own class (`netex:AuthorityRef`).
+* The base's IRI naming rules (`@` for attributes, `_Collection` for
+  case-colliding containers) are therefore never repeated in this generator.
+
 === What is generated
 
 * A property constraint is generated only where the profile is stricter than
@@ -84,17 +114,19 @@ wrapper elements (`projections/PointProjection`,
   `Operator/CustomerServiceContactDetails/Url (1..1)` requires a `Url` inside
   `CustomerServiceContactDetails` without requiring
   `CustomerServiceContactDetails` itself.
+* Attributes are generated like elements, on their `netex:@name` property
+  (`Line/@version (1..1)` gives `sh:minCount 1` on `netex:@version`).
 * A member path that ends in `X/@ref` is generated as a requirement on the
-  reference element `X`, since the XSD already requires `@ref` on a reference.
+  reference element `X`. The base's shape for a reference points `sh:class`
+  at the referenced entity, not at the reference structure that carries
+  `@ref`, and the XSD already requires `@ref` on every reference.
 
 === What is not generated
 
-* Other attribute paths (`@id`, `@version`, `@order`, `@lang`, ...) are
-  skipped and listed in the generator's report until the base models
-  attributes. Fixing that belongs in the base generator, not here.
-* Paths through substitution groups or wrapper elements that do not resolve
-  are skipped and listed in the report. A resolution rule for them can be
-  added to the generator later; until then they stay unenforced, as today.
+* Paths that do not resolve are skipped and listed in the generator's report.
+  Today that is the 8 paths above: the profile errors are fixed in the
+  membership, and `gml:` steps wait for GML to get its own namespace in the
+  base.
 * Anything that is not a cardinality: excluded fields (`sh:maxCount 0` on a
   field outside the allowlist), type checks (`sh:class`), "at least one of",
   and value lists narrower than the XSD. These stay in the hand-written shapes
@@ -112,8 +144,9 @@ wrapper elements (`projections/PointProjection`,
 
 === Positive
 
-* Every requirement in the membership reaches SHACL. About 31 required fields
-  become visible to validators and rule tools at once, without new decisions.
+* Every requirement in the membership reaches SHACL. 132 required fields and
+  attributes become visible to validators and rule tools at once, without new
+  decisions.
 * A CCB decision that changes a cardinality is enforced as soon as it lands in
   `netex-nordic.ttl`, with no separate shape to remember.
 * Downstream profiles get the same behaviour from the same script.
@@ -131,12 +164,17 @@ wrapper elements (`projections/PointProjection`,
 
 == Risks
 
-* *Attributes stay unenforced.* 143 member paths are attributes, and none can
-  be generated until the base models them. The report keeps them visible; a
-  follow-up in the base generator is needed.
-* *Base drift.* Resolution depends on the vendored `base/`. A new base snapshot
-  can change property names or types. The generator's report is compared in
-  CI, so a path that stops resolving is noticed.
+* *Profile paths that do not follow the XSD.* A path the base cannot resolve
+  is not enforced. The report lists them, and each is either a profile error
+  to fix in the membership or a gap in the base to fix in its generator.
+* *Base drift.* Resolution depends on the vendored `base/`. A new base can
+  change what a name resolves to; v0.3.0 moved `netex:parkingProperties` from
+  the container to the `ParkingProperties` element. Matching by `sh:name`
+  makes this generator immune to such renames, but hand-written shapes that
+  use the IRI are not. The base states which XSD revision and generator
+  release it comes from (`prov:wasDerivedFrom`, `prov:wasAttributedTo`), and
+  the generator's report is compared in CI, so a path that stops resolving is
+  noticed.
 * *Weaker than existing validators.* `sh:minCount 1` accepts an empty or
   whitespace-only value; Antu rejects it (`normalize-space(...) = ''`).
   Requiring non-empty values would make data invalid, so it is a CCB decision
