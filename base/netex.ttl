@@ -1,12 +1,16 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix netex: <https://netex-cen.eu/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://netex-cen.eu/ontology> a owl:Ontology ;
-    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:created "2004-09-29"^^xsd:date ;
+    dcterms:modified "2025-05-27"^^xsd:date ;
     dcterms:source "NeTEx_publication.xsd" ;
     dcterms:title "NeTEx base ontology (generated from XSD)" ;
+    rdfs:comment "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     owl:imports <https://netex-cen.eu/ontology/core>,
         <https://netex-cen.eu/ontology/framework>,
         <https://netex-cen.eu/ontology/gml>,
@@ -16,10 +20,15 @@
         <https://netex-cen.eu/ontology/part5>,
         <https://netex-cen.eu/ontology/service>,
         <https://netex-cen.eu/ontology/siri> ;
-    owl:versionInfo "482a533" .
+    owl:versionInfo "2.0" ;
+    prov:wasAttributedTo <https://github.com/hfjelstad/netex-ontology-generator/releases/tag/v0.4.0> ;
+    prov:wasDerivedFrom <https://github.com/TransmodelEcosystem/NeTEx/blob/8056d5a30b131a3303d5c8b198cadc3a3570b083/xsd/NeTEx_publication.xsd> .
 
 netex:isReference a owl:AnnotationProperty ;
     rdfs:label "is reference" .
+
+netex:xsdAttribute a owl:AnnotationProperty ;
+    rdfs:label "xsd attribute" .
 
 netex:xsdElement a owl:AnnotationProperty ;
     rdfs:label "xsd element" .

@@ -1,6 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix netex: <https://netex-cen.eu/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -423,7 +424,13 @@ netex:LocationStructure a owl:Class ;
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:precision ;
-            netex:xsdSequenceOrder 4 ] .
+            netex:xsdSequenceOrder 4 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@id> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsName> ] .
 
 netex:MessageRefStructure a owl:Class ;
     rdfs:label "Message" ;
@@ -432,11 +439,17 @@ netex:MessageRefStructure a owl:Class ;
 
 netex:NaturalLanguagePlaceNameStructure a owl:Class ;
     rdfs:label "NaturalLanguagePlaceName" ;
-    rdfs:comment "@lang. ISO language code (default is 'en') A string containing a phrase in a natural language name that requires at least one character of text and forbids certain reserved characters." .
+    rdfs:comment "@lang. ISO language code (default is 'en') A string containing a phrase in a natural language name that requires at least one character of text and forbids certain reserved characters." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@lang> ] .
 
 netex:NaturalLanguageStringStructure a owl:Class ;
     rdfs:label "NaturalLanguageString" ;
-    rdfs:comment "Tyoe for a string in a specified language." .
+    rdfs:comment "Tyoe for a string in a specified language." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@lang> ] .
 
 netex:NoInfoForTopicError a owl:Class ;
     rdfs:label "NoInfoForTopicError" ;
@@ -525,7 +538,11 @@ netex:ServiceDeliveryBodyStructure a owl:Class ;
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractFunctionalServiceDelivery ;
-            netex:xsdSequenceOrder 4 ] .
+            netex:xsdSequenceOrder 4 ],
+        [ a owl:Restriction ;
+            rdfs:comment "Default gml coordinate format for eny location elements in response; applies if Coordinates element is used to specify points. May be overridden on individual points." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsName> ] .
 
 netex:ServiceDeliveryErrorConditionElement a owl:Class ;
     rdfs:label "ServiceDeliveryErrorConditionElement" ;
@@ -709,7 +726,10 @@ netex:SiriSchema a owl:Class ;
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractDiscoveryRequest ;
-            netex:xsdSequenceOrder 9 ] .
+            netex:xsdSequenceOrder 9 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ] .
 
 netex:SubscriptionContextStructure a owl:Class ;
     rdfs:label "SubscriptionContext" ;
@@ -865,8 +885,36 @@ netex:UnknownSubscriptionError a owl:Class ;
     rdfs:subClassOf netex:UnknownSubscriptionErrorStructure ;
     netex:xsdElement true .
 
+netex:abstractFunctionalServiceRequest a owl:ObjectProperty ;
+    rdfs:label "AbstractFunctionalServiceRequest" ;
+    rdfs:subPropertyOf netex:abstractServiceRequest ;
+    netex:xsdType "AbstractFunctionalServiceRequestStructure" .
+
+netex:dataObjectCapabilitiesRequest a owl:ObjectProperty ;
+    rdfs:label "DataObjectCapabilitiesRequest" ;
+    rdfs:subPropertyOf netex:abstractFunctionalServiceCapabilitiesRequest ;
+    netex:xsdType "ServiceCapabilitiesRequestStructure" .
+
 netex:isReference a owl:AnnotationProperty ;
     rdfs:label "is reference" .
+
+netex:lineShape a owl:ObjectProperty ;
+    rdfs:label "LineShape" ;
+    rdfs:subPropertyOf netex:dataManagedObject ;
+    netex:xsdType "LineShapeStructure" .
+
+netex:subscriptionTerminatedNotification a owl:ObjectProperty ;
+    rdfs:label "SubscriptionTerminatedNotification" ;
+    rdfs:subPropertyOf netex:producerResponse ;
+    netex:xsdType "SubscriptionTerminatedNotificationStructure" .
+
+netex:unknownSubscriberError a owl:ObjectProperty ;
+    rdfs:label "UnknownSubscriberError" ;
+    rdfs:subPropertyOf netex:errorCode ;
+    netex:xsdType "UnknownSubscriberErrorStructure" .
+
+netex:xsdAttribute a owl:AnnotationProperty ;
+    rdfs:label "xsd attribute" .
 
 netex:xsdElement a owl:AnnotationProperty ;
     rdfs:label "xsd element" .
@@ -878,11 +926,29 @@ netex:xsdType a owl:AnnotationProperty ;
     rdfs:label "xsd type" .
 
 <https://netex-cen.eu/ontology/siri> a owl:Ontology ;
-    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:created "2004-09-29"^^xsd:date ;
+    dcterms:modified "2018-04-12"^^xsd:date ;
     dcterms:source "NeTEx_publication.xsd" ;
     dcterms:title "SIRI subset" ;
+    rdfs:comment "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     owl:imports <https://netex-cen.eu/ontology/framework> ;
-    owl:versionInfo "482a533" .
+    owl:versionInfo "2.0" ;
+    prov:wasAttributedTo <https://github.com/hfjelstad/netex-ontology-generator/releases/tag/v0.4.0> ;
+    prov:wasDerivedFrom <https://github.com/TransmodelEcosystem/NeTEx/blob/8056d5a30b131a3303d5c8b198cadc3a3570b083/xsd/NeTEx_publication.xsd> .
+
+<https://netex-cen.eu/ontology#@id> a owl:DatatypeProperty ;
+    rdfs:label "@id" ;
+    rdfs:comment "Identifier of POINT." ;
+    rdfs:range xsd:NMTOKEN ;
+    netex:xsdAttribute true ;
+    netex:xsdType "xsd:NMTOKEN" .
+
+<https://netex-cen.eu/ontology#@number> a owl:DatatypeProperty ;
+    rdfs:label "@number" ;
+    rdfs:comment "Error code number associated with error." ;
+    rdfs:range xsd:integer ;
+    netex:xsdAttribute true ;
+    netex:xsdType "xsd:integer" .
 
 netex:AbstractDiscoveryDeliveryStructure a owl:Class ;
     rdfs:label "AbstractDiscoveryDelivery" ;
@@ -1070,6 +1136,9 @@ netex:CapabilitiesRequestStructure a owl:Class ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractFunctionalServiceCapabilitiesRequest ;
             netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
         netex:RequestStructure .
 
 netex:CapabilitiesResponseStructure a owl:Class ;
@@ -1097,6 +1166,10 @@ netex:CheckStatusRequestStructure a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:extensions ;
             netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            rdfs:comment "Version number of request." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
         netex:RequestStructure .
 
 netex:CheckStatusResponseStructure a owl:Class ;
@@ -1478,6 +1551,9 @@ netex:ServiceCapabilitiesRequestStructure a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:extensions ;
             netex:xsdSequenceOrder 2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
         netex:AbstractServiceRequestStructure .
 
 netex:ServiceDeliveryErrorConditionStructure a owl:Class ;
@@ -1569,6 +1645,10 @@ netex:ServiceDeliveryStructure a owl:Class ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractFunctionalServiceDelivery ;
             netex:xsdSequenceOrder 4 ],
+        [ a owl:Restriction ;
+            rdfs:comment "Default gml coordinate format for eny location elements in response; applies if Coordinates element is used to specify points. May be overridden on individual points." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsName> ],
         netex:ProducerResponseStructure .
 
 netex:ServiceNotAvailableErrorStructure a owl:Class ;
@@ -1785,23 +1865,26 @@ netex:UnknownSubscriptionErrorStructure a owl:Class ;
 
 netex:abstractDiscoveryDelivery a owl:ObjectProperty ;
     rdfs:label "AbstractDiscoveryDelivery" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
     netex:xsdType "AbstractDiscoveryDeliveryStructure" .
 
 netex:abstractDiscoveryRequest a owl:ObjectProperty ;
     rdfs:label "AbstractDiscoveryRequest" ;
+    rdfs:subPropertyOf netex:authenticatedRequest ;
     netex:xsdType "AbstractDiscoveryRequestStructure" .
-
-netex:abstractFunctionalServiceCapabilitiesRequest a owl:ObjectProperty ;
-    rdfs:label "AbstractFunctionalServiceCapabilitiesRequest" ;
-    netex:xsdType "AbstractServiceRequestStructure" .
 
 netex:abstractFunctionalServiceCapabilitiesResponse a owl:ObjectProperty ;
     rdfs:label "AbstractFunctionalServiceCapabilitiesResponse" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
     netex:xsdType "AbstractServiceCapabilitiesResponseStructure" .
 
 netex:abstractFunctionalServiceSubscriptionRequest a owl:ObjectProperty ;
     rdfs:label "AbstractFunctionalServiceSubscriptionRequest" ;
     netex:xsdType "AbstractSubscriptionStructure" .
+
+netex:abstractTrackedRequest a owl:ObjectProperty ;
+    rdfs:label "AbstractTrackedRequest" ;
+    netex:xsdType "RequestStructure" .
 
 netex:allowedPredictors a owl:DatatypeProperty ;
     rdfs:label "AllowedPredictors" ;
@@ -1816,6 +1899,7 @@ netex:capabilitiesRequest a owl:ObjectProperty ;
 netex:capabilitiesResponse a owl:ObjectProperty ;
     rdfs:label "CapabilitiesResponse" ;
     rdfs:comment "Responses with the capabilities of an implementation. Answers a CapabilityRequest." ;
+    rdfs:subPropertyOf netex:producerResponse ;
     netex:xsdType "CapabilitiesResponseStructure" .
 
 netex:capabilityRef a owl:ObjectProperty ;
@@ -1832,10 +1916,12 @@ netex:checkStatusAddress a owl:DatatypeProperty ;
 
 netex:checkStatusRequest a owl:ObjectProperty ;
     rdfs:label "CheckStatusRequest" ;
+    rdfs:subPropertyOf netex:abstractTrackedRequest ;
     netex:xsdType "CheckStatusRequestStructure" .
 
 netex:checkStatusResponse a owl:ObjectProperty ;
     rdfs:label "CheckStatusResponse" ;
+    rdfs:subPropertyOf netex:producerResponse ;
     netex:xsdType "CheckStatusResponseStructure" .
 
 netex:communicationsTransportMethod a owl:DatatypeProperty ;
@@ -1867,6 +1953,10 @@ netex:dataHorizon a owl:DatatypeProperty ;
     rdfs:range xsd:duration ;
     netex:xsdType "PositiveDurationType" .
 
+netex:dataManagedObject a owl:ObjectProperty ;
+    rdfs:label "DataManagedObject" ;
+    netex:xsdType "DataManagedObjectStructure" .
+
 netex:dataNameSpaces a owl:ObjectProperty ;
     rdfs:label "DataNameSpaces" ;
     rdfs:comment "Default names pace used to scope data identifiers." ;
@@ -1874,18 +1964,22 @@ netex:dataNameSpaces a owl:ObjectProperty ;
 
 netex:dataReadyAcknowledgement a owl:ObjectProperty ;
     rdfs:label "DataReadyAcknowledgement" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
     netex:xsdType "DataReadyResponseStructure" .
 
 netex:dataReadyNotification a owl:ObjectProperty ;
     rdfs:label "DataReadyNotification" ;
+    rdfs:subPropertyOf netex:producerRequest ;
     netex:xsdType "DataReadyRequestStructure" .
 
 netex:dataReceivedAcknowledgement a owl:ObjectProperty ;
     rdfs:label "DataReceivedAcknowledgement" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
     netex:xsdType "DataReceivedResponseStructure" .
 
 netex:dataSupplyRequest a owl:ObjectProperty ;
     rdfs:label "DataSupplyRequest" ;
+    rdfs:subPropertyOf netex:abstractRequest ;
     netex:xsdType "DataSupplyRequestStructure" .
 
 netex:defaultLanguage a owl:DatatypeProperty ;
@@ -1971,6 +2065,7 @@ netex:heartbeatInterval a owl:DatatypeProperty ;
 
 netex:heartbeatNotification a owl:ObjectProperty ;
     rdfs:label "HeartbeatNotification" ;
+    rdfs:subPropertyOf netex:producerRequest ;
     netex:xsdType "HeartbeatNotificationStructure" .
 
 netex:initialTerminationTime a owl:DatatypeProperty ;
@@ -2115,6 +2210,7 @@ netex:responderRef a owl:ObjectProperty ;
 
 netex:serviceDelivery a owl:ObjectProperty ;
     rdfs:label "ServiceDelivery" ;
+    rdfs:subPropertyOf netex:producerResponse ;
     netex:xsdType "ServiceDeliveryStructure" .
 
 netex:serviceFeatureNameSpace a owl:DatatypeProperty ;
@@ -2183,14 +2279,17 @@ netex:subscriptionRequest a owl:ObjectProperty ;
 
 netex:subscriptionResponse a owl:ObjectProperty ;
     rdfs:label "SubscriptionResponse" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
     netex:xsdType "SubscriptionResponseStructure" .
 
 netex:terminateSubscriptionRequest a owl:ObjectProperty ;
     rdfs:label "TerminateSubscriptionRequest" ;
+    rdfs:subPropertyOf netex:authenticatedRequest ;
     netex:xsdType "TerminateSubscriptionRequestStructure" .
 
 netex:terminateSubscriptionResponse a owl:ObjectProperty ;
     rdfs:label "TerminateSubscriptionResponse" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
     netex:xsdType "TerminateSubscriptionResponseStructure" .
 
 netex:terminationResponseStatus a owl:ObjectProperty ;
@@ -2211,6 +2310,7 @@ netex:transportDescription a owl:ObjectProperty ;
 
 netex:unknownSubscriptionError a owl:ObjectProperty ;
     rdfs:label "UnknownSubscriptionError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "UnknownSubscriptionErrorStructure" .
 
 netex:upperLeft a owl:ObjectProperty ;
@@ -2235,6 +2335,12 @@ netex:visitNumberisOrder a owl:DatatypeProperty ;
     rdfs:comment "Whether VisitNumber can be used as a strict order number within JOURNEY PATTERN. Default is 'false'." ;
     rdfs:range xsd:boolean ;
     netex:xsdType "xsd:boolean" .
+
+<https://netex-cen.eu/ontology#@lang> a owl:DatatypeProperty ;
+    rdfs:label "@lang" ;
+    rdfs:range xsd:language ;
+    netex:xsdAttribute true ;
+    netex:xsdType "xsd:language" .
 
 netex:ConsumerResponseEndpointStructure a owl:Class ;
     rdfs:label "ConsumerResponseEndpoint" ;
@@ -2285,9 +2391,24 @@ netex:ResponseEndpointStructure a owl:Class ;
             netex:xsdSequenceOrder 5 ],
         netex:ResponseStructure .
 
+netex:abstractFunctionalServiceCapabilitiesRequest a owl:ObjectProperty ;
+    rdfs:label "AbstractFunctionalServiceCapabilitiesRequest" ;
+    rdfs:subPropertyOf netex:abstractServiceRequest ;
+    netex:xsdType "AbstractServiceRequestStructure" .
+
 netex:abstractFunctionalServiceDelivery a owl:ObjectProperty ;
     rdfs:label "AbstractFunctionalServiceDelivery" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
     netex:xsdType "AbstractServiceDeliveryStructure" .
+
+netex:abstractRequest a owl:ObjectProperty ;
+    rdfs:label "AbstractRequest" ;
+    netex:xsdType "AbstractRequestStructure" .
+
+netex:abstractServiceRequest a owl:ObjectProperty ;
+    rdfs:label "AbstractServiceRequest" ;
+    rdfs:subPropertyOf netex:abstractRequest ;
+    netex:xsdType "AbstractServiceRequestStructure" .
 
 netex:accountId a owl:DatatypeProperty ;
     rdfs:label "AccountId" ;
@@ -2327,10 +2448,12 @@ netex:consumerRef a owl:ObjectProperty ;
 
 netex:endpointDeniedAccessError a owl:ObjectProperty ;
     rdfs:label "EndpointDeniedAccessError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "EndpointDeniedAccessStructure" .
 
 netex:endpointNotAvailableAccessError a owl:ObjectProperty ;
     rdfs:label "EndpointNotAvailableAccessError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "EndpointNotAvailableAccessStructure" .
 
 netex:gmlCoordinateFormat a owl:DatatypeProperty ;
@@ -2369,6 +2492,11 @@ netex:notificationRef a owl:ObjectProperty ;
     netex:isReference true ;
     netex:xsdType "MessageRefStructure" .
 
+netex:producerRequest a owl:ObjectProperty ;
+    rdfs:label "ProducerRequest" ;
+    rdfs:subPropertyOf netex:authenticatedRequest ;
+    netex:xsdType "ProducerRequestEndpointStructure" .
+
 netex:requestTimestamp a owl:DatatypeProperty ;
     rdfs:label "RequestTimestamp" ;
     rdfs:range xsd:dateTime ;
@@ -2396,15 +2524,18 @@ netex:subscriptionManagerAddress a owl:DatatypeProperty ;
 
 netex:unapprovedKeyAccessError a owl:ObjectProperty ;
     rdfs:label "UnapprovedKeyAccessError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "UnapprovedKeyAccessStructure" .
 
 netex:unknownEndpointError a owl:ObjectProperty ;
     rdfs:label "UnknownEndpointError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "UnknownEndpointErrorStructure" .
 
 netex:unknownParticipantError a owl:ObjectProperty ;
     rdfs:label "UnknownParticipantError" ;
     rdfs:comment "Error: Recipient for a message to be distributed is unknown. I.e. delegatior is found, but +SIRI v2.0" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "UnknownParticipantErrorStructure" .
 
 netex:wgsDecimalDegrees a owl:DatatypeProperty ;
@@ -2412,6 +2543,13 @@ netex:wgsDecimalDegrees a owl:DatatypeProperty ;
     rdfs:comment "Geospatial coordinates are given as Wgs 84 Latiude and longitude, decimial degrees of arc." ;
     rdfs:range xsd:string ;
     netex:xsdType "EmptyType" .
+
+<https://netex-cen.eu/ontology#@srsName> a owl:DatatypeProperty ;
+    rdfs:label "@srsName" ;
+    rdfs:comment "identifier of data reference system for geocodes if point is specified as gml compatible Coordinates. A gml value. If not specified taken from system configuration." ;
+    rdfs:range xsd:string ;
+    netex:xsdAttribute true ;
+    netex:xsdType "SrsNameType" .
 
 netex:AbstractRequestStructure a owl:Class ;
     rdfs:label "AbstractRequest" ;
@@ -2451,19 +2589,27 @@ netex:ProducerRequestEndpointStructure a owl:Class ;
 
 netex:accessNotAllowedError a owl:ObjectProperty ;
     rdfs:label "AccessNotAllowedError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "AccessNotAllowedErrorStructure" .
 
 netex:allowedResourceUsageExceededError a owl:ObjectProperty ;
     rdfs:label "AllowedResourceUsageExceededError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "AllowedResourceUsageExceededErrorStructure" .
+
+netex:authenticatedRequest a owl:ObjectProperty ;
+    rdfs:label "AuthenticatedRequest" ;
+    netex:xsdType "AuthenticatedRequestStructure" .
 
 netex:beyondDataHorizon a owl:ObjectProperty ;
     rdfs:label "BeyondDataHorizon" ;
     rdfs:comment "Error: Data period or subscription period is outside of period covered by service. +SIRI v2.0." ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "BeyondDataHorizonErrorStructure" .
 
 netex:capabilityNotSupportedError a owl:ObjectProperty ;
     rdfs:label "CapabilityNotSupportedError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "CapabilityNotSupportedErrorStructure" .
 
 netex:dataReady a owl:DatatypeProperty ;
@@ -2480,18 +2626,22 @@ netex:endpoint a owl:DatatypeProperty ;
 
 netex:invalidDataReferencesError a owl:ObjectProperty ;
     rdfs:label "InvalidDataReferencesError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "InvalidDataReferencesErrorStructure" .
 
 netex:noInfoForTopicError a owl:ObjectProperty ;
     rdfs:label "NoInfoForTopicError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "NoInfoForTopicErrorStructure" .
 
 netex:otherError a owl:ObjectProperty ;
     rdfs:label "OtherError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "OtherErrorStructure" .
 
 netex:parametersIgnoredError a owl:ObjectProperty ;
     rdfs:label "ParametersIgnoredError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "ParametersIgnoredErrorStructure" .
 
 netex:producerRef a owl:ObjectProperty ;
@@ -2502,12 +2652,21 @@ netex:producerRef a owl:ObjectProperty ;
 
 netex:serviceNotAvailableError a owl:ObjectProperty ;
     rdfs:label "ServiceNotAvailableError" ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "ServiceNotAvailableErrorStructure" .
 
 netex:unknownExtensionsError a owl:ObjectProperty ;
     rdfs:label "UnknownExtensionsError" ;
     rdfs:comment "Error: Request contained extensions that were not supported by the producer. A response has been provided but some or all extensions have been ignored. +SIRI v2.0." ;
+    rdfs:subPropertyOf netex:errorCode ;
     netex:xsdType "UnknownExtensionsErrorStructure" .
+
+<https://netex-cen.eu/ontology#@version> a owl:DatatypeProperty ;
+    rdfs:label "@version" ;
+    rdfs:comment "Version number of request. Fixed." ;
+    rdfs:range xsd:NMTOKEN ;
+    netex:xsdAttribute true ;
+    netex:xsdType "VersionString" .
 
 netex:AbstractItemStructure a owl:Class ;
     rdfs:label "AbstractItem" ;
@@ -2558,6 +2717,11 @@ netex:description a owl:ObjectProperty ;
     rdfs:label "Description" ;
     rdfs:comment "Text description of error." ;
     netex:xsdType "NaturalLanguageStringStructure" .
+
+netex:producerResponse a owl:ObjectProperty ;
+    rdfs:label "ProducerResponse" ;
+    rdfs:subPropertyOf netex:abstractResponse ;
+    netex:xsdType "ProducerResponseStructure" .
 
 netex:requestorRef a owl:ObjectProperty ;
     rdfs:label "RequestorRef" ;
@@ -2643,6 +2807,10 @@ netex:messageIdentifier a owl:ObjectProperty ;
     rdfs:comment "Arbitrary unique identifier that can be used to reference this message in subsequent interactions." ;
     netex:xsdType "MessageQualifierStructure" .
 
+netex:abstractResponse a owl:ObjectProperty ;
+    rdfs:label "AbstractResponse" ;
+    netex:xsdType "ResponseStructure" .
+
 netex:extensions a owl:ObjectProperty ;
     rdfs:label "Extensions" ;
     netex:xsdType "ExtensionsStructure" .
@@ -2696,11 +2864,18 @@ netex:status a owl:DatatypeProperty ;
     rdfs:range xsd:boolean ;
     netex:xsdType "xsd:boolean" .
 
+netex:errorCode a owl:ObjectProperty ;
+    rdfs:label "ErrorCode" ;
+    netex:xsdType "ErrorCodeStructure" .
+
 netex:ErrorCodeStructure a owl:Class ;
     rdfs:label "ErrorCode" ;
     rdfs:comment "Type for Error Code." ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:errorText ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@number> ] .
 

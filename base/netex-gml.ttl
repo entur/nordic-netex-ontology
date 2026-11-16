@@ -1,6 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix netex: <https://netex-cen.eu/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -33,11 +34,17 @@ netex:AbstractGeometry a owl:Class ;
 netex:AbstractMemberType a owl:Class ;
     rdfs:label "AbstractMemberType" ;
     rdfs:comment "To create a collection of GML Objects that are not all features, a property type shall be derived by extension from gml:AbstractMemberType. This abstract property type is intended to be used only in object types where software shall be able to identify that an instance of such an object type is to be interpreted as a collection of objects. By default, this abstract property type does not imply any ownership of the objects in the collection. The owns attribute of gml:OwnershipAttributeGroup may be used on a property element instance to assert ownership of an object in the collection. A collection shall not own an object already owned by another object." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] ;
     netex:abstract true .
 
 netex:AbstractMetadataPropertyType a owl:Class ;
     rdfs:label "AbstractMetadataPropertyType" ;
     rdfs:comment "To associate metadata described by any XML Schema with a GML object, a property element shall be defined whose content model is derived by extension from gml:AbstractMetadataPropertyType. The value of such a property shall be metadata. The content model of such a property type, i.e. the metadata application schema shall be specified by the GML Application Schema. By default, this abstract property type does not imply any ownership of the metadata. The owns attribute of gml:OwnershipAttributeGroup may be used on a metadata property element instance to assert ownership of the metadata. If metadata following the conceptual model of ISO 19115 is to be encoded in a GML document, the corresponding Implementation Specification specified in ISO/TS 19139 shall be used to encode the metadata information." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] ;
     netex:abstract true .
 
 netex:AbstractRing a owl:Class ;
@@ -56,22 +63,40 @@ netex:AggregationType a rdfs:Datatype ;
 
 netex:CodeListType a owl:Class ;
     rdfs:label "CodeListType" ;
-    rdfs:comment "gml:CodeListType provides for lists of terms. The values in an instance element shall all be valid according to the rules of the dictionary, classification scheme, or authority identified by the value of its codeSpace attribute." .
+    rdfs:comment "gml:CodeListType provides for lists of terms. The values in an instance element shall all be valid according to the rules of the dictionary, classification scheme, or authority identified by the value of its codeSpace attribute." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@codeSpace> ] .
 
 netex:CodeOrNilReasonListType a owl:Class ;
     rdfs:label "CodeOrNilReasonListType" ;
-    rdfs:comment "gml:CodeOrNilReasonListType provides for lists of terms. The values in an instance element shall all be valid according to the rules of the dictionary, classification scheme, or authority identified by the value of its codeSpace attribute. An instance element may also include embedded values from NilReasonType. It is intended to be used in situations where a term or classification is expected, but the value may be absent for some reason." .
+    rdfs:comment "gml:CodeOrNilReasonListType provides for lists of terms. The values in an instance element shall all be valid according to the rules of the dictionary, classification scheme, or authority identified by the value of its codeSpace attribute. An instance element may also include embedded values from NilReasonType. It is intended to be used in situations where a term or classification is expected, but the value may be absent for some reason." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@codeSpace> ] .
 
 netex:CoordinatesType a owl:Class ;
     rdfs:label "CoordinatesType" ;
-    rdfs:comment "This type is deprecated for tuples with ordinate values that are numbers. CoordinatesType is a text string, intended to be used to record an array of tuples or coordinates. While it is not possible to enforce the internal structure of the string through schema validation, some optional attributes have been provided in previous versions of GML to support a description of the internal structure. These attributes are deprecated. The attributes were intended to be used as follows: Decimal symbol used for a decimal point (default=\".\" a stop or period) cs symbol used to separate components within a tuple or coordinate string (default=\",\" a comma) ts symbol used to separate tuples or coordinate strings (default=\" \" a space) Since it is based on the XML Schema string type, CoordinatesType may be used in the construction of tables of tuples or arrays of tuples, including ones that contain mixed text and numeric values." .
+    rdfs:comment "This type is deprecated for tuples with ordinate values that are numbers. CoordinatesType is a text string, intended to be used to record an array of tuples or coordinates. While it is not possible to enforce the internal structure of the string through schema validation, some optional attributes have been provided in previous versions of GML to support a description of the internal structure. These attributes are deprecated. The attributes were intended to be used as follows: Decimal symbol used for a decimal point (default=\".\" a stop or period) cs symbol used to separate components within a tuple or coordinate string (default=\",\" a comma) ts symbol used to separate tuples or coordinate strings (default=\" \" a space) Since it is based on the XML Schema string type, CoordinatesType may be used in the construction of tables of tuples or arrays of tuples, including ones that contain mixed text and numeric values." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@decimal> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@cs> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ts> ] .
 
 netex:CurveArrayPropertyType a owl:Class ;
     rdfs:label "CurveArrayPropertyType" ;
     rdfs:comment "A container for an array of curves. The elements are always contained in the array property, referencing geometry elements or arrays of geometry elements via XLinks is not supported." ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty netex:abstractCurve ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:Envelope a owl:Class ;
     rdfs:label "Envelope" ;
@@ -84,14 +109,23 @@ netex:GeometricPrimitivePropertyType a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractGeometricPrimitive ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ] .
 
 netex:GeometryArrayPropertyType a owl:Class ;
     rdfs:label "GeometryArrayPropertyType" ;
     rdfs:comment "If a feature has a property which takes an array of geometry elements as its value, this is called a geometry array property. A generic type for such a geometry property is GeometryArrayPropertyType. The elements are always contained inline in the array property, referencing geometry elements or arrays of geometry elements via XLinks is not supported." ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty netex:abstractGeometry ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:GeometryPropertyType a owl:Class ;
     rdfs:label "GeometryPropertyType" ;
@@ -99,7 +133,13 @@ netex:GeometryPropertyType a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractGeometry ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:LineString a owl:Class ;
     rdfs:label "LineString" ;
@@ -121,15 +161,24 @@ netex:LinearRingPropertyType a owl:Class ;
 
 netex:MeasureListType a owl:Class ;
     rdfs:label "MeasureListType" ;
-    rdfs:comment "gml:MeasureListType provides for a list of quantities." .
+    rdfs:comment "gml:MeasureListType provides for a list of quantities." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uom> ] .
 
 netex:MeasureOrNilReasonListType a owl:Class ;
     rdfs:label "MeasureOrNilReasonListType" ;
-    rdfs:comment "gml:MeasureOrNilReasonListType provides for a list of quantities. An instance element may also include embedded values from NilReasonType. It is intended to be used in situations where a value is expected, but the value may be absent for some reason." .
+    rdfs:comment "gml:MeasureOrNilReasonListType provides for a list of quantities. An instance element may also include embedded values from NilReasonType. It is intended to be used in situations where a value is expected, but the value may be absent for some reason." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uom> ] .
 
 netex:MeasureType a owl:Class ;
     rdfs:label "MeasureType" ;
-    rdfs:comment "gml:MeasureType supports recording an amount encoded as a value of XML Schema double, together with a units of measure indicated by an attribute uom, short for \"units of measure\". The value of the uom attribute identifies a reference system for the amount, usually a ratio or interval scale." .
+    rdfs:comment "gml:MeasureType supports recording an amount encoded as a value of XML Schema double, together with a units of measure indicated by an attribute uom, short for \"units of measure\". The value of the uom attribute identifies a reference system for the amount, usually a ratio or interval scale." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uom> ] .
 
 netex:MultiSurface a owl:Class ;
     rdfs:label "MultiSurface" ;
@@ -142,7 +191,13 @@ netex:MultiSurfacePropertyType a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:multiSurface ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:NilReasonEnumeration a rdfs:Datatype ;
     rdfs:label "NilReasonEnumeration" ;
@@ -153,7 +208,10 @@ netex:PointArrayPropertyType a owl:Class ;
     rdfs:comment "gml:PointArrayPropertyType is a container for an array of points. The elements are always contained inline in the array property, referencing geometry elements or arrays of geometry elements via XLinks is not supported." ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty netex:point ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:PointType a owl:Class ;
     rdfs:label "PointType" ;
@@ -198,8 +256,23 @@ netex:curveProperty a owl:Class ;
     rdfs:subClassOf netex:CurvePropertyType ;
     netex:xsdElement true .
 
+netex:envelope a owl:ObjectProperty ;
+    rdfs:label "Envelope" ;
+    rdfs:subPropertyOf netex:abstractObject ;
+    netex:xsdType "EnvelopeType" .
+
 netex:isReference a owl:AnnotationProperty ;
     rdfs:label "is reference" .
+
+netex:lineString a owl:ObjectProperty ;
+    rdfs:label "LineString" ;
+    rdfs:subPropertyOf netex:abstractCurve ;
+    netex:xsdType "LineStringType" .
+
+netex:polygon a owl:ObjectProperty ;
+    rdfs:label "Polygon" ;
+    rdfs:subPropertyOf netex:abstractSurface ;
+    netex:xsdType "PolygonType" .
 
 netex:surfaceProperty a owl:Class ;
     rdfs:label "surfaceProperty" ;
@@ -211,6 +284,9 @@ netex:vector a owl:Class ;
     rdfs:subClassOf netex:VectorType ;
     netex:xsdElement true .
 
+netex:xsdAttribute a owl:AnnotationProperty ;
+    rdfs:label "xsd attribute" .
+
 netex:xsdElement a owl:AnnotationProperty ;
     rdfs:label "xsd element" .
 
@@ -221,15 +297,51 @@ netex:xsdType a owl:AnnotationProperty ;
     rdfs:label "xsd type" .
 
 <https://netex-cen.eu/ontology/gml> a owl:Ontology ;
-    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:created "2004-09-29"^^xsd:date ;
+    dcterms:modified "2025-05-27"^^xsd:date ;
     dcterms:source "NeTEx_publication.xsd" ;
     dcterms:title "GML subset" ;
-    owl:versionInfo "482a533" .
+    rdfs:comment "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
+    owl:versionInfo "2.0" ;
+    prov:wasAttributedTo <https://github.com/hfjelstad/netex-ontology-generator/releases/tag/v0.4.0> ;
+    prov:wasDerivedFrom <https://github.com/TransmodelEcosystem/NeTEx/blob/8056d5a30b131a3303d5c8b198cadc3a3570b083/xsd/NeTEx_publication.xsd> .
+
+<https://netex-cen.eu/ontology#@aggregationType> a owl:DatatypeProperty ;
+    rdfs:label "@aggregationType" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "gml:AggregationType" .
+
+<https://netex-cen.eu/ontology#@count> a owl:DatatypeProperty ;
+    rdfs:label "@count" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "positiveInteger" .
+
+<https://netex-cen.eu/ontology#@cs> a owl:DatatypeProperty ;
+    rdfs:label "@cs" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "string" .
+
+<https://netex-cen.eu/ontology#@decimal> a owl:DatatypeProperty ;
+    rdfs:label "@decimal" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "string" .
+
+<https://netex-cen.eu/ontology#@gml:id> a owl:DatatypeProperty ;
+    rdfs:label "@gml:id" ;
+    netex:xsdAttribute true .
+
+<https://netex-cen.eu/ontology#@ts> a owl:DatatypeProperty ;
+    rdfs:label "@ts" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "string" .
 
 netex:CodeWithAuthorityType a owl:Class ;
     rdfs:label "CodeWithAuthorityType" ;
     rdfs:comment "gml:CodeWithAuthorityType requires that the codeSpace attribute is provided in an instance." ;
-    rdfs:subClassOf netex:CodeType .
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@codeSpace> ],
+        netex:CodeType .
 
 netex:CurvePropertyType a owl:Class ;
     rdfs:label "CurvePropertyType" ;
@@ -237,11 +349,26 @@ netex:CurvePropertyType a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractCurve ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:DirectPositionListType a owl:Class ;
     rdfs:label "DirectPositionListType" ;
-    rdfs:comment "posList instances (and other instances with the content model specified by DirectPositionListType) hold the coordinates for a sequence of direct positions within the same coordinate reference system (CRS). if no srsName attribute is given, the CRS shall be specified as part of the larger context this geometry element is part of, typically a geometric object like a point, curve, etc. The optional attribute count specifies the number of direct positions in the list. If the attribute count is present then the attribute srsDimension shall be present, too. The number of entries in the list is equal to the product of the dimensionality of the coordinate reference system (i.e. it is a derived value of the coordinate reference system definition) and the number of direct positions." .
+    rdfs:comment "posList instances (and other instances with the content model specified by DirectPositionListType) hold the coordinates for a sequence of direct positions within the same coordinate reference system (CRS). if no srsName attribute is given, the CRS shall be specified as part of the larger context this geometry element is part of, typically a geometric object like a point, curve, etc. The optional attribute count specifies the number of direct positions in the list. If the attribute count is present then the attribute srsDimension shall be present, too. The number of entries in the list is equal to the product of the dimensionality of the coordinate reference system (i.e. it is a derived value of the coordinate reference system definition) and the number of direct positions." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsName> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsDimension> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@count> ] .
 
 netex:EnvelopeType a owl:Class ;
     rdfs:label "EnvelopeType" ;
@@ -256,10 +383,19 @@ netex:EnvelopeType a owl:Class ;
         [ a owl:Restriction ;
             owl:maxCardinality "2"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:pos ;
-            netex:xsdSequenceOrder 3 ] .
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsName> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsDimension> ] .
 
 netex:InlinePropertyType a owl:Class ;
-    rdfs:label "InlinePropertyType" .
+    rdfs:label "InlinePropertyType" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:LineStringType a owl:Class ;
     rdfs:label "LineStringType" ;
@@ -306,7 +442,13 @@ netex:PointPropertyType a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:point ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:PolygonType a owl:Class ;
     rdfs:label "PolygonType" ;
@@ -324,20 +466,25 @@ netex:SurfaceArrayPropertyType a owl:Class ;
     rdfs:comment "gml:SurfaceArrayPropertyType is a container for an array of surfaces. The elements are always contained in the array property, referencing geometry elements or arrays of geometry elements via XLinks is not supported." ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty netex:abstractSurface ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
 netex:VectorType a owl:Class ;
     rdfs:label "VectorType" ;
     rdfs:comment "For some applications the components of the position may be adjusted to yield a unit vector." ;
     rdfs:subClassOf netex:DirectPositionType .
 
-netex:abstractGeometricPrimitive a owl:ObjectProperty ;
-    rdfs:label "AbstractGeometricPrimitive" ;
-    netex:xsdType "gml:AbstractGeometricPrimitiveType" .
+netex:abstractGML a owl:ObjectProperty ;
+    rdfs:label "AbstractGML" ;
+    rdfs:subPropertyOf netex:abstractObject ;
+    netex:xsdType "AbstractGMLType" .
 
-netex:abstractRing a owl:ObjectProperty ;
-    rdfs:label "AbstractRing" ;
-    netex:xsdType "gml:AbstractRingType" .
+netex:abstractGeometricAggregate a owl:ObjectProperty ;
+    rdfs:label "AbstractGeometricAggregate" ;
+    rdfs:subPropertyOf netex:abstractGeometry ;
+    netex:xsdType "AbstractGeometricAggregateType" .
 
 netex:descriptionReference a owl:Class,
         owl:ObjectProperty ;
@@ -369,6 +516,7 @@ netex:interior a owl:Class,
 
 netex:linearRing a owl:ObjectProperty ;
     rdfs:label "LinearRing" ;
+    rdfs:subPropertyOf netex:abstractRing ;
     netex:xsdType "gml:LinearRingType" .
 
 netex:lowerCorner a owl:ObjectProperty ;
@@ -377,6 +525,7 @@ netex:lowerCorner a owl:ObjectProperty ;
 
 netex:multiSurface a owl:ObjectProperty ;
     rdfs:label "MultiSurface" ;
+    rdfs:subPropertyOf netex:abstractGeometricAggregate ;
     netex:xsdType "gml:MultiSurfaceType" .
 
 netex:name a owl:Class,
@@ -422,12 +571,18 @@ netex:AbstractGMLType a owl:Class ;
             netex:xsdSequenceOrder 2 ],
         [ a owl:Restriction ;
             owl:onProperty netex:name ;
-            netex:xsdSequenceOrder 3 ] ;
+            netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@gml:id> ] ;
     netex:abstract true .
 
 netex:AbstractGeometricAggregateType a owl:Class ;
     rdfs:label "AbstractGeometricAggregateType" ;
-    rdfs:subClassOf netex:AbstractGeometryType ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@aggregationType> ],
+        netex:AbstractGeometryType ;
     netex:abstract true .
 
 netex:AbstractRingPropertyType a owl:Class ;
@@ -449,19 +604,40 @@ netex:AbstractSurfaceType a owl:Class ;
     netex:abstract true .
 
 netex:AssociationRoleType a owl:Class ;
-    rdfs:label "AssociationRoleType" .
+    rdfs:label "AssociationRoleType" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ] .
 
 netex:CodeType a owl:Class ;
     rdfs:label "CodeType" ;
-    rdfs:comment "gml:CodeType is a generalized type to be used for a term, keyword or name. It adds a XML attribute codeSpace to a term, where the value of the codeSpace attribute (if present) shall indicate a dictionary, thesaurus, classification scheme, authority, or pattern for the term." .
+    rdfs:comment "gml:CodeType is a generalized type to be used for a term, keyword or name. It adds a XML attribute codeSpace to a term, where the value of the codeSpace attribute (if present) shall indicate a dictionary, thesaurus, classification scheme, authority, or pattern for the term." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@codeSpace> ] .
 
 netex:DirectPositionType a owl:Class ;
     rdfs:label "DirectPositionType" ;
-    rdfs:comment "Direct position instances hold the coordinates for a position within some coordinate reference system (CRS). Since direct positions, as data types, will often be included in larger objects (such as geometry elements) that have references to CRS, the srsName attribute will in general be missing, if this particular direct position is included in a larger element with such a reference to a CRS. In this case, the CRS is implicitly assumed to take on the value of the containing object's CRS. if no srsName attribute is given, the CRS shall be specified as part of the larger context this geometry element is part of, typically a geometric object like a point, curve, etc." .
+    rdfs:comment "Direct position instances hold the coordinates for a position within some coordinate reference system (CRS). Since direct positions, as data types, will often be included in larger objects (such as geometry elements) that have references to CRS, the srsName attribute will in general be missing, if this particular direct position is included in a larger element with such a reference to a CRS. In this case, the CRS is implicitly assumed to take on the value of the containing object's CRS. if no srsName attribute is given, the CRS shall be specified as part of the larger context this geometry element is part of, typically a geometric object like a point, curve, etc." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsName> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsDimension> ] .
 
 netex:ReferenceType a owl:Class ;
     rdfs:label "ReferenceType" ;
-    rdfs:comment "gml:ReferenceType is intended to be used in application schemas directly, if a property element shall use a \"by-reference only\" encoding." .
+    rdfs:comment "gml:ReferenceType is intended to be used in application schemas directly, if a property element shall use a \"by-reference only\" encoding." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ] .
 
 netex:SurfacePropertyType a owl:Class ;
     rdfs:label "SurfacePropertyType" ;
@@ -469,19 +645,18 @@ netex:SurfacePropertyType a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:abstractSurface ;
-            netex:xsdSequenceOrder 1 ] .
+            netex:xsdSequenceOrder 1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nilReason> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@owns> ] .
 
-netex:abstractCurve a owl:ObjectProperty ;
-    rdfs:label "AbstractCurve" ;
-    netex:xsdType "gml:AbstractCurveType" .
-
-netex:abstractGeometry a owl:ObjectProperty ;
-    rdfs:label "AbstractGeometry" ;
-    netex:xsdType "gml:AbstractGeometryType" .
-
-netex:abstractSurface a owl:ObjectProperty ;
-    rdfs:label "AbstractSurface" ;
-    netex:xsdType "gml:AbstractSurfaceType" .
+netex:abstractRing a owl:ObjectProperty ;
+    rdfs:label "AbstractRing" ;
+    rdfs:subPropertyOf netex:abstractObject ;
+    netex:xsdType "gml:AbstractRingType" .
 
 netex:point a owl:ObjectProperty ;
     rdfs:label "Point" ;
@@ -501,11 +676,55 @@ netex:posList a owl:Class,
     netex:xsdElement true ;
     netex:xsdType "gml:DirectPositionListType" .
 
+<https://netex-cen.eu/ontology#@uom> a owl:DatatypeProperty ;
+    rdfs:label "@uom" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "gml:UomIdentifier" .
+
 netex:AbstractGeometryType a owl:Class ;
     rdfs:label "AbstractGeometryType" ;
     rdfs:comment "All geometry elements are derived directly or indirectly from this abstract supertype. A geometry element may have an identifying attribute (gml:id), one or more names (elements identifier and name) and a description (elements description and descriptionReference) . It may be associated with a spatial reference system (attribute group gml:SRSReferenceGroup). The following rules shall be adhered to: - Every geometry type shall derive from this abstract type. - Every geometry element (i.e. an element of a geometry type) shall be directly or indirectly in the substitution group of AbstractGeometry." ;
-    rdfs:subClassOf netex:AbstractGMLType ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsName> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@srsDimension> ],
+        netex:AbstractGMLType ;
     netex:abstract true .
+
+netex:abstractCurve a owl:ObjectProperty ;
+    rdfs:label "AbstractCurve" ;
+    rdfs:subPropertyOf netex:abstractGeometricPrimitive ;
+    netex:xsdType "gml:AbstractCurveType" .
+
+netex:abstractGeometricPrimitive a owl:ObjectProperty ;
+    rdfs:label "AbstractGeometricPrimitive" ;
+    rdfs:subPropertyOf netex:abstractGeometry ;
+    netex:xsdType "gml:AbstractGeometricPrimitiveType" .
+
+netex:abstractObject a owl:DatatypeProperty ;
+    rdfs:label "AbstractObject" .
+
+netex:abstractSurface a owl:ObjectProperty ;
+    rdfs:label "AbstractSurface" ;
+    rdfs:subPropertyOf netex:abstractGeometricPrimitive ;
+    netex:xsdType "gml:AbstractSurfaceType" .
+
+<https://netex-cen.eu/ontology#@codeSpace> a owl:DatatypeProperty ;
+    rdfs:label "@codeSpace" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "anyURI" .
+
+<https://netex-cen.eu/ontology#@srsDimension> a owl:DatatypeProperty ;
+    rdfs:label "@srsDimension" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "positiveInteger" .
+
+<https://netex-cen.eu/ontology#@srsName> a owl:DatatypeProperty ;
+    rdfs:label "@srsName" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "anyURI" .
 
 netex:AbstractGeometricPrimitiveType a owl:Class ;
     rdfs:label "AbstractGeometricPrimitiveType" ;
@@ -513,10 +732,25 @@ netex:AbstractGeometricPrimitiveType a owl:Class ;
     rdfs:subClassOf netex:AbstractGeometryType ;
     netex:abstract true .
 
+netex:abstractGeometry a owl:ObjectProperty ;
+    rdfs:label "AbstractGeometry" ;
+    rdfs:subPropertyOf netex:abstractGML ;
+    netex:xsdType "gml:AbstractGeometryType" .
+
 netex:pos a owl:Class,
         owl:ObjectProperty ;
     rdfs:label "pos" ;
     rdfs:subClassOf netex:DirectPositionType ;
     netex:xsdElement true ;
     netex:xsdType "gml:DirectPositionType" .
+
+<https://netex-cen.eu/ontology#@nilReason> a owl:DatatypeProperty ;
+    rdfs:label "@nilReason" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "gml:NilReasonType" .
+
+<https://netex-cen.eu/ontology#@owns> a owl:DatatypeProperty ;
+    rdfs:label "@owns" ;
+    netex:xsdAttribute true ;
+    netex:xsdType "boolean" .
 

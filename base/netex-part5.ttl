@@ -1,14 +1,10 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix netex: <https://netex-cen.eu/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-netex:AdditionalDriverOption a owl:Class ;
-    rdfs:label "AdditionalDriverOption" ;
-    rdfs:subClassOf netex:AdditionalDriverOption_VersionStructure ;
-    netex:xsdElement true .
 
 netex:AdditionalDriverOptionRef a owl:Class ;
     rdfs:label "AdditionalDriverOptionRef" ;
@@ -20,19 +16,9 @@ netex:AdditionalDriverTypeEnumeration a rdfs:Datatype ;
     rdfs:comment "Allowed values for ADDITIONAL DRIVER Type" ;
     owl:oneOf ( "none" "named" "any" "other" ) .
 
-netex:CarPoolingService a owl:Class ;
-    rdfs:label "CarPoolingService" ;
-    rdfs:subClassOf netex:CarPoolingService_VersionStructure ;
-    netex:xsdElement true .
-
 netex:CarPoolingServiceRef a owl:Class ;
     rdfs:label "CarPoolingServiceRef" ;
     rdfs:subClassOf netex:CarPoolingServiceRefStructure ;
-    netex:xsdElement true .
-
-netex:ChauffeuredVehicleService a owl:Class ;
-    rdfs:label "ChauffeuredVehicleService" ;
-    rdfs:subClassOf netex:ChauffeuredVehicleService_VersionStructure ;
     netex:xsdElement true .
 
 netex:ChauffeuredVehicleServiceRef a owl:Class ;
@@ -58,11 +44,6 @@ netex:DrivingStyleEnumeration a rdfs:Datatype ;
 netex:DynamicVehicleMeetingPointAssignmentRef a owl:Class ;
     rdfs:label "DynamicVehicleMeetingPointAssignmentRef" ;
     rdfs:subClassOf netex:DynamicVehicleMeetingPointAssignmentRefStructure ;
-    netex:xsdElement true .
-
-netex:GroupOfSingleJourneys a owl:Class ;
-    rdfs:label "GroupOfSingleJourneys" ;
-    rdfs:subClassOf netex:GroupOfSingleJourneys_VersionStructure ;
     netex:xsdElement true .
 
 netex:GroupOfSingleJourneysRef a owl:Class ;
@@ -94,11 +75,6 @@ netex:MeetingUsageEnumeration a rdfs:Datatype ;
     rdfs:comment "Allowed values for meeting usage of VEHICLE MEETING POINTs. +v1.2.2" ;
     owl:oneOf ( "pickUp" "setDown" "all" ) .
 
-netex:MobilityJourneyFrame a owl:Class ;
-    rdfs:label "MobilityJourneyFrame" ;
-    rdfs:subClassOf netex:MobilityJourney_VersionFrameStructure ;
-    netex:xsdElement true .
-
 netex:MobilityJourneyFrameRef a owl:Class ;
     rdfs:label "MobilityJourneyFrameRef" ;
     rdfs:subClassOf netex:MobilityJourneyFrameRefStructure ;
@@ -107,11 +83,6 @@ netex:MobilityJourneyFrameRef a owl:Class ;
 netex:MobilityServiceConstraintZoneRef a owl:Class ;
     rdfs:label "MobilityServiceConstraintZoneRef" ;
     rdfs:subClassOf netex:MobilityServiceConstraintZoneRefStructure ;
-    netex:xsdElement true .
-
-netex:MobilityServiceFrame a owl:Class ;
-    rdfs:label "MobilityServiceFrame" ;
-    rdfs:subClassOf netex:MobilityService_VersionFrameStructure ;
     netex:xsdElement true .
 
 netex:MobilityServiceFrameRef a owl:Class ;
@@ -124,19 +95,9 @@ netex:MobilityServiceRef a owl:Class ;
     rdfs:subClassOf netex:MobilityServiceRefStructure ;
     netex:xsdElement true .
 
-netex:MonitoredVehicleSharingParkingBay a owl:Class ;
-    rdfs:label "MonitoredVehicleSharingParkingBay" ;
-    rdfs:subClassOf netex:MonitoredVehicleSharingParkingBay_VersionStructure ;
-    netex:xsdElement true .
-
 netex:MonitoredVehicleSharingParkingBayRef a owl:Class ;
     rdfs:label "MonitoredVehicleSharingParkingBayRef" ;
     rdfs:subClassOf netex:MonitoredVehicleSharingParkingBayRefStructure ;
-    netex:xsdElement true .
-
-netex:OnlineServiceOperator a owl:Class ;
-    rdfs:label "OnlineServiceOperator" ;
-    rdfs:subClassOf netex:OnlineServiceOperator_VersionStructure ;
     netex:xsdElement true .
 
 netex:OnlineServiceOperatorRef a owl:Class ;
@@ -162,7 +123,33 @@ netex:ParkingBayConditionRef a owl:Class ;
 netex:ParkingBayConditionRefStructure a owl:Class ;
     rdfs:label "ParkingBayCondition" ;
     rdfs:comment "Type for a reference to a PPARKING BAY CONDITION." ;
-    rdfs:subClassOf netex:LogEntryRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Reference to a PARKING BAY CONDITION." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Name of Class of the referenced entity. Allows reflection. Fixed for each entity type." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:LogEntryRefStructure .
 
 netex:ParkingBayStatusEnumeration a rdfs:Datatype ;
     rdfs:label "ParkingBayStatusEnumeration" ;
@@ -210,21 +197,37 @@ netex:RentalAvailabilityRef a owl:Class ;
 netex:RentalAvailabilityRefStructure a owl:Class ;
     rdfs:label "RentalAvailability" ;
     rdfs:comment "Type for a reference to a RENTAL AVAILABILITY." ;
-    rdfs:subClassOf netex:VersionOfObjectRefStructure .
-
-netex:RentalOption a owl:Class ;
-    rdfs:label "RentalOption" ;
-    rdfs:subClassOf netex:RentalOption_VersionStructure ;
-    netex:xsdElement true .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Reference to a RENTAL AVAILABILITY." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Name of Class of the referenced entity. Allows reflection. Fixed for each entity type." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VersionOfObjectRefStructure .
 
 netex:RentalOptionRef a owl:Class ;
     rdfs:label "RentalOptionRef" ;
     rdfs:subClassOf netex:RentalOptionRefStructure ;
-    netex:xsdElement true .
-
-netex:RentalPenaltyPolicy a owl:Class ;
-    rdfs:label "RentalPenaltyPolicy" ;
-    rdfs:subClassOf netex:RentalPenaltyPolicy_VersionStructure ;
     netex:xsdElement true .
 
 netex:RentalPenaltyPolicyRef a owl:Class ;
@@ -291,19 +294,9 @@ netex:VehicleAccessCredentialsAssignmentRef a owl:Class ;
     rdfs:subClassOf netex:VehicleAccessCredentialsAssignmentRefStructure ;
     netex:xsdElement true .
 
-netex:VehicleMeetingLink a owl:Class ;
-    rdfs:label "VehicleMeetingLink" ;
-    rdfs:subClassOf netex:VehicleMeetingLink_VersionStructure ;
-    netex:xsdElement true .
-
 netex:VehicleMeetingLinkRef a owl:Class ;
     rdfs:label "VehicleMeetingLinkRef" ;
     rdfs:subClassOf netex:VehicleMeetingLinkRefStructure ;
-    netex:xsdElement true .
-
-netex:VehicleMeetingPlace a owl:Class ;
-    rdfs:label "VehicleMeetingPlace" ;
-    rdfs:subClassOf netex:VehicleMeetingPlace_VersionStructure ;
     netex:xsdElement true .
 
 netex:VehicleMeetingPlaceRef a owl:Class ;
@@ -326,11 +319,6 @@ netex:VehicleMeetingPointRef a owl:Class ;
     rdfs:subClassOf netex:VehicleMeetingPointRefStructure ;
     netex:xsdElement true .
 
-netex:VehiclePoolerProfile a owl:Class ;
-    rdfs:label "VehiclePoolerProfile" ;
-    rdfs:subClassOf netex:VehiclePoolerProfile_VersionStructure ;
-    netex:xsdElement true .
-
 netex:VehiclePoolerProfileRef a owl:Class ;
     rdfs:label "VehiclePoolerProfileRef" ;
     rdfs:subClassOf netex:VehiclePoolerProfileRefStructure ;
@@ -349,11 +337,6 @@ netex:VehiclePoolingMeetingPlaceRef a owl:Class ;
 netex:VehiclePoolingParkingAreaRef a owl:Class ;
     rdfs:label "VehiclePoolingParkingAreaRef" ;
     rdfs:subClassOf netex:VehiclePoolingParkingAreaRefStructure ;
-    netex:xsdElement true .
-
-netex:VehiclePoolingParkingBay a owl:Class ;
-    rdfs:label "VehiclePoolingParkingBay" ;
-    rdfs:subClassOf netex:VehiclePoolingParkingBay_VersionStructure ;
     netex:xsdElement true .
 
 netex:VehiclePoolingParkingBayRef a owl:Class ;
@@ -385,11 +368,6 @@ netex:VehiclePoolingService_Dummy a owl:Class ;
     rdfs:subClassOf netex:MobilityService_VersionStructure ;
     netex:xsdElement true .
 
-netex:VehicleRentalService a owl:Class ;
-    rdfs:label "VehicleRentalService" ;
-    rdfs:subClassOf netex:VehicleRentalService_VersionStructure ;
-    netex:xsdElement true .
-
 netex:VehicleRentalServiceRef a owl:Class ;
     rdfs:label "VehicleRentalServiceRef" ;
     rdfs:subClassOf netex:VehicleRentalServiceRefStructure ;
@@ -403,11 +381,6 @@ netex:VehicleServicePlaceAssignmentRef a owl:Class ;
 netex:VehicleSharingParkingAreaRef a owl:Class ;
     rdfs:label "VehicleSharingParkingAreaRef" ;
     rdfs:subClassOf netex:VehicleSharingParkingAreaRefStructure ;
-    netex:xsdElement true .
-
-netex:VehicleSharingParkingBay a owl:Class ;
-    rdfs:label "VehicleSharingParkingBay" ;
-    rdfs:subClassOf netex:VehicleSharingParkingBay_VersionStructure ;
     netex:xsdElement true .
 
 netex:VehicleSharingParkingBayRef a owl:Class ;
@@ -429,11 +402,6 @@ netex:VehicleSharingPlaceAssignmentRefs_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 1 ],
         netex:oneToManyRelationshipStructure .
 
-netex:VehicleSharingService a owl:Class ;
-    rdfs:label "VehicleSharingService" ;
-    rdfs:subClassOf netex:VehicleSharingService_VersionStructure ;
-    netex:xsdElement true .
-
 netex:VehicleSharingServiceRef a owl:Class ;
     rdfs:label "VehicleSharingServiceRef" ;
     rdfs:subClassOf netex:VehicleSharingServiceRefStructure ;
@@ -449,6 +417,47 @@ netex:ZoneRuleApplicabilityEnumeration a rdfs:Datatype ;
     rdfs:comment "Allowed values for ZONE rule applicability. +v1.2.2" ;
     owl:oneOf ( "inside" "outside" ) .
 
+netex:additionalDriverOption a owl:ObjectProperty ;
+    rdfs:label "AdditionalDriverOption" ;
+    rdfs:subPropertyOf netex:usageParameter_Dummy ;
+    netex:xsdType "AdditionalDriverOption_VersionStructure" .
+
+netex:additionalDriverOptionRef a owl:ObjectProperty ;
+    rdfs:label "AdditionalDriverOptionRef" ;
+    rdfs:range netex:AdditionalDriverOption ;
+    rdfs:subPropertyOf netex:usageParameterRef ;
+    netex:isReference true ;
+    netex:xsdType "AdditionalDriverOptionRefStructure" .
+
+netex:carPoolingService a owl:ObjectProperty ;
+    rdfs:label "CarPoolingService" ;
+    rdfs:subPropertyOf netex:vehiclePoolingService_Dummy ;
+    netex:xsdType "CarPoolingService_VersionStructure" .
+
+netex:carPoolingServiceRef a owl:ObjectProperty ;
+    rdfs:label "CarPoolingServiceRef" ;
+    rdfs:range netex:CarPoolingService ;
+    rdfs:subPropertyOf netex:vehiclePoolingServiceRef ;
+    netex:isReference true ;
+    netex:xsdType "CarPoolingServiceRefStructure" .
+
+netex:chauffeuredVehicleService a owl:ObjectProperty ;
+    rdfs:label "ChauffeuredVehicleService" ;
+    rdfs:subPropertyOf netex:vehiclePoolingService_Dummy ;
+    netex:xsdType "ChauffeuredVehicleService_VersionStructure" .
+
+netex:chauffeuredVehicleServiceRef a owl:ObjectProperty ;
+    rdfs:label "ChauffeuredVehicleServiceRef" ;
+    rdfs:range netex:ChauffeuredVehicleService ;
+    rdfs:subPropertyOf netex:vehiclePoolingServiceRef ;
+    netex:isReference true ;
+    netex:xsdType "ChauffeuredVehicleServiceRefStructure" .
+
+netex:commonVehicleService a owl:ObjectProperty ;
+    rdfs:label "CommonVehicleService" ;
+    rdfs:subPropertyOf netex:commonVehicleService_Dummy ;
+    netex:xsdType "CommonVehicleService_VersionStructure" .
+
 netex:commonVehicleServiceRefs_RelStructure a owl:Class ;
     rdfs:label "commonVehicleServiceRefs_Rel" ;
     rdfs:comment "Type for a list of COMMON VEHICLE SERVICEs." ;
@@ -458,6 +467,11 @@ netex:commonVehicleServiceRefs_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 1 ],
         netex:oneToManyRelationshipStructure .
 
+netex:dynamicVehicleMeetingPointAssignment a owl:ObjectProperty ;
+    rdfs:label "DynamicVehicleMeetingPointAssignment" ;
+    rdfs:subPropertyOf netex:assignment_Dummy ;
+    netex:xsdType "DynamicVehicleMeetingPointAssignment_VersionStructure" .
+
 netex:dynamicVehicleMeetingPointAssignmentRefs_RelStructure a owl:Class ;
     rdfs:label "dynamicVehicleMeetingPointAssignmentRefs_Rel" ;
     rdfs:comment "Type for a list of DYNAMIC VEHICLE MEETING POINT ASSIGNMENTs." ;
@@ -466,6 +480,13 @@ netex:dynamicVehicleMeetingPointAssignmentRefs_RelStructure a owl:Class ;
             owl:onProperty netex:dynamicVehicleMeetingPointAssignmentRef ;
             netex:xsdSequenceOrder 1 ],
         netex:oneToManyRelationshipStructure .
+
+netex:groupOfSingleJourneysRef a owl:ObjectProperty ;
+    rdfs:label "GroupOfSingleJourneysRef" ;
+    rdfs:range netex:GroupOfSingleJourneys ;
+    rdfs:subPropertyOf netex:groupOfEntitiesRef_Dummy ;
+    netex:isReference true ;
+    netex:xsdType "GroupOfSingleJourneysRefStructure" .
 
 netex:groupsOfSingleJourneys_RelStructure a owl:Class ;
     rdfs:label "groupsOfSingleJourneys_Rel" ;
@@ -516,6 +537,23 @@ netex:individualTravellers_RelStructure a owl:Class ;
 netex:isReference a owl:AnnotationProperty ;
     rdfs:label "is reference" .
 
+netex:mobilityJourneyFrame a owl:ObjectProperty ;
+    rdfs:label "MobilityJourneyFrame" ;
+    rdfs:subPropertyOf netex:commonFrame ;
+    netex:xsdType "MobilityJourney_VersionFrameStructure" .
+
+netex:mobilityJourneyFrameRef a owl:ObjectProperty ;
+    rdfs:label "MobilityJourneyFrameRef" ;
+    rdfs:range netex:MobilityJourneyFrame ;
+    rdfs:subPropertyOf netex:versionFrameRef ;
+    netex:isReference true ;
+    netex:xsdType "MobilityJourneyFrameRefStructure" .
+
+netex:mobilityService a owl:ObjectProperty ;
+    rdfs:label "MobilityService" ;
+    rdfs:subPropertyOf netex:mobilityService_Dummy ;
+    netex:xsdType "MobilityService_VersionStructure" .
+
 netex:mobilityServiceConstraintZoneRefs_RelStructure a owl:Class ;
     rdfs:label "mobilityServiceConstraintZoneRefs_Rel" ;
     rdfs:comment "Type for a list of MOBILITY SERVICE CONSTRAINT ZONEs." ;
@@ -545,6 +583,18 @@ netex:mobilityServiceConstraintZones_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 2 ],
         netex:containmentAggregationStructure .
 
+netex:mobilityServiceFrame a owl:ObjectProperty ;
+    rdfs:label "MobilityServiceFrame" ;
+    rdfs:subPropertyOf netex:commonFrame ;
+    netex:xsdType "MobilityService_VersionFrameStructure" .
+
+netex:mobilityServiceFrameRef a owl:ObjectProperty ;
+    rdfs:label "MobilityServiceFrameRef" ;
+    rdfs:range netex:MobilityServiceFrame ;
+    rdfs:subPropertyOf netex:versionFrameRef ;
+    netex:isReference true ;
+    netex:xsdType "MobilityServiceFrameRefStructure" .
+
 netex:mobilityServiceRefs_RelStructure a owl:Class ;
     rdfs:label "mobilityServiceRefs_Rel" ;
     rdfs:comment "Type for a list of refernces to MOBILITY SERVICEs." ;
@@ -561,6 +611,30 @@ netex:mobilityServices_RelStructure a owl:Class ;
             owl:onProperty netex:mobilityService_Dummy ;
             netex:xsdSequenceOrder 1 ],
         netex:containmentAggregationStructure .
+
+netex:monitoredVehicleSharingParkingBay a owl:ObjectProperty ;
+    rdfs:label "MonitoredVehicleSharingParkingBay" ;
+    rdfs:subPropertyOf netex:parkingBay_Dummy ;
+    netex:xsdType "MonitoredVehicleSharingParkingBay_VersionStructure" .
+
+netex:monitoredVehicleSharingParkingBayRef a owl:ObjectProperty ;
+    rdfs:label "MonitoredVehicleSharingParkingBayRef" ;
+    rdfs:range netex:MonitoredVehicleSharingParkingBay ;
+    rdfs:subPropertyOf netex:vehicleSharingParkingBayRef ;
+    netex:isReference true ;
+    netex:xsdType "MonitoredVehicleSharingParkingBayRefStructure" .
+
+netex:onlineServiceOperator a owl:ObjectProperty ;
+    rdfs:label "OnlineServiceOperator" ;
+    rdfs:subPropertyOf netex:transportOrganisation_Dummy ;
+    netex:xsdType "OnlineServiceOperator_VersionStructure" .
+
+netex:onlineServiceOperatorRef a owl:ObjectProperty ;
+    rdfs:label "OnlineServiceOperatorRef" ;
+    rdfs:range netex:OnlineServiceOperator ;
+    rdfs:subPropertyOf netex:organisationRef_Dummy ;
+    netex:isReference true ;
+    netex:xsdType "OnlineServiceOperatorRefStructure" .
 
 netex:onlineServiceOperatorRefs_RelStructure a owl:Class ;
     rdfs:label "onlineServiceOperatorRefs_Rel" ;
@@ -588,6 +662,16 @@ netex:onlineServices_RelStructure a owl:Class ;
             owl:onProperty netex:onlineService ;
             netex:xsdSequenceOrder 1 ],
         netex:containmentAggregationStructure .
+
+netex:parkingBayCondition a owl:ObjectProperty ;
+    rdfs:label "ParkingBayCondition" ;
+    rdfs:subPropertyOf netex:parkingLogEntry_Dummy ;
+    netex:xsdType "ParkingBayCondition_VersionStructure" .
+
+netex:parkingBayStatus a owl:ObjectProperty ;
+    rdfs:label "ParkingBayStatus" ;
+    rdfs:subPropertyOf netex:typeOfValue ;
+    netex:xsdType "ParkingBayStatus_ValueStructure" .
 
 netex:parkingLogEntriesInFrame_RelStructure a owl:Class ;
     rdfs:label "parkingLogEntriesInFrame_Rel" ;
@@ -620,6 +704,35 @@ netex:poolOfVehicles_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 1 ],
         netex:containmentAggregationStructure .
 
+netex:rentalAvailability a owl:ObjectProperty ;
+    rdfs:label "RentalAvailability" ;
+    rdfs:subPropertyOf netex:parkingLogEntry_Dummy ;
+    netex:xsdType "RentalAvailability_VersionStructure" .
+
+netex:rentalOption a owl:ObjectProperty ;
+    rdfs:label "RentalOption" ;
+    rdfs:subPropertyOf netex:usageParameter_Dummy ;
+    netex:xsdType "RentalOption_VersionStructure" .
+
+netex:rentalOptionRef a owl:ObjectProperty ;
+    rdfs:label "RentalOptionRef" ;
+    rdfs:range netex:RentalOption ;
+    rdfs:subPropertyOf netex:usageParameterRef ;
+    netex:isReference true ;
+    netex:xsdType "RentalOptionRefStructure" .
+
+netex:rentalPenaltyPolicy a owl:ObjectProperty ;
+    rdfs:label "RentalPenaltyPolicy" ;
+    rdfs:subPropertyOf netex:usageParameter_Dummy ;
+    netex:xsdType "RentalPenaltyPolicy_VersionStructure" .
+
+netex:rentalPenaltyPolicyRef a owl:ObjectProperty ;
+    rdfs:label "RentalPenaltyPolicyRef" ;
+    rdfs:range netex:RentalPenaltyPolicy ;
+    rdfs:subPropertyOf netex:usageParameterRef ;
+    netex:isReference true ;
+    netex:xsdType "RentalPenaltyPolicyRefStructure" .
+
 netex:reviews_RelStructure a owl:Class ;
     rdfs:label "reviews_Rel" ;
     rdfs:comment "Type for collection of reviews." ;
@@ -627,6 +740,11 @@ netex:reviews_RelStructure a owl:Class ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:review ;
             netex:xsdSequenceOrder 1 ] .
+
+netex:serviceAccessCode a owl:ObjectProperty ;
+    rdfs:label "ServiceAccessCode" ;
+    rdfs:subPropertyOf netex:dataManagedObject ;
+    netex:xsdType "ServiceAccessCode_VersionStructure" .
 
 netex:serviceAccessCodeRefs_RelStructure a owl:Class ;
     rdfs:label "serviceAccessCodeRefs_Rel" ;
@@ -671,6 +789,16 @@ netex:singleJourneys_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 1 ],
         netex:containmentAggregationStructure .
 
+netex:taxiService a owl:ObjectProperty ;
+    rdfs:label "TaxiService" ;
+    rdfs:subPropertyOf netex:vehiclePoolingService_Dummy ;
+    netex:xsdType "TaxiService_VersionStructure" .
+
+netex:typeOfMobilityService a owl:ObjectProperty ;
+    rdfs:label "TypeOfMobilityService" ;
+    rdfs:subPropertyOf netex:typeOfEntity ;
+    netex:xsdType "TypeOfMobilityService_ValueStructure" .
+
 netex:vehicleAccessCredentialAssignments_RelStructure a owl:Class ;
     rdfs:label "vehicleAccessCredentialAssignments_Rel" ;
     rdfs:comment "Type for a list of references to a VEHICLE ACCESS CREDENTIALs ASSIGNMENT" ;
@@ -688,6 +816,13 @@ netex:vehicleAccessCredentialsAssignmentRefs_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 1 ],
         netex:oneToManyRelationshipStructure .
 
+netex:vehicleMeetingLinkRef a owl:ObjectProperty ;
+    rdfs:label "VehicleMeetingLinkRef" ;
+    rdfs:range netex:VehicleMeetingLink ;
+    rdfs:subPropertyOf netex:linkRef ;
+    netex:isReference true ;
+    netex:xsdType "VehicleMeetingLinkRefStructure" .
+
 netex:vehicleMeetingLinksInFrame_RelStructure a owl:Class ;
     rdfs:label "vehicleMeetingLinksInFrame_Rel" ;
     rdfs:comment "Type for a list of references to a VEHICLE MEETING LINKs." ;
@@ -696,6 +831,11 @@ netex:vehicleMeetingLinksInFrame_RelStructure a owl:Class ;
             owl:onProperty netex:vehicleMeetingLink ;
             netex:xsdSequenceOrder 1 ],
         netex:containmentAggregationStructure .
+
+netex:vehicleMeetingPlace a owl:ObjectProperty ;
+    rdfs:label "VehicleMeetingPlace" ;
+    rdfs:subPropertyOf netex:place ;
+    netex:xsdType "VehicleMeetingPlace_VersionStructure" .
 
 netex:vehicleMeetingPlaces_RelStructure a owl:Class ;
     rdfs:label "vehicleMeetingPlaces_Rel" ;
@@ -771,6 +911,18 @@ netex:vehicleMeetingPoints_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 2 ],
         netex:containmentAggregationStructure .
 
+netex:vehiclePoolerProfile a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolerProfile" ;
+    rdfs:subPropertyOf netex:usageParameter_Dummy ;
+    netex:xsdType "VehiclePoolerProfile_VersionStructure" .
+
+netex:vehiclePoolerProfileRef a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolerProfileRef" ;
+    rdfs:range netex:VehiclePoolerProfile ;
+    rdfs:subPropertyOf netex:userProfileRef ;
+    netex:isReference true ;
+    netex:xsdType "VehiclePoolerProfileRefStructure" .
+
 netex:vehiclePoolingDriverInfoRefs_RelStructure a owl:Class ;
     rdfs:label "vehiclePoolingDriverInfoRefs_Rel" ;
     rdfs:comment "Type for a list of VEHICLE POOLING DRIVER INFOs." ;
@@ -788,6 +940,50 @@ netex:vehiclePoolingDriverInfos_RelStructure a owl:Class ;
             owl:onProperty netex:vehiclePoolingDriverInfo ;
             netex:xsdSequenceOrder 1 ],
         netex:containmentAggregationStructure .
+
+netex:vehiclePoolingMeetingPlace a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolingMeetingPlace" ;
+    rdfs:subPropertyOf netex:vehicleMeetingPlace_Dummy ;
+    netex:xsdType "VehiclePoolingMeetingPlace_VersionStructure" .
+
+netex:vehiclePoolingParkingArea a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolingParkingArea" ;
+    rdfs:subPropertyOf netex:parkingArea_Dummy ;
+    netex:xsdType "VehiclePoolingParkingArea_VersionStructure" .
+
+netex:vehiclePoolingParkingBay a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolingParkingBay" ;
+    rdfs:subPropertyOf netex:parkingBay_Dummy ;
+    netex:xsdType "VehiclePoolingParkingBay_VersionStructure" .
+
+netex:vehiclePoolingParkingBayRef a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolingParkingBayRef" ;
+    rdfs:range netex:VehiclePoolingParkingBay ;
+    rdfs:subPropertyOf netex:parkingBayRef ;
+    netex:isReference true ;
+    netex:xsdType "VehiclePoolingParkingBayRefStructure" .
+
+netex:vehiclePoolingService a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolingService" ;
+    rdfs:subPropertyOf netex:vehiclePoolingService_Dummy ;
+    netex:xsdType "VehiclePoolingService_VersionStructure" .
+
+netex:vehicleRentalService a owl:ObjectProperty ;
+    rdfs:label "VehicleRentalService" ;
+    rdfs:subPropertyOf netex:commonVehicleService_Dummy ;
+    netex:xsdType "VehicleRentalService_VersionStructure" .
+
+netex:vehicleRentalServiceRef a owl:ObjectProperty ;
+    rdfs:label "VehicleRentalServiceRef" ;
+    rdfs:range netex:VehicleRentalService ;
+    rdfs:subPropertyOf netex:commonVehicleServiceRef ;
+    netex:isReference true ;
+    netex:xsdType "VehicleRentalServiceRefStructure" .
+
+netex:vehicleServicePlaceAssignment a owl:ObjectProperty ;
+    rdfs:label "VehicleServicePlaceAssignment" ;
+    rdfs:subPropertyOf netex:assignment_Dummy ;
+    netex:xsdType "VehicleServicePlaceAssignment_VersionStructure" .
 
 netex:vehicleServicePlaceAssignmentRefs_RelStructure a owl:Class ;
     rdfs:label "vehicleServicePlaceAssignmentRefs_Rel" ;
@@ -812,6 +1008,28 @@ netex:vehicleServicePlaceAssignments_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 3 ],
         netex:oneToManyRelationshipStructure .
 
+netex:vehicleSharingParkingArea a owl:ObjectProperty ;
+    rdfs:label "VehicleSharingParkingArea" ;
+    rdfs:subPropertyOf netex:parkingArea_Dummy ;
+    netex:xsdType "VehicleSharingParkingArea_VersionStructure" .
+
+netex:vehicleSharingParkingBay a owl:ObjectProperty ;
+    rdfs:label "VehicleSharingParkingBay" ;
+    rdfs:subPropertyOf netex:parkingBay_Dummy ;
+    netex:xsdType "VehicleSharingParkingBay_VersionStructure" .
+
+netex:vehicleSharingService a owl:ObjectProperty ;
+    rdfs:label "VehicleSharingService" ;
+    rdfs:subPropertyOf netex:commonVehicleService_Dummy ;
+    netex:xsdType "VehicleSharingService_VersionStructure" .
+
+netex:vehicleSharingServiceRef a owl:ObjectProperty ;
+    rdfs:label "VehicleSharingServiceRef" ;
+    rdfs:range netex:VehicleSharingService ;
+    rdfs:subPropertyOf netex:commonVehicleServiceRef ;
+    netex:isReference true ;
+    netex:xsdType "VehicleSharingServiceRefStructure" .
+
 netex:vehicleTypeZoneRestrictionRefs_RelStructure a owl:Class ;
     rdfs:label "vehicleTypeZoneRestrictionRefs_Rel" ;
     rdfs:comment "Type for a list of VEHICLE TYPE ZONE RESTRICTIONs." ;
@@ -829,6 +1047,9 @@ netex:vehicleTypeZoneRestrictions_RelStructure a owl:Class ;
             netex:xsdSequenceOrder 1 ],
         netex:containmentAggregationStructure .
 
+netex:xsdAttribute a owl:AnnotationProperty ;
+    rdfs:label "xsd attribute" .
+
 netex:xsdElement a owl:AnnotationProperty ;
     rdfs:label "xsd element" .
 
@@ -839,16 +1060,51 @@ netex:xsdType a owl:AnnotationProperty ;
     rdfs:label "xsd type" .
 
 <https://netex-cen.eu/ontology/part5> a owl:Ontology ;
-    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:created "2020-10-05"^^xsd:date ;
+    dcterms:modified "2023-12-18"^^xsd:date ;
     dcterms:source "NeTEx_publication.xsd" ;
     dcterms:title "NeTEx Part 5 - Alternative modes" ;
+    rdfs:comment "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     owl:imports <https://netex-cen.eu/ontology/framework> ;
-    owl:versionInfo "482a533" .
+    owl:versionInfo "2.0" ;
+    prov:wasAttributedTo <https://github.com/hfjelstad/netex-ontology-generator/releases/tag/v0.4.0> ;
+    prov:wasDerivedFrom <https://github.com/TransmodelEcosystem/NeTEx/blob/8056d5a30b131a3303d5c8b198cadc3a3570b083/xsd/NeTEx_publication.xsd> .
+
+netex:AdditionalDriverOption a owl:Class ;
+    rdfs:label "AdditionalDriverOption" ;
+    rdfs:subClassOf netex:AdditionalDriverOption_VersionStructure ;
+    netex:xsdElement true .
 
 netex:AdditionalDriverOptionRefStructure a owl:Class ;
     rdfs:label "AdditionalDriverOption" ;
     rdfs:comment "Type for Reference to a ADDITIONAL DRIVER OPTION usage parameter." ;
-    rdfs:subClassOf netex:RentalOptionRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a ADDITIONAL DRIVER OPTION PARAMETER." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for AdditionalDriverOptionRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:RentalOptionRefStructure .
 
 netex:AdditionalDriverOption_VersionStructure a owl:Class ;
     rdfs:label "AdditionalDriverOption" ;
@@ -867,20 +1123,82 @@ netex:AdditionalDriverOption_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 3 ],
         netex:RentalOption_VersionStructure .
 
+netex:CarPoolingService a owl:Class ;
+    rdfs:label "CarPoolingService" ;
+    rdfs:subClassOf netex:CarPoolingService_VersionStructure ;
+    netex:xsdElement true .
+
 netex:CarPoolingServiceRefStructure a owl:Class ;
     rdfs:label "CarPoolingService" ;
     rdfs:comment "Type for a reference to an CAR POOLING SERVICE." ;
-    rdfs:subClassOf netex:VehiclePoolingServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a TICKETING SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for CarPoolingServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehiclePoolingServiceRefStructure .
 
 netex:CarPoolingService_VersionStructure a owl:Class ;
     rdfs:label "CarPoolingService" ;
     rdfs:comment "Type for CAR POOLING SERVICE." ;
     rdfs:subClassOf netex:VehiclePoolingService_VersionStructure .
 
+netex:ChauffeuredVehicleService a owl:Class ;
+    rdfs:label "ChauffeuredVehicleService" ;
+    rdfs:subClassOf netex:ChauffeuredVehicleService_VersionStructure ;
+    netex:xsdElement true .
+
 netex:ChauffeuredVehicleServiceRefStructure a owl:Class ;
     rdfs:label "ChauffeuredVehicleService" ;
     rdfs:comment "Type for a reference to an CHAUFFEURED VEHICLE SERVICE." ;
-    rdfs:subClassOf netex:VehiclePoolingServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a TICKETING SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for ChauffeuredVehicleServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehiclePoolingServiceRefStructure .
 
 netex:ChauffeuredVehicleService_VersionStructure a owl:Class ;
     rdfs:label "ChauffeuredVehicleService" ;
@@ -900,7 +1218,33 @@ netex:DynamicVehicleMeetingPointAssignment a owl:Class ;
 netex:DynamicVehicleMeetingPointAssignmentRefStructure a owl:Class ;
     rdfs:label "DynamicVehicleMeetingPointAssignment" ;
     rdfs:comment "Type for a reference to a DYNAMIC VEHICLE MEETING POINT ASSIGNMENT." ;
-    rdfs:subClassOf netex:VehicleMeetingPointAssignmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of DYNAMIC VEHICLE MEETING POINT ASSIGNMENT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for DynamicVehicleMeetingPointAssignmentRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehicleMeetingPointAssignmentRefStructure .
 
 netex:DynamicVehicleMeetingPointAssignment_VersionStructure a owl:Class ;
     rdfs:label "DynamicVehicleMeetingPointAssignment" ;
@@ -911,10 +1255,41 @@ netex:DynamicVehicleMeetingPointAssignment_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 1 ],
         netex:VehicleMeetingPointAssignment_VersionStructure .
 
+netex:GroupOfSingleJourneys a owl:Class ;
+    rdfs:label "GroupOfSingleJourneys" ;
+    rdfs:subClassOf netex:GroupOfSingleJourneys_VersionStructure ;
+    netex:xsdElement true .
+
 netex:GroupOfSingleJourneysRefStructure a owl:Class ;
     rdfs:label "GroupOfSingleJourneys" ;
     rdfs:comment "Type for a reference to a GROUP OF SINGLE JOURNEYs." ;
-    rdfs:subClassOf netex:GroupOfEntitiesRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a GROUP OF SINGLE JOURNEYs." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for GroupOfSingleJourneysRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:GroupOfEntitiesRefStructure .
 
 netex:GroupOfSingleJourneys_VersionStructure a owl:Class ;
     rdfs:label "GroupOfSingleJourneys" ;
@@ -937,7 +1312,33 @@ netex:IndividualPassengerInfo a owl:Class ;
 netex:IndividualPassengerInfoRefStructure a owl:Class ;
     rdfs:label "IndividualPassengerInfo" ;
     rdfs:comment "Type for a reference to a INDIVIDUAL PASSENGER INFO." ;
-    rdfs:subClassOf netex:VersionOfObjectRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of INDIVIDUAL PASSENGER INFO." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for IndividualPassengerInfoRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VersionOfObjectRefStructure .
 
 netex:IndividualPassengerInfo_VersionStructure a owl:Class ;
     rdfs:label "IndividualPassengerInfo" ;
@@ -980,7 +1381,33 @@ netex:IndividualTraveller a owl:Class ;
 netex:IndividualTravellerRefStructure a owl:Class ;
     rdfs:label "IndividualTraveller" ;
     rdfs:comment "Type for a reference to a INDIVIDUAL TRAVELLER." ;
-    rdfs:subClassOf netex:VersionOfObjectRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of INDIVIDUAL TRAVELLER." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for IndividualTravellerRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VersionOfObjectRefStructure .
 
 netex:IndividualTraveller_VersionStructure a owl:Class ;
     rdfs:label "IndividualTraveller" ;
@@ -1027,10 +1454,40 @@ netex:IndividualTraveller_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 9 ],
         netex:DataManagedObjectStructure .
 
+netex:MobilityJourneyFrame a owl:Class ;
+    rdfs:label "MobilityJourneyFrame" ;
+    rdfs:subClassOf netex:MobilityJourney_VersionFrameStructure ;
+    netex:xsdElement true .
+
 netex:MobilityJourneyFrameRefStructure a owl:Class ;
     rdfs:label "MobilityJourneyFrame" ;
     rdfs:comment "Type for a reference to a MOBILITY JOURNEY FRAME." ;
-    rdfs:subClassOf netex:VersionFrameRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for MobilityJourneyFrameRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VersionFrameRefStructure .
 
 netex:MobilityJourney_VersionFrameStructure a owl:Class ;
     rdfs:label "MobilityJourney_VersionFrame" ;
@@ -1074,7 +1531,33 @@ netex:MobilityServiceConstraintZone a owl:Class ;
 netex:MobilityServiceConstraintZoneRefStructure a owl:Class ;
     rdfs:label "MobilityServiceConstraintZone" ;
     rdfs:comment "Type for Reference to an MOBILITY SERVICE CONSTRAINT ZONE. Left untyped so as to avoid forwards dependency." ;
-    rdfs:subClassOf netex:ZoneRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for MobilityServiceConstraintZoneRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Identifier of referenced entity." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:ZoneRefStructure .
 
 netex:MobilityServiceConstraintZone_VersionStructure a owl:Class ;
     rdfs:label "MobilityServiceConstraintZone" ;
@@ -1101,10 +1584,40 @@ netex:MobilityServiceConstraintZone_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 5 ],
         netex:Zone_VersionStructure .
 
+netex:MobilityServiceFrame a owl:Class ;
+    rdfs:label "MobilityServiceFrame" ;
+    rdfs:subClassOf netex:MobilityService_VersionFrameStructure ;
+    netex:xsdElement true .
+
 netex:MobilityServiceFrameRefStructure a owl:Class ;
     rdfs:label "MobilityServiceFrame" ;
     rdfs:comment "Type for a reference to a MOBILITY SERVICE FRAME." ;
-    rdfs:subClassOf netex:VersionFrameRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for MobilityServiceFrameRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VersionFrameRefStructure .
 
 netex:MobilityService_VersionFrameStructure a owl:Class ;
     rdfs:label "MobilityService_VersionFrame" ;
@@ -1156,10 +1669,41 @@ netex:MobilityService_VersionFrameStructure a owl:Class ;
             netex:xsdSequenceOrder 9 ],
         netex:Common_VersionFrameStructure .
 
+netex:MonitoredVehicleSharingParkingBay a owl:Class ;
+    rdfs:label "MonitoredVehicleSharingParkingBay" ;
+    rdfs:subClassOf netex:MonitoredVehicleSharingParkingBay_VersionStructure ;
+    netex:xsdElement true .
+
 netex:MonitoredVehicleSharingParkingBayRefStructure a owl:Class ;
     rdfs:label "MonitoredVehicleSharingParkingBay" ;
     rdfs:comment "Type for a reference to a MONITORED VEHICLE SHARING PARKING BAY." ;
-    rdfs:subClassOf netex:VehicleSharingParkingBayRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a MONITORED VEHICLE SHARING PARKING BAY." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for MonitoredVehicleSharingParkingBayRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehicleSharingParkingBayRefStructure .
 
 netex:MonitoredVehicleSharingParkingBay_VersionStructure a owl:Class ;
     rdfs:label "MonitoredVehicleSharingParkingBay" ;
@@ -1179,10 +1723,39 @@ netex:OnlineService a owl:Class ;
     rdfs:subClassOf netex:OnlineService_VersionStructure ;
     netex:xsdElement true .
 
+netex:OnlineServiceOperator a owl:Class ;
+    rdfs:label "OnlineServiceOperator" ;
+    rdfs:subClassOf netex:OnlineServiceOperator_VersionStructure ;
+    netex:xsdElement true .
+
 netex:OnlineServiceOperatorRefStructure a owl:Class ;
     rdfs:label "OnlineServiceOperator" ;
     rdfs:comment "Type for a reference to an ONLINE SERVICE OPERATOR." ;
-    rdfs:subClassOf netex:OrganisationRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:OrganisationRefStructure .
 
 netex:OnlineServiceOperator_VersionStructure a owl:Class ;
     rdfs:label "OnlineServiceOperator" ;
@@ -1204,7 +1777,33 @@ netex:OnlineServiceOperator_VersionStructure a owl:Class ;
 netex:OnlineServiceRefStructure a owl:Class ;
     rdfs:label "OnlineService" ;
     rdfs:comment "Type for a reference to an ONLINE SERVICE." ;
-    rdfs:subClassOf netex:MobilityServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of an ONLINE SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for OnlineServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:MobilityServiceRefStructure .
 
 netex:OnlineService_VersionStructure a owl:Class ;
     rdfs:label "OnlineService" ;
@@ -1258,7 +1857,33 @@ netex:ParkingBayStatus_ValueStructure a owl:Class ;
 netex:PointInSingleJourneyPathRefStructure a owl:Class ;
     rdfs:label "PointInSingleJourneyPath" ;
     rdfs:comment "Type for a reference to a POINT IN SINGLE JOURNEY PATH." ;
-    rdfs:subClassOf netex:PointInJourneyPatternRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of POINT IN SINGLE JOURNEY PATH." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Name of Class of the referenced entity. Allows reflection. Fixed for each entity type." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:PointInJourneyPatternRefStructure .
 
 netex:PoolOfVehicles a owl:Class ;
     rdfs:label "PoolOfVehicles" ;
@@ -1268,7 +1893,33 @@ netex:PoolOfVehicles a owl:Class ;
 netex:PoolOfVehiclesRefStructure a owl:Class ;
     rdfs:label "PoolOfVehicles" ;
     rdfs:comment "Type for Reference to an POOL OF VEHICLEs ZONE." ;
-    rdfs:subClassOf netex:GroupOfEntitiesRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for PoolOfVehiclesRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Identifier of referenced entity." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:GroupOfEntitiesRefStructure .
 
 netex:PoolOfVehicles_VersionStructure a owl:Class ;
     rdfs:label "PoolOfVehicles" ;
@@ -1341,10 +1992,46 @@ netex:RentalAvailability_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 8 ],
         netex:LogEntry_VersionStructure .
 
+netex:RentalOption a owl:Class ;
+    rdfs:label "RentalOption" ;
+    rdfs:subClassOf netex:RentalOption_VersionStructure ;
+    netex:xsdElement true .
+
+netex:RentalPenaltyPolicy a owl:Class ;
+    rdfs:label "RentalPenaltyPolicy" ;
+    rdfs:subClassOf netex:RentalPenaltyPolicy_VersionStructure ;
+    netex:xsdElement true .
+
 netex:RentalPenaltyPolicyRefStructure a owl:Class ;
     rdfs:label "RentalPenaltyPolicy" ;
     rdfs:comment "Type for Reference to a RENTAL PENALTY POLICY usage parameter." ;
-    rdfs:subClassOf netex:UsageParameterRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a RENTAL PENALTY POLICY PARAMETER." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for RentalPenaltyPolicyRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:UsageParameterRefStructure .
 
 netex:RentalPenaltyPolicy_VersionStructure a owl:Class ;
     rdfs:label "RentalPenaltyPolicy" ;
@@ -1400,7 +2087,33 @@ netex:ServiceAccessCode a owl:Class ;
 netex:ServiceAccessCodeRefStructure a owl:Class ;
     rdfs:label "ServiceAccessCode" ;
     rdfs:comment "Type for a reference to a SERVICE ACCESS CODE." ;
-    rdfs:subClassOf netex:TravelDocumentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of SERVICE ACCESS CODE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for ServiceAccessCodeRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:TravelDocumentRefStructure .
 
 netex:ServiceAccessCode_VersionStructure a owl:Class ;
     rdfs:label "ServiceAccessCode" ;
@@ -1432,7 +2145,33 @@ netex:SingleJourneyPath a owl:Class ;
 netex:SingleJourneyPathRefStructure a owl:Class ;
     rdfs:label "SingleJourneyPath" ;
     rdfs:comment "Type for a reference to a SINGLE JOURNEY PATH." ;
-    rdfs:subClassOf netex:LinkSequenceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of SINGLE JOURNEY PATH." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for SingleJourneyPathRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:LinkSequenceRefStructure .
 
 netex:SingleJourneyPath_VersionStructure a owl:Class ;
     rdfs:label "SingleJourneyPath" ;
@@ -1450,7 +2189,33 @@ netex:SingleJourneyPath_VersionStructure a owl:Class ;
 netex:SingleJourneyRefStructure a owl:Class ;
     rdfs:label "SingleJourney" ;
     rdfs:comment "Type for a reference to a SINGLE JOURNEY." ;
-    rdfs:subClassOf netex:JourneyRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of SINGLE JOURNEY." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for SingleJourneyRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:JourneyRefStructure .
 
 netex:SingleJourney_VersionStructure a owl:Class ;
     rdfs:label "SingleJourney" ;
@@ -1507,7 +2272,33 @@ netex:TaxiServicePlaceAssignment a owl:Class ;
 netex:TaxiServicePlaceAssignmentRefStructure a owl:Class ;
     rdfs:label "TaxiServicePlaceAssignment" ;
     rdfs:comment "Type for a reference to a TAXI SERVICE PLACE ASSIGNMENT." ;
-    rdfs:subClassOf netex:VehicleServicePlaceAssignmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of TAXI SERVICE PLACE ASSIGNMENT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for TaxiServicePlaceAssignmentRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehicleServicePlaceAssignmentRefStructure .
 
 netex:TaxiServicePlaceAssignment_VersionStructure a owl:Class ;
     rdfs:label "TaxiServicePlaceAssignment" ;
@@ -1533,7 +2324,33 @@ netex:TaxiServicePlaceAssignment_VersionStructure a owl:Class ;
 netex:TaxiServiceRefStructure a owl:Class ;
     rdfs:label "TaxiService" ;
     rdfs:comment "Type for a reference to an TAXI SERVICE." ;
-    rdfs:subClassOf netex:VehiclePoolingServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a TICKETING SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for TaxiServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehiclePoolingServiceRefStructure .
 
 netex:TaxiService_VersionStructure a owl:Class ;
     rdfs:label "TaxiService" ;
@@ -1548,7 +2365,33 @@ netex:TypeOfMobilityService a owl:Class ;
 netex:TypeOfMobilityServiceRefStructure a owl:Class ;
     rdfs:label "TypeOfMobilityService" ;
     rdfs:comment "Type for a reference to a TYPE OF MOBILITY SERVICE." ;
-    rdfs:subClassOf netex:TypeOfValueRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a MOBILITY SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for TypeOfMobilityServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:TypeOfValueRefStructure .
 
 netex:TypeOfMobilityService_ValueStructure a owl:Class ;
     rdfs:label "TypeOfMobilityService" ;
@@ -1563,7 +2406,33 @@ netex:VehicleAccessCredentialsAssignment a owl:Class ;
 netex:VehicleAccessCredentialsAssignmentRefStructure a owl:Class ;
     rdfs:label "VehicleAccessCredentialsAssignment" ;
     rdfs:comment "Type for a reference to a VEHICLE ACCESS CREDENTIALS ASSIGNMENT. +v1.2.2" ;
-    rdfs:subClassOf netex:AssignmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE ACCESS CREDENTIALS ASSIGNMENT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleAccessCredentialsAssignmentRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:AssignmentRefStructure .
 
 netex:VehicleAccessCredentialsAssignment_VersionStructure a owl:Class ;
     rdfs:label "VehicleAccessCredentialsAssignment" ;
@@ -1586,6 +2455,11 @@ netex:VehicleAccessCredentialsAssignment_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 4 ],
         netex:Assignment_VersionStructure .
 
+netex:VehicleMeetingLink a owl:Class ;
+    rdfs:label "VehicleMeetingLink" ;
+    rdfs:subClassOf netex:VehicleMeetingLink_VersionStructure ;
+    netex:xsdElement true .
+
 netex:VehicleMeetingLink_VersionStructure a owl:Class ;
     rdfs:label "VehicleMeetingLink" ;
     rdfs:comment "Type for VEHICLE MEETING LINK." ;
@@ -1598,6 +2472,11 @@ netex:VehicleMeetingLink_VersionStructure a owl:Class ;
             owl:onProperty netex:toPointRef ;
             netex:xsdSequenceOrder 2 ],
         netex:Link_VersionStructure .
+
+netex:VehicleMeetingPlace a owl:Class ;
+    rdfs:label "VehicleMeetingPlace" ;
+    rdfs:subClassOf netex:VehicleMeetingPlace_VersionStructure ;
+    netex:xsdElement true .
 
 netex:VehicleMeetingPoint a owl:Class ;
     rdfs:label "VehicleMeetingPoint" ;
@@ -1621,17 +2500,74 @@ netex:VehicleMeetingPointInPath_VersionStructure a owl:Class ;
 netex:VehicleMeetingPointRefStructure a owl:Class ;
     rdfs:label "VehicleMeetingPoint" ;
     rdfs:comment "Type for a reference to a VEHICLE MEETING POINT." ;
-    rdfs:subClassOf netex:PointRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE MEETING POINT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Name of Class of the referenced entity. Allows reflection. Fixed for each entity type." ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:PointRefStructure .
 
 netex:VehicleMeetingPoint_VersionStructure a owl:Class ;
     rdfs:label "VehicleMeetingPoint" ;
     rdfs:comment "Type for VEHICLE MEETING POINT restricts id." ;
     rdfs:subClassOf netex:Point_VersionStructure .
 
+netex:VehiclePoolerProfile a owl:Class ;
+    rdfs:label "VehiclePoolerProfile" ;
+    rdfs:subClassOf netex:VehiclePoolerProfile_VersionStructure ;
+    netex:xsdElement true .
+
 netex:VehiclePoolerProfileRefStructure a owl:Class ;
     rdfs:label "VehiclePoolerProfile" ;
     rdfs:comment "Type for Reference to a VEHICLE POOLER PROFILE usage parameter" ;
-    rdfs:subClassOf netex:UserProfileRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a VEHICLE POOLER PROFILE usage parameter" ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehiclePoolerProfileRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:UserProfileRefStructure .
 
 netex:VehiclePoolerProfile_VersionStructure a owl:Class ;
     rdfs:label "VehiclePoolerProfile" ;
@@ -1666,7 +2602,33 @@ netex:VehiclePoolingDriverInfo a owl:Class ;
 netex:VehiclePoolingDriverInfoRefStructure a owl:Class ;
     rdfs:label "VehiclePoolingDriverInfo" ;
     rdfs:comment "Type for a reference to a VEHICLE POOLING DRIVER INFO." ;
-    rdfs:subClassOf netex:VersionOfObjectRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE POOLING DRIVER INFO." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehiclePoolingDriverInfoRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VersionOfObjectRefStructure .
 
 netex:VehiclePoolingDriverInfo_VersionStructure a owl:Class ;
     rdfs:label "VehiclePoolingDriverInfo" ;
@@ -1730,7 +2692,33 @@ netex:VehiclePoolingMeetingPlace a owl:Class ;
 netex:VehiclePoolingMeetingPlaceRefStructure a owl:Class ;
     rdfs:label "VehiclePoolingMeetingPlace" ;
     rdfs:comment "Type for a reference to a VEHICLE POOLING MEETING PLACE." ;
-    rdfs:subClassOf netex:VehicleMeetingPlaceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE POOLING MEETING PLACE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehiclePoolingMeetingPlaceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehicleMeetingPlaceRefStructure .
 
 netex:VehiclePoolingMeetingPlace_VersionStructure a owl:Class ;
     rdfs:label "VehiclePoolingMeetingPlace" ;
@@ -1745,17 +2733,74 @@ netex:VehiclePoolingParkingArea a owl:Class ;
 netex:VehiclePoolingParkingAreaRefStructure a owl:Class ;
     rdfs:label "VehiclePoolingParkingArea" ;
     rdfs:comment "Type for a reference to a VEHICLE POOLING PARKING AREA." ;
-    rdfs:subClassOf netex:ParkingAreaRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a VEHICLE POOLING PARKING AREA." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehiclePoolingParkingAreaRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:ParkingAreaRefStructure .
 
 netex:VehiclePoolingParkingArea_VersionStructure a owl:Class ;
     rdfs:label "VehiclePoolingParkingArea" ;
     rdfs:comment "Type for VEHICLE POOLING PARKING AREA." ;
     rdfs:subClassOf netex:ParkingArea_VersionStructure .
 
+netex:VehiclePoolingParkingBay a owl:Class ;
+    rdfs:label "VehiclePoolingParkingBay" ;
+    rdfs:subClassOf netex:VehiclePoolingParkingBay_VersionStructure ;
+    netex:xsdElement true .
+
 netex:VehiclePoolingParkingBayRefStructure a owl:Class ;
     rdfs:label "VehiclePoolingParkingBay" ;
     rdfs:comment "Type for a reference to a VEHICLE POOLING PARKING BAY." ;
-    rdfs:subClassOf netex:ParkingBayRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a VEHICLE POOLING PARKING BAY." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehiclePoolingParkingBayRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:ParkingBayRefStructure .
 
 netex:VehiclePoolingParkingBay_VersionStructure a owl:Class ;
     rdfs:label "VehiclePoolingParkingBay" ;
@@ -1770,7 +2815,33 @@ netex:VehiclePoolingPlaceAssignment a owl:Class ;
 netex:VehiclePoolingPlaceAssignmentRefStructure a owl:Class ;
     rdfs:label "VehiclePoolingPlaceAssignment" ;
     rdfs:comment "Type for a reference to a VEHICLE POOLING PLACE ASSIGNMENT." ;
-    rdfs:subClassOf netex:VehicleServicePlaceAssignmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE POOLING PLACE ASSIGNMENT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehiclePoolingPlaceAssignmentRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehicleServicePlaceAssignmentRefStructure .
 
 netex:VehiclePoolingPlaceAssignment_VersionStructure a owl:Class ;
     rdfs:label "VehiclePoolingPlaceAssignment" ;
@@ -1798,10 +2869,41 @@ netex:VehiclePoolingService a owl:Class ;
     rdfs:subClassOf netex:VehiclePoolingService_VersionStructure ;
     netex:xsdElement true .
 
+netex:VehicleRentalService a owl:Class ;
+    rdfs:label "VehicleRentalService" ;
+    rdfs:subClassOf netex:VehicleRentalService_VersionStructure ;
+    netex:xsdElement true .
+
 netex:VehicleRentalServiceRefStructure a owl:Class ;
     rdfs:label "VehicleRentalService" ;
     rdfs:comment "Type for a reference to an VEHICLE RENTAL SERVICE." ;
-    rdfs:subClassOf netex:CommonVehicleServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a TICKETING SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleRentalServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:CommonVehicleServiceRefStructure .
 
 netex:VehicleRentalService_VersionStructure a owl:Class ;
     rdfs:label "VehicleRentalService" ;
@@ -1842,12 +2944,43 @@ netex:VehicleSharingParkingArea a owl:Class ;
 netex:VehicleSharingParkingAreaRefStructure a owl:Class ;
     rdfs:label "VehicleSharingParkingArea" ;
     rdfs:comment "Type for a reference to a VEHICLE SHARING PARKING AREA." ;
-    rdfs:subClassOf netex:ParkingAreaRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a VEHICLE SHARING PARKING AREA." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleSharingParkingAreaRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:ParkingAreaRefStructure .
 
 netex:VehicleSharingParkingArea_VersionStructure a owl:Class ;
     rdfs:label "VehicleSharingParkingArea" ;
     rdfs:comment "Type for VEHICLE SHARING PARKING AREA." ;
     rdfs:subClassOf netex:ParkingArea_VersionStructure .
+
+netex:VehicleSharingParkingBay a owl:Class ;
+    rdfs:label "VehicleSharingParkingBay" ;
+    rdfs:subClassOf netex:VehicleSharingParkingBay_VersionStructure ;
+    netex:xsdElement true .
 
 netex:VehicleSharingPlaceAssignment a owl:Class ;
     rdfs:label "VehicleSharingPlaceAssignment" ;
@@ -1857,7 +2990,33 @@ netex:VehicleSharingPlaceAssignment a owl:Class ;
 netex:VehicleSharingPlaceAssignmentRefStructure a owl:Class ;
     rdfs:label "VehicleSharingPlaceAssignment" ;
     rdfs:comment "Type for a reference to a VEHICLE SHARING PLACE ASSIGNMENT." ;
-    rdfs:subClassOf netex:VehicleServicePlaceAssignmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE SHARING PLACE ASSIGNMENT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleSharingPlaceAssignmentRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:VehicleServicePlaceAssignmentRefStructure .
 
 netex:VehicleSharingPlaceAssignment_VersionStructure a owl:Class ;
     rdfs:label "VehicleSharingPlaceAssignment" ;
@@ -1876,10 +3035,41 @@ netex:VehicleSharingPlaceAssignment_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 3 ],
         netex:VehicleServicePlaceAssignment_VersionStructure .
 
+netex:VehicleSharingService a owl:Class ;
+    rdfs:label "VehicleSharingService" ;
+    rdfs:subClassOf netex:VehicleSharingService_VersionStructure ;
+    netex:xsdElement true .
+
 netex:VehicleSharingServiceRefStructure a owl:Class ;
     rdfs:label "VehicleSharingService" ;
     rdfs:comment "Type for a reference to an VEHICLE SHARING SERVICE." ;
-    rdfs:subClassOf netex:CommonVehicleServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a TICKETING SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleSharingServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:CommonVehicleServiceRefStructure .
 
 netex:VehicleSharingService_VersionStructure a owl:Class ;
     rdfs:label "VehicleSharingService" ;
@@ -1918,7 +3108,33 @@ netex:VehicleTypeZoneRestriction a owl:Class ;
 netex:VehicleTypeZoneRestrictionRefStructure a owl:Class ;
     rdfs:label "VehicleTypeZoneRestriction" ;
     rdfs:comment "Type for Reference to an VEHICLE TYPE ZONE RESTRICTION. Left untyped so as to avoid forwards dependency." ;
-    rdfs:subClassOf netex:ZoneRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleTypeZoneRestrictionRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Identifier of referenced entity." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:ZoneRefStructure .
 
 netex:VehicleTypeZoneRestriction_VersionStructure a owl:Class ;
     rdfs:label "VehicleTypeZoneRestriction" ;
@@ -1954,15 +3170,10 @@ netex:additionalDriver a owl:DatatypeProperty ;
     rdfs:range xsd:normalizedString ;
     netex:xsdType "AdditionalDriverTypeEnumeration" .
 
-netex:address a owl:DatatypeProperty ;
+netex:address a owl:ObjectProperty ;
     rdfs:label "Address" ;
-    rdfs:comment "Address of TRANSPORT ORGANISATION." .
-
-netex:addressablePlaceRef a owl:ObjectProperty ;
-    rdfs:label "AddressablePlaceRef" ;
-    rdfs:range netex:AddressablePlace ;
-    netex:isReference true ;
-    netex:xsdType "AddressablePlaceRefStructure" .
+    rdfs:comment "Address of TRANSPORT ORGANISATION." ;
+    netex:xsdType "PostalAddress_VersionStructure" .
 
 netex:availableDocks a owl:DatatypeProperty ;
     rdfs:label "AvailableDocks" ;
@@ -2067,8 +3278,15 @@ netex:drivingStyle a owl:DatatypeProperty ;
 netex:dynamicVehicleMeetingPointAssignmentRef a owl:ObjectProperty ;
     rdfs:label "DynamicVehicleMeetingPointAssignmentRef" ;
     rdfs:range netex:DynamicVehicleMeetingPointAssignment ;
+    rdfs:subPropertyOf netex:vehicleMeetingPointAssignmentRef ;
     netex:isReference true ;
     netex:xsdType "DynamicVehicleMeetingPointAssignmentRefStructure" .
+
+netex:equipmentRef a owl:ObjectProperty ;
+    rdfs:label "EquipmentRef" ;
+    rdfs:range netex:Equipment ;
+    netex:isReference true ;
+    netex:xsdType "EquipmentRefStructure" .
 
 netex:expiryDate a owl:DatatypeProperty ;
     rdfs:label "ExpiryDate" ;
@@ -2090,6 +3308,7 @@ netex:gender a owl:DatatypeProperty ;
 
 netex:groupOfSingleJourneys a owl:ObjectProperty ;
     rdfs:label "GroupOfSingleJourneys" ;
+    rdfs:subPropertyOf netex:groupOfEntities ;
     netex:xsdType "GroupOfSingleJourneys_VersionStructure" .
 
 netex:groupsOfSingleJourneys a owl:ObjectProperty ;
@@ -2117,11 +3336,13 @@ netex:immobilisation a owl:DatatypeProperty ;
 
 netex:individualPassengerInfo a owl:ObjectProperty ;
     rdfs:label "IndividualPassengerInfo" ;
+    rdfs:subPropertyOf netex:dataManagedObject ;
     netex:xsdType "IndividualPassengerInfo_VersionStructure" .
 
 netex:individualPassengerInfoRef a owl:ObjectProperty ;
     rdfs:label "IndividualPassengerInfoRef" ;
     rdfs:range netex:IndividualPassengerInfo ;
+    rdfs:subPropertyOf netex:versionOfObjectRef ;
     netex:isReference true ;
     netex:xsdType "IndividualPassengerInfoRefStructure" .
 
@@ -2159,10 +3380,34 @@ netex:isRenting a owl:DatatypeProperty ;
     rdfs:range xsd:boolean ;
     netex:xsdType "xsd:boolean" .
 
+netex:journeyRef a owl:ObjectProperty ;
+    rdfs:label "JourneyRef" ;
+    rdfs:range netex:Journey ;
+    netex:isReference true ;
+    netex:xsdType "JourneyRefStructure" .
+
+netex:journey_Dummy a owl:ObjectProperty ;
+    rdfs:label "Journey_Dummy" ;
+    netex:xsdType "LinkSequence_VersionStructure" .
+
 netex:languages a owl:DatatypeProperty ;
     rdfs:label "Languages" ;
     rdfs:comment "Languages spoken" ;
     netex:xsdType "LanguageListOfEnumerations" .
+
+netex:link a owl:ObjectProperty ;
+    rdfs:label "Link" ;
+    netex:xsdType "Link_VersionStructure" .
+
+netex:linkSequence a owl:ObjectProperty ;
+    rdfs:label "LinkSequence" ;
+    netex:xsdType "LinkSequence_VersionStructure" .
+
+netex:linkSequenceRef a owl:ObjectProperty ;
+    rdfs:label "LinkSequenceRef" ;
+    rdfs:range netex:LinkSequence ;
+    netex:isReference true ;
+    netex:xsdType "LinkSequenceRefStructure" .
 
 netex:logInRequired a owl:DatatypeProperty ;
     rdfs:label "LogInRequired" ;
@@ -2221,10 +3466,6 @@ netex:mobilityServiceConstraintZones a owl:ObjectProperty ;
     rdfs:comment "Zone use restrictions in FRAME." ;
     netex:xsdType "mobilityServiceConstraintZonesInFrame_RelStructure" .
 
-netex:mobilityService_Dummy a owl:ObjectProperty ;
-    rdfs:label "MobilityService_Dummy" ;
-    netex:xsdType "Equipment_VersionStructure" .
-
 netex:mobilityServices a owl:ObjectProperty ;
     rdfs:label "mobilityServices" ;
     rdfs:comment "MOBILITY SERVICEs in frame." ;
@@ -2271,6 +3512,7 @@ netex:numberOfTravellersCarried a owl:DatatypeProperty ;
 
 netex:onlineService a owl:ObjectProperty ;
     rdfs:label "OnlineService" ;
+    rdfs:subPropertyOf netex:mobilityService_Dummy ;
     netex:xsdType "OnlineService_VersionStructure" .
 
 netex:onlineServices a owl:ObjectProperty ;
@@ -2280,6 +3522,7 @@ netex:onlineServices a owl:ObjectProperty ;
 
 netex:onwardVehicleMeetingLinkRef a owl:ObjectProperty ;
     rdfs:label "OnwardVehicleMeetingLinkRef" ;
+    rdfs:subPropertyOf netex:linkRef ;
     netex:isReference true ;
     netex:xsdType "VehicleMeetingLinkRefStructure" .
 
@@ -2289,14 +3532,10 @@ netex:operatingDayRef a owl:ObjectProperty ;
     netex:isReference true ;
     netex:xsdType "OperatingDayRefStructure" .
 
-netex:organisationRef_Dummy a owl:ObjectProperty ;
-    rdfs:label "OrganisationRef_Dummy" ;
-    netex:isReference true ;
-    netex:xsdType "OrganisationRefStructure" .
-
 netex:parkingBayConditionRef a owl:ObjectProperty ;
     rdfs:label "ParkingBayConditionRef" ;
     rdfs:range netex:ParkingBayCondition ;
+    rdfs:subPropertyOf netex:typeOfValueRef ;
     netex:isReference true ;
     netex:xsdType "ParkingBayStatusRefStructure" .
 
@@ -2322,10 +3561,35 @@ netex:petsAllowed a owl:DatatypeProperty ;
     rdfs:range xsd:boolean ;
     netex:xsdType "xsd:boolean" .
 
+netex:place a owl:ObjectProperty ;
+    rdfs:label "Place" ;
+    netex:xsdType "Place_VersionStructure" .
+
+netex:point a owl:ObjectProperty ;
+    rdfs:label "Point" ;
+    netex:xsdType "Point_VersionStructure" .
+
+netex:pointInJourneyPatternRef a owl:ObjectProperty ;
+    rdfs:label "PointInJourneyPatternRef" ;
+    rdfs:range netex:PointInJourneyPattern ;
+    netex:isReference true ;
+    netex:xsdType "PointInJourneyPatternRefStructure" .
+
+netex:pointInLinkSequence a owl:ObjectProperty ;
+    rdfs:label "PointInLinkSequence" ;
+    netex:xsdType "PointInLinkSequence_VersionedChildStructure" .
+
 netex:pointInSingleJourneyPathRef a owl:ObjectProperty ;
     rdfs:label "PointInSingleJourneyPathRef" ;
+    rdfs:subPropertyOf netex:pointInJourneyPatternRef ;
     netex:isReference true ;
     netex:xsdType "PointInSingleJourneyPathRefStructure" .
+
+netex:pointRef a owl:ObjectProperty ;
+    rdfs:label "PointRef" ;
+    rdfs:range netex:Point ;
+    netex:isReference true ;
+    netex:xsdType "PointRefStructure" .
 
 netex:pointsInSequence a owl:ObjectProperty ;
     rdfs:label "pointsInSequence" ;
@@ -2334,11 +3598,13 @@ netex:pointsInSequence a owl:ObjectProperty ;
 netex:poolOfVehicles a owl:ObjectProperty ;
     rdfs:label "PoolOfVehicles" ;
     rdfs:comment "A set of vehicles assigned to a specific PARKING, PARKING AREAs, PARKING BAYs, p lace or MOBILITY CONSTRAINT ZONE that must be picked up and returned to the same area. . +v1.2.2" ;
+    rdfs:subPropertyOf netex:groupOfEntities ;
     netex:xsdType "PoolOfVehicles_VersionStructure" .
 
 netex:poolOfVehiclesRef a owl:ObjectProperty ;
     rdfs:label "PoolOfVehiclesRef" ;
     rdfs:range netex:PoolOfVehicles ;
+    rdfs:subPropertyOf netex:groupOfEntitiesRef_Dummy ;
     netex:isReference true ;
     netex:xsdType "PoolOfVehiclesRefStructure" .
 
@@ -2371,6 +3637,7 @@ netex:registrationRequired a owl:DatatypeProperty ;
 netex:rentalAvailabilityRef a owl:ObjectProperty ;
     rdfs:label "RentalAvailabilityRef" ;
     rdfs:range netex:RentalAvailability ;
+    rdfs:subPropertyOf netex:typeOfValueRef ;
     netex:isReference true ;
     netex:xsdType "ParkingBayStatusRefStructure" .
 
@@ -2402,6 +3669,16 @@ netex:ruleApplicability a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     netex:xsdType "ZoneRuleApplicabilityEnumeration" .
 
+netex:serviceBookingArrangements a owl:ObjectProperty ;
+    rdfs:label "ServiceBookingArrangements" ;
+    rdfs:comment "Booking Arrangements for service. DEPRECATED: use serviceBookingArrangements" ;
+    netex:xsdType "ServiceBookingArrangement_VersionStructure" .
+
+netex:serviceBookingArrangements_Collection a owl:ObjectProperty ;
+    rdfs:label "serviceBookingArrangements" ;
+    rdfs:comment "Service Booking Arrangements for service. +2.0" ;
+    netex:xsdType "serviceBookingArrangements_RelStructure" .
+
 netex:services a owl:ObjectProperty ;
     rdfs:label "services" ;
     rdfs:comment "ONLINE SERVICES managed by ONLINE OPERATOR." ;
@@ -2420,10 +3697,12 @@ netex:shortName a owl:ObjectProperty ;
 
 netex:singleJourney a owl:ObjectProperty ;
     rdfs:label "SingleJourney" ;
+    rdfs:subPropertyOf netex:journey_Dummy ;
     netex:xsdType "SingleJourney_VersionStructure" .
 
 netex:singleJourneyPath a owl:ObjectProperty ;
     rdfs:label "SingleJourneyPath" ;
+    rdfs:subPropertyOf netex:linkSequence ;
     netex:xsdType "SingleJourneyPath_VersionStructure" .
 
 netex:singleJourneyPaths a owl:ObjectProperty ;
@@ -2434,6 +3713,7 @@ netex:singleJourneyPaths a owl:ObjectProperty ;
 netex:singleJourneyRef a owl:ObjectProperty ;
     rdfs:label "SingleJourneyRef" ;
     rdfs:range netex:SingleJourney ;
+    rdfs:subPropertyOf netex:journeyRef ;
     netex:isReference true ;
     netex:xsdType "SingleJourneyRefStructure" .
 
@@ -2486,17 +3766,20 @@ netex:taxiParkingAreaRef a owl:ObjectProperty ;
 
 netex:taxiServicePlaceAssignment a owl:ObjectProperty ;
     rdfs:label "TaxiServicePlaceAssignment" ;
+    rdfs:subPropertyOf netex:assignment_Dummy ;
     netex:xsdType "TaxiServicePlaceAssignment_VersionStructure" .
 
 netex:taxiServicePlaceAssignmentRef a owl:ObjectProperty ;
     rdfs:label "TaxiServicePlaceAssignmentRef" ;
     rdfs:range netex:TaxiServicePlaceAssignment ;
+    rdfs:subPropertyOf netex:vehicleServicePlaceAssignmentRef ;
     netex:isReference true ;
     netex:xsdType "TaxiServicePlaceAssignmentRefStructure" .
 
 netex:taxiServiceRef a owl:ObjectProperty ;
     rdfs:label "TaxiServiceRef" ;
     rdfs:range netex:TaxiService ;
+    rdfs:subPropertyOf netex:vehiclePoolingServiceRef ;
     netex:isReference true ;
     netex:xsdType "TaxiServiceRefStructure" .
 
@@ -2512,17 +3795,42 @@ netex:toPointRef a owl:ObjectProperty ;
     netex:isReference true ;
     netex:xsdType "VehicleMeetingPointRefStructure" .
 
+netex:transportOrganisation_Dummy a owl:ObjectProperty ;
+    rdfs:label "TransportOrganisation_Dummy" ;
+    netex:xsdType "Organisation_VersionStructure" .
+
 netex:transportTypeRef a owl:ObjectProperty ;
     rdfs:label "TransportTypeRef" ;
     rdfs:range netex:TransportType ;
     netex:isReference true ;
     netex:xsdType "TransportTypeRefStructure" .
 
+netex:travelDocumentRef a owl:ObjectProperty ;
+    rdfs:label "TravelDocumentRef" ;
+    rdfs:range netex:TravelDocument ;
+    netex:isReference true ;
+    netex:xsdType "TravelDocumentRefStructure" .
+
+netex:typeOfEntity a owl:ObjectProperty ;
+    rdfs:label "TypeOfEntity" ;
+    netex:xsdType "TypeOfEntity_VersionStructure" .
+
+netex:typeOfEntityRef a owl:ObjectProperty ;
+    rdfs:label "TypeOfEntityRef" ;
+    rdfs:range netex:TypeOfEntity ;
+    netex:isReference true ;
+    netex:xsdType "TypeOfValueRefStructure" .
+
 netex:typeOfMobilityServiceRef a owl:ObjectProperty ;
     rdfs:label "TypeOfMobilityServiceRef" ;
     rdfs:range netex:TypeOfMobilityService ;
+    rdfs:subPropertyOf netex:typeOfEntityRef ;
     netex:isReference true ;
     netex:xsdType "TypeOfMobilityServiceRefStructure" .
+
+netex:typeOfValue a owl:ObjectProperty ;
+    rdfs:label "TypeOfValue" ;
+    netex:xsdType "TypeOfValue_VersionStructure" .
 
 netex:usage a owl:DatatypeProperty ;
     rdfs:label "Usage" ;
@@ -2534,6 +3842,12 @@ netex:userAcronym a owl:ObjectProperty ;
     rdfs:comment "Acronym name of the reviewer" ;
     netex:xsdType "MultilingualString" .
 
+netex:userProfileRef a owl:ObjectProperty ;
+    rdfs:label "UserProfileRef" ;
+    rdfs:range netex:UserProfile ;
+    netex:isReference true ;
+    netex:xsdType "UserProfileRefStructure" .
+
 netex:vehicleAccessCredentials a owl:ObjectProperty ;
     rdfs:label "vehicleAccessCredentials" ;
     rdfs:comment "VEHICLE ACCESS CREDENTIALs in frame." ;
@@ -2541,10 +3855,12 @@ netex:vehicleAccessCredentials a owl:ObjectProperty ;
 
 netex:vehicleAccessCredentialsAssignment a owl:ObjectProperty ;
     rdfs:label "VehicleAccessCredentialsAssignment" ;
+    rdfs:subPropertyOf netex:assignment_Dummy ;
     netex:xsdType "VehicleAccessCredentialsAssignment_VersionStructure" .
 
 netex:vehicleMeetingLink a owl:ObjectProperty ;
     rdfs:label "VehicleMeetingLink" ;
+    rdfs:subPropertyOf netex:link ;
     netex:xsdType "VehicleMeetingLink_VersionStructure" .
 
 netex:vehicleMeetingLinks a owl:ObjectProperty ;
@@ -2557,9 +3873,12 @@ netex:vehicleMeetingPlaceAssignments a owl:ObjectProperty ;
     rdfs:comment "VEHICLE SERVICE PLACE ASSIGNMENTs in frame." ;
     netex:xsdType "vehicleServicePlaceAssignments_RelStructure" .
 
-netex:vehicleMeetingPlace_Dummy a owl:ObjectProperty ;
-    rdfs:label "VehicleMeetingPlace_Dummy" ;
-    netex:xsdType "AddressablePlace_VersionStructure" .
+netex:vehicleMeetingPlaceRef a owl:ObjectProperty ;
+    rdfs:label "VehicleMeetingPlaceRef" ;
+    rdfs:range netex:VehicleMeetingPlace ;
+    rdfs:subPropertyOf netex:addressablePlaceRef ;
+    netex:isReference true ;
+    netex:xsdType "VehicleMeetingPlaceRefStructure" .
 
 netex:vehicleMeetingPlaces a owl:ObjectProperty ;
     rdfs:label "vehicleMeetingPlaces" ;
@@ -2574,6 +3893,7 @@ netex:vehicleMeetingPointAssignments a owl:ObjectProperty ;
 netex:vehicleMeetingPointInPath a owl:ObjectProperty ;
     rdfs:label "VehicleMeetingPointInPath" ;
     rdfs:comment "A group of VEHICLE JOURNEYs following the same JOURNEY PATTERN having the same HEADWAY INTERVAL between a specified start and end time (for example, every 10 min). This is especially useful for passenger information." ;
+    rdfs:subPropertyOf netex:pointInLinkSequence ;
     netex:xsdType "VehicleMeetingPointInPath_VersionStructure" .
 
 netex:vehicleMeetingPoints a owl:ObjectProperty ;
@@ -2583,6 +3903,7 @@ netex:vehicleMeetingPoints a owl:ObjectProperty ;
 
 netex:vehiclePoolingDriverInfo a owl:ObjectProperty ;
     rdfs:label "VehiclePoolingDriverInfo" ;
+    rdfs:subPropertyOf netex:dataManagedObject ;
     netex:xsdType "VehiclePoolingDriverInfo_VersionStructure" .
 
 netex:vehiclePoolingDriverInfos a owl:ObjectProperty ;
@@ -2593,22 +3914,26 @@ netex:vehiclePoolingDriverInfos a owl:ObjectProperty ;
 netex:vehiclePoolingMeetingPlaceRef a owl:ObjectProperty ;
     rdfs:label "VehiclePoolingMeetingPlaceRef" ;
     rdfs:range netex:VehiclePoolingMeetingPlace ;
+    rdfs:subPropertyOf netex:vehicleMeetingPlaceRef ;
     netex:isReference true ;
     netex:xsdType "VehiclePoolingMeetingPlaceRefStructure" .
 
 netex:vehiclePoolingParkingAreaRef a owl:ObjectProperty ;
     rdfs:label "VehiclePoolingParkingAreaRef" ;
     rdfs:range netex:VehiclePoolingParkingArea ;
+    rdfs:subPropertyOf netex:parkingAreaRef ;
     netex:isReference true ;
     netex:xsdType "VehiclePoolingParkingAreaRefStructure" .
 
 netex:vehiclePoolingPlaceAssignment a owl:ObjectProperty ;
     rdfs:label "VehiclePoolingPlaceAssignment" ;
+    rdfs:subPropertyOf netex:assignment_Dummy ;
     netex:xsdType "VehiclePoolingPlaceAssignment_VersionStructure" .
 
 netex:vehiclePoolingPlaceAssignmentRef a owl:ObjectProperty ;
     rdfs:label "VehiclePoolingPlaceAssignmentRef" ;
     rdfs:range netex:VehiclePoolingPlaceAssignment ;
+    rdfs:subPropertyOf netex:vehicleServicePlaceAssignmentRef ;
     netex:isReference true ;
     netex:xsdType "VehiclePoolingPlaceAssignmentRefStructure" .
 
@@ -2617,12 +3942,6 @@ netex:vehiclePoolingRef a owl:ObjectProperty ;
     rdfs:range netex:VehiclePooling ;
     netex:isReference true ;
     netex:xsdType "VehiclePoolingModeOfOperationRefStructure" .
-
-netex:vehiclePoolingServiceRef a owl:ObjectProperty ;
-    rdfs:label "VehiclePoolingServiceRef" ;
-    rdfs:range netex:VehiclePoolingService ;
-    netex:isReference true ;
-    netex:xsdType "VehiclePoolingServiceRefStructure" .
 
 netex:vehicleRentalRef a owl:ObjectProperty ;
     rdfs:label "VehicleRentalRef" ;
@@ -2635,25 +3954,29 @@ netex:vehicleRestrictions a owl:ObjectProperty ;
     rdfs:comment "Vehclie restrictions in Zone" ;
     netex:xsdType "vehicleTypeZoneRestrictions_RelStructure" .
 
-netex:vehicleServicePlaceAssignmentRef a owl:ObjectProperty ;
-    rdfs:label "VehicleServicePlaceAssignmentRef" ;
-    rdfs:range netex:VehicleServicePlaceAssignment ;
-    netex:isReference true ;
-    netex:xsdType "VehicleServicePlaceAssignmentRefStructure" .
-
 netex:vehicleSharingParkingAreaRef a owl:ObjectProperty ;
     rdfs:label "VehicleSharingParkingAreaRef" ;
     rdfs:range netex:VehicleSharingParkingArea ;
+    rdfs:subPropertyOf netex:parkingAreaRef ;
     netex:isReference true ;
     netex:xsdType "VehicleSharingParkingAreaRefStructure" .
 
+netex:vehicleSharingParkingBayRef a owl:ObjectProperty ;
+    rdfs:label "VehicleSharingParkingBayRef" ;
+    rdfs:range netex:VehicleSharingParkingBay ;
+    rdfs:subPropertyOf netex:parkingBayRef ;
+    netex:isReference true ;
+    netex:xsdType "VehicleSharingParkingBayRefStructure" .
+
 netex:vehicleSharingPlaceAssignment a owl:ObjectProperty ;
     rdfs:label "VehicleSharingPlaceAssignment" ;
+    rdfs:subPropertyOf netex:assignment_Dummy ;
     netex:xsdType "VehicleSharingPlaceAssignment_VersionStructure" .
 
 netex:vehicleSharingPlaceAssignmentRef a owl:ObjectProperty ;
     rdfs:label "VehicleSharingPlaceAssignmentRef" ;
     rdfs:range netex:VehicleSharingPlaceAssignment ;
+    rdfs:subPropertyOf netex:vehicleServicePlaceAssignmentRef ;
     netex:isReference true ;
     netex:xsdType "VehicleSharingPlaceAssignmentRefStructure" .
 
@@ -2665,11 +3988,13 @@ netex:vehicleSharingRef a owl:ObjectProperty ;
 
 netex:vehicleTypeZoneRestriction a owl:ObjectProperty ;
     rdfs:label "VehicleTypeZoneRestriction" ;
+    rdfs:subPropertyOf netex:versionedChild ;
     netex:xsdType "VehicleTypeZoneRestriction_VersionStructure" .
 
 netex:vehicleTypeZoneRestrictionRef a owl:ObjectProperty ;
     rdfs:label "VehicleTypeZoneRestrictionRef" ;
     rdfs:range netex:VehicleTypeZoneRestriction ;
+    rdfs:subPropertyOf netex:versionOfObjectRef ;
     netex:isReference true ;
     netex:xsdType "VehicleTypeZoneRestrictionRefStructure" .
 
@@ -2678,10 +4003,50 @@ netex:vehicles a owl:ObjectProperty ;
     rdfs:comment "VEHICLEs in POOL OF VEHICLEs." ;
     netex:xsdType "vehicleRefs_RelStructure" .
 
+netex:versionedChild a owl:ObjectProperty ;
+    rdfs:label "VersionedChild" ;
+    netex:xsdType "VersionedChildStructure" .
+
+netex:zone a owl:ObjectProperty ;
+    rdfs:label "Zone" ;
+    netex:xsdType "Zone_VersionStructure" .
+
+netex:zoneRef a owl:ObjectProperty ;
+    rdfs:label "ZoneRef" ;
+    rdfs:range netex:Zone ;
+    netex:isReference true ;
+    netex:xsdType "ZoneRefStructure" .
+
 netex:RentalOptionRefStructure a owl:Class ;
     rdfs:label "RentalOption" ;
     rdfs:comment "Type for Reference to a RENTAL OPTION usage parameter." ;
-    rdfs:subClassOf netex:UsageParameterRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a RENTAL OPTION PARAMETER." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for RentalOptionRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:UsageParameterRefStructure .
 
 netex:RentalOption_VersionStructure a owl:Class ;
     rdfs:label "RentalOption" ;
@@ -2691,12 +4056,64 @@ netex:RentalOption_VersionStructure a owl:Class ;
 netex:VehicleMeetingLinkRefStructure a owl:Class ;
     rdfs:label "VehicleMeetingLink" ;
     rdfs:comment "Type for a reference to a VEHICLE MEETING LINK." ;
-    rdfs:subClassOf netex:LinkRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a VEHICLE MEETING LINK." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleMeetingLinkRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:LinkRefStructure .
 
 netex:VehicleMeetingPlaceRefStructure a owl:Class ;
     rdfs:label "VehicleMeetingPlace" ;
     rdfs:comment "Type for a reference to a VEHICLE MEETING PLACE." ;
-    rdfs:subClassOf netex:AddressablePlaceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE MEETING PLACE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleMeetingPlaceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:AddressablePlaceRefStructure .
 
 netex:VehicleMeetingPlace_VersionStructure a owl:Class ;
     rdfs:label "VehicleMeetingPlace" ;
@@ -2714,7 +4131,33 @@ netex:VehicleMeetingPlace_VersionStructure a owl:Class ;
 netex:VehicleMeetingPointAssignmentRefStructure a owl:Class ;
     rdfs:label "VehicleMeetingPointAssignment" ;
     rdfs:comment "Type for a reference to a VEHICLE MEETING POINT ASSIGNMENT." ;
-    rdfs:subClassOf netex:AssignmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE MEETING POINT ASSIGNMENT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleMeetingPointAssignmentRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:AssignmentRefStructure .
 
 netex:VehicleMeetingPointAssignment_VersionStructure a owl:Class ;
     rdfs:label "VehicleMeetingPointAssignment" ;
@@ -2736,17 +4179,53 @@ netex:VehicleMeetingPointAssignment_VersionStructure a owl:Class ;
 netex:VehicleSharingParkingBayRefStructure a owl:Class ;
     rdfs:label "VehicleSharingParkingBay" ;
     rdfs:comment "Type for a reference to a VEHICLE SHARING PARKING BAY." ;
-    rdfs:subClassOf netex:ParkingBayRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a VEHICLE SHARING PARKING BAY." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleSharingParkingBayRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:ParkingBayRefStructure .
 
 netex:VehicleSharingParkingBay_VersionStructure a owl:Class ;
     rdfs:label "VehicleSharingParkingBay" ;
     rdfs:comment "Type for VEHICLE SHARING PARKING BAY." ;
     rdfs:subClassOf netex:ParkingBay_VersionStructure .
 
+netex:addressablePlaceRef a owl:ObjectProperty ;
+    rdfs:label "AddressablePlaceRef" ;
+    rdfs:range netex:AddressablePlace ;
+    netex:isReference true ;
+    netex:xsdType "AddressablePlaceRefStructure" .
+
 netex:commentsAbout a owl:ObjectProperty ;
     rdfs:label "CommentsAbout" ;
     rdfs:comment "Comments on driver." ;
     netex:xsdType "MultilingualString" .
+
+netex:commonFrame a owl:ObjectProperty ;
+    rdfs:label "CommonFrame" ;
+    netex:xsdType "Common_VersionFrameStructure" .
 
 netex:floatingVehicles a owl:DatatypeProperty ;
     rdfs:label "FloatingVehicles" ;
@@ -2754,8 +4233,18 @@ netex:floatingVehicles a owl:DatatypeProperty ;
     rdfs:range xsd:boolean ;
     netex:xsdType "xsd:boolean" .
 
+netex:groupOfEntities a owl:ObjectProperty ;
+    rdfs:label "GroupOfEntities" ;
+    netex:xsdType "GroupOfEntities_VersionStructure" .
+
+netex:groupOfEntitiesRef_Dummy a owl:ObjectProperty ;
+    rdfs:label "GroupOfEntitiesRef_Dummy" ;
+    netex:isReference true ;
+    netex:xsdType "VersionOfObjectRefStructure" .
+
 netex:individualTraveller a owl:ObjectProperty ;
     rdfs:label "IndividualTraveller" ;
+    rdfs:subPropertyOf netex:dataManagedObject ;
     netex:xsdType "IndividualTraveller_VersionStructure" .
 
 netex:lastTripDate a owl:DatatypeProperty ;
@@ -2763,6 +4252,12 @@ netex:lastTripDate a owl:DatatypeProperty ;
     rdfs:comment "Date of last trip." ;
     rdfs:range xsd:dateTime ;
     netex:xsdType "xsd:dateTime" .
+
+netex:linkRef a owl:ObjectProperty ;
+    rdfs:label "LinkRef" ;
+    rdfs:range netex:Link ;
+    netex:isReference true ;
+    netex:xsdType "LinkRefStructure" .
 
 netex:maximumSpeed a owl:DatatypeProperty ;
     rdfs:label "MaximumSpeed" ;
@@ -2772,24 +4267,37 @@ netex:maximumSpeed a owl:DatatypeProperty ;
 
 netex:mobilityServiceConstraintZone a owl:ObjectProperty ;
     rdfs:label "MobilityServiceConstraintZone" ;
+    rdfs:subPropertyOf netex:zone ;
     netex:xsdType "MobilityServiceConstraintZone_VersionStructure" .
 
 netex:onlineServiceRef a owl:ObjectProperty ;
     rdfs:label "OnlineServiceRef" ;
     rdfs:range netex:OnlineService ;
+    rdfs:subPropertyOf netex:mobilityServiceRef ;
     netex:isReference true ;
     netex:xsdType "OnlineServiceRefStructure" .
+
+netex:organisationRef_Dummy a owl:ObjectProperty ;
+    rdfs:label "OrganisationRef_Dummy" ;
+    netex:isReference true ;
+    netex:xsdType "OrganisationRefStructure" .
+
+netex:parkingAreaRef a owl:ObjectProperty ;
+    rdfs:label "ParkingAreaRef" ;
+    rdfs:range netex:ParkingArea ;
+    netex:isReference true ;
+    netex:xsdType "ParkingAreaRefStructure" .
+
+netex:parkingArea_Dummy a owl:ObjectProperty ;
+    rdfs:label "ParkingArea_Dummy" ;
+    netex:xsdType "SiteComponent_VersionStructure" .
 
 netex:parkingBayStatusRef a owl:ObjectProperty ;
     rdfs:label "ParkingBayStatusRef" ;
     rdfs:range netex:ParkingBayStatus ;
+    rdfs:subPropertyOf netex:typeOfValueRef ;
     netex:isReference true ;
     netex:xsdType "ParkingBayStatusRefStructure" .
-
-netex:parkingLogEntry_Dummy a owl:ObjectProperty ;
-    rdfs:label "ParkingLogEntry_Dummy" ;
-    rdfs:comment "Dummy type for Parking Log ENTRY. +v1.2.2" ;
-    netex:xsdType "DataManagedObjectStructure" .
 
 netex:parkingRef a owl:ObjectProperty ;
     rdfs:label "ParkingRef" ;
@@ -2805,17 +4313,14 @@ netex:reviews a owl:ObjectProperty ;
 netex:serviceAccessCodeRef a owl:ObjectProperty ;
     rdfs:label "ServiceAccessCodeRef" ;
     rdfs:range netex:ServiceAccessCode ;
+    rdfs:subPropertyOf netex:travelDocumentRef ;
     netex:isReference true ;
     netex:xsdType "ServiceAccessCodeRefStructure" .
-
-netex:serviceBookingArrangements a owl:ObjectProperty ;
-    rdfs:label "serviceBookingArrangements" ;
-    rdfs:comment "Service Booking Arrangements for service. +2.0" ;
-    netex:xsdType "serviceBookingArrangements_RelStructure" .
 
 netex:singleJourneyPathRef a owl:ObjectProperty ;
     rdfs:label "SingleJourneyPathRef" ;
     rdfs:range netex:SingleJourneyPath ;
+    rdfs:subPropertyOf netex:linkSequenceRef ;
     netex:isReference true ;
     netex:xsdType "SingleJourneyPathRefStructure" .
 
@@ -2834,22 +4339,36 @@ netex:travellingWithPet a owl:DatatypeProperty ;
 netex:vehicleAccessCredentialsAssignmentRef a owl:ObjectProperty ;
     rdfs:label "VehicleAccessCredentialsAssignmentRef" ;
     rdfs:range netex:VehicleAccessCredentialsAssignment ;
+    rdfs:subPropertyOf netex:assignmentRef ;
     netex:isReference true ;
     netex:xsdType "VehicleAccessCredentialsAssignmentRefStructure" .
 
+netex:vehicleMeetingPlace_Dummy a owl:ObjectProperty ;
+    rdfs:label "VehicleMeetingPlace_Dummy" ;
+    netex:xsdType "AddressablePlace_VersionStructure" .
+
 netex:vehicleMeetingPoint a owl:ObjectProperty ;
     rdfs:label "VehicleMeetingPoint" ;
+    rdfs:subPropertyOf netex:point ;
     netex:xsdType "VehicleMeetingPoint_VersionStructure" .
 
 netex:vehicleMeetingPointAssignment a owl:ObjectProperty ;
     rdfs:label "VehicleMeetingPointAssignment" ;
+    rdfs:subPropertyOf netex:assignment_Dummy ;
     netex:xsdType "VehicleMeetingPointAssignment_VersionStructure" .
 
 netex:vehiclePoolingDriverInfoRef a owl:ObjectProperty ;
     rdfs:label "VehiclePoolingDriverInfoRef" ;
     rdfs:range netex:VehiclePoolingDriverInfo ;
+    rdfs:subPropertyOf netex:versionOfObjectRef ;
     netex:isReference true ;
     netex:xsdType "VehiclePoolingDriverInfoRefStructure" .
+
+netex:versionFrameRef a owl:ObjectProperty ;
+    rdfs:label "VersionFrameRef" ;
+    rdfs:range netex:VersionFrame ;
+    netex:isReference true ;
+    netex:xsdType "VersionFrameRefStructure" .
 
 netex:zoneUse a owl:DatatypeProperty ;
     rdfs:label "ZoneUse" ;
@@ -2860,12 +4379,70 @@ netex:zoneUse a owl:DatatypeProperty ;
 netex:MobilityServiceRefStructure a owl:Class ;
     rdfs:label "MobilityService" ;
     rdfs:comment "Type for a reference to a MOBILITY SERVICE." ;
-    rdfs:subClassOf netex:EquipmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a POINT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for MobilityServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:EquipmentRefStructure .
 
 netex:ParkingBayStatusRefStructure a owl:Class ;
     rdfs:label "ParkingBayStatus" ;
     rdfs:comment "Type for a reference to a PARKING BAY STATUS." ;
-    rdfs:subClassOf netex:TypeOfValueRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Reference to a PARKING BAY STATUS." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for ParkingBayStatusRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:TypeOfValueRefStructure .
+
+netex:assignmentRef a owl:ObjectProperty ;
+    rdfs:label "AssignmentRef" ;
+    rdfs:range netex:Assignment ;
+    netex:isReference true ;
+    netex:xsdType "AssignmentRefStructure" .
 
 netex:fleets a owl:ObjectProperty ;
     rdfs:label "fleets" ;
@@ -2875,14 +4452,17 @@ netex:fleets a owl:ObjectProperty ;
 netex:mobilityServiceConstraintZoneRef a owl:ObjectProperty ;
     rdfs:label "MobilityServiceConstraintZoneRef" ;
     rdfs:range netex:MobilityServiceConstraintZone ;
+    rdfs:subPropertyOf netex:zoneRef ;
     netex:isReference true ;
     netex:xsdType "MobilityServiceConstraintZoneRefStructure" .
 
-netex:mobilityServiceRef a owl:ObjectProperty ;
-    rdfs:label "MobilityServiceRef" ;
-    rdfs:range netex:MobilityService ;
-    netex:isReference true ;
-    netex:xsdType "MobilityServiceRefStructure" .
+netex:mobilityService_Dummy a owl:ObjectProperty ;
+    rdfs:label "MobilityService_Dummy" ;
+    netex:xsdType "Equipment_VersionStructure" .
+
+netex:parkingBay_Dummy a owl:ObjectProperty ;
+    rdfs:label "ParkingBay_Dummy" ;
+    netex:xsdType "SiteComponent_VersionStructure" .
 
 netex:status a owl:DatatypeProperty ;
     rdfs:label "Status" ;
@@ -2890,15 +4470,22 @@ netex:status a owl:DatatypeProperty ;
     rdfs:range xsd:normalizedString ;
     netex:xsdType "ParkingBayStatusEnumeration" .
 
-netex:vehicleMeetingPointAssignmentRef a owl:ObjectProperty ;
-    rdfs:label "VehicleMeetingPointAssignmentRef" ;
-    rdfs:range netex:VehicleMeetingPointAssignment ;
+netex:typeOfValueRef a owl:ObjectProperty ;
+    rdfs:label "TypeOfValueRef" ;
+    rdfs:range netex:TypeOfValue ;
     netex:isReference true ;
-    netex:xsdType "VehicleMeetingPointAssignmentRefStructure" .
+    netex:xsdType "TypeOfValueRefStructure" .
+
+netex:usageParameterRef a owl:ObjectProperty ;
+    rdfs:label "UsageParameterRef" ;
+    rdfs:range netex:UsageParameter ;
+    netex:isReference true ;
+    netex:xsdType "UsageParameterRefStructure" .
 
 netex:vehicleMeetingPointRef a owl:ObjectProperty ;
     rdfs:label "VehicleMeetingPointRef" ;
     rdfs:range netex:VehicleMeetingPoint ;
+    rdfs:subPropertyOf netex:pointRef ;
     netex:isReference true ;
     netex:xsdType "VehicleMeetingPointRefStructure" .
 
@@ -2911,7 +4498,33 @@ netex:vehicleRef a owl:ObjectProperty ;
 netex:CommonVehicleServiceRefStructure a owl:Class ;
     rdfs:label "CommonVehicleService" ;
     rdfs:comment "Type for a reference to an COMMON VEHICLE SERVICE." ;
-    rdfs:subClassOf netex:MobilityServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a TICKETING SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for CommonVehicleServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:MobilityServiceRefStructure .
 
 netex:CommonVehicleService_VersionStructure a owl:Class ;
     rdfs:label "CommonVehicleService" ;
@@ -2955,10 +4568,9 @@ netex:MobilityService_VersionStructure a owl:Class ;
             netex:xsdSequenceOrder 5 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty netex:serviceBookingArrangements ;
+            owl:onProperty netex:serviceBookingArrangements_Collection ;
             netex:xsdSequenceOrder 6 ],
         [ a owl:Restriction ;
-            rdfs:comment "Booking Arrangements for service. DEPRECATED: use serviceBookingArrangements" ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:serviceBookingArrangements ;
             netex:xsdSequenceOrder 7 ],
@@ -2968,7 +4580,33 @@ netex:MobilityService_VersionStructure a owl:Class ;
 netex:VehiclePoolingServiceRefStructure a owl:Class ;
     rdfs:label "VehiclePoolingService" ;
     rdfs:comment "Type for a reference to an VEHICLE POOLING SERVICE." ;
-    rdfs:subClassOf netex:CommonVehicleServiceRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of a TICKETING SERVICE." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehiclePoolingServiceRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:CommonVehicleServiceRefStructure .
 
 netex:VehiclePoolingService_VersionStructure a owl:Class ;
     rdfs:label "VehiclePoolingService" ;
@@ -2986,24 +4624,106 @@ netex:VehiclePoolingService_VersionStructure a owl:Class ;
 netex:VehicleServicePlaceAssignmentRefStructure a owl:Class ;
     rdfs:label "VehicleServicePlaceAssignment" ;
     rdfs:comment "Type for a reference to a VEHICLE SERVICE PLACE ASSIGNMENT. +v1.2.2" ;
-    rdfs:subClassOf netex:AssignmentRefStructure .
+    rdfs:subClassOf [ a owl:Restriction ;
+            rdfs:comment "Identifier of VEHICLE SERVICE PLACE ASSIGNMENT." ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@ref> ],
+        [ a owl:Restriction ;
+            rdfs:comment "Automatic reference class for VehicleServicePlaceAssignmentRefStructure" ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@nameOfRefClass> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@modification> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@versionRef> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@uri> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@created> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@changed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
+        netex:AssignmentRefStructure .
 
 netex:VehicleServicePlaceAssignment_VersionStructure a owl:Class ;
     rdfs:label "VehicleServicePlaceAssignment" ;
     rdfs:comment "Type for VEHICLE SERVICE PLACE ASSIGNMENT restricts id." ;
     rdfs:subClassOf netex:Assignment_VersionStructure .
 
-netex:commonVehicleServiceRef a owl:ObjectProperty ;
-    rdfs:label "CommonVehicleServiceRef" ;
-    rdfs:range netex:CommonVehicleService ;
-    netex:isReference true ;
-    netex:xsdType "CommonVehicleServiceRefStructure" .
+netex:commonVehicleService_Dummy a owl:ObjectProperty ;
+    rdfs:label "CommonVehicleService_Dummy" ;
+    netex:xsdType "Equipment_VersionStructure" .
+
+netex:dataManagedObject a owl:ObjectProperty ;
+    rdfs:label "DataManagedObject" ;
+    netex:xsdType "DataManagedObjectStructure" .
 
 netex:individualTravellerRef a owl:ObjectProperty ;
     rdfs:label "IndividualTravellerRef" ;
     rdfs:range netex:IndividualTraveller ;
+    rdfs:subPropertyOf netex:versionOfObjectRef ;
     netex:isReference true ;
     netex:xsdType "IndividualTravellerRefStructure" .
+
+netex:parkingLogEntry_Dummy a owl:ObjectProperty ;
+    rdfs:label "ParkingLogEntry_Dummy" ;
+    rdfs:comment "Dummy type for Parking Log ENTRY. +v1.2.2" ;
+    netex:xsdType "DataManagedObjectStructure" .
+
+netex:ranking a owl:DatatypeProperty ;
+    rdfs:label "Ranking" ;
+    rdfs:comment "Mean rating for traveller" ;
+    rdfs:range xsd:decimal ;
+    netex:xsdType "GlobalRankingType" .
+
+netex:usageParameter_Dummy a owl:ObjectProperty ;
+    rdfs:label "UsageParameter_Dummy" ;
+    netex:xsdType "DataManagedObjectStructure" .
+
+netex:vehicleMeetingPointAssignmentRef a owl:ObjectProperty ;
+    rdfs:label "VehicleMeetingPointAssignmentRef" ;
+    rdfs:range netex:VehicleMeetingPointAssignment ;
+    rdfs:subPropertyOf netex:assignmentRef ;
+    netex:isReference true ;
+    netex:xsdType "VehicleMeetingPointAssignmentRefStructure" .
+
+netex:vehiclePoolingServiceRef a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolingServiceRef" ;
+    rdfs:range netex:VehiclePoolingService ;
+    rdfs:subPropertyOf netex:commonVehicleServiceRef ;
+    netex:isReference true ;
+    netex:xsdType "VehiclePoolingServiceRefStructure" .
+
+netex:vehiclePoolingService_Dummy a owl:ObjectProperty ;
+    rdfs:label "VehiclePoolingService_Dummy" ;
+    rdfs:subPropertyOf netex:commonVehicleService_Dummy ;
+    netex:xsdType "MobilityService_VersionStructure" .
+
+netex:vehicleServicePlaceAssignmentRef a owl:ObjectProperty ;
+    rdfs:label "VehicleServicePlaceAssignmentRef" ;
+    rdfs:range netex:VehicleServicePlaceAssignment ;
+    rdfs:subPropertyOf netex:assignmentRef ;
+    netex:isReference true ;
+    netex:xsdType "VehicleServicePlaceAssignmentRefStructure" .
+
+netex:versionOfObjectRef a owl:ObjectProperty ;
+    rdfs:label "VersionOfObjectRef" ;
+    netex:isReference true ;
+    netex:xsdType "VersionOfObjectRefStructure" .
+
+netex:mobilityServiceRef a owl:ObjectProperty ;
+    rdfs:label "MobilityServiceRef" ;
+    rdfs:range netex:MobilityService ;
+    rdfs:subPropertyOf netex:equipmentRef ;
+    netex:isReference true ;
+    netex:xsdType "MobilityServiceRefStructure" .
 
 netex:parkingBayRef a owl:ObjectProperty ;
     rdfs:label "ParkingBayRef" ;
@@ -3011,9 +4731,70 @@ netex:parkingBayRef a owl:ObjectProperty ;
     netex:isReference true ;
     netex:xsdType "ParkingBayRefStructure" .
 
-netex:ranking a owl:DatatypeProperty ;
-    rdfs:label "Ranking" ;
-    rdfs:comment "Mean rating for traveller" ;
-    rdfs:range xsd:decimal ;
-    netex:xsdType "GlobalRankingType" .
+netex:assignment_Dummy a owl:ObjectProperty ;
+    rdfs:label "Assignment_Dummy" ;
+    netex:xsdType "DataManagedObjectStructure" .
+
+netex:commonVehicleServiceRef a owl:ObjectProperty ;
+    rdfs:label "CommonVehicleServiceRef" ;
+    rdfs:range netex:CommonVehicleService ;
+    rdfs:subPropertyOf netex:mobilityServiceRef ;
+    netex:isReference true ;
+    netex:xsdType "CommonVehicleServiceRefStructure" .
+
+<https://netex-cen.eu/ontology#@changed> a owl:DatatypeProperty ;
+    rdfs:label "@changed" ;
+    rdfs:comment "Date reference was last changed." ;
+    rdfs:range xsd:dateTime ;
+    netex:xsdAttribute true ;
+    netex:xsdType "xsd:dateTime" .
+
+<https://netex-cen.eu/ontology#@created> a owl:DatatypeProperty ;
+    rdfs:label "@created" ;
+    rdfs:comment "Date reference was first created." ;
+    rdfs:range xsd:dateTime ;
+    netex:xsdAttribute true ;
+    netex:xsdType "xsd:dateTime" .
+
+<https://netex-cen.eu/ontology#@modification> a owl:DatatypeProperty ;
+    rdfs:label "@modification" ;
+    rdfs:comment "Nature of last modification: new, revise, delete, unchanged." ;
+    rdfs:range xsd:NMTOKEN ;
+    netex:xsdAttribute true ;
+    netex:xsdType "ModificationEnumeration" .
+
+<https://netex-cen.eu/ontology#@nameOfRefClass> a owl:DatatypeProperty ;
+    rdfs:label "@nameOfRefClass" ;
+    rdfs:comment "Automatic reference class for OnlineServiceOperatorRefStructure" ;
+    rdfs:range xsd:Name ;
+    netex:xsdAttribute true ;
+    netex:xsdType "NameOfClassOnlineServiceOperatorRefStructureType" .
+
+<https://netex-cen.eu/ontology#@ref> a owl:DatatypeProperty ;
+    rdfs:label "@ref" ;
+    rdfs:comment "Identifier of an ONLINE SERVICE OPERATOR." ;
+    rdfs:range xsd:normalizedString ;
+    netex:xsdAttribute true ;
+    netex:xsdType "OnlineServiceOperatorIdType" .
+
+<https://netex-cen.eu/ontology#@uri> a owl:DatatypeProperty ;
+    rdfs:label "@uri" ;
+    rdfs:comment "Location of the external entity. +v2.0" ;
+    rdfs:range xsd:anyURI ;
+    netex:xsdAttribute true ;
+    netex:xsdType "xsd:anyURI" .
+
+<https://netex-cen.eu/ontology#@version> a owl:DatatypeProperty ;
+    rdfs:label "@version" ;
+    rdfs:comment "Version number of referenced entity." ;
+    rdfs:range xsd:normalizedString ;
+    netex:xsdAttribute true ;
+    netex:xsdType "VersionIdType" .
+
+<https://netex-cen.eu/ontology#@versionRef> a owl:DatatypeProperty ;
+    rdfs:label "@versionRef" ;
+    rdfs:comment "Identifier of version of referenced entity. For use when reference is External and a specific version is required. Mutually exclusive with version" ;
+    rdfs:range xsd:normalizedString ;
+    netex:xsdAttribute true ;
+    netex:xsdType "VersionIdType" .
 

@@ -1,6 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix netex: <https://netex-cen.eu/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -116,8 +117,26 @@ netex:Topic a owl:Class ;
     rdfs:subClassOf netex:TopicStructure ;
     netex:xsdElement true .
 
+netex:dataObjectCapabilitiesResponse a owl:ObjectProperty ;
+    rdfs:label "DataObjectCapabilitiesResponse" ;
+    rdfs:subPropertyOf netex:abstractFunctionalServiceCapabilitiesResponse ;
+    netex:xsdType "DataObjectCapabilitiesResponseStructure" .
+
+netex:dataObjectSubscriptionRequest a owl:ObjectProperty ;
+    rdfs:label "DataObjectSubscriptionRequest" ;
+    rdfs:subPropertyOf netex:abstractFunctionalServiceSubscriptionRequest ;
+    netex:xsdType "DataObjectSubscriptionStructure" .
+
 netex:isReference a owl:AnnotationProperty ;
     rdfs:label "is reference" .
+
+netex:networkFrameTopic a owl:ObjectProperty ;
+    rdfs:label "NetworkFrameTopic" ;
+    rdfs:subPropertyOf netex:topic ;
+    netex:xsdType "NetworkFrameTopicStructure" .
+
+netex:xsdAttribute a owl:AnnotationProperty ;
+    rdfs:label "xsd attribute" .
 
 netex:xsdElement a owl:AnnotationProperty ;
     rdfs:label "xsd element" .
@@ -129,11 +148,22 @@ netex:xsdType a owl:AnnotationProperty ;
     rdfs:label "xsd type" .
 
 <https://netex-cen.eu/ontology/service> a owl:Ontology ;
-    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:created "2010-09-04"^^xsd:date ;
+    dcterms:modified "2010-09-04"^^xsd:date ;
     dcterms:source "NeTEx_publication.xsd" ;
     dcterms:title "NeTEx service" ;
+    rdfs:comment "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     owl:imports <https://netex-cen.eu/ontology/framework> ;
-    owl:versionInfo "482a533" .
+    owl:versionInfo "2.0" ;
+    prov:wasAttributedTo <https://github.com/hfjelstad/netex-ontology-generator/releases/tag/v0.4.0> ;
+    prov:wasDerivedFrom <https://github.com/TransmodelEcosystem/NeTEx/blob/8056d5a30b131a3303d5c8b198cadc3a3570b083/xsd/NeTEx_publication.xsd> .
+
+<https://netex-cen.eu/ontology#@version> a owl:DatatypeProperty ;
+    rdfs:label "@version" ;
+    rdfs:comment "Version number of response. Fixed" ;
+    rdfs:range xsd:NMTOKEN ;
+    netex:xsdAttribute true ;
+    netex:xsdType "siri:VersionString" .
 
 netex:DataObjectCapabilitiesResponseStructure a owl:Class ;
     rdfs:label "DataObjectCapabilitiesResponse" ;
@@ -150,6 +180,9 @@ netex:DataObjectCapabilitiesResponseStructure a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:extensions ;
             netex:xsdSequenceOrder 3 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ],
         netex:AbstractServiceCapabilitiesResponseStructure .
 
 netex:DataObjectDeliveryStructure a owl:Class ;
@@ -261,6 +294,22 @@ netex:NetworkFrameTopicStructure a owl:Class ;
             netex:xsdSequenceOrder 8 ],
         netex:TopicStructure .
 
+netex:abstractFunctionalServiceCapabilitiesResponse a owl:ObjectProperty ;
+    rdfs:label "AbstractFunctionalServiceCapabilitiesResponse" ;
+    netex:xsdType "AbstractServiceCapabilitiesResponseStructure" .
+
+netex:abstractFunctionalServiceDelivery a owl:ObjectProperty ;
+    rdfs:label "AbstractFunctionalServiceDelivery" ;
+    netex:xsdType "AbstractServiceDeliveryStructure" .
+
+netex:abstractFunctionalServiceRequest a owl:ObjectProperty ;
+    rdfs:label "AbstractFunctionalServiceRequest" ;
+    netex:xsdType "AbstractFunctionalServiceRequestStructure" .
+
+netex:abstractFunctionalServiceSubscriptionRequest a owl:ObjectProperty ;
+    rdfs:label "AbstractFunctionalServiceSubscriptionRequest" ;
+    netex:xsdType "AbstractSubscriptionStructure" .
+
 netex:boundingBox a owl:ObjectProperty ;
     rdfs:label "BoundingBox" ;
     rdfs:comment "Area containing objects to be returned." ;
@@ -293,6 +342,7 @@ netex:currentAt a owl:DatatypeProperty ;
 netex:dataObjectDelivery a owl:ObjectProperty ;
     rdfs:label "DataObjectDelivery" ;
     rdfs:comment "Delivery for Stop Event service." ;
+    rdfs:subPropertyOf netex:abstractFunctionalServiceDelivery ;
     netex:xsdType "DataObjectDeliveryStructure" .
 
 netex:dataObjectPermissions a owl:DatatypeProperty ;
@@ -302,9 +352,10 @@ netex:dataObjectServiceCapabilities a owl:ObjectProperty ;
     rdfs:label "DataObjectServiceCapabilities" ;
     netex:xsdType "DataObjectServiceCapabilitiesStructure" .
 
-netex:dataObjects a owl:DatatypeProperty ;
+netex:dataObjects a owl:ObjectProperty ;
     rdfs:label "dataObjects" ;
-    rdfs:comment "NeTEx Entities of any type." .
+    rdfs:comment "NeTEx Entities of any type." ;
+    netex:xsdType "dataObjects_RelStructure" .
 
 netex:description a owl:ObjectProperty ;
     rdfs:label "Description" ;
@@ -381,9 +432,10 @@ netex:requestDetail a owl:DatatypeProperty ;
     rdfs:comment "Level of detail to return. Default is all. All = Return all data and geometry, but not Xref NoGeometry = Return all, omitting geometry. XRef - Return Xcross Reference data , e.g. links for zones." ;
     netex:xsdType "OutputDetailListOfEnumerations" .
 
-netex:requestPolicy a owl:DatatypeProperty ;
+netex:requestPolicy a owl:ObjectProperty ;
     rdfs:label "RequestPolicy" ;
-    rdfs:comment "Available Request Policy capabilities." .
+    rdfs:comment "Available Request Policy capabilities." ;
+    netex:xsdType "DataObjectCapabilityRequestPolicyStructure" .
 
 netex:responseFeatures a owl:DatatypeProperty ;
     rdfs:label "ResponseFeatures" ;
@@ -401,6 +453,10 @@ netex:sources a owl:ObjectProperty ;
     rdfs:label "sources" ;
     rdfs:comment "Data Sources to include. If more than one source is specified it is logically ORed with the others." ;
     netex:xsdType "dataSources_RelStructure" .
+
+netex:topic a owl:ObjectProperty ;
+    rdfs:label "Topic" ;
+    netex:xsdType "TopicStructure" .
 
 netex:topicFiltering a owl:DatatypeProperty ;
     rdfs:label "TopicFiltering" ;
@@ -466,6 +522,7 @@ netex:TopicStructure a owl:Class ;
 
 netex:dataObjectRequest a owl:ObjectProperty ;
     rdfs:label "DataObjectRequest" ;
+    rdfs:subPropertyOf netex:abstractFunctionalServiceRequest ;
     netex:xsdType "DataObjectRequestStructure" .
 
 netex:subscriptionPolicy a owl:ObjectProperty ;

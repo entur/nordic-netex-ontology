@@ -19,7 +19,7 @@
 <https://netex-cen.eu/catalog> a dcat:Catalog ;
     dcterms:title "Nordic NeTEx Ontology — catalog" ;
     dcterms:description "Manifest of every RDF document this repository composes: the vendored generated NeTEx base and the Nordic profile layer on top of it." ;
-    dcterms:modified "2026-10-30"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:dataset
         <https://netex-cen.eu/ontology/core> ,
         <https://netex-cen.eu/ontology/framework> ,
@@ -40,9 +40,10 @@
 
 <https://netex-cen.eu/ontology/core> a dcat:Dataset ;
     dcterms:title "NeTEx core (root schemas)" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 488 ;
+    void:triples 508 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-core.ttl> ;
@@ -50,9 +51,10 @@
 
 <https://netex-cen.eu/ontology/framework> a dcat:Dataset ;
     dcterms:title "NeTEx framework" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 37749 ;
+    void:triples 48221 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-framework.ttl> ;
@@ -60,9 +62,10 @@
 
 <https://netex-cen.eu/ontology/gml> a dcat:Dataset ;
     dcterms:title "GML subset" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 482 ;
+    void:triples 740 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-gml.ttl> ;
@@ -70,9 +73,10 @@
 
 <https://netex-cen.eu/ontology/part1> a dcat:Dataset ;
     dcterms:title "NeTEx Part 1 - Network topology" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 19348 ;
+    void:triples 27961 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part1.ttl> ;
@@ -80,9 +84,10 @@
 
 <https://netex-cen.eu/ontology/part2> a dcat:Dataset ;
     dcterms:title "NeTEx Part 2 - Scheduled timetables" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 9119 ;
+    void:triples 11925 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part2.ttl> ;
@@ -90,9 +95,10 @@
 
 <https://netex-cen.eu/ontology/part3> a dcat:Dataset ;
     dcterms:title "NeTEx Part 3 - Fare information" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 17473 ;
+    void:triples 25681 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part3.ttl> ;
@@ -100,9 +106,10 @@
 
 <https://netex-cen.eu/ontology/part5> a dcat:Dataset ;
     dcterms:title "NeTEx Part 5 - Alternative modes" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 2895 ;
+    void:triples 4958 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part5.ttl> ;
@@ -110,9 +117,10 @@
 
 <https://netex-cen.eu/ontology/service> a dcat:Dataset ;
     dcterms:title "NeTEx service" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 459 ;
+    void:triples 506 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-service.ttl> ;
@@ -120,9 +128,10 @@
 
 <https://netex-cen.eu/ontology/shacl> a dcat:Dataset ;
     dcterms:title "NeTEx SHACL shapes (generated from XSD)" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 50231 ;
+    void:triples 85758 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-shacl.ttl> ;
@@ -130,9 +139,10 @@
 
 <https://netex-cen.eu/ontology/siri> a dcat:Dataset ;
     dcterms:title "SIRI subset" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 2719 ;
+    void:triples 2884 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-siri.ttl> ;
@@ -140,9 +150,10 @@
 
 <https://netex-cen.eu/ontology> a dcat:Dataset ;
     dcterms:title "NeTEx base ontology (generated from XSD)" ;
+    dcterms:description "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
-    void:triples 22 ;
+    void:triples 28 ;
     dcterms:modified "2026-08-24"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex.ttl> ;
@@ -175,8 +186,8 @@
     dcterms:description "The Nordic Profile: membership allowlist (profile nodes and fields), SHACL shapes (allow / require / exclude), profile element ordering and navigational domain chains." ;
     dcat:keyword "profile" ;
     dcterms:provenance "maintained here" ;
-    void:triples 3086 ;
-    dcterms:modified "2026-10-29"^^xsd:date ;
+    void:triples 3088 ;
+    dcterms:modified "2026-11-11"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-nordic.ttl> ;
         dcterms:format "text/turtle" ] .
