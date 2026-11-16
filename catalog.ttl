@@ -35,6 +35,7 @@
         <https://netex-cen.eu/nordic> ,
         <https://netex-cen.eu/nordic/model> ,
         <https://netex-cen.eu/profile/nordic> ,
+        <https://netex-cen.eu/profile/nordic/shapes> ,
         <https://netex-cen.eu/bridge/siri> ,
         <https://netex-cen.eu/alignment/transmodel> .
 
@@ -44,7 +45,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 508 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-core.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -55,7 +56,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 48221 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-framework.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -66,7 +67,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 740 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-gml.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -77,7 +78,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 27961 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part1.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -88,7 +89,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 11925 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part2.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -99,7 +100,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 25681 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part3.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -110,7 +111,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 4958 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-part5.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -121,7 +122,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 506 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-service.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -132,7 +133,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 85758 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-shacl.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -143,7 +144,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 2884 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex-siri.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -154,7 +155,7 @@
     dcat:keyword "base" ;
     dcterms:provenance "vendored snapshot, generated from NeTEx_publication.xsd; not hand-edited" ;
     void:triples 28 ;
-    dcterms:modified "2026-08-24"^^xsd:date ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <base/netex.ttl> ;
         dcterms:format "text/turtle" ] .
@@ -183,13 +184,24 @@
 
 <https://netex-cen.eu/profile/nordic> a dcat:Dataset ;
     dcterms:title "Nordic NeTEx Profile" ;
-    dcterms:description "The Nordic Profile: membership allowlist (profile nodes and fields), SHACL shapes (allow / require / exclude), profile element ordering and navigational domain chains." ;
+    dcterms:description "The Nordic Profile: membership allowlist (profile nodes and fields, with the cardinality the SHACL shapes are generated from), profile element ordering and navigational domain chains." ;
     dcat:keyword "profile" ;
     dcterms:provenance "maintained here" ;
-    void:triples 3088 ;
+    void:triples 2978 ;
     dcterms:modified "2026-11-11"^^xsd:date ;
     dcat:distribution [ a dcat:Distribution ;
         dcat:downloadURL <netex-nordic.ttl> ;
+        dcterms:format "text/turtle" ] .
+
+<https://netex-cen.eu/profile/nordic/shapes> a dcat:Dataset ;
+    dcterms:title "netex-nordic.ttl: shapes generated from profile:cardinality" ;
+    dcterms:description "Generated by scripts/generate-shapes.py from the profile:cardinality of the members in netex-nordic.ttl, where the profile is stricter than the XSD (docs/adr/0002). Do not hand-edit; change the membership and regenerate." ;
+    dcat:keyword "shapes" ;
+    dcterms:provenance "generated by scripts/generate-shapes.py from netex-nordic.ttl; not hand-edited" ;
+    void:triples 964 ;
+    dcterms:modified "2026-11-16"^^xsd:date ;
+    dcat:distribution [ a dcat:Distribution ;
+        dcat:downloadURL <netex-nordic-shapes.ttl> ;
         dcterms:format "text/turtle" ] .
 
 <https://netex-cen.eu/bridge/siri> a dcat:Dataset ;

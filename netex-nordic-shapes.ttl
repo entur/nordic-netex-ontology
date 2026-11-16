@@ -1,0 +1,822 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix netex: <https://netex-cen.eu/ontology#> .
+@prefix nordic: <https://netex-cen.eu/nordic#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nordic:AlternativeText_CardinalityShape a sh:NodeShape ;
+    rdfs:label "AlternativeText: generated from profile:cardinality" ;
+    sh:property [ sh:description "AlternativeText/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "AlternativeText/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:AlternativeText .
+
+nordic:Authority_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Authority: generated from profile:cardinality" ;
+    sh:property [ sh:description "Authority/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "Authority/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "Authority/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Authority .
+
+nordic:Codespace_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Codespace: generated from profile:cardinality" ;
+    sh:property [ sh:description "Codespace/XmlnsUrl is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "XmlnsUrl" ;
+            sh:path netex:xmlnsUrl ],
+        [ sh:description "Codespace/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ] ;
+    sh:targetClass netex:Codespace .
+
+nordic:DayTypeAssignment_CardinalityShape a sh:NodeShape ;
+    rdfs:label "DayTypeAssignment: generated from profile:cardinality" ;
+    sh:property [ sh:description "DayTypeAssignment/isAvailable is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "isAvailable" ;
+            sh:path netex:isAvailable ],
+        [ sh:description "DayTypeAssignment/@order is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@order" ;
+            sh:path <https://netex-cen.eu/ontology#@order> ],
+        [ sh:description "DayTypeAssignment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:DayTypeAssignment .
+
+nordic:DayType_CardinalityShape a sh:NodeShape ;
+    rdfs:label "DayType: generated from profile:cardinality" ;
+    sh:property [ sh:description "DayType/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "DayType/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:DayType .
+
+nordic:DefaultConnection_CardinalityShape a sh:NodeShape ;
+    rdfs:label "DefaultConnection: generated from profile:cardinality" ;
+    sh:property [ sh:description "DefaultConnection/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "DefaultConnection/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:DefaultConnection .
+
+nordic:DestinationDisplay_CardinalityShape a sh:NodeShape ;
+    rdfs:label "DestinationDisplay: generated from profile:cardinality" ;
+    sh:property [ sh:description "DestinationDisplay/FrontText is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "FrontText" ;
+            sh:path netex:frontText ],
+        [ sh:description "DestinationDisplay/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "DestinationDisplay/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:DestinationDisplay .
+
+nordic:FlexibleServiceProperties_CardinalityShape a sh:NodeShape ;
+    rdfs:label "FlexibleServiceProperties: generated from profile:cardinality" ;
+    sh:property [ sh:description "FlexibleServiceProperties/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "FlexibleServiceProperties/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:FlexibleServiceProperties .
+
+nordic:GroupOfLines_CardinalityShape a sh:NodeShape ;
+    rdfs:label "GroupOfLines: generated from profile:cardinality" ;
+    sh:property [ sh:description "GroupOfLines/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "GroupOfLines/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:GroupOfLines .
+
+nordic:JourneyPattern_CardinalityShape a sh:NodeShape ;
+    rdfs:label "JourneyPattern: generated from profile:cardinality" ;
+    sh:property [ sh:description "JourneyPattern/RouteRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "RouteRef" ;
+            sh:path netex:routeRef ],
+        [ sh:description "JourneyPattern/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:name "linksInSequence" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "ServiceLinkInJourneyPattern" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@id is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@id" ;
+                                            sh:path <https://netex-cen.eu/ontology#@id> ],
+                                        [ sh:description "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@order is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@order" ;
+                                            sh:path <https://netex-cen.eu/ontology#@order> ],
+                                        [ sh:description "JourneyPattern/linksInSequence/ServiceLinkInJourneyPattern/@version is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@version" ;
+                                            sh:path <https://netex-cen.eu/ontology#@version> ] ] ;
+                            sh:path netex:serviceLinkInJourneyPattern ] ] ;
+            sh:path netex:linksInSequence ],
+        [ sh:name "pointsInSequence" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "StopPointInJourneyPattern" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@id is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@id" ;
+                                            sh:path <https://netex-cen.eu/ontology#@id> ],
+                                        [ sh:name "noticeAssignments" ;
+                                            sh:node [ a sh:NodeShape ;
+                                                    sh:property [ sh:name "NoticeAssignment" ;
+                                                            sh:node [ a sh:NodeShape ;
+                                                                    sh:property [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/NoticeRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+                                                                            sh:minCount 1 ;
+                                                                            sh:name "NoticeRef" ;
+                                                                            sh:path netex:noticeRef ],
+                                                                        [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@order is 1..1 in the profile; the XSD allows 0..1." ;
+                                                                            sh:minCount 1 ;
+                                                                            sh:name "@order" ;
+                                                                            sh:path <https://netex-cen.eu/ontology#@order> ],
+                                                                        [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/noticeAssignments/NoticeAssignment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+                                                                            sh:minCount 1 ;
+                                                                            sh:name "@version" ;
+                                                                            sh:path <https://netex-cen.eu/ontology#@version> ] ] ;
+                                                            sh:path netex:noticeAssignment ] ] ;
+                                            sh:path netex:noticeAssignments ],
+                                        [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@order is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@order" ;
+                                            sh:path <https://netex-cen.eu/ontology#@order> ],
+                                        [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@version is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@version" ;
+                                            sh:path <https://netex-cen.eu/ontology#@version> ] ] ;
+                            sh:path netex:stopPointInJourneyPattern ] ] ;
+            sh:path netex:pointsInSequence ],
+        [ sh:description "JourneyPattern/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:JourneyPattern .
+
+nordic:Line_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Line: generated from profile:cardinality" ;
+    sh:property [ sh:description "Line/OperatorRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "OperatorRef" ;
+            sh:path netex:operatorRef ],
+        [ sh:description "Line/TransportMode is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "TransportMode" ;
+            sh:path netex:transportMode ],
+        [ sh:description "Line/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "Line/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Line .
+
+nordic:LinkSequenceProjection_CardinalityShape a sh:NodeShape ;
+    rdfs:label "LinkSequenceProjection: generated from profile:cardinality" ;
+    sh:property [ sh:description "LinkSequenceProjection/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "LinkSequenceProjection/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:LinkSequenceProjection .
+
+nordic:Network_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Network: generated from profile:cardinality" ;
+    sh:property [ sh:description "Network/AuthorityRef/@ref is 0..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:name "AuthorityRef" ;
+            sh:path netex:authorityRef ],
+        [ sh:description "Network/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "Network/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "Network/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Network .
+
+nordic:Notice_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Notice: generated from profile:cardinality" ;
+    sh:property [ sh:description "Notice/Text is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Text" ;
+            sh:path netex:text ],
+        [ sh:description "Notice/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "Notice/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Notice .
+
+nordic:OperatingDay_CardinalityShape a sh:NodeShape ;
+    rdfs:label "OperatingDay: generated from profile:cardinality" ;
+    sh:property [ sh:description "OperatingDay/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "OperatingDay/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:OperatingDay .
+
+nordic:OperatingPeriod_CardinalityShape a sh:NodeShape ;
+    rdfs:label "OperatingPeriod: generated from profile:cardinality" ;
+    sh:property [ sh:description "OperatingPeriod/FromDate is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "FromDate" ;
+            sh:path netex:fromDate ],
+        [ sh:description "OperatingPeriod/ToDate is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "ToDate" ;
+            sh:path netex:toDate ],
+        [ sh:description "OperatingPeriod/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "OperatingPeriod/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:OperatingPeriod .
+
+nordic:Operator_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Operator: generated from profile:cardinality" ;
+    sh:property [ sh:description "Operator/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "Operator/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "Operator/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Operator .
+
+nordic:Parking_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Parking: generated from profile:cardinality" ;
+    sh:property [ sh:name "Centroid" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "Parking/Centroid/Location is 1..1 in the profile; the XSD allows 0..1." ;
+                            sh:minCount 1 ;
+                            sh:name "Location" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "Parking/Centroid/Location/Latitude is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "Latitude" ;
+                                            sh:path netex:latitude ],
+                                        [ sh:description "Parking/Centroid/Location/Longitude is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "Longitude" ;
+                                            sh:path netex:longitude ] ] ;
+                            sh:path netex:location ] ] ;
+            sh:path netex:centroid ],
+        [ sh:description "Parking/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "Parking/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:name "parkingProperties" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "ParkingProperties" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:name "spaces" ;
+                                            sh:node [ a sh:NodeShape ;
+                                                    sh:property [ sh:name "ParkingCapacity" ;
+                                                            sh:node [ a sh:NodeShape ;
+                                                                    sh:property [ sh:description "Parking/parkingProperties/ParkingProperties/spaces/ParkingCapacity/ParkingUserType is 1..1 in the profile; the XSD allows 0..1." ;
+                                                                            sh:minCount 1 ;
+                                                                            sh:name "ParkingUserType" ;
+                                                                            sh:path netex:parkingUserType ] ] ;
+                                                            sh:path netex:parkingCapacity ] ] ;
+                                            sh:path netex:spaces ] ] ;
+                            sh:path netex:parkingProperties ] ] ;
+            sh:path netex:parkingProperties_Collection ],
+        [ sh:description "Parking/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Parking .
+
+nordic:PassengerStopAssignment_CardinalityShape a sh:NodeShape ;
+    rdfs:label "PassengerStopAssignment: generated from profile:cardinality" ;
+    sh:property [ sh:description "PassengerStopAssignment/QuayRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "QuayRef" ;
+            sh:path netex:quayRef ],
+        [ sh:description "PassengerStopAssignment/ScheduledStopPointRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "ScheduledStopPointRef" ;
+            sh:path netex:scheduledStopPointRef ],
+        [ sh:description "PassengerStopAssignment/ValidBetween is 0..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:name "ValidBetween" ;
+            sh:path netex:validBetween ],
+        [ sh:description "PassengerStopAssignment/@order is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@order" ;
+            sh:path <https://netex-cen.eu/ontology#@order> ],
+        [ sh:description "PassengerStopAssignment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:PassengerStopAssignment .
+
+nordic:PurposeOfGrouping_CardinalityShape a sh:NodeShape ;
+    rdfs:label "PurposeOfGrouping: generated from profile:cardinality" ;
+    sh:property [ sh:description "PurposeOfGrouping/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "PurposeOfGrouping/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "PurposeOfGrouping/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:PurposeOfGrouping .
+
+nordic:Quay_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Quay: generated from profile:cardinality" ;
+    sh:property [ sh:name "Centroid" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "Location" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "Quay/Centroid/Location/Latitude is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "Latitude" ;
+                                            sh:path netex:latitude ],
+                                        [ sh:description "Quay/Centroid/Location/Longitude is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "Longitude" ;
+                                            sh:path netex:longitude ] ] ;
+                            sh:path netex:location ] ] ;
+            sh:path netex:centroid ],
+        [ sh:description "Quay/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:name "boardingPositions" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "Quay/boardingPositions/BoardingPosition is 1..n in the profile; the XSD allows 0..n." ;
+                            sh:minCount 1 ;
+                            sh:name "BoardingPosition" ;
+                            sh:path netex:boardingPosition ] ] ;
+            sh:path netex:boardingPositions ],
+        [ sh:description "Quay/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "Quay/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Quay .
+
+nordic:ResponsibilitySet_CardinalityShape a sh:NodeShape ;
+    rdfs:label "ResponsibilitySet: generated from profile:cardinality" ;
+    sh:property [ sh:description "ResponsibilitySet/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:name "roles" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "ResponsibilityRoleAssignment" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@id is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@id" ;
+                                            sh:path <https://netex-cen.eu/ontology#@id> ],
+                                        [ sh:description "ResponsibilitySet/roles/ResponsibilityRoleAssignment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@version" ;
+                                            sh:path <https://netex-cen.eu/ontology#@version> ] ] ;
+                            sh:path netex:responsibilityRoleAssignment ] ] ;
+            sh:path netex:roles ],
+        [ sh:description "ResponsibilitySet/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:ResponsibilitySet .
+
+nordic:RoutePoint_CardinalityShape a sh:NodeShape ;
+    rdfs:label "RoutePoint: generated from profile:cardinality" ;
+    sh:property [ sh:description "RoutePoint/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "RoutePoint/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:RoutePoint .
+
+nordic:Route_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Route: generated from profile:cardinality" ;
+    sh:property [ sh:description "Route/LineRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "LineRef" ;
+            sh:path netex:lineRef ],
+        [ sh:description "Route/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "Route/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:name "pointsInSequence" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "PointOnRoute" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "Route/pointsInSequence/PointOnRoute/RoutePointRef/@ref is 0..1 in the profile; the XSD allows 0..n." ;
+                                            sh:maxCount 1 ;
+                                            sh:name "RoutePointRef" ;
+                                            sh:path netex:routePointRef ],
+                                        [ sh:description "Route/pointsInSequence/PointOnRoute/@order is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@order" ;
+                                            sh:path <https://netex-cen.eu/ontology#@order> ] ] ;
+                            sh:path netex:pointOnRoute ] ] ;
+            sh:path netex:pointsInSequence ],
+        [ sh:description "Route/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Route .
+
+nordic:SanitaryEquipment_CardinalityShape a sh:NodeShape ;
+    rdfs:label "SanitaryEquipment: generated from profile:cardinality" ;
+    sh:property [ sh:description "SanitaryEquipment/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "SanitaryEquipment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:SanitaryEquipment .
+
+nordic:ScheduledStopPoint_CardinalityShape a sh:NodeShape ;
+    rdfs:label "ScheduledStopPoint: generated from profile:cardinality" ;
+    sh:property [ sh:description "ScheduledStopPoint/ValidBetween is 0..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:name "ValidBetween" ;
+            sh:path netex:validBetween ],
+        [ sh:description "ScheduledStopPoint/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "ScheduledStopPoint/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:ScheduledStopPoint .
+
+nordic:ServiceCalendar_CardinalityShape a sh:NodeShape ;
+    rdfs:label "ServiceCalendar: generated from profile:cardinality" ;
+    sh:property [ sh:description "ServiceCalendar/FromDate is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "FromDate" ;
+            sh:path netex:fromDate ],
+        [ sh:description "ServiceCalendar/ToDate is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "ToDate" ;
+            sh:path netex:toDate ],
+        [ sh:description "ServiceCalendar/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "ServiceCalendar/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:ServiceCalendar .
+
+nordic:ServiceJourneyInterchange_CardinalityShape a sh:NodeShape ;
+    rdfs:label "ServiceJourneyInterchange: generated from profile:cardinality" ;
+    sh:property [ sh:description "ServiceJourneyInterchange/FromJourneyRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "FromJourneyRef" ;
+            sh:path netex:fromJourneyRef ],
+        [ sh:description "ServiceJourneyInterchange/ToJourneyRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "ToJourneyRef" ;
+            sh:path netex:toJourneyRef ],
+        [ sh:description "ServiceJourneyInterchange/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "ServiceJourneyInterchange/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:ServiceJourneyInterchange .
+
+nordic:ServiceJourney_CardinalityShape a sh:NodeShape ;
+    rdfs:label "ServiceJourney: generated from profile:cardinality" ;
+    sh:property [ sh:description "ServiceJourney/BlockRef is 0..0 in the profile; the XSD allows 0..1." ;
+            sh:maxCount 0 ;
+            sh:name "BlockRef" ;
+            sh:path netex:blockRef ],
+        [ sh:description "ServiceJourney/FlexibleLineRef is 0..0 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 0 ;
+            sh:name "FlexibleLineRef" ;
+            sh:path netex:flexibleLineRef ],
+        [ sh:description "ServiceJourney/JourneyPatternRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "JourneyPatternRef" ;
+            sh:path netex:journeyPatternRef ],
+        [ sh:description "ServiceJourney/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "ServiceJourney/passingTimes is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "passingTimes" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "TimetabledPassingTime" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "ServiceJourney/passingTimes/TimetabledPassingTime/StopPointInJourneyPatternRef/@ref is 1..1 in the profile; the XSD allows 0..n." ;
+                                            sh:maxCount 1 ;
+                                            sh:minCount 1 ;
+                                            sh:name "StopPointInJourneyPatternRef" ;
+                                            sh:path netex:stopPointInJourneyPatternRef ] ] ;
+                            sh:path netex:timetabledPassingTime ] ] ;
+            sh:path netex:passingTimes ],
+        [ sh:description "ServiceJourney/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:ServiceJourney .
+
+nordic:ServiceLink_CardinalityShape a sh:NodeShape ;
+    rdfs:label "ServiceLink: generated from profile:cardinality" ;
+    sh:property [ sh:description "ServiceLink/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "ServiceLink/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:ServiceLink .
+
+nordic:ShelterEquipment_CardinalityShape a sh:NodeShape ;
+    rdfs:label "ShelterEquipment: generated from profile:cardinality" ;
+    sh:property [ sh:description "ShelterEquipment/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "ShelterEquipment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:ShelterEquipment .
+
+nordic:SiteConnection_CardinalityShape a sh:NodeShape ;
+    rdfs:label "SiteConnection: generated from profile:cardinality" ;
+    sh:property [ sh:name "From" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "SiteConnection/From/StopPlaceRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+                            sh:minCount 1 ;
+                            sh:name "StopPlaceRef" ;
+                            sh:path netex:stopPlaceRef ] ] ;
+            sh:path netex:from ],
+        [ sh:name "To" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "SiteConnection/To/StopPlaceRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+                            sh:minCount 1 ;
+                            sh:name "StopPlaceRef" ;
+                            sh:path netex:stopPlaceRef ] ] ;
+            sh:path netex:to ],
+        [ sh:description "SiteConnection/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "SiteConnection/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:SiteConnection .
+
+nordic:StopPlace_CardinalityShape a sh:NodeShape ;
+    rdfs:label "StopPlace: generated from profile:cardinality" ;
+    sh:property [ sh:description "StopPlace/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "StopPlace/TransportMode is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "TransportMode" ;
+            sh:path netex:transportMode ],
+        [ sh:description "StopPlace/ValidBetween is 0..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:name "ValidBetween" ;
+            sh:path netex:validBetween ],
+        [ sh:description "StopPlace/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:name "quays" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "StopPlace/quays/Quay is 1..n in the profile; the XSD allows 0..n." ;
+                            sh:minCount 1 ;
+                            sh:name "Quay" ;
+                            sh:path netex:quay ] ] ;
+            sh:path netex:quays ],
+        [ sh:description "StopPlace/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:StopPlace .
+
+nordic:TariffZone_CardinalityShape a sh:NodeShape ;
+    rdfs:label "TariffZone: generated from profile:cardinality" ;
+    sh:property [ sh:description "TariffZone/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "TariffZone/ValidBetween is 0..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:name "ValidBetween" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "TariffZone/ValidBetween/FromDate is 1..1 in the profile; the XSD allows 0..1." ;
+                            sh:minCount 1 ;
+                            sh:name "FromDate" ;
+                            sh:path netex:fromDate ] ] ;
+            sh:path netex:validBetween ],
+        [ sh:description "TariffZone/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "TariffZone/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:TariffZone .
+
+nordic:TicketingEquipment_CardinalityShape a sh:NodeShape ;
+    rdfs:label "TicketingEquipment: generated from profile:cardinality" ;
+    sh:property [ sh:description "TicketingEquipment/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "TicketingEquipment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:TicketingEquipment .
+
+nordic:TopographicPlace_CardinalityShape a sh:NodeShape ;
+    rdfs:label "TopographicPlace: generated from profile:cardinality" ;
+    sh:property [ sh:description "TopographicPlace/ValidBetween is 0..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:name "ValidBetween" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "TopographicPlace/ValidBetween/FromDate is 1..1 in the profile; the XSD allows 0..1." ;
+                            sh:minCount 1 ;
+                            sh:name "FromDate" ;
+                            sh:path netex:fromDate ] ] ;
+            sh:path netex:validBetween ],
+        [ sh:description "TopographicPlace/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "TopographicPlace/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:TopographicPlace .
+
+nordic:TrainNumber_CardinalityShape a sh:NodeShape ;
+    rdfs:label "TrainNumber: generated from profile:cardinality" ;
+    sh:property [ sh:description "TrainNumber/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "TrainNumber/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:TrainNumber .
+
+nordic:VehicleType_CardinalityShape a sh:NodeShape ;
+    rdfs:label "VehicleType: generated from profile:cardinality" ;
+    sh:property [ sh:description "VehicleType/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "VehicleType/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "VehicleType/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:VehicleType .
+
+nordic:Vehicle_CardinalityShape a sh:NodeShape ;
+    rdfs:label "Vehicle: generated from profile:cardinality" ;
+    sh:property [ sh:description "Vehicle/OperatorRef/@ref is 0..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:name "OperatorRef" ;
+            sh:path netex:operatorRef ],
+        [ sh:description "Vehicle/VehicleTypeRef/@ref is 1..1 in the profile; the XSD allows 0..n." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "VehicleTypeRef" ;
+            sh:path netex:vehicleTypeRef ],
+        [ sh:description "Vehicle/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "Vehicle/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:Vehicle .
+
+nordic:WaitingRoomEquipment_CardinalityShape a sh:NodeShape ;
+    rdfs:label "WaitingRoomEquipment: generated from profile:cardinality" ;
+    sh:property [ sh:description "WaitingRoomEquipment/@id is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@id" ;
+            sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "WaitingRoomEquipment/@version is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "@version" ;
+            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+    sh:targetClass netex:WaitingRoomEquipment .
+
+<https://netex-cen.eu/profile/nordic/shapes> a owl:Ontology ;
+    dcterms:title "netex-nordic.ttl: shapes generated from profile:cardinality" ;
+    rdfs:comment "Generated by scripts/generate-shapes.py from the profile:cardinality of the members in netex-nordic.ttl, where the profile is stricter than the XSD (docs/adr/0002). Do not hand-edit; change the membership and regenerate." ;
+    prov:wasAttributedTo <https://github.com/entur/nordic-netex-ontology/blob/main/scripts/generate-shapes.py> .
+
