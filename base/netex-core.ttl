@@ -1,6 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix netex: <https://netex-cen.eu/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -497,6 +498,9 @@ netex:targetElement a owl:Class ;
     rdfs:label "targetElement" ;
     netex:xsdElement true .
 
+netex:xsdAttribute a owl:AnnotationProperty ;
+    rdfs:label "xsd attribute" .
+
 netex:xsdElement a owl:AnnotationProperty ;
     rdfs:label "xsd element" .
 
@@ -507,10 +511,14 @@ netex:xsdType a owl:AnnotationProperty ;
     rdfs:label "xsd type" .
 
 <https://netex-cen.eu/ontology/core> a owl:Ontology ;
-    dcterms:created "2026-08-11T10:11:58+02:00" ;
+    dcterms:created "2010-09-04"^^xsd:date ;
+    dcterms:modified "2025-04-27"^^xsd:date ;
     dcterms:source "NeTEx_publication.xsd" ;
     dcterms:title "NeTEx core (root schemas)" ;
-    owl:versionInfo "482a533" .
+    rdfs:comment "owl:versionInfo is the NeTEx version the source XSD declares (@version); it does not identify the exact source revision. prov:wasDerivedFrom is the exact XSD revision read, and prov:wasAttributedTo the generator release that produced this document." ;
+    owl:versionInfo "2.0" ;
+    prov:wasAttributedTo <https://github.com/hfjelstad/netex-ontology-generator/releases/tag/v0.4.0> ;
+    prov:wasDerivedFrom <https://github.com/TransmodelEcosystem/NeTEx/blob/8056d5a30b131a3303d5c8b198cadc3a3570b083/xsd/NeTEx_publication.xsd> .
 
 netex:PublicationDeliveryStructure a owl:Class ;
     rdfs:label "PublicationDelivery" ;
@@ -539,7 +547,10 @@ netex:PublicationDeliveryStructure a owl:Class ;
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:dataObjects ;
-            netex:xsdSequenceOrder 6 ] .
+            netex:xsdSequenceOrder 6 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ] .
 
 netex:PublicationRequestStructure a owl:Class ;
     rdfs:label "PublicationRequest" ;
@@ -567,11 +578,15 @@ netex:PublicationRequestStructure a owl:Class ;
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty netex:subscriptionPolicy ;
-            netex:xsdSequenceOrder 6 ] .
+            netex:xsdSequenceOrder 6 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://netex-cen.eu/ontology#@version> ] .
 
-netex:dataObjects a owl:DatatypeProperty ;
+netex:dataObjects a owl:ObjectProperty ;
     rdfs:label "dataObjects" ;
-    rdfs:comment "NeTEx Entities of any type." .
+    rdfs:comment "NeTEx Entities of any type." ;
+    netex:xsdType "dataObjects_RelStructure" .
 
 netex:publicationRefreshInterval a owl:DatatypeProperty ;
     rdfs:label "PublicationRefreshInterval" ;
@@ -609,6 +624,12 @@ netex:subscriptionPolicy a owl:ObjectProperty ;
 netex:topics a owl:DatatypeProperty ;
     rdfs:label "topics" ;
     rdfs:comment "One or more Request filters that specify tthe data to be included in output. Multiple filters are logically ANDed." .
+
+<https://netex-cen.eu/ontology#@version> a owl:DatatypeProperty ;
+    rdfs:label "@version" ;
+    rdfs:range xsd:NMTOKEN ;
+    netex:xsdAttribute true ;
+    netex:xsdType "xsd:NMTOKEN" .
 
 netex:description a owl:ObjectProperty ;
     rdfs:label "Description" ;
