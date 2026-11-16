@@ -1,0 +1,78 @@
+== 1. Record architecture decisions in `docs/adr/`, and leave specification decisions to the CCB
+
+Date: 2026-11-16
+
+== Status
+
+Proposed. Owner: the maintainer of `entur/nordic-netex-ontology`.
+
+== Context
+
+How the Nordic Profile is represented in RDF has so far been decided in
+commit messages and in the README. Examples: profile statements are never
+written on `netex:` classes but on Nordic-owned `profile:ProfileClass` nodes
+(`README.md`, "Namespaces and ownership"), the membership allowlist moved into
+`netex-nordic.ttl` (`2f10135`), and `base/` is a vendored snapshot of the
+generator output. Nobody can find or challenge these choices without reading
+the git log.
+
+Two kinds of decision meet in this repository:
+
+* *Specification decisions* say what the Nordic Profile requires of NeTEx
+  data. They are proposed and accepted in the Nordic Profile Change and
+  Control Board (CCB) repository as `decisions/NP-NNNN-*.yaml`, and arrive
+  here as `profile:ProfileMember` entries with `nordic:decision "NP-NNNN"`.
+* *System decisions* say how this repository works: how the profile is
+  modelled, what is generated and from what, and what downstream profiles and
+  tools may rely on. They have no home today.
+
+The CCB repository, Kompass and Gangleri already record system decisions as
+ADRs under `docs/adr/` (AsciiDoc, `NNNN-slug.adoc`, sections Status, Context,
+Decision, Consequences, Risks, Alternatives). The CCB's ADR 0001 defines the
+split between specification decisions and ADRs.
+
+== Decision
+
+* System decisions for this repository are recorded as AsciiDoc files in
+  `docs/adr/`, with the layout and conventions in
+  link:README.md[docs/adr/README.md], taken from Kompass, Gangleri and the CCB.
+* Specification decisions are not recorded here. A rule that can make a
+  dataset valid or invalid is a CCB decision; this repository records only its
+  outcome, as `nordic:decision` provenance on the affected entries.
+* When a change needs both, the rule is a CCB decision and the mechanism is an
+  ADR here, and the two link to each other.
+* ADRs are written in English. An accepted ADR is changed only through dated
+  amendments; a materially changed decision gets a new ADR that supersedes the
+  old one.
+
+== Consequences
+
+=== Positive
+
+* Modelling and generation choices can be found, reviewed and superseded.
+* Downstream profiles (for example Entur's) and rule tools can point at a
+  stable decision instead of at a commit.
+* Same form as the CCB, Kompass and Gangleri, so ADRs can refer to each other
+  across repositories.
+
+=== Negative
+
+* Some extra writing per decision.
+* Decisions already made (ProfileClass nodes, vendored base) are only written
+  up when they are next changed.
+
+== Risks
+
+* *Misfiled decisions.* A profile rule written as an ADR here would bypass the
+  CCB. The question "could it make a dataset valid or invalid?" is the guard,
+  and a reviewer should ask it on every ADR PR.
+* The index in `docs/adr/README.md` can fall out of date. It is updated in the
+  same PR as the ADR.
+
+== Alternatives
+
+* *Record system decisions in the CCB repository.* The CCB decides what the
+  profile requires, not how this repository models it. Mixing them would put
+  ontology mechanics in front of the CCB's readers. Rejected.
+* *Keep using the README.* It describes the current state, not why it was
+  chosen or what was rejected. Rejected.

@@ -1,0 +1,128 @@
+== 3. State value lists and severity on profile members, and generate `sh:in` and `sh:severity` from them
+
+Date: 2026-11-16
+
+== Status
+
+Proposed. Depends on ADR 0002. Owner: the maintainer of
+`entur/nordic-netex-ontology`.
+
+== Context
+
+ADR 0002 makes `profile:cardinality` the source for how often a field occurs.
+Two other things a profile needs to say about a field have no place on a
+`profile:ProfileMember`:
+
+* *Allowed values narrower than the XSD.* The XSD baseline already carries the
+  standard's value lists as `sh:in` (for example 21 values for
+  `Line/TransportMode`, 7 for `BookWhen`). Validators in use apply shorter
+  lists: Entur's Antu accepts 12 transport modes on a Line, 3 values of
+  `BookingAccess`, 3 of `BookWhen` and 4 of `FlexibleServiceType`. No `sh:in`
+  exists anywhere in `netex-nordic.ttl`. Downstream, Entur writes its lists
+  by hand in a separate shape (`ENT_DatedServiceJourneyShape`,
+  `ServiceAlteration`).
+* *How serious a miss is.* Antu reports rules as error, warning or
+  information. A profile requirement today has one strength: violated or not.
+  A field the Nordic validators want but do not reject on, such as
+  `Line/PublicCode` (warning in Antu), cannot be expressed without making it a
+  hard requirement or leaving it out.
+
+The CCB's decision template already has `decision.rule.in`, but nothing
+carries it into the ontology. It has no field for severity.
+
+== Decision
+
+=== Two new shared terms
+
+In `netex-nordic-vocab.ttl`, next to `profile:cardinality`:
+
+* `profile:allowedValues`: an `rdf:List` of literals on a
+  `profile:ProfileMember`. The field may take only these values.
+* `profile:severity`: one of `sh:Violation`, `sh:Warning`, `sh:Info` on a
+  `profile:ProfileMember`. It says how a violation of the member's
+  cardinality or allowed values is reported. Without it, `sh:Violation`
+  applies, as in SHACL.
+
+[source,turtle]
+----
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "PublicCode" ;
+    profile:path "Line/PublicCode" ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning .
+----
+
+=== Generation
+
+The generator from ADR 0002 also:
+
+* emits `sh:in` from `profile:allowedValues` when the list is narrower than
+  the XSD's `sh:in` for the same property. Values outside the XSD list are an
+  error in the generator, since a profile cannot allow what the standard does
+  not.
+* emits `sh:severity` from `profile:severity` on the generated property
+  constraint.
+
+`sh:in` is not generated for a property whose XSD type is a whitespace-
+separated list (for example `BookingMethods` and `BuyWhen`). SHACL compares
+`sh:in` against the whole value, so `"callOffice online"` would fail a list
+that contains both tokens. Such members are reported and need a hand-written
+shape.
+
+=== Meaning and layering
+
+* `profile:cardinality` states what the profile expects. `profile:severity`
+  states what happens when the data does not meet it. `1..1` with
+  `sh:Warning` reads "should be present", and the documentation tables show
+  the severity next to the cardinality.
+* A downstream profile may raise severity on its own member
+  (`sh:Warning` to `sh:Violation`) and may shorten a value list, but never
+  lower severity or add values. This is the same "tighten, never loosen" rule
+  that applies to cardinality.
+* Which members get a value list or a severity is a specification decision
+  for the CCB. This ADR decides only where it is written and how it is
+  generated.
+
+== Consequences
+
+=== Positive
+
+* Value lists and warnings get the same path as cardinality: CCB decision,
+  member, generated shape. No hand-written `sh:in`.
+* `decision.rule.in` in the CCB template gets a target in the ontology, and a
+  `severity` field can be added there with the same meaning.
+* Requirements that are warnings or information in today's validators can be
+  stated in the profile without turning them into errors.
+
+=== Negative
+
+* Two more terms in the shared `profile:` vocabulary, which downstream
+  profiles and documentation tools have to understand.
+* A member with `1..1` and `sh:Info` is weaker than its cardinality suggests
+  to someone who reads only the cardinality.
+
+== Risks
+
+* *Severity used to avoid a decision.* Marking a requirement as a warning is
+  easier than agreeing on it. The CCB should treat severity as part of the
+  rule, not as a softer default.
+* *Tools that ignore `sh:severity`.* A consumer that treats every SHACL result
+  as an error will reject data the profile only warns about. `kusu` passes
+  every `sh:*` term on; `netex-rule-gap` does not read `sh:in` or
+  `sh:severity` today.
+
+== Alternatives
+
+* *Keep writing `sh:in` and `sh:severity` in hand-written shapes.* Splits one
+  field's rules across the member and a shape, which is what ADR 0002
+  removes for cardinality. Rejected.
+* *Encode severity in the cardinality string*, for example `"1..1?"`.
+  Breaks every tool that parses `profile:cardinality` today, and mixes two
+  meanings in one literal. Rejected.
+* *Keep value lists and severity only in the CCB decisions.* Consumers read
+  the ontology, not the CCB's YAML; the information would never reach them.
+  Rejected.
+* *A separate `profile:recommended` flag instead of severity.* Covers warnings
+  but not information, and does not map onto SHACL's own severities.
+  Rejected.
