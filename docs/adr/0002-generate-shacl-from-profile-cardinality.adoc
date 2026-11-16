@@ -1,0 +1,157 @@
+== 2. Generate SHACL from `profile:cardinality`; hand-write shapes only for what cardinality cannot say
+
+Date: 2026-11-16
+
+== Status
+
+Proposed. Owner: the maintainer of `entur/nordic-netex-ontology`.
+
+== Context
+
+The profile says what it requires in two places that do not know about each
+other.
+
+* *Membership.* `netex-nordic.ttl:50` onwards lists 352 `profile:ProfileMember`
+  entries, each with a `profile:path` and a `profile:cardinality`. 160 of them
+  are required (`1..1` or `1..n`). The documentation tables are generated from
+  them.
+* *Shapes.* `netex-nordic.ttl:2859` onwards holds 11 hand-written
+  `sh:NodeShape`s. Only 6 of their properties carry `sh:minCount`.
+
+Validators and rule tools read shapes, not membership. pySHACL and Jena
+validate against `sh:NodeShape`s only. Entur's `netex-rule-gap` and `kusu`
+(team-validering), which compare the profile with what is validated today and
+draft rules from it, also read only `sh:NodeShape`s. A field that the profile
+lists as `1..1` but no shape repeats is therefore invisible to every consumer.
+A review of 42 rules in Entur's production validator (Antu) found that most of
+the plain "field is required" rules missing from the profile are exactly this
+case: the field is listed, but the requirement never reaches SHACL. The
+README promises "a SHACL-validatable definition of the Nordic Profile"; today
+the profile's own shapes repeat 6 of its 160 requirements, and the rest are
+enforced only where the XSD happens to require the same.
+
+The CCB's consumer contract (`docs/CONSUMER-CONTRACT.md` in the CCB
+repository) already assigns this step here: "The Nordic NeTEx repository ...
+generates or updates SHACL". No generator for it exists; the only generator
+in this repository writes `catalog.ttl`.
+
+A feasibility check on `6bc8b10` resolved every member path against the
+generated XSD baseline (`base/netex-shacl.ttl`), turning each step into the
+lowerCamelCase `netex:` property and following `sh:class` from one step to the
+next, starting from the class's `rdfs:subClassOf` chain:
+
+----
+element paths      209   resolved 199, unresolved 10
+attribute paths    143   resolved 0   (the base has no attribute properties)
+
+required members whose path resolves:
+  already required by the XSD    16   (nothing to generate)
+  stricter than the XSD          31   (a shape is needed)
+----
+
+The 10 unresolved element paths go through XSD substitution groups or
+wrapper elements (`projections/PointProjection`,
+`noticeAssignments/NoticeAssignment`, `BookingArrangements/...`).
+
+== Decision
+
+=== Cardinality is the source, SHACL is generated
+
+* `profile:cardinality` on a `profile:ProfileMember` is the only place a
+  profile states how often a field occurs. The SHACL for it is generated and
+  never written by hand.
+* `scripts/generate-shapes.py` reads a profile layer and the vendored base and
+  writes one generated file per layer. For this repository that is
+  `netex-nordic-shapes.ttl`, imported by `netex-nordic.ttl`, listed in
+  `catalog.ttl`, and marked "generated, do not hand-edit" in its header like
+  `catalog.ttl`.
+* The generator takes the layer file and the profile namespace as arguments,
+  so a downstream profile runs the same script on its own layer and gets its
+  own generated file. It never writes into another profile's file.
+
+=== What is generated
+
+* A property constraint is generated only where the profile is stricter than
+  the XSD: `sh:minCount` when the profile's lower bound is at least 1 and the
+  XSD's is 0, `sh:maxCount` when the profile's upper bound is lower than the
+  XSD's. Where they agree, nothing is generated.
+* One `sh:NodeShape` per profiled class, `sh:targetClass netex:X`, named
+  `nordic:X_CardinalityShape`. Each property constraint carries the member's
+  element as `sh:name` and its path and cardinality in `sh:description`, so a
+  reader can trace it back.
+* A nested path becomes a nested property shape (`sh:node`), so a nested
+  requirement applies only when its parent is present. For example
+  `Operator/CustomerServiceContactDetails/Url (1..1)` requires a `Url` inside
+  `CustomerServiceContactDetails` without requiring
+  `CustomerServiceContactDetails` itself.
+* A member path that ends in `X/@ref` is generated as a requirement on the
+  reference element `X`, since the XSD already requires `@ref` on a reference.
+
+=== What is not generated
+
+* Other attribute paths (`@id`, `@version`, `@order`, `@lang`, ...) are
+  skipped and listed in the generator's report until the base models
+  attributes. Fixing that belongs in the base generator, not here.
+* Paths through substitution groups or wrapper elements that do not resolve
+  are skipped and listed in the report. A resolution rule for them can be
+  added to the generator later; until then they stay unenforced, as today.
+* Anything that is not a cardinality: excluded fields (`sh:maxCount 0` on a
+  field outside the allowlist), type checks (`sh:class`), "at least one of",
+  and value lists narrower than the XSD. These stay in the hand-written shapes
+  in `netex-nordic.ttl`. Value lists are covered by ADR 0003.
+
+=== Hand-written shapes shrink
+
+* In the same PR as the generator, every hand-written property constraint that
+  the generator now produces, or that only repeats the XSD, is removed from
+  `netex-nordic.ttl`. What is left there is what cardinality cannot say.
+* A check fails when a hand-written shape constrains the count of a property
+  that also has a generated constraint, so the two cannot drift apart again.
+
+== Consequences
+
+=== Positive
+
+* Every requirement in the membership reaches SHACL. About 31 required fields
+  become visible to validators and rule tools at once, without new decisions.
+* A CCB decision that changes a cardinality is enforced as soon as it lands in
+  `netex-nordic.ttl`, with no separate shape to remember.
+* Downstream profiles get the same behaviour from the same script.
+
+=== Negative
+
+* One more generated file to keep in step with the membership. The generator
+  runs in the same PR as any membership change, like `catalog.ttl`.
+* Consumers that load files by name (for example `netex-rule-gap` and `kusu`,
+  which list `netex-nordic.ttl` explicitly) must also load
+  `netex-nordic-shapes.ttl`, or follow `owl:imports`.
+* Data that passed the hand-written shapes can fail the generated ones. That
+  is the profile being enforced as written, but it will be noticed as a
+  change.
+
+== Risks
+
+* *Attributes stay unenforced.* 143 member paths are attributes, and none can
+  be generated until the base models them. The report keeps them visible; a
+  follow-up in the base generator is needed.
+* *Base drift.* Resolution depends on the vendored `base/`. A new base snapshot
+  can change property names or types. The generator's report is compared in
+  CI, so a path that stops resolving is noticed.
+* *Weaker than existing validators.* `sh:minCount 1` accepts an empty or
+  whitespace-only value; Antu rejects it (`normalize-space(...) = ''`).
+  Requiring non-empty values would make data invalid, so it is a CCB decision
+  and not part of this ADR.
+
+== Alternatives
+
+* *Keep writing shapes by hand.* That is how 154 of 160 requirements came to
+  have no profile shape. Rejected.
+* *Generate SHACL in the CCB repository.* The CCB has no base ontology to
+  resolve paths against, and its consumer contract places this step here.
+  Rejected.
+* *Let each consumer derive constraints from `profile:cardinality` itself.*
+  Every tool (`netex-rule-gap`, `kusu`, pySHACL users) would reimplement the
+  same path resolution and could disagree. Rejected.
+* *Replace the membership with SHACL entirely.* The membership also drives
+  the documentation tables and element ordering, and states what is in the
+  profile, not only what is required. Rejected.
