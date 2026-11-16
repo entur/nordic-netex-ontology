@@ -223,8 +223,11 @@ was a comment). What the implementation settled:
 * *The `StopPlace/tariffZoneRef` exclusion is not carried over.* It never
   applied: `TariffZoneRef` sits inside `tariffZones`, not on `StopPlace`.
   Making it effective (`StopPlace/tariffZones 0..0`) would reject data that
-  passes today, including Entur's NSR exports, which use `tariffZones`. That
-  is a profile decision for the CCB, not part of a mechanical replacement.
+  passes today, including Entur's NSR exports, which carry `FareZoneRef` in
+  `tariffZones`. Phasing out TariffZone is a national decision, not a Nordic
+  one: in Norway it was deprecated in favour of FareZone in 2022 and removed
+  from Entur's APIs on 2026-11-17, so it belongs in Entur's layer, while the
+  Nordic Profile keeps TariffZone for the countries that use it.
 
 Every other hand-written constraint is either generated (`Name` on Authority,
 Operator and VehicleType; `RouteRef`; `VehicleTypeRef`; `ValidBetween`;
