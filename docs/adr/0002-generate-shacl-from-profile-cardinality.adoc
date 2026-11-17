@@ -4,9 +4,10 @@ Date: 2026-11-16
 
 == Status
 
-Proposed. Requires the base from `netex-ontology-generator` v0.4.0 or later
-(attributes, `sh:name`, substitution groups). Owner: the maintainer of
-`entur/nordic-netex-ontology`.
+Accepted, 2026-11-16, and implemented; see the
+<<amendment-2026-11-16,amendment>>. Requires the base from
+`netex-ontology-generator` v0.4.0 or later (attributes, `sh:name`,
+substitution groups). Owner: the maintainer of `entur/nordic-netex-ontology`.
 
 == Context
 
@@ -193,3 +194,44 @@ exist in the NeTEx 2.0 XSD, which are errors in this profile
 * *Replace the membership with SHACL entirely.* The membership also drives
   the documentation tables and element ordering, and states what is in the
   profile, not only what is required. Rejected.
+
+[[amendment-2026-11-16]]
+== Amendment 2026-11-16: implementation
+
+`scripts/generate-shapes.py` implements this ADR and replaces all ten
+hand-written NP shapes (not eleven, as the Context says; the eleventh match
+was a comment). What the implementation settled:
+
+* *Exclusions are members.* A field the profile excludes is a member with
+  `profile:cardinality "0..0"`, generated as `sh:maxCount 0`. This replaces
+  "excluded fields stay in the hand-written shapes" under _What is not
+  generated_; it also matches `decision.type: excluded` in the CCB's decision
+  template. `ServiceJourney/FlexibleLineRef` and `ServiceJourney/BlockRef` are
+  now `0..0` members.
+* *Requirements the shapes held but the membership did not are now members.*
+  `ServiceJourney/passingTimes` is `1..1` (the hand-written requirement from
+  #14); before, the membership only had the nested
+  `passingTimes/TimetabledPassingTime 1..n`, which applies only where
+  `passingTimes` is present.
+* *Substitution group members carry the profile's full cardinality.* The
+  base's bounds sit on the head's path (`transportTypeRef`), so in SHACL
+  nothing constrains the member's own path (`vehicleTypeRef`). For a member,
+  the generator writes both `sh:minCount` and `sh:maxCount` from the profile.
+* *Hand-written type checks were redundant.* `sh:class netex:Route` on
+  `routeRef` repeats the base; `sh:class netex:VehicleType` on
+  `vehicleTypeRef` follows from the element name.
+* *The `StopPlace/tariffZoneRef` exclusion is not carried over.* It never
+  applied: `TariffZoneRef` sits inside `tariffZones`, not on `StopPlace`.
+  Making it effective (`StopPlace/tariffZones 0..0`) would reject data that
+  passes today, including Entur's NSR exports, which carry `FareZoneRef` in
+  `tariffZones`. Phasing out TariffZone is a national decision, not a Nordic
+  one: in Norway it was deprecated in favour of FareZone in 2022 and removed
+  from Entur's APIs on 2026-11-17, so it belongs in Entur's layer, while the
+  Nordic Profile keeps TariffZone for the countries that use it.
+
+Every other hand-written constraint is either generated (`Name` on Authority,
+Operator and VehicleType; `RouteRef`; `VehicleTypeRef`; `ValidBetween`;
+`passingTimes`; the two exclusions) or already enforced by the base, since the
+XSD allows the same (the eleven "allowed (0..1)" constraints). Checked with
+pySHACL on instance data, including a nested requirement that must not fire
+when its parent is absent.

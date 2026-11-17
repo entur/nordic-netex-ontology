@@ -12,6 +12,8 @@
 ## Imports:
 ##   netex.ttl (generated) — CEN-owned NeTEx base ontology, provided via submodule
 ##   netex-nordic-vocab.ttl — Nordic-specific vocabulary (nordic:)
+##   netex-nordic-shapes.ttl (generated) — SHACL from the membership's
+##     profile:cardinality (scripts/generate-shapes.py, docs/adr/0002)
 ## -----------------------------------------------------------------
 
 @prefix netex:   <https://netex-cen.eu/ontology#> .
@@ -26,9 +28,10 @@
 ## --- Import generated NeTEx base + Nordic vocabulary ---
 <https://netex-cen.eu/profile/nordic> a owl:Ontology ;
     rdfs:label "Nordic NeTEx Profile" ;
-    rdfs:comment "The Nordic Profile: membership allowlist (profile nodes and fields), SHACL shapes (allow / require / exclude), profile element ordering and navigational domain chains." ;
+    rdfs:comment "The Nordic Profile: membership allowlist (profile nodes and fields, with the cardinality the SHACL shapes are generated from), profile element ordering and navigational domain chains." ;
     owl:imports <https://netex-cen.eu/ontology> ,
-                <https://netex-cen.eu/nordic> .
+                <https://netex-cen.eu/nordic> ,
+                <https://netex-cen.eu/profile/nordic/shapes> .
 
 ## =================================================================
 ## PROFILE DEFINITION
@@ -1979,6 +1982,27 @@ nordic:ServiceJourney a profile:ProfileClass ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
+    profile:element "FlexibleLineRef" ;
+    profile:path "ServiceJourney/FlexibleLineRef" ;
+    profile:cardinality "0..0" ;
+    skos:definition "Not used in NP: use a Line with FlexibleServiceProperties"@en ;
+    nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "BlockRef" ;
+    profile:path "ServiceJourney/BlockRef" ;
+    profile:cardinality "0..0" ;
+    skos:definition "Not used in NP"@en ;
+    nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "passingTimes" ;
+    profile:path "ServiceJourney/passingTimes" ;
+    profile:cardinality "1..1" ;
+    skos:definition "Container for the journey's TimetabledPassingTimes; required in NP"@en ;
+    nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
     profile:element "TimetabledPassingTime" ;
     profile:path "ServiceJourney/passingTimes/TimetabledPassingTime" ;
     profile:cardinality "1..n" ;
@@ -2858,191 +2882,12 @@ nordic:WaitingRoomEquipment a profile:ProfileClass ;
 ## =================================================================
 ## PROFILE CONSTRAINTS — SHACL SHAPES
 ## =================================================================
-## NP-specific exclusions, allowances, and cardinality tightening.
-## Expressed as SHACL NodeShapes for validation with standard tooling
-## (pySHACL, Apache Jena, TopBraid).
-##
-## sh:path references point to the generated object/datatype
-## properties in the NeTEx base ontology (lowerCamelCase, derived
-## 1:1 from the XSD element names), enabling traceability between
-## constraints and the base schema vocabulary.
-##
-## Shape naming: profile:NP_{ClassName}Shape
+## Generated, not written here: scripts/generate-shapes.py turns the
+## profile:cardinality of the members above into SHACL wherever the
+## profile is stricter than the XSD, and writes netex-nordic-shapes.ttl
+## (imported above). Required, allowed (0..1) and excluded (0..0)
+## fields are all stated as members. See docs/adr/0002.
 ## -----------------------------------------------------------------
-
-## --- StopPlace ---
-
-profile:NP_StopPlaceShape a sh:NodeShape ;
-    sh:targetClass netex:StopPlace ;
-    rdfs:label "StopPlace — NP constraints" ;
-    ## Excluded
-    sh:property [
-        sh:path netex:tariffZoneRef ;
-        sh:maxCount 0 ;
-        sh:name "TariffZoneRef" ;
-        sh:description "Not used in NP"
-    ] ;
-    ## Allowed (0..1)
-    sh:property [
-        sh:path netex:topographicPlaceRef ;
-        sh:maxCount 1 ;
-        sh:name "TopographicPlaceRef"
-    ] , [
-        sh:path netex:parentSiteRef ;
-        sh:maxCount 1 ;
-        sh:name "ParentSiteRef" ;
-        sh:description "Used for multimodal StopPlace hierarchy (child stop referencing its parent), confirmed present in NSR exports"
-    ] , [
-        sh:path netex:validBetween ;
-        sh:maxCount 1 ;
-        sh:name "ValidBetween"
-    ] , [
-        sh:path netex:accessibilityAssessment ;
-        sh:maxCount 1 ;
-        sh:name "AccessibilityAssessment"
-    ] .
-
-## --- Quay ---
-
-profile:NP_QuayShape a sh:NodeShape ;
-    sh:targetClass netex:Quay ;
-    rdfs:label "Quay — NP constraints" ;
-    sh:property [
-        sh:path netex:accessibilityAssessment ;
-        sh:maxCount 1 ;
-        sh:name "AccessibilityAssessment"
-    ] , [
-        sh:path netex:boardingPositions ;
-        sh:maxCount 1 ;
-        sh:name "boardingPositions"
-    ] .
-
-## --- Line ---
-
-profile:NP_LineShape a sh:NodeShape ;
-    sh:targetClass netex:Line ;
-    rdfs:label "Line — NP constraints" ;
-    sh:property [
-        sh:path netex:representedByGroupRef ;
-        sh:maxCount 1 ;
-        sh:name "RepresentedByGroupRef"
-    ] , [
-        sh:path netex:transportSubmode ;
-        sh:maxCount 1 ;
-        sh:name "TransportSubmode"
-    ] , [
-        sh:path netex:publicCode ;
-        sh:maxCount 1 ;
-        sh:name "PublicCode"
-    ] , [
-        sh:path netex:privateCode ;
-        sh:maxCount 1 ;
-        sh:name "PrivateCode"
-    ] .
-
-## --- ServiceJourney ---
-
-profile:NP_ServiceJourneyShape a sh:NodeShape ;
-    sh:targetClass netex:ServiceJourney ;
-    rdfs:label "ServiceJourney — NP constraints" ;
-    ## Excluded
-    sh:property [
-        sh:path netex:flexibleLineRef ;
-        sh:maxCount 0 ;
-        sh:name "FlexibleLineRef" ;
-        sh:description "Not used in NP — use Line with FlexibleServiceProperties"
-    ] , [
-        sh:path netex:blockRef ;
-        sh:maxCount 0 ;
-        sh:name "BlockRef" ;
-        sh:description "Not used in NP"
-    ] ,
-    ## Required (tightened from XSD 0..1)
-    [
-        sh:path netex:passingTimes ;
-        sh:minCount 1 ; sh:maxCount 1 ;
-        sh:name "passingTimes" ;
-        sh:description "XSD allows 0..1, NP mandates 1..1 (passingTimes/TimetabledPassingTime is 1..n)"
-    ] .
-
-## --- JourneyPattern ---
-
-profile:NP_JourneyPatternShape a sh:NodeShape ;
-    sh:targetClass netex:JourneyPattern ;
-    rdfs:label "JourneyPattern — NP constraints" ;
-    ## Required (tightened from XSD 0..1)
-    sh:property [
-        sh:path netex:routeRef ;
-        sh:minCount 1 ; sh:maxCount 1 ;
-        sh:class netex:Route ;
-        sh:name "RouteRef" ;
-        sh:description "XSD allows 0..1, NP mandates 1..1"
-    ] .
-
-## --- Vehicle ---
-
-profile:NP_VehicleShape a sh:NodeShape ;
-    sh:targetClass netex:Vehicle ;
-    rdfs:label "Vehicle — NP constraints" ;
-    ## Required (tightened from XSD 0..1)
-    sh:property [
-        sh:path netex:vehicleTypeRef ;
-        sh:minCount 1 ; sh:maxCount 1 ;
-        sh:class netex:VehicleType ;
-        sh:name "VehicleTypeRef" ;
-        sh:description "XSD allows 0..1, NP mandates 1..1"
-    ] .
-
-## --- Authority ---
-
-profile:NP_AuthorityShape a sh:NodeShape ;
-    sh:targetClass netex:Authority ;
-    rdfs:label "Authority — NP constraints" ;
-    sh:property [
-        sh:path netex:name ;
-        sh:minCount 1 ; sh:maxCount 1 ;
-        sh:name "Name" ;
-        sh:description "XSD allows 0..1, NP mandates 1..1"
-    ] .
-
-## --- Operator ---
-
-profile:NP_OperatorShape a sh:NodeShape ;
-    sh:targetClass netex:Operator ;
-    rdfs:label "Operator — NP constraints" ;
-    sh:property [
-        sh:path netex:name ;
-        sh:minCount 1 ; sh:maxCount 1 ;
-        sh:name "Name" ;
-        sh:description "XSD allows 0..1, NP mandates 1..1"
-    ] .
-
-## --- VehicleType ---
-
-profile:NP_VehicleTypeShape a sh:NodeShape ;
-    sh:targetClass netex:VehicleType ;
-    rdfs:label "VehicleType — NP constraints" ;
-    sh:property [
-        sh:path netex:name ;
-        sh:minCount 1 ; sh:maxCount 1 ;
-        sh:name "Name" ;
-        sh:description "XSD allows 0..1, NP mandates 1..1"
-    ] .
-
-## --- Interchange ---
-
-profile:NP_InterchangeShape a sh:NodeShape ;
-    sh:targetClass netex:ServiceJourneyInterchange ;
-    rdfs:label "Interchange — NP constraints" ;
-    sh:property [
-        sh:path netex:fromPointRef ;
-        sh:maxCount 1 ;
-        sh:name "FromPointRef"
-    ] , [
-        sh:path netex:toPointRef ;
-        sh:maxCount 1 ;
-        sh:name "ToPointRef"
-    ] .
 
 ## =================================================================
 ## ELEMENT ORDERING (XSD-derived)

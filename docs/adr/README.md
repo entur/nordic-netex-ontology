@@ -9,7 +9,7 @@ The layout follows [Kompass](https://github.com/entur/kompass/tree/main/docs/adr
 | ADR | Status | Read it when |
 |---|---|---|
 | [0001-record-architecture-decisions.adoc](0001-record-architecture-decisions.adoc) | proposed | you are writing, amending or superseding an ADR, or are unsure whether something belongs here or in the CCB |
-| [0002-generate-shacl-from-profile-cardinality.adoc](0002-generate-shacl-from-profile-cardinality.adoc) | proposed | you are changing a `profile:cardinality`, writing a SHACL shape by hand, or consuming the profile's shapes in a validator or rule tool |
+| [0002-generate-shacl-from-profile-cardinality.adoc](0002-generate-shacl-from-profile-cardinality.adoc) | accepted and implemented | you are changing a `profile:cardinality`, writing a SHACL shape by hand, or consuming the profile's shapes in a validator or rule tool |
 | [0003-value-lists-and-severity-on-profile-members.adoc](0003-value-lists-and-severity-on-profile-members.adoc) | proposed | a profile allows fewer values than the XSD, or a requirement should be reported as a warning or information rather than an error |
 
 ## Is it an ADR?
