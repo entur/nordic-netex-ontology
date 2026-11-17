@@ -148,7 +148,14 @@ substitution group members), and writes a constraint to
 | `1..1` where the XSD says `0..1` | `sh:minCount 1` | `JourneyPattern/RouteRef/@ref` |
 | `0..1` where the XSD says `0..n` | `sh:maxCount 1` | `StopPlace/ValidBetween` |
 | `0..0` (excluded) | `sh:maxCount 0` | `ServiceJourney/BlockRef` |
+| `profile:allowedValues` narrower than the XSD's enumeration | `sh:in` | a list of transport modes on `Line/TransportMode` |
+| `profile:severity sh:Warning` or `sh:Info` | `sh:severity` on the member's constraint | a field a validator only warns about |
 | same as the XSD | nothing; the base's SHACL already applies | `Line/PublicCode` |
+
+Value lists are not generated for a field the XSD does not enumerate, such as
+the whitespace-separated `BookingMethods`; the generator reports them. A value
+outside the XSD's enumeration is an error. See
+[ADR 0003](docs/adr/0003-value-lists-and-severity-on-profile-members.adoc).
 
 A nested path becomes a nested property shape (`sh:node`), so it applies only
 where its parent is present. Shape naming: `nordic:{ClassName}_CardinalityShape`.

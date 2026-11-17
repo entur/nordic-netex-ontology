@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-"""Generate SHACL shapes from profile:cardinality (docs/adr/0002).
+"""Generate SHACL shapes from profile:cardinality (docs/adr/0002, 0003).
 
 Reads the profile:ProfileMember entries of one profile layer, resolves each
 profile:path against the vendored base by name, and writes a constraint
 wherever the profile is stricter than the XSD: sh:minCount when the profile
-requires what the XSD leaves optional, sh:maxCount when it allows fewer.
-Where profile and XSD agree, nothing is written.
+requires what the XSD leaves optional, sh:maxCount when it allows fewer, and
+sh:in when profile:allowedValues lists fewer values than the XSD's
+enumeration. profile:severity becomes sh:severity on that constraint.
+Where profile and XSD agree, nothing is written. A value the XSD does not
+allow is an error, and nothing is written.
 
 Path steps are matched by name, never by computing an IRI: first against
 sh:name on the base's property shapes for the class and its ancestors, then,
@@ -31,6 +34,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
+from rdflib.collection import Collection
 from rdflib.namespace import DCTERMS, OWL, PROV, RDF, RDFS
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -59,6 +63,8 @@ class Node:
     path: URIRef
     min: int = 0
     max: float = UNBOUNDED
+    values: list | None = None     # sh:in, when narrower than the XSD's
+    severity: URIRef | None = None  # sh:severity, when not sh:Violation
     description: str | None = None
     children: dict = field(default_factory=dict)
 
@@ -117,6 +123,12 @@ class Base:
                     return Step(name, prop, ps, nxt, via_head=True)
         return None
 
+    def values(self, base_shape) -> list[str] | None:
+        """The XSD's enumeration for the field, or None if it has none (also
+        for a whitespace-separated list type, which the base leaves open)."""
+        head = self.g.value(base_shape, SH["in"])
+        return [str(v) for v in Collection(self.g, head)] if head is not None else None
+
     def bounds(self, base_shape) -> tuple[int, float]:
         lo, hi = self.g.value(base_shape, SH.minCount), self.g.value(base_shape, SH.maxCount)
         return (int(lo) if lo is not None else 0), (int(hi) if hi is not None else UNBOUNDED)
@@ -149,7 +161,7 @@ def build(args):
 
     trees = defaultdict(dict)  # target class -> {path: Node}
     report = Counter()
-    unresolved, looser = [], []
+    unresolved, looser, notes = [], [], []
     for member in layer.subjects(RDF.type, PROFILE.ProfileMember):
         pclass = layer.value(member, PROFILE.memberOf)
         if pclass not in own_classes:
@@ -185,20 +197,43 @@ def build(args):
             x_lo, x_hi = 0, UNBOUNDED
         new_lo = p_lo if p_lo > x_lo else 0
         new_hi = p_hi if p_hi < x_hi else UNBOUNDED
-        if not new_lo and new_hi == UNBOUNDED:
+
+        # Value list (docs/adr/0003): only where narrower than the XSD's.
+        new_values = None
+        listed = layer.value(member, PROFILE.allowedValues)
+        if listed is not None:
+            p_values = [str(v) for v in Collection(layer, listed)]
+            x_values = base.values(chain[-1].base_shape)
+            if x_values is None:
+                notes.append(f"value list not generated: {path} has no XSD enumeration "
+                             "(for example a whitespace-separated list); write it by hand")
+            elif not set(p_values) <= set(x_values):
+                notes.append(f"ERROR: {path} allows values the XSD does not: "
+                             f"{', '.join(sorted(set(p_values) - set(x_values)))}")
+            elif set(p_values) != set(x_values):
+                new_values = p_values
+        severity = layer.value(member, PROFILE.severity)
+
+        if not new_lo and new_hi == UNBOUNDED and new_values is None:
             report["same as XSD"] += 1
             continue
         report["generated"] += 1
 
+        description = f"{path} is {card} in the profile; the XSD allows {fmt(x_lo, x_hi)}."
+        if new_values is not None:
+            description += f" Allowed values: {', '.join(new_values)} (the XSD allows {len(x_values)})."
         level = trees[cls]
         for i, step in enumerate(chain):
             node = level.setdefault(step.path, Node(step.name, step.path))
             if i == len(chain) - 1:
                 node.min = max(node.min, new_lo)
                 node.max = min(node.max, new_hi)
-                node.description = f"{path} is {card} in the profile; the XSD allows {fmt(x_lo, x_hi)}."
+                node.values = new_values if new_values is not None else node.values
+                if severity is not None and severity != SH.Violation:
+                    node.severity = severity
+                node.description = description
             level = node.children
-    return trees, report, unresolved, looser
+    return trees, report, unresolved, looser, notes
 
 
 def node_id(*parts) -> str:
@@ -214,6 +249,15 @@ def emit_node(g: Graph, parent, node: Node, ident: str):
         g.add((ps, SH.minCount, Literal(node.min)))
     if node.max != UNBOUNDED:
         g.add((ps, SH.maxCount, Literal(int(node.max))))
+    if node.values is not None:
+        # Fixed ids for every list cell keep the output byte-identical.
+        cells = [BNode(f"{ident}_in_{i}") for i in range(len(node.values))]
+        for i, (cell, value) in enumerate(zip(cells, node.values)):
+            g.add((cell, RDF.first, Literal(value)))
+            g.add((cell, RDF.rest, cells[i + 1] if i + 1 < len(cells) else RDF.nil))
+        g.add((ps, SH["in"], cells[0]))
+    if node.severity is not None:
+        g.add((ps, SH.severity, node.severity))
     if node.description:
         g.add((ps, SH.description, Literal(node.description)))
     if node.children:
@@ -232,12 +276,14 @@ def render(args, trees) -> str:
     g.bind("sh", SH)
     g.bind("prov", PROV)
     onto = URIRef(args.ontology)
+    layer_name = Path(args.layer).name
     g.add((onto, RDF.type, OWL.Ontology))
-    g.add((onto, DCTERMS.title, Literal(f"{args.layer}: shapes generated from profile:cardinality")))
+    g.add((onto, DCTERMS.title, Literal(f"{layer_name}: shapes generated from profile:cardinality")))
     g.add((onto, RDFS.comment, Literal(
-        f"Generated by scripts/generate-shapes.py from the profile:cardinality of the "
-        f"members in {args.layer}, where the profile is stricter than the XSD "
-        f"(docs/adr/0002). Do not hand-edit; change the membership and regenerate.")))
+        f"Generated by scripts/generate-shapes.py from the profile:cardinality, "
+        f"profile:allowedValues and profile:severity of the members in {layer_name}, "
+        f"where the profile is stricter than the XSD (docs/adr/0002, docs/adr/0003). "
+        f"Do not hand-edit; change the membership and regenerate.")))
     g.add((onto, PROV.wasAttributedTo, GENERATOR))
     for cls in sorted(trees, key=local):
         shape = ns[f"{local(cls)}_CardinalityShape"]
@@ -250,16 +296,20 @@ def render(args, trees) -> str:
 
 
 def overlaps(args, trees):
-    """Hand-written shapes in the layer that count a property the generated
-    shapes already count, so the two cannot drift apart."""
+    """Hand-written shapes in the layer that count, or list the values of, a
+    property the generated shapes already constrain the same way, so the two
+    cannot drift apart."""
     layer = load([ROOT / args.layer])
     for shape in layer.subjects(RDF.type, SH.NodeShape):
         cls = layer.value(shape, SH.targetClass)
         for ps in layer.objects(shape, SH.property):
-            path = layer.value(ps, SH.path)
+            node = trees.get(cls, {}).get(layer.value(ps, SH.path))
+            if node is None:
+                continue
             counted = (ps, SH.minCount, None) in layer or (ps, SH.maxCount, None) in layer
-            if counted and path in trees.get(cls, {}):
-                yield cls, path
+            listed = (ps, SH["in"], None) in layer and node.values is not None
+            if counted or listed:
+                yield cls, node.path
 
 
 def main() -> int:
@@ -272,7 +322,7 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="exit 1 if the output file is stale")
     args = parser.parse_args()
 
-    trees, report, unresolved, looser = build(args)
+    trees, report, unresolved, looser, notes = build(args)
     text = render(args, trees)
     out = ROOT / args.out
 
@@ -283,6 +333,12 @@ def main() -> int:
         print(f"  unresolved: {path} (no '{name}' in the base)")
     for path, card, xsd in sorted(looser):
         print(f"  looser than XSD, XSD applies: {path} is {card}, XSD {xsd}")
+    for note in sorted(notes):
+        print(f"  {note}")
+    # A profile cannot allow a value the standard does not.
+    if any(note.startswith("ERROR") for note in notes):
+        print("value lists outside the XSD's enumeration; nothing written", file=sys.stderr)
+        return 1
 
     if args.check:
         failed = False
@@ -291,8 +347,8 @@ def main() -> int:
             print(f"{args.out} is stale; run scripts/generate-shapes.py", file=sys.stderr)
             failed = True
         for cls, path in overlaps(args, trees):
-            print(f"hand-written shape in {args.layer} constrains the count of {local(path)} "
-                  f"on {local(cls)}, which is generated; state it as a member instead", file=sys.stderr)
+            print(f"hand-written shape in {args.layer} constrains {local(path)} on {local(cls)}, "
+                  f"which is generated; state it on the member instead", file=sys.stderr)
             failed = True
         return 1 if failed else 0
     out.write_text(text, encoding="utf-8")
