@@ -4,8 +4,9 @@ Date: 2026-11-16
 
 == Status
 
-Proposed. Depends on ADR 0002. Owner: the maintainer of
-`entur/nordic-netex-ontology`.
+Accepted, 2026-11-17, and implemented; see the
+<<amendment-2026-11-17,amendment>>. Depends on ADR 0002. Owner: the
+maintainer of `entur/nordic-netex-ontology`.
 
 == Context
 
@@ -126,3 +127,30 @@ shape.
 * *A separate `profile:recommended` flag instead of severity.* Covers warnings
   but not information, and does not map onto SHACL's own severities.
   Rejected.
+
+[[amendment-2026-11-17]]
+== Amendment 2026-11-17: implementation
+
+`profile:allowedValues` and `profile:severity` are declared in
+`netex-nordic-vocab.ttl`, and `scripts/generate-shapes.py` generates them.
+What the implementation settled:
+
+* *A value list needs an XSD enumeration to compare against.* The generator
+  writes `sh:in` only where the base has `sh:in` for the field and the
+  profile's list is a proper subset of it. A field without one, such as the
+  whitespace-separated `BookingMethods`, is reported and needs a hand-written
+  shape, as decided above.
+* *A value outside the XSD's enumeration stops the generator.* It reports
+  the value, writes nothing and exits with 1, also with `--check`.
+* *Severity rides on a generated constraint.* `sh:severity` is written on
+  the member's constraint when there is one; a member whose cardinality and
+  values equal the XSD's produces nothing, so its severity has nothing to
+  qualify. `sh:Violation` is the default and is not written.
+* *The overlap check covers value lists.* `--check` fails if a hand-written
+  shape lists values (`sh:in`) for a field whose values are generated.
+
+Checked with pySHACL on a test layer: `Line/TransportMode` limited to 12 of
+the XSD's 21 modes rejects `trolleyBus` as a violation, and
+`Authority/CompanyNumber 1..1` with `sh:Info` reports a missing value as
+information. No member of the Nordic Profile uses the terms yet; the first
+users are Entur's members.

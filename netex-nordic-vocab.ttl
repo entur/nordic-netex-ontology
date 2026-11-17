@@ -20,6 +20,8 @@
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 <https://netex-cen.eu/nordic> a owl:Ontology ;
     rdfs:label "Nordic NeTEx Vocabulary" ;
@@ -181,6 +183,21 @@ profile:cardinality a owl:DatatypeProperty ;
     rdfs:label "cardinality" ;
     rdfs:range xsd:string ;
     skos:definition "Profile cardinality of the member (e.g. 1..1, 0..n)" .
+
+## Value lists and severity (docs/adr/0003). scripts/generate-shapes.py
+## turns them into sh:in and sh:severity on the member's generated shape.
+profile:allowedValues a owl:ObjectProperty ;
+    rdfs:label "allowed values" ;
+    rdfs:domain profile:ProfileMember ;
+    rdfs:range rdf:List ;
+    skos:definition "The values the member may take, as an rdf:List of literals; must be a subset of the XSD's enumeration" .
+
+profile:severity a owl:ObjectProperty ;
+    rdfs:label "severity" ;
+    rdfs:domain profile:ProfileMember ;
+    rdfs:range sh:Severity ;
+    skos:definition "How a violation of the member's cardinality or allowed values is reported: sh:Violation (default), sh:Warning or sh:Info" ;
+    rdfs:comment "A downstream profile may raise the severity of its own member, never lower it." .
 
 ## --- Provenance: how a rule entered the profile ---
 nordic:Provenance a owl:Class ;
