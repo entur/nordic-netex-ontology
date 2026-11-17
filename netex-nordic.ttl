@@ -118,6 +118,12 @@ nordic:AlternativeText a profile:ProfileClass ;
     profile:cardinality "1..1" ;
     skos:definition "The alternative text content"@en ;
     nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:AlternativeText ;
+    profile:element "Text/@lang" ;
+    profile:path "AlternativeText/Text/@lang" ;
+    profile:cardinality "1..1" ;
+    skos:definition "Language of the alternative text (Antu NOTICE_3)"@en .
 
 ## --- Authority (NP) ---
 nordic:Authority a profile:ProfileClass ;
@@ -164,8 +170,9 @@ nordic:Authority a profile:ProfileClass ;
     profile:memberOf nordic:Authority ;
     profile:element "ContactDetails" ;
     profile:path "Authority/ContactDetails" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Contact information"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Contact information (Antu AUTHORITY_4)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Authority ;
@@ -356,6 +363,24 @@ nordic:DestinationDisplay a profile:ProfileClass ;
     profile:cardinality "0..1" ;
     skos:definition "Text shown on the side display of a vehicle"@en ;
     nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "vias" ;
+    profile:path "DestinationDisplay/vias" ;
+    profile:cardinality "0..1" ;
+    skos:definition "Intermediate destinations shown on the display (Antu DESTINATION_DISPLAY_2)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "Via" ;
+    profile:path "DestinationDisplay/vias/Via" ;
+    profile:cardinality "0..n" ;
+    skos:definition "One intermediate destination (Antu DESTINATION_DISPLAY_2)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:DestinationDisplay ;
+    profile:element "DestinationDisplayRef/@ref" ;
+    profile:path "DestinationDisplay/vias/Via/DestinationDisplayRef/@ref" ;
+    profile:cardinality "1..1" ;
+    skos:definition "The destination display of the via (Antu DESTINATION_DISPLAY_2)"@en .
 
 ## --- FareFrame (NP) ---
 ## Frame-level membership only; field containment is in netex-nordic-model.ttl.
@@ -396,14 +421,16 @@ nordic:FlexibleServiceProperties a profile:ProfileClass ;
     profile:element "BookingAccess" ;
     profile:path "FlexibleServiceProperties/BookingAccess" ;
     profile:cardinality "0..1" ;
-    skos:definition "Who may book (e.g., public)"@en ;
+    profile:allowedValues ( "public" "authorisedPublic" "staff" ) ;
+    skos:definition "Who may book (e.g., public) (Antu BOOKING_1)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:FlexibleServiceProperties ;
     profile:element "BookWhen" ;
     profile:path "FlexibleServiceProperties/BookWhen" ;
     profile:cardinality "0..1" ;
-    skos:definition "When booking must be made (e.g., untilPreviousDay)"@en ;
+    profile:allowedValues ( "dayOfTravelOnly" "untilPreviousDay" "advanceAndDayOfTravel" ) ;
+    skos:definition "When booking must be made (e.g., untilPreviousDay) (Antu BOOKING_3)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:FlexibleServiceProperties ;
@@ -412,6 +439,13 @@ nordic:FlexibleServiceProperties a profile:ProfileClass ;
     profile:cardinality "0..1" ;
     skos:definition "Latest allowed booking time"@en ;
     nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:FlexibleServiceProperties ;
+    profile:element "FlexibleServiceType" ;
+    profile:path "FlexibleServiceProperties/FlexibleServiceType" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "dynamicPassingTimes" "fixedHeadwayFrequency" "fixedPassingTimes" "notFlexible" ) ;
+    skos:definition "How the service is flexible (Antu FLEXIBLE_LINE_9)"@en .
 
 ## --- GroupOfLines (NP) ---
 nordic:GroupOfLines a profile:ProfileClass ;
@@ -437,8 +471,8 @@ nordic:GroupOfLines a profile:ProfileClass ;
     profile:memberOf nordic:GroupOfLines ;
     profile:element "Name" ;
     profile:path "GroupOfLines/Name" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Public name of the group"@en ;
+    profile:cardinality "1..1" ;
+    skos:definition "Public name of the group (Antu NETWORK_3)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:GroupOfLines ;
@@ -675,14 +709,16 @@ nordic:JourneyPattern a profile:ProfileClass ;
     profile:element "BookingAccess" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingAccess" ;
     profile:cardinality "0..1" ;
-    skos:definition "Who can book: `public`, `authorisedPublic`, `staff`"@en ;
+    profile:allowedValues ( "public" "authorisedPublic" "staff" ) ;
+    skos:definition "Who can book: `public`, `authorisedPublic`, `staff` (Antu BOOKING_1)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
     profile:element "BookWhen" ;
     profile:path "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookWhen" ;
     profile:cardinality "0..1" ;
-    skos:definition "When to book: `advanceOnly`, `dayOfTravelOnly`, `untilPreviousDay`"@en ;
+    profile:allowedValues ( "dayOfTravelOnly" "untilPreviousDay" "advanceAndDayOfTravel" ) ;
+    skos:definition "When to book: `advanceOnly`, `dayOfTravelOnly`, `untilPreviousDay` (Antu BOOKING_3)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:JourneyPattern ;
@@ -787,21 +823,24 @@ nordic:Line a profile:ProfileClass ;
     profile:element "TransportMode" ;
     profile:path "Line/TransportMode" ;
     profile:cardinality "1..1" ;
-    skos:definition "Primary transport mode (bus, rail, water, tram, metro, air, coach, cableway)"@en ;
+    profile:allowedValues ( "coach" "bus" "tram" "rail" "metro" "air" "taxi" "water" "cableway" "funicular" "snowAndIce" "unknown" ) ;
+    skos:definition "Primary transport mode (bus, rail, water, tram, metro, air, coach, cableway) (Antu TRANSPORT_MODE_ON_LINE)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "TransportSubmode" ;
     profile:path "Line/TransportSubmode" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Transport submode container"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode container (Antu LINE_5)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
     profile:element "BusSubmode" ;
     profile:path "Line/TransportSubmode/BusSubmode" ;
     profile:cardinality "0..1" ;
-    skos:definition "Bus submode (localBus, regionalBus, expressBus, etc.)"@en ;
+    profile:allowedValues ( "airportLinkBus" "expressBus" "localBus" "nightBus" "railReplacementBus" "regionalBus" "schoolBus" "sightseeingBus" "shuttleBus" "unknown" ) ;
+    skos:definition "Bus submode (localBus, regionalBus, expressBus, etc.) (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
@@ -814,8 +853,9 @@ nordic:Line a profile:ProfileClass ;
     profile:memberOf nordic:Line ;
     profile:element "PublicCode" ;
     profile:path "Line/PublicCode" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Public-facing line number or code"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Public-facing line number or code (Antu LINE_3)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
@@ -828,8 +868,8 @@ nordic:Line a profile:ProfileClass ;
     profile:memberOf nordic:Line ;
     profile:element "RepresentedByGroupRef/@ref" ;
     profile:path "Line/RepresentedByGroupRef/@ref" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Reference to the Network or GroupOfLines this line belongs to"@en ;
+    profile:cardinality "1..1" ;
+    skos:definition "Reference to the Network or GroupOfLines this line belongs to (Antu LINE_7)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Line ;
@@ -852,6 +892,83 @@ nordic:Line a profile:ProfileClass ;
     profile:cardinality "0..1" ;
     skos:definition "Text colour as 6-digit uppercase hex (e.g., FFFFFF)"@en ;
     nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "AirSubmode" ;
+    profile:path "Line/TransportSubmode/AirSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "helicopterService" "domesticFlight" "internationalFlight" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "CoachSubmode" ;
+    profile:path "Line/TransportSubmode/CoachSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "internationalCoach" "nationalCoach" "touristCoach" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "FunicularSubmode" ;
+    profile:path "Line/TransportSubmode/FunicularSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "funicular" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "MetroSubmode" ;
+    profile:path "Line/TransportSubmode/MetroSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "metro" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "RailSubmode" ;
+    profile:path "Line/TransportSubmode/RailSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "international" "interregionalRail" "local" "longDistance" "nightRail" "airportLinkRail" "regionalRail" "touristRailway" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "SelfDriveSubmode" ;
+    profile:path "Line/TransportSubmode/SelfDriveSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "SnowAndIceSubmode" ;
+    profile:path "Line/TransportSubmode/SnowAndIceSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "snowCoach" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "TaxiSubmode" ;
+    profile:path "Line/TransportSubmode/TaxiSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "charterTaxi" "communalTaxi" "waterTaxi" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "TelecabinSubmode" ;
+    profile:path "Line/TransportSubmode/TelecabinSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "telecabin" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "TramSubmode" ;
+    profile:path "Line/TransportSubmode/TramSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "localTram" "cityTram" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Line ;
+    profile:element "WaterSubmode" ;
+    profile:path "Line/TransportSubmode/WaterSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "highSpeedPassengerService" "highSpeedVehicleService" "internationalCarFerry" "internationalPassengerFerry" "localCarFerry" "localPassengerFerry" "nationalCarFerry" "sightseeingService" "unknown" ) ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_LINE)"@en .
 
 ## --- LinkSequenceProjection (NP) ---
 nordic:LinkSequenceProjection a profile:ProfileClass ;
@@ -940,8 +1057,8 @@ nordic:Network a profile:ProfileClass ;
     profile:memberOf nordic:Network ;
     profile:element "AuthorityRef/@ref" ;
     profile:path "Network/AuthorityRef/@ref" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Reference to the Authority responsible for the network"@en ;
+    profile:cardinality "1..1" ;
+    skos:definition "Reference to the Authority responsible for the network (Antu NETWORK_1)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Network ;
@@ -1115,8 +1232,9 @@ nordic:Operator a profile:ProfileClass ;
     profile:memberOf nordic:Operator ;
     profile:element "ContactDetails" ;
     profile:path "Operator/ContactDetails" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Contact information (phone, email, website)"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Contact information (phone, email, website) (Antu OPERATOR_4)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
@@ -1143,8 +1261,9 @@ nordic:Operator a profile:ProfileClass ;
     profile:memberOf nordic:Operator ;
     profile:element "CustomerServiceContactDetails" ;
     profile:path "Operator/CustomerServiceContactDetails" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Public-facing customer service contact details"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Public-facing customer service contact details (Antu OPERATOR_6)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:Operator ;
@@ -1164,8 +1283,9 @@ nordic:Operator a profile:ProfileClass ;
     profile:memberOf nordic:Operator ;
     profile:element "Url" ;
     profile:path "Operator/CustomerServiceContactDetails/Url" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Customer service URL"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Customer service URL (Antu OPERATOR_7)"@en ;
     nordic:provenance nordic:Baseline .
 
 ## --- Parking (NP) ---
@@ -1714,6 +1834,12 @@ nordic:Route a profile:ProfileClass ;
     profile:cardinality "0..1" ;
     skos:definition "Reference to a RoutePoint (used in NP profile)"@en ;
     nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:Route ;
+    profile:element "pointsInSequence" ;
+    profile:path "Route/pointsInSequence" ;
+    profile:cardinality "1..1" ;
+    skos:definition "The points of the route, in order (Antu ROUTE_4)"@en .
 
 ## --- RoutePoint (NP) ---
 nordic:RoutePoint a profile:ProfileClass ;
@@ -1746,8 +1872,8 @@ nordic:RoutePoint a profile:ProfileClass ;
     profile:memberOf nordic:RoutePoint ;
     profile:element "projections" ;
     profile:path "RoutePoint/projections" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Projection to map coordinates or ScheduledStopPoint"@en ;
+    profile:cardinality "1..1" ;
+    skos:definition "Projection to map coordinates or ScheduledStopPoint (Antu SERVICE_FRAME_3)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:RoutePoint ;
@@ -2012,8 +2138,9 @@ nordic:ServiceJourney a profile:ProfileClass ;
     profile:memberOf nordic:ServiceJourney ;
     profile:element "TimetabledPassingTime/@id" ;
     profile:path "ServiceJourney/passingTimes/TimetabledPassingTime/@id" ;
-    profile:cardinality "0..1" ;
-    skos:definition "Optional identifier for the TimetabledPassingTime element"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Optional identifier for the TimetabledPassingTime element (Antu SERVICE_JOURNEY_8)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceJourney ;
@@ -2036,6 +2163,123 @@ nordic:ServiceJourney a profile:ProfileClass ;
     profile:cardinality "0..1" ;
     skos:definition "Planned departure time from the stop"@en ;
     nordic:provenance nordic:Baseline .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TransportMode" ;
+    profile:path "ServiceJourney/TransportMode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "coach" "bus" "tram" "rail" "metro" "air" "taxi" "water" "cableway" "funicular" "snowAndIce" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport mode, when it differs from the line's (Antu TRANSPORT_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TransportSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode" ;
+    profile:cardinality "0..1" ;
+    skos:definition "Transport submode, when it differs from the line's (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "AirSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/AirSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "helicopterService" "domesticFlight" "internationalFlight" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "BusSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/BusSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "airportLinkBus" "expressBus" "localBus" "nightBus" "railReplacementBus" "regionalBus" "schoolBus" "sightseeingBus" "shuttleBus" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "CoachSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/CoachSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "internationalCoach" "nationalCoach" "touristCoach" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "FunicularSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/FunicularSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "funicular" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "MetroSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/MetroSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "metro" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "RailSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/RailSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "international" "interregionalRail" "local" "longDistance" "nightRail" "airportLinkRail" "regionalRail" "touristRailway" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "SelfDriveSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/SelfDriveSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "SnowAndIceSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/SnowAndIceSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "snowCoach" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TaxiSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/TaxiSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "charterTaxi" "communalTaxi" "waterTaxi" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TelecabinSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/TelecabinSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "telecabin" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TramSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/TramSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "localTram" "cityTram" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "WaterSubmode" ;
+    profile:path "ServiceJourney/TransportSubmode/WaterSubmode" ;
+    profile:cardinality "0..1" ;
+    profile:allowedValues ( "highSpeedPassengerService" "highSpeedVehicleService" "internationalCarFerry" "internationalPassengerFerry" "localCarFerry" "localPassengerFerry" "nationalCarFerry" "sightseeingService" "unknown" ) ;
+    profile:severity sh:Warning ;
+    skos:definition "Transport submode (Antu TRANSPORT_SUB_MODE_ON_SERVICE_JOURNEY)"@en .
+[] a profile:ProfileMember ;
+    profile:memberOf nordic:ServiceJourney ;
+    profile:element "TimetabledPassingTime/@version" ;
+    profile:path "ServiceJourney/passingTimes/TimetabledPassingTime/@version" ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "Version of the passing time (Antu SERVICE_JOURNEY_9)"@en .
 
 ## --- ServiceLink (NP) ---
 nordic:ServiceLink a profile:ProfileClass ;
@@ -2068,8 +2312,9 @@ nordic:ServiceLink a profile:ProfileClass ;
     profile:memberOf nordic:ServiceLink ;
     profile:element "projections" ;
     profile:path "ServiceLink/projections" ;
-    profile:cardinality "0..1" ;
-    skos:definition "GML geometry for map rendering"@en ;
+    profile:cardinality "1..1" ;
+    profile:severity sh:Warning ;
+    skos:definition "GML geometry for map rendering (Antu SERVICE_LINK_3)"@en ;
     nordic:provenance nordic:Baseline .
 [] a profile:ProfileMember ;
     profile:memberOf nordic:ServiceLink ;
