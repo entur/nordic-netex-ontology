@@ -3,13 +3,21 @@
 @prefix nordic: <https://netex-cen.eu/nordic#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 nordic:AlternativeText_CardinalityShape a sh:NodeShape ;
     rdfs:label "AlternativeText: generated from profile:cardinality" ;
-    sh:property [ sh:description "AlternativeText/@id is 1..1 in the profile; the XSD allows 0..1." ;
+    sh:property [ sh:name "Text" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "AlternativeText/Text/@lang is 1..1 in the profile; the XSD allows 0..1." ;
+                            sh:minCount 1 ;
+                            sh:name "@lang" ;
+                            sh:path <https://netex-cen.eu/ontology#@lang> ] ] ;
+            sh:path netex:text ],
+        [ sh:description "AlternativeText/@id is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@id" ;
             sh:path <https://netex-cen.eu/ontology#@id> ],
@@ -21,7 +29,12 @@ nordic:AlternativeText_CardinalityShape a sh:NodeShape ;
 
 nordic:Authority_CardinalityShape a sh:NodeShape ;
     rdfs:label "Authority: generated from profile:cardinality" ;
-    sh:property [ sh:description "Authority/Name is 1..1 in the profile; the XSD allows 0..1." ;
+    sh:property [ sh:description "Authority/ContactDetails is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "ContactDetails" ;
+            sh:path netex:contactDetails ;
+            sh:severity sh:Warning ],
+        [ sh:description "Authority/Name is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "Name" ;
             sh:path netex:name ],
@@ -100,12 +113,34 @@ nordic:DestinationDisplay_CardinalityShape a sh:NodeShape ;
         [ sh:description "DestinationDisplay/@version is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@version" ;
-            sh:path <https://netex-cen.eu/ontology#@version> ] ;
+            sh:path <https://netex-cen.eu/ontology#@version> ],
+        [ sh:name "vias" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:name "Via" ;
+                            sh:node [ a sh:NodeShape ;
+                                    sh:property [ sh:description "DestinationDisplay/vias/Via/DestinationDisplayRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "DestinationDisplayRef" ;
+                                            sh:path netex:destinationDisplayRef ] ] ;
+                            sh:path netex:via ] ] ;
+            sh:path netex:vias ] ;
     sh:targetClass netex:DestinationDisplay .
 
 nordic:FlexibleServiceProperties_CardinalityShape a sh:NodeShape ;
     rdfs:label "FlexibleServiceProperties: generated from profile:cardinality" ;
-    sh:property [ sh:description "FlexibleServiceProperties/@id is 1..1 in the profile; the XSD allows 0..1." ;
+    sh:property [ sh:description "FlexibleServiceProperties/BookWhen is 0..1 in the profile; the XSD allows 0..1. Allowed values: dayOfTravelOnly, untilPreviousDay, advanceAndDayOfTravel (the XSD allows 7)." ;
+            sh:in ( "dayOfTravelOnly" "untilPreviousDay" "advanceAndDayOfTravel" ) ;
+            sh:name "BookWhen" ;
+            sh:path netex:bookWhen ],
+        [ sh:description "FlexibleServiceProperties/BookingAccess is 0..1 in the profile; the XSD allows 0..1. Allowed values: public, authorisedPublic, staff (the XSD allows 4)." ;
+            sh:in ( "public" "authorisedPublic" "staff" ) ;
+            sh:name "BookingAccess" ;
+            sh:path netex:bookingAccess ],
+        [ sh:description "FlexibleServiceProperties/FlexibleServiceType is 0..1 in the profile; the XSD allows 0..1. Allowed values: dynamicPassingTimes, fixedHeadwayFrequency, fixedPassingTimes, notFlexible (the XSD allows 5)." ;
+            sh:in ( "dynamicPassingTimes" "fixedHeadwayFrequency" "fixedPassingTimes" "notFlexible" ) ;
+            sh:name "FlexibleServiceType" ;
+            sh:path netex:flexibleServiceType ],
+        [ sh:description "FlexibleServiceProperties/@id is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@id" ;
             sh:path <https://netex-cen.eu/ontology#@id> ],
@@ -117,7 +152,11 @@ nordic:FlexibleServiceProperties_CardinalityShape a sh:NodeShape ;
 
 nordic:GroupOfLines_CardinalityShape a sh:NodeShape ;
     rdfs:label "GroupOfLines: generated from profile:cardinality" ;
-    sh:property [ sh:description "GroupOfLines/@id is 1..1 in the profile; the XSD allows 0..1." ;
+    sh:property [ sh:description "GroupOfLines/Name is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "Name" ;
+            sh:path netex:name ],
+        [ sh:description "GroupOfLines/@id is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@id" ;
             sh:path <https://netex-cen.eu/ontology#@id> ],
@@ -159,7 +198,18 @@ nordic:JourneyPattern_CardinalityShape a sh:NodeShape ;
             sh:node [ a sh:NodeShape ;
                     sh:property [ sh:name "StopPointInJourneyPattern" ;
                             sh:node [ a sh:NodeShape ;
-                                    sh:property [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@id is 1..1 in the profile; the XSD allows 0..1." ;
+                                    sh:property [ sh:name "BookingArrangements" ;
+                                            sh:node [ a sh:NodeShape ;
+                                                    sh:property [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookWhen is 0..1 in the profile; the XSD allows 0..1. Allowed values: dayOfTravelOnly, untilPreviousDay, advanceAndDayOfTravel (the XSD allows 7)." ;
+                                                            sh:in ( "dayOfTravelOnly" "untilPreviousDay" "advanceAndDayOfTravel" ) ;
+                                                            sh:name "BookWhen" ;
+                                                            sh:path netex:bookWhen ],
+                                                        [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/BookingArrangements/BookingAccess is 0..1 in the profile; the XSD allows 0..1. Allowed values: public, authorisedPublic, staff (the XSD allows 4)." ;
+                                                            sh:in ( "public" "authorisedPublic" "staff" ) ;
+                                                            sh:name "BookingAccess" ;
+                                                            sh:path netex:bookingAccess ] ] ;
+                                            sh:path netex:bookingArrangements ],
+                                        [ sh:description "JourneyPattern/pointsInSequence/StopPointInJourneyPattern/@id is 1..1 in the profile; the XSD allows 0..1." ;
                                             sh:minCount 1 ;
                                             sh:name "@id" ;
                                             sh:path <https://netex-cen.eu/ontology#@id> ],
@@ -203,10 +253,74 @@ nordic:Line_CardinalityShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:name "OperatorRef" ;
             sh:path netex:operatorRef ],
-        [ sh:description "Line/TransportMode is 1..1 in the profile; the XSD allows 0..1." ;
+        [ sh:description "Line/PublicCode is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "PublicCode" ;
+            sh:path netex:publicCode ;
+            sh:severity sh:Warning ],
+        [ sh:description "Line/RepresentedByGroupRef/@ref is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "RepresentedByGroupRef" ;
+            sh:path netex:representedByGroupRef ],
+        [ sh:description "Line/TransportMode is 1..1 in the profile; the XSD allows 0..1. Allowed values: coach, bus, tram, rail, metro, air, taxi, water, cableway, funicular, snowAndIce, unknown (the XSD allows 21)." ;
+            sh:in ( "coach" "bus" "tram" "rail" "metro" "air" "taxi" "water" "cableway" "funicular" "snowAndIce" "unknown" ) ;
             sh:minCount 1 ;
             sh:name "TransportMode" ;
             sh:path netex:transportMode ],
+        [ sh:description "Line/TransportSubmode is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "TransportSubmode" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "Line/TransportSubmode/AirSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: helicopterService, domesticFlight, internationalFlight, unknown (the XSD allows 16)." ;
+                            sh:in ( "helicopterService" "domesticFlight" "internationalFlight" "unknown" ) ;
+                            sh:name "AirSubmode" ;
+                            sh:path netex:airSubmode ],
+                        [ sh:description "Line/TransportSubmode/BusSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: airportLinkBus, expressBus, localBus, nightBus, railReplacementBus, regionalBus, schoolBus, sightseeingBus, shuttleBus, unknown (the XSD allows 19)." ;
+                            sh:in ( "airportLinkBus" "expressBus" "localBus" "nightBus" "railReplacementBus" "regionalBus" "schoolBus" "sightseeingBus" "shuttleBus" "unknown" ) ;
+                            sh:name "BusSubmode" ;
+                            sh:path netex:busSubmode ],
+                        [ sh:description "Line/TransportSubmode/CoachSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: internationalCoach, nationalCoach, touristCoach, unknown (the XSD allows 11)." ;
+                            sh:in ( "internationalCoach" "nationalCoach" "touristCoach" "unknown" ) ;
+                            sh:name "CoachSubmode" ;
+                            sh:path netex:coachSubmode ],
+                        [ sh:description "Line/TransportSubmode/FunicularSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: funicular, unknown (the XSD allows 5)." ;
+                            sh:in ( "funicular" "unknown" ) ;
+                            sh:name "FunicularSubmode" ;
+                            sh:path netex:funicularSubmode ],
+                        [ sh:description "Line/TransportSubmode/MetroSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: metro, unknown (the XSD allows 5)." ;
+                            sh:in ( "metro" "unknown" ) ;
+                            sh:name "MetroSubmode" ;
+                            sh:path netex:metroSubmode ],
+                        [ sh:description "Line/TransportSubmode/RailSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: international, interregionalRail, local, longDistance, nightRail, airportLinkRail, regionalRail, touristRailway, unknown (the XSD allows 19)." ;
+                            sh:in ( "international" "interregionalRail" "local" "longDistance" "nightRail" "airportLinkRail" "regionalRail" "touristRailway" "unknown" ) ;
+                            sh:name "RailSubmode" ;
+                            sh:path netex:railSubmode ],
+                        [ sh:description "Line/TransportSubmode/SelfDriveSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: unknown (the XSD allows 14)." ;
+                            sh:in ( "unknown" ) ;
+                            sh:name "SelfDriveSubmode" ;
+                            sh:path netex:selfDriveSubmode ],
+                        [ sh:description "Line/TransportSubmode/SnowAndIceSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: snowCoach, unknown (the XSD allows 7)." ;
+                            sh:in ( "snowCoach" "unknown" ) ;
+                            sh:name "SnowAndIceSubmode" ;
+                            sh:path netex:snowAndIceSubmode ],
+                        [ sh:description "Line/TransportSubmode/TaxiSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: charterTaxi, communalTaxi, waterTaxi, unknown (the XSD allows 14)." ;
+                            sh:in ( "charterTaxi" "communalTaxi" "waterTaxi" "unknown" ) ;
+                            sh:name "TaxiSubmode" ;
+                            sh:path netex:taxiSubmode ],
+                        [ sh:description "Line/TransportSubmode/TelecabinSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: telecabin, unknown (the XSD allows 9)." ;
+                            sh:in ( "telecabin" "unknown" ) ;
+                            sh:name "TelecabinSubmode" ;
+                            sh:path netex:telecabinSubmode ],
+                        [ sh:description "Line/TransportSubmode/TramSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: localTram, cityTram, unknown (the XSD allows 8)." ;
+                            sh:in ( "localTram" "cityTram" "unknown" ) ;
+                            sh:name "TramSubmode" ;
+                            sh:path netex:tramSubmode ],
+                        [ sh:description "Line/TransportSubmode/WaterSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: highSpeedPassengerService, highSpeedVehicleService, internationalCarFerry, internationalPassengerFerry, localCarFerry, localPassengerFerry, nationalCarFerry, sightseeingService, unknown (the XSD allows 23)." ;
+                            sh:in ( "highSpeedPassengerService" "highSpeedVehicleService" "internationalCarFerry" "internationalPassengerFerry" "localCarFerry" "localPassengerFerry" "nationalCarFerry" "sightseeingService" "unknown" ) ;
+                            sh:name "WaterSubmode" ;
+                            sh:path netex:waterSubmode ] ] ;
+            sh:path netex:transportSubmode ;
+            sh:severity sh:Warning ],
         [ sh:description "Line/@id is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@id" ;
@@ -231,8 +345,9 @@ nordic:LinkSequenceProjection_CardinalityShape a sh:NodeShape ;
 
 nordic:Network_CardinalityShape a sh:NodeShape ;
     rdfs:label "Network: generated from profile:cardinality" ;
-    sh:property [ sh:description "Network/AuthorityRef/@ref is 0..1 in the profile; the XSD allows 0..n." ;
+    sh:property [ sh:description "Network/AuthorityRef/@ref is 1..1 in the profile; the XSD allows 0..n." ;
             sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:name "AuthorityRef" ;
             sh:path netex:authorityRef ],
         [ sh:description "Network/Name is 1..1 in the profile; the XSD allows 0..1." ;
@@ -299,7 +414,23 @@ nordic:OperatingPeriod_CardinalityShape a sh:NodeShape ;
 
 nordic:Operator_CardinalityShape a sh:NodeShape ;
     rdfs:label "Operator: generated from profile:cardinality" ;
-    sh:property [ sh:description "Operator/Name is 1..1 in the profile; the XSD allows 0..1." ;
+    sh:property [ sh:description "Operator/ContactDetails is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "ContactDetails" ;
+            sh:path netex:contactDetails ;
+            sh:severity sh:Warning ],
+        [ sh:description "Operator/CustomerServiceContactDetails is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "CustomerServiceContactDetails" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "Operator/CustomerServiceContactDetails/Url is 1..1 in the profile; the XSD allows 0..1." ;
+                            sh:minCount 1 ;
+                            sh:name "Url" ;
+                            sh:path netex:url ;
+                            sh:severity sh:Warning ] ] ;
+            sh:path netex:customerServiceContactDetails ;
+            sh:severity sh:Warning ],
+        [ sh:description "Operator/Name is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "Name" ;
             sh:path netex:name ],
@@ -470,6 +601,10 @@ nordic:RoutePoint_CardinalityShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:name "@id" ;
             sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "RoutePoint/projections is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "projections" ;
+            sh:path netex:projections ],
         [ sh:description "RoutePoint/@version is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@version" ;
@@ -490,7 +625,9 @@ nordic:Route_CardinalityShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:name "@id" ;
             sh:path <https://netex-cen.eu/ontology#@id> ],
-        [ sh:name "pointsInSequence" ;
+        [ sh:description "Route/pointsInSequence is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "pointsInSequence" ;
             sh:node [ a sh:NodeShape ;
                     sh:property [ sh:name "PointOnRoute" ;
                             sh:node [ a sh:NodeShape ;
@@ -592,6 +729,74 @@ nordic:ServiceJourney_CardinalityShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:name "JourneyPatternRef" ;
             sh:path netex:journeyPatternRef ],
+        [ sh:description "ServiceJourney/TransportMode is 0..1 in the profile; the XSD allows 0..1. Allowed values: coach, bus, tram, rail, metro, air, taxi, water, cableway, funicular, snowAndIce, unknown (the XSD allows 21)." ;
+            sh:in ( "coach" "bus" "tram" "rail" "metro" "air" "taxi" "water" "cableway" "funicular" "snowAndIce" "unknown" ) ;
+            sh:name "TransportMode" ;
+            sh:path netex:transportMode ;
+            sh:severity sh:Warning ],
+        [ sh:name "TransportSubmode" ;
+            sh:node [ a sh:NodeShape ;
+                    sh:property [ sh:description "ServiceJourney/TransportSubmode/AirSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: helicopterService, domesticFlight, internationalFlight, unknown (the XSD allows 16)." ;
+                            sh:in ( "helicopterService" "domesticFlight" "internationalFlight" "unknown" ) ;
+                            sh:name "AirSubmode" ;
+                            sh:path netex:airSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/BusSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: airportLinkBus, expressBus, localBus, nightBus, railReplacementBus, regionalBus, schoolBus, sightseeingBus, shuttleBus, unknown (the XSD allows 19)." ;
+                            sh:in ( "airportLinkBus" "expressBus" "localBus" "nightBus" "railReplacementBus" "regionalBus" "schoolBus" "sightseeingBus" "shuttleBus" "unknown" ) ;
+                            sh:name "BusSubmode" ;
+                            sh:path netex:busSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/CoachSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: internationalCoach, nationalCoach, touristCoach, unknown (the XSD allows 11)." ;
+                            sh:in ( "internationalCoach" "nationalCoach" "touristCoach" "unknown" ) ;
+                            sh:name "CoachSubmode" ;
+                            sh:path netex:coachSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/FunicularSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: funicular, unknown (the XSD allows 5)." ;
+                            sh:in ( "funicular" "unknown" ) ;
+                            sh:name "FunicularSubmode" ;
+                            sh:path netex:funicularSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/MetroSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: metro, unknown (the XSD allows 5)." ;
+                            sh:in ( "metro" "unknown" ) ;
+                            sh:name "MetroSubmode" ;
+                            sh:path netex:metroSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/RailSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: international, interregionalRail, local, longDistance, nightRail, airportLinkRail, regionalRail, touristRailway, unknown (the XSD allows 19)." ;
+                            sh:in ( "international" "interregionalRail" "local" "longDistance" "nightRail" "airportLinkRail" "regionalRail" "touristRailway" "unknown" ) ;
+                            sh:name "RailSubmode" ;
+                            sh:path netex:railSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/SelfDriveSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: unknown (the XSD allows 14)." ;
+                            sh:in ( "unknown" ) ;
+                            sh:name "SelfDriveSubmode" ;
+                            sh:path netex:selfDriveSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/SnowAndIceSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: snowCoach, unknown (the XSD allows 7)." ;
+                            sh:in ( "snowCoach" "unknown" ) ;
+                            sh:name "SnowAndIceSubmode" ;
+                            sh:path netex:snowAndIceSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/TaxiSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: charterTaxi, communalTaxi, waterTaxi, unknown (the XSD allows 14)." ;
+                            sh:in ( "charterTaxi" "communalTaxi" "waterTaxi" "unknown" ) ;
+                            sh:name "TaxiSubmode" ;
+                            sh:path netex:taxiSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/TelecabinSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: telecabin, unknown (the XSD allows 9)." ;
+                            sh:in ( "telecabin" "unknown" ) ;
+                            sh:name "TelecabinSubmode" ;
+                            sh:path netex:telecabinSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/TramSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: localTram, cityTram, unknown (the XSD allows 8)." ;
+                            sh:in ( "localTram" "cityTram" "unknown" ) ;
+                            sh:name "TramSubmode" ;
+                            sh:path netex:tramSubmode ;
+                            sh:severity sh:Warning ],
+                        [ sh:description "ServiceJourney/TransportSubmode/WaterSubmode is 0..1 in the profile; the XSD allows 0..1. Allowed values: highSpeedPassengerService, highSpeedVehicleService, internationalCarFerry, internationalPassengerFerry, localCarFerry, localPassengerFerry, nationalCarFerry, sightseeingService, unknown (the XSD allows 23)." ;
+                            sh:in ( "highSpeedPassengerService" "highSpeedVehicleService" "internationalCarFerry" "internationalPassengerFerry" "localCarFerry" "localPassengerFerry" "nationalCarFerry" "sightseeingService" "unknown" ) ;
+                            sh:name "WaterSubmode" ;
+                            sh:path netex:waterSubmode ;
+                            sh:severity sh:Warning ] ] ;
+            sh:path netex:transportSubmode ],
         [ sh:description "ServiceJourney/@id is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@id" ;
@@ -606,7 +811,17 @@ nordic:ServiceJourney_CardinalityShape a sh:NodeShape ;
                                             sh:maxCount 1 ;
                                             sh:minCount 1 ;
                                             sh:name "StopPointInJourneyPatternRef" ;
-                                            sh:path netex:stopPointInJourneyPatternRef ] ] ;
+                                            sh:path netex:stopPointInJourneyPatternRef ],
+                                        [ sh:description "ServiceJourney/passingTimes/TimetabledPassingTime/@id is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@id" ;
+                                            sh:path <https://netex-cen.eu/ontology#@id> ;
+                                            sh:severity sh:Warning ],
+                                        [ sh:description "ServiceJourney/passingTimes/TimetabledPassingTime/@version is 1..1 in the profile; the XSD allows 0..1." ;
+                                            sh:minCount 1 ;
+                                            sh:name "@version" ;
+                                            sh:path <https://netex-cen.eu/ontology#@version> ;
+                                            sh:severity sh:Warning ] ] ;
                             sh:path netex:timetabledPassingTime ] ] ;
             sh:path netex:passingTimes ],
         [ sh:description "ServiceJourney/@version is 1..1 in the profile; the XSD allows 0..1." ;
@@ -621,6 +836,11 @@ nordic:ServiceLink_CardinalityShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:name "@id" ;
             sh:path <https://netex-cen.eu/ontology#@id> ],
+        [ sh:description "ServiceLink/projections is 1..1 in the profile; the XSD allows 0..1." ;
+            sh:minCount 1 ;
+            sh:name "projections" ;
+            sh:path netex:projections ;
+            sh:severity sh:Warning ],
         [ sh:description "ServiceLink/@version is 1..1 in the profile; the XSD allows 0..1." ;
             sh:minCount 1 ;
             sh:name "@version" ;

@@ -36,9 +36,17 @@ split between specification decisions and ADRs.
 * System decisions for this repository are recorded as AsciiDoc files in
   `docs/adr/`, with the layout and conventions in
   link:README.md[docs/adr/README.md], taken from Kompass, Gangleri and the CCB.
-* Specification decisions are not recorded here. A rule that can make a
+* Specification decisions are not recorded here. A new rule that can make a
   dataset valid or invalid is a CCB decision; this repository records only its
   outcome, as `nordic:decision` provenance on the affected entries.
+* Recording what the profile already is, is not a specification decision. A
+  rule the Nordic validators already apply to every Nordic profile
+  (`netex-validator-java`, used by Antu for Norway, Sweden and Finland) is
+  written into the membership directly, with the validator's rule code in the
+  member's `skos:definition` ("Antu NETWORK_1") so it can be traced. The same
+  holds for correcting a member so it matches the XSD. Only a rule no Nordic
+  validator applies yet, or one that differs between the countries, goes to
+  the CCB.
 * When a change needs both, the rule is a CCB decision and the mechanism is an
   ADR here, and the two link to each other.
 * ADRs are written in English. An accepted ADR is changed only through dated
